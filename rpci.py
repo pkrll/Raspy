@@ -7,4 +7,4 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'RPCi'
+  return 'RPCi'
