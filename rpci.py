@@ -3,7 +3,7 @@
 """
     RPCi
 """
-from flask import Flask
+from flask import Flask, request
 import json
 from RPCi.lib.tools import bytes2human
 
@@ -64,3 +64,45 @@ def getDiskInfo():
     stat["percentage_used"] = str(disk.percent)+"%"
 
     return json.dumps(stat)
+
+@app.route('/filesystem/list/', defaults={'directory': '/'})
+@app.route('/filesystem/list/<path:directory>')
+def listDirectory(directory):
+    import os
+
+    if directory is not '/':
+        directory = '/' + directory.strip('/') + '/'
+
+    response = {}
+    response["cwdir"] = directory
+    response["files"] = [file for file in os.listdir(directory) if os.path.isfile(directory + file)]
+    response["dirs"]  = [dir for dir in os.listdir(directory) if os.path.isdir(directory + dir)]
+
+    return json.dumps(response)
+
+@app.route('/filesystem/file/<path:filepath>', methods = ['GET', 'DELETE'])
+def manageFile(filepath):
+    import os
+
+    filepath = '/' + filepath
+
+    if request.method == 'DELETE':
+        try:
+            os.remove(filepath)
+            return "OK"
+        except OSError:
+            return "Could not delete file"
+    elif request.method == 'GET':
+        try:
+            stat = os.stat(filepath)
+
+            response = {
+                "size": stat.st_size,
+                "accessed": stat.st_atime,
+                "created": stat.st_ctime,
+                "modified": stat.st_mtime
+            }
+
+            return json.dumps(response)
+        except OSError:
+            return "Could not get file"
