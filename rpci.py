@@ -11,7 +11,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'RPCi'
+    response = {
+        "resources": {
+            "temperature": { "url": "/system/temp" },
+            "cpu usage": { "url": "/system/cpu" },
+            "ram usage": { "url": "/system/ram" },
+            "disk usage": { "url": "/system/disk" }
+        }
+    }
+
+    return json.dumps(response)
 
 @app.route('/system/temp')
 def getTemperature():
