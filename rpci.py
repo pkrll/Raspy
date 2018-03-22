@@ -6,10 +6,12 @@
 from flask import Flask, request
 import json
 from RPCi.lib.tools import bytes2human
+from RPCi.core.auth import requires_auth
 
 app = Flask(__name__)
 
 @app.route('/')
+@requires_auth
 def index():
     response = {
         "resources": {
@@ -23,6 +25,7 @@ def index():
     return json.dumps(response)
 
 @app.route('/system/temp')
+@requires_auth
 def getTemperature():
     import os
     result = os.popen('cat /sys/class/thermal/thermal_zone0/temp').readline().replace("\n", "")
@@ -35,6 +38,7 @@ def getTemperature():
     return json.dumps(stat)
 
 @app.route('/system/cpu')
+@requires_auth
 def getCPUUsage():
     import psutil
     stat = {}
@@ -42,6 +46,7 @@ def getCPUUsage():
     return json.dumps(stat)
 
 @app.route('/system/ram')
+@requires_auth
 def getRAMInfo():
     import psutil
     ram = psutil.phymem_usage()
@@ -54,6 +59,7 @@ def getRAMInfo():
     return json.dumps(stat)
 
 @app.route('/system/disk')
+@requires_auth
 def getDiskInfo():
     import psutil
     disk = psutil.disk_usage('/')
@@ -67,6 +73,7 @@ def getDiskInfo():
 
 @app.route('/filesystem/list/', defaults={'directory': '/'})
 @app.route('/filesystem/list/<path:directory>')
+@requires_auth
 def listDirectory(directory):
     import os
 
@@ -81,6 +88,7 @@ def listDirectory(directory):
     return json.dumps(response)
 
 @app.route('/filesystem/file/<path:filepath>', methods = ['GET', 'DELETE'])
+@requires_auth
 def manageFile(filepath):
     import os
 
