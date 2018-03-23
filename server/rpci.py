@@ -97,13 +97,23 @@ def getDiskInfo():
 @app.route('/api/filesystem/list/<path:directory>')
 @requires_auth
 def listDirectory(directory):
-    if directory is not '/':
+    if directory != '/':
         directory = '/' + directory.strip('/') + '/'
 
-    response = {}
+    response = {'files': [], 'directories': []}
     response['cwdir'] = directory
-    response['files'] = [file for file in os.listdir(directory) if os.path.isfile(directory + file)]
-    response['dirs']  = [dir for dir in os.listdir(directory) if os.path.isdir(directory + dir)]
+    for file in os.listdir(directory):
+        if os.path.isfile(directory + file):
+            response['files'].append({
+                'name': file,
+                'path': directory + file
+            })
+    for dir in os.listdir(directory):
+        if os.path.isdir(directory + dir):
+            response['directories'].append({
+                'name': dir,
+                'path': directory + dir
+            })
 
     return json.dumps(response)
 
