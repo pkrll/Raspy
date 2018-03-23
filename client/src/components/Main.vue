@@ -5,7 +5,7 @@
 		</h1>
 		<ul v-for="parentNode in resources">
 			<li v-for="node in parentNode">
-				{{node.url}}
+				{{node.name}}
 			</li>
 		</ul>
 	</div>
