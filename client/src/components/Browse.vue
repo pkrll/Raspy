@@ -4,15 +4,11 @@
 			<font-awesome-icon v-bind:icon="toolbar.icon"/> {{toolbar.text}}
 		</div>
 		<nav class="file-list">
-			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')">
-				<router-link v-bind:to="'/filesystem/browse' + directory.path">
-					<font-awesome-icon icon="folder-open"/> {{directory.name}}
-				</router-link>
+			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')" v-on:click="browseDirectory(directory.path)">
+				<font-awesome-icon icon="folder-open"/> {{directory.name}}
 			</div>
-			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')">
-				<router-link v-bind:to="'/filesystem/file' + file.path">
-					<font-awesome-icon icon="file"/> {{file.name}}
-				</router-link>
+			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')" v-on:click="viewFile(file.path)">
+				<font-awesome-icon icon="file"/> {{file.name}}
 			</div>
 		</nav>
 	</div>
@@ -29,13 +25,46 @@ export default {
 	components: {
     FontAwesomeIcon
   },
-	methods: {
-		startsWith: function (value, searchString) {
-	    if (!value) return false;
-	    value = value.toString();
-	    return value.charAt(0) === searchString.toString();
-	  },
 
+	methods: {
+		/**
+		 * Browse the specified path.
+		 *
+		 * @param  {[type]} path The path to list.
+		 */
+		browseDirectory: function (path) {
+			HTTP.get('filesystem/list' + path).then(
+				response => {
+					this.files = response.data.files;
+					this.directories = response.data.directories;
+				}
+			).catch(e => {
+				console.log("ERROR " + e);
+			})
+		},
+		/**
+		 * View the specified file.
+		 *
+		 * @param  {[type]} path Path to the file to view.
+		 */
+		viewFile: function (path) {
+
+		},
+		/**
+		 * Checks if a string starts with a specific character.
+		 *
+		 * @param  {[type]} value     The string to check.
+		 * @param  {[type]} character The character to check against.
+		 * @return Boolean            True if value starts with character, otherwise false.
+		 */
+		startsWith: function (value, character) {
+			if (!value) return false;
+			value = value.toString();
+			return value.charAt(0) === character.toString();
+		},
+		/**
+		 * Toggles hidden files and changes the toolbar.
+		 */
 		toggleHidden: function () {
 			if (this.showHidden) {
 				this.toolbar = {icon: 'eye-slash', text: 'Show hidden files'},
@@ -45,7 +74,6 @@ export default {
 				this.showHidden = true;
 			}
 		}
-
 	},
 
 	data() {
@@ -58,14 +86,7 @@ export default {
 	},
 
 	created() {
-		HTTP.get('filesystem/list/').then(
-			response => {
-				this.files = response.data.files;
-				this.directories = response.data.directories;
-			}
-		).catch(e => {
-			console.log("ERROR " + e);
-		})
+		this.browseDirectory('/');
 	}
 
 }
@@ -86,8 +107,7 @@ export default {
 	border-top:	1px solid #000;
 }
 
-.file-list a {
-	display: 					block;
+.file-list div {
 	color: 						#fff;
 	font-size: 				1.2em;
 	text-decoration: 	none;

@@ -7,7 +7,7 @@
 		<section class="section">
 			<div>
 				<div class="header">File system</div>
-				<router-link to="/files/browse"><div class="item">Browse files</div></router-link>
+				<router-link to="/filesystem/browse"><div class="item">Browse files</div></router-link>
 			</div>
 			<div>
 				<div class="header">System information</div>

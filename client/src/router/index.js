@@ -6,6 +6,7 @@ import Browse from '@/components/Browse'
 Vue.use(Router)
 
 export default new Router({
+	mode: 'history',
   routes: [
 		{
 			path: '/',
@@ -13,7 +14,7 @@ export default new Router({
 			component: Main
 		},
 		{
-			path: '/files/browse',
+			path: '/filesystem/browse/',
 			name: 'Browse',
 			component: Browse
 		}
