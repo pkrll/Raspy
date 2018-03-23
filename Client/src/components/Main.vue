@@ -1,7 +1,14 @@
 <template>
-  <h1>
-		RPCi
-	</h1>
+	<div>
+		<h1>
+			{{device.name}}
+		</h1>
+		<ul v-for="parentNode in resources">
+			<li v-for="node in parentNode">
+				{{node.url}}
+			</li>
+		</ul>
+	</div>
 </template>
 
 <script>
@@ -12,14 +19,16 @@ export default {
 	name: 'Main',
 	data() {
 		return {
-			msg: 'Welcome!'
+			resources: {},
+			device: {}
 		}
 	},
 
 	created() {
-		HTTP.get('filesystem/list/').then(
+		HTTP.get('').then(
 			response => {
-				console.log(response);
+				this.resources = response.data.resources;
+				this.device    = response.data.device;
 			}
 		).catch(e => {
 			console.log("ERROR " + e);
