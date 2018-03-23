@@ -2,6 +2,9 @@
 
 all: client server
 
+install:
+	cd client && npm install
+
 server:
 	cd server && export FLASK_APP=rpci.py && flask run --host=0.0.0.0
 
