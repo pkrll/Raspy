@@ -1,2 +1,3 @@
 *.pyc
 dist/*
+package-lock.json
