@@ -6,7 +6,7 @@ server:
 	cd server && export FLASK_APP=rpci.py && flask run --host=0.0.0.0
 
 client:
-	cd Client && npm run build
+	cd client && npm run build
 
 clean:
 	find . -name \*.pyc -delete
