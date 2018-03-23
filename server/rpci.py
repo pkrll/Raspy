@@ -32,16 +32,16 @@ def api_root():
             'uptime': 0
         },
         'resources': {
-            'System information': {
-                'Temperature': { 'url': '/system/temp' },
-                'CPU usage': { 'url': '/system/cpu' },
-                'RAM usage': { 'url': '/system/ram' },
-                'Disk usage': { 'url': '/system/disk' }
-            },
-            'Filesystem': {
-                'List': { 'url': '/filesystem/list' },
-                'View/Delete file': { 'url': '/filesystem/file/<filename>' }
-            }
+            'System information': [
+                {'name': 'Temperature', 'url': '/system/temp' },
+                {'name': 'CPU usage',   'url': '/system/cpu' },
+                {'name': 'RAM usage',   'url': '/system/ram' },
+                {'name': 'Disk usage',  'url': '/system/disk' }
+            ],
+            'Filesystem': [
+                {'name': 'List', 'url': '/filesystem/list' },
+                {'name': 'View/Delete file', 'url': '/filesystem/file/<filename>' }
+            ]
         }
     }
 
