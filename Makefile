@@ -1,4 +1,4 @@
-.PHONY: run server client clean
+.PHONY: run install server client devclient clean
 
 ENV = prod
 
@@ -16,6 +16,9 @@ ifeq ($(ENV), dev)
 else
 	cd client && npm run build
 endif
+
+devclient:
+	make ENV=dev client
 
 clean:
 	find . -name \*.pyc -delete
