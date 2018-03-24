@@ -128,9 +128,9 @@ def manageFile(filepath):
     if request.method == 'DELETE':
         try:
             os.remove(filepath)
-            return 'OK'
+            return json.dumps({'status': 'OK'})
         except OSError:
-            return 'Could not delete file'
+            return json.dumps({'status': 'ERROR', 'message': 'Could not delete file'})
     elif request.method == 'GET':
         try:
             stat = os.stat(filepath)
