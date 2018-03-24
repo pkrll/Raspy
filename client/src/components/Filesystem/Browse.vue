@@ -5,38 +5,57 @@
 			{{prettyPath}}
 		</div>
 
-		<div class="toolbar">
+		<header class="header toolbar">
 			<div class="navigation" v-on:click="goBack">
 				<font-awesome-icon icon="arrow-alt-circle-left" /> Back
 			</div>
-			<div class="options" v-on:click="toggleHidden">
-				<font-awesome-icon v-bind:icon="toolbar.icon"/> {{toolbar.text}}
+
+			<div class="options" v-on:click="showOptions = !showOptions">
+				<font-awesome-icon icon="cog"/> Options
 			</div>
-		</div>
+		</header>
+
+		<header class="header optionsbar" v-if="showOptions">
+			<div>
+				<div><font-awesome-icon icon="trash-alt" /></div>
+				<div>Delete folder</div>
+			</div>
+			<div v-on:click="toggleHidden">
+				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
+				<div>Show hidden files</div>
+			</div>
+			<div v-on:click="toggleHidden">
+				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
+				<div>Show hidden files</div>
+			</div>
+			<div v-on:click="toggleHidden">
+				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
+				<div>Show hidden files</div>
+			</div>
+		</header>
 
 		<nav class="file-list" v-if="files.length > 0 || directories.length > 0">
 			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')">
 				<router-link :to="{ name: 'Browses', params: {path: encodeURIComponent(directory.path) }}">
-					<font-awesome-icon icon="folder-open"/> {{directory.name}}
+					<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;{{directory.name}}</span>
 				</router-link>
 			</div>
 			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')">
-				<router-link :to="{ name: '', params: {path: encodeURIComponent(file.path) }}">
-					<font-awesome-icon icon="file"/> {{file.name}}
+				<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
+					<span><font-awesome-icon icon="file"/>&nbsp;&nbsp;{{file.name}}</span>
 				</router-link>
 			</div>
 		</nav>
-
-		<div class="file-list empty" v-show="files.length == 0 || directories.length == 0">
+		<nav class="file-list empty" v-else>
 			<div>This folder contains no files.</div>
-		</div>
+		</nav>
 	</div>
 </template>
 
 <script>
-import {HTTP} from '../http-common'
+import {HTTP} from '../../http-common'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { arrowaltcircleleft, folderopen, file, eye, eyeslash } from '@fortawesome/fontawesome-free-solid'
+import { trashalt, cog, arrowaltcircleleft, folderopen, file, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: {
@@ -96,11 +115,12 @@ export default {
 		 * Toggles hidden files and changes the toolbar.
 		 */
 		toggleHidden: function () {
+			// TODO: Improve this
 			if (this.showHidden) {
-				this.toolbar = {icon: 'eye-slash', text: 'Show hidden files'},
+				this.toggleHiddenIcon = 'toggle-off';
 				this.showHidden = false;
 			} else {
-				this.toolbar = {icon: 'eye', text: 'Hide hidden files'},
+				this.toggleHiddenIcon = 'toggle-on';
 				this.showHidden = true;
 			}
 		},
@@ -115,7 +135,8 @@ export default {
 	data() {
 		return {
 			showHidden: false,
-			toolbar: {icon: 'eye-slash', text: 'Show hidden files'},
+			showOptions: false,
+			toggleHiddenIcon: 'toggle-off',
 			files: [],
 			directories: []
 		}
@@ -130,30 +151,31 @@ export default {
 
 <style scoped>
 
+.header {
+	background: 	rgb(229, 73, 95);
+	color: 				#fff;
+	font-size: 		1.2em;
+	display:			flex;
+	align-items: 	center;
+}
+
+.header > div {
+	cursor:		pointer;
+	color:		#fff;
+	padding:	10px;
+}
+
 .toolbar {
-	background: rgb(229, 73, 95);
-	color: #fff;
-	font-size: 1.2em;
-	display: flex;
 	justify-content: space-between;
-	align-items: center;
 }
 
-
-.toolbar div:hover {
-	color: #000;
+.optionsbar {
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 
-.navigation {
-	color: 			#fff;
-	cursor: 		pointer;
-	padding:		10px;
-}
-
-.options {
-	color: 			#fff;
-	cursor: 		pointer;
-	padding:		10px;
+.optionsbar > div {
+	text-align: center;
 }
 
 .status-bar {
@@ -163,19 +185,37 @@ export default {
 	text-align: center;
 }
 
+.file-list {
+	display: 				flex;
+	flex-direction: column;
+	height: 				100vh;
+	width: 					100vw;
+}
+
 .file-list div {
 	background: 			rgb(115, 186, 208);
-	padding: 					10px;
 	width: 						100%;
+	flex: 						1;
+	height: 					100px;
+	max-height: 			100px;
 }
 
 .file-list div a {
-	display: block;
 	cursor:						pointer;
 	color: 						#fff;
-	font-size: 				1.2em;
+	display: 					table;
+	font-size: 				7vw;
+	height: 					100%;
 	text-decoration: 	none;
 	width: 						100%;
+
+}
+
+.file-list div a span {
+	display: 				table-cell;
+	vertical-align: middle;
+	padding: 				0 0px 0 30px;
+	word-break: 		break-all;
 }
 
 .file-list div:hover {
@@ -186,6 +226,12 @@ export default {
 	color: 			#fff;
 	font-size: 	1.4em;
 	text-align: center;
+}
+
+@media screen and (min-width: 540px) {
+  .file-list div a {
+     font-size: 6vh;
+  }
 }
 
 </style>

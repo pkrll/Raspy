@@ -19,8 +19,8 @@
 				<router-link to="/system/ram"><span>RAM usage</span></router-link>
 			</div>
 			<div class="item">
-			<router-link to="/system/disk"><span>Disk usage</span></router-link>
-				</div>
+				<router-link to="/system/disk"><span>Disk usage</span></router-link>
+			</div>
 		</section>
 	</div>
 </template>

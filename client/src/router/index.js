@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import Browse from '@/components/Browse'
-import Temperature from '@/components/System.Temperature'
+import Browse from '@/components/Filesystem/Browse'
+import File from '@/components/Filesystem/File'
+import Temperature from '@/components/System/Temperature'
 
 Vue.use(Router)
 
@@ -23,6 +24,12 @@ export default new Router({
 			path: '/filesystem/browse/:path',
 			name: 'Browses',
 			component: Browse,
+			props: true
+		},
+		{
+			path: '/filesystem/file/:path',
+			name: 'File',
+			component: File,
 			props: true
 		},
 		{
