@@ -31,7 +31,7 @@ export default {
 	font-size: 				1.5em;
 	height: 					100px;
 	justify-content: 	space-around;
-	position: 				absolute;
+	position: 				fixed;
 	width: 						100%;
 }
 

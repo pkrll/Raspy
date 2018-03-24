@@ -1,60 +1,47 @@
 <template>
 	<div>
-
-		<div class="status-bar">
-			{{prettyPath(path)}}
-		</div>
-
-		<header class="header toolbar">
-			<div class="navigation" v-on:click="goBack">
-				<font-awesome-icon icon="arrow-alt-circle-left" /> Back
-			</div>
-
-			<div class="options" v-on:click="showOptions = !showOptions">
-				<font-awesome-icon icon="cog"/> Options
-			</div>
-		</header>
-
-		<header class="header optionsbar" v-if="showOptions">
-			<div v-on:click="showConfirmation = true">
-				<div><font-awesome-icon icon="trash-alt" /></div>
-				<div>Delete folder</div>
-			</div>
-			<div v-on:click="toggleHidden">
-				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
-				<div>Show hidden files</div>
-			</div>
-		</header>
+		<Toolbar 	:path="path"
+							:goBack="goBack"
+							:toggleHidden="toggleHidden"
+							:toggleHiddenIcon="toggleHiddenIcon"
+							:showConfirmation="showConfirmation">
+		</Toolbar>
 
 		<nav class="file-list" v-if="files.length > 0 || directories.length > 0">
+
 			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')">
 				<router-link :to="{ name: 'Browses', params: {path: encodeURIComponent(directory.path) }}">
 					<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;{{directory.name}}</span>
 				</router-link>
 			</div>
+
 			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')">
 				<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
 					<span><font-awesome-icon icon="file"/>&nbsp;&nbsp;{{file.name}}</span>
 				</router-link>
 			</div>
+
 		</nav>
+
 		<nav class="file-list empty" v-else>
 			<div>This folder contains no files.</div>
 		</nav>
-		<ConfirmButton v-show="showConfirmation" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
+
+		<ConfirmButton v-show="didClickDelete" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
 	</div>
 </template>
 
 <script>
 import shared from '@/common'
 import ConfirmButton from '@/components/ConfirmButton'
+import Toolbar from '@/components/Filesystem/Toolbar'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { trashalt, cog, arrowaltcircleleft, folderopen, file, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: { path: { default: '/' } },
 	name: 'Browse',
-	components: { FontAwesomeIcon, ConfirmButton },
+	components: { FontAwesomeIcon, Toolbar, ConfirmButton },
 	watch: {
 		'$route' (to, from) {
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/'
@@ -74,13 +61,16 @@ export default {
 				this.toggleHiddenIcon = 'toggle-on';
 				this.showHidden = true;
 			}
+		},
+
+		showConfirmation: function (status) {
+			this.didClickDelete = status;
 		}
 	},
 	data() {
 		return {
 			showHidden: false,
-			showOptions: false,
-			showConfirmation: false,
+			didClickDelete: false,
 			toggleHiddenIcon: 'toggle-off',
 			files: [],
 			directories: []
@@ -101,40 +91,6 @@ export default {
 </script>
 
 <style scoped>
-
-.header {
-	background: 	rgb(229, 73, 95);
-	color: 				#fff;
-	font-size: 		1.2em;
-	display:			flex;
-	align-items: 	center;
-}
-
-.header > div {
-	cursor:		pointer;
-	color:		#fff;
-	padding:	10px;
-}
-
-.toolbar {
-	justify-content: space-between;
-}
-
-.optionsbar {
-	justify-content: space-around;
-	flex-wrap: wrap;
-}
-
-.optionsbar > div {
-	text-align: center;
-}
-
-.status-bar {
-	background: rgb(29, 49, 72);
-	color: 			#fff;
-	padding: 		10px;
-	text-align: center;
-}
 
 .file-list {
 	display: 				flex;

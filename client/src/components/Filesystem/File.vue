@@ -1,45 +1,35 @@
 <template>
 	<div>
-		<div class="status-bar">
-			{{prettyPath(path)}}
-		</div>
+		<Toolbar 	:path="path"
+							:goBack="goBack"
+							:toggleHidden="toggleHidden"
+							:toggleHiddenIcon="toggleHiddenIcon"
+							:showConfirmation="showConfirmation">
+		</Toolbar>
 
-		<header class="header toolbar">
-			<div class="navigation" v-on:click="goBack">
-				<font-awesome-icon icon="arrow-alt-circle-left" /> Back
-			</div>
-
-			<div class="options" v-on:click="showOptions = !showOptions">
-				<font-awesome-icon icon="cog"/> Options
-			</div>
-		</header>
-
-		<header class="header optionsbar" v-if="showOptions">
-			<div v-on:click="showConfirmation = true">
-				<div><font-awesome-icon icon="trash-alt" /></div>
-				<div>Delete file</div>
-			</div>
-		</header>
-		<ConfirmButton v-show="showConfirmation" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
+		<ConfirmButton v-show="didClickDelete" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
 	</div>
 </template>
 
 <script>
 import shared from '@/common'
 import ConfirmButton from '@/components/ConfirmButton'
+import Toolbar from '@/components/Filesystem/Toolbar'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { trashalt, cog, arrowaltcircleleft } from '@fortawesome/fontawesome-free-solid'
+import { arrowaltcircleleft } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: ['path'],
 	name: "File",
-	components: {
-    FontAwesomeIcon, ConfirmButton
-  },
+	components: { FontAwesomeIcon, ConfirmButton, Toolbar },
+	methods: {
+		showConfirmation: function (status) {
+			this.didClickDelete = status;
+		}
+	},
 	data() {
 		return {
-			showOptions: false,
-			showConfirmation: false
+			didClickDelete: false
 		}
 	},
 	created () {

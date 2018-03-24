@@ -45,7 +45,7 @@ export default {
 		});
 	},
 	cancelDeleteFile: function () {
-		this.showConfirmation = false;
+		this.showConfirmation(false);
 	},
 	/**
 	 * Navigates back to the previous page.
