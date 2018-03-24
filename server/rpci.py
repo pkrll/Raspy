@@ -127,9 +127,14 @@ def manageFile(filepath):
 
     if request.method == 'DELETE':
         try:
-            os.remove(filepath)
+            if os.path.isfile(filepath):
+                os.remove(filepath)
+            elif os.path.isdir(filepath):
+                import shutil
+                shutil.rmtree(filepath)
             return json.dumps({'status': 'OK'})
         except OSError:
+            print OSError
             return json.dumps({'status': 'ERROR', 'message': 'Could not delete file'})
     elif request.method == 'GET':
         try:
