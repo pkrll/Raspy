@@ -2,7 +2,7 @@
 	<div>
 
 		<div class="status-bar">
-			{{prettyPath}}
+			{{prettyPath(path)}}
 		</div>
 
 		<header class="header toolbar">
@@ -16,17 +16,9 @@
 		</header>
 
 		<header class="header optionsbar" v-if="showOptions">
-			<div>
+			<div v-on:click="showConfirmation = true">
 				<div><font-awesome-icon icon="trash-alt" /></div>
 				<div>Delete folder</div>
-			</div>
-			<div v-on:click="toggleHidden">
-				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
-				<div>Show hidden files</div>
-			</div>
-			<div v-on:click="toggleHidden">
-				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
-				<div>Show hidden files</div>
 			</div>
 			<div v-on:click="toggleHidden">
 				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>
@@ -49,68 +41,27 @@
 		<nav class="file-list empty" v-else>
 			<div>This folder contains no files.</div>
 		</nav>
+		<ConfirmButton v-show="showConfirmation" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
 	</div>
 </template>
 
 <script>
-import {HTTP} from '../../http-common'
+import shared from '@/common'
+import ConfirmButton from '@/components/ConfirmButton'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { trashalt, cog, arrowaltcircleleft, folderopen, file, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 
 export default {
-	props: {
-		path: {
-			default: '/'
-		}
-	},
-
+	props: { path: { default: '/' } },
 	name: 'Browse',
-
-	components: {
-    FontAwesomeIcon
-  },
-
+	components: { FontAwesomeIcon, ConfirmButton },
 	watch: {
 		'$route' (to, from) {
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/'
 			this.browseDirectory(path);
 		}
   },
-
-	computed: {
-		prettyPath: function () {
-			return decodeURIComponent(this.path);
-		}
-	},
-
 	methods: {
-		/**
-		 * Browse the specified path.
-		 *
-		 * @param  {[type]} path The path to list.
-		 */
-		browseDirectory: function (path) {
-			HTTP.get('filesystem/list' + path).then(
-				response => {
-					this.files = response.data.files;
-					this.directories = response.data.directories;
-				}
-			).catch(e => {
-				console.log("ERROR " + e);
-			})
-		},
-		/**
-		 * Checks if a string starts with a specific character.
-		 *
-		 * @param  {[type]} value     The string to check.
-		 * @param  {[type]} character The character to check against.
-		 * @return Boolean            True if value starts with character, otherwise false.
-		 */
-		startsWith: function (value, character) {
-			if (!value) return false;
-			value = value.toString();
-			return value.charAt(0) === character.toString();
-		},
 		/**
 		 * Toggles hidden files and changes the toolbar.
 		 */
@@ -123,26 +74,26 @@ export default {
 				this.toggleHiddenIcon = 'toggle-on';
 				this.showHidden = true;
 			}
-		},
-		/**
-		 * Navigates back to the previous page.
-		 */
-		goBack: function () {
-			this.$root._router.go(-1);
 		}
 	},
-
 	data() {
 		return {
 			showHidden: false,
 			showOptions: false,
+			showConfirmation: false,
 			toggleHiddenIcon: 'toggle-off',
 			files: [],
 			directories: []
 		}
 	},
+	created () {
+		this.browseDirectory 	= shared.browseDirectory.bind(this);
+		this.deleteFile 			= shared.deleteFile.bind(this);
+		this.cancelDeleteFile = shared.cancelDeleteFile.bind(this);
+		this.goBack 					= shared.goBack.bind(this);
+		this.startsWith 			= shared.startsWith;
+		this.prettyPath 			= shared.prettyPath;
 
-	created() {
 		this.browseDirectory(this.path);
 	}
 

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {HTTP} from '../../http-common';
+import {HTTP} from '@/http-common';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { thermometerfull, thermometerthreequarters, thermometerquarter, thermometerhalf, thermometerempty } from '@fortawesome/fontawesome-free-solid'
 
