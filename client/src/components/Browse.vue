@@ -1,30 +1,68 @@
 <template>
 	<div>
-		<div class="toolbar" v-on:click="toggleHidden">
-			<font-awesome-icon v-bind:icon="toolbar.icon"/> {{toolbar.text}}
+
+		<div class="status-bar">
+			{{prettyPath}}
 		</div>
-		<nav class="file-list">
-			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')" v-on:click="browseDirectory(directory.path)">
-				<font-awesome-icon icon="folder-open"/> {{directory.name}}
+
+		<div class="toolbar">
+			<div class="navigation" v-on:click="goBack">
+				<font-awesome-icon icon="arrow-alt-circle-left" /> Back
 			</div>
-			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')" v-on:click="viewFile(file.path)">
-				<font-awesome-icon icon="file"/> {{file.name}}
+			<div class="options" v-on:click="toggleHidden">
+				<font-awesome-icon v-bind:icon="toolbar.icon"/> {{toolbar.text}}
+			</div>
+		</div>
+
+		<nav class="file-list" v-if="files.length > 0 || directories.length > 0">
+			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')">
+				<router-link :to="{ name: 'Browses', params: {path: encodeURIComponent(directory.path) }}">
+					<font-awesome-icon icon="folder-open"/> {{directory.name}}
+				</router-link>
+			</div>
+			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')">
+				<router-link :to="{ name: '', params: {path: encodeURIComponent(file.path) }}">
+					<font-awesome-icon icon="file"/> {{file.name}}
+				</router-link>
 			</div>
 		</nav>
+
+		<div class="file-list empty" v-show="files.length == 0 || directories.length == 0">
+			<div>This folder contains no files.</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import {HTTP} from '../http-common'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { folderopen, file, eye, eyeslash } from '@fortawesome/fontawesome-free-solid'
+import { arrowaltcircleleft, folderopen, file, eye, eyeslash } from '@fortawesome/fontawesome-free-solid'
 
 export default {
+	props: {
+		path: {
+			default: '/'
+		}
+	},
+
 	name: 'Browse',
 
 	components: {
     FontAwesomeIcon
   },
+
+	watch: {
+		'$route' (to, from) {
+			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/'
+			this.browseDirectory(path);
+		}
+  },
+
+	computed: {
+		prettyPath: function () {
+			return decodeURIComponent(this.path);
+		}
+	},
 
 	methods: {
 		/**
@@ -41,14 +79,6 @@ export default {
 			).catch(e => {
 				console.log("ERROR " + e);
 			})
-		},
-		/**
-		 * View the specified file.
-		 *
-		 * @param  {[type]} path Path to the file to view.
-		 */
-		viewFile: function (path) {
-
 		},
 		/**
 		 * Checks if a string starts with a specific character.
@@ -73,6 +103,12 @@ export default {
 				this.toolbar = {icon: 'eye', text: 'Hide hidden files'},
 				this.showHidden = true;
 			}
+		},
+		/**
+		 * Navigates back to the previous page.
+		 */
+		goBack: function () {
+			this.$root._router.go(-1);
 		}
 	},
 
@@ -86,7 +122,7 @@ export default {
 	},
 
 	created() {
-		this.browseDirectory('/');
+		this.browseDirectory(this.path);
 	}
 
 }
@@ -95,24 +131,61 @@ export default {
 <style scoped>
 
 .toolbar {
-	background: rgb(92, 107, 158);
-	border-top:	1px solid #000;
+	background: rgb(229, 73, 95);
+	color: #fff;
+	font-size: 1.2em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.toolbar div:hover {
+	color: #000;
+}
+
+.navigation {
 	color: 			#fff;
 	cursor: 		pointer;
 	padding:		10px;
 }
 
-.file-list div {
-	background: rgb(115, 186, 208);
-	border-top:	1px solid #000;
+.options {
+	color: 			#fff;
+	cursor: 		pointer;
+	padding:		10px;
+}
+
+.status-bar {
+	background: rgb(29, 49, 72);
+	color: 			#fff;
+	padding: 		10px;
+	text-align: center;
 }
 
 .file-list div {
+	background: 			rgb(115, 186, 208);
+	padding: 					10px;
+	width: 						100%;
+}
+
+.file-list div a {
+	display: block;
+	cursor:						pointer;
 	color: 						#fff;
 	font-size: 				1.2em;
 	text-decoration: 	none;
-	padding: 					10px;
 	width: 						100%;
+}
+
+.file-list div:hover {
+	background: 			rgba(115, 186, 208, 0.5);
+}
+
+.empty div {
+	color: 			#fff;
+	font-size: 	1.4em;
+	text-align: center;
 }
 
 </style>

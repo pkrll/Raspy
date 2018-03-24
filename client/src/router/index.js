@@ -17,6 +17,12 @@ export default new Router({
 			path: '/filesystem/browse/',
 			name: 'Browse',
 			component: Browse
+		},
+		{
+			path: '/filesystem/browse/:path',
+			name: 'Browses',
+			component: Browse,
+			props: true
 		}
   ]
 })
