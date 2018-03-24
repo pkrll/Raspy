@@ -5,6 +5,7 @@
 							:toggleHidden="toggleHidden"
 							:toggleHiddenIcon="toggleHiddenIcon"
 							:showConfirmation="showConfirmation">
+			Folder
 		</Toolbar>
 
 		<nav class="file-list" v-if="files.length > 0 || directories.length > 0">

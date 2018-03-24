@@ -17,7 +17,7 @@
 		<div class="header optionsbar" v-if="showOptions">
 			<div v-on:click="showConfirmation(true)">
 				<div><font-awesome-icon icon="trash-alt" /></div>
-				<div>Delete folder</div>
+				<div>Delete <slot/></div>
 			</div>
 			<div v-on:click="toggleHidden" v-if="toggleHiddenIcon">
 				<div><font-awesome-icon v-bind:icon="toggleHiddenIcon" /></div>

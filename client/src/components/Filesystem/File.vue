@@ -5,6 +5,7 @@
 							:toggleHidden="toggleHidden"
 							:toggleHiddenIcon="toggleHiddenIcon"
 							:showConfirmation="showConfirmation">
+			File
 		</Toolbar>
 
 		<ConfirmButton v-show="didClickDelete" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
