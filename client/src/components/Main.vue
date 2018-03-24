@@ -1,21 +1,26 @@
 <template>
 	<div>
-		<header class="titlebar">
-			<font-awesome-icon icon="desktop"/> {{device.name}}
-		</header>
-
+		<!-- <header class="titlebar">
+			<font-awesome-icon icon="desktop"/>
+		</header> -->
 		<section class="section">
-			<div>
-				<div class="header">File system</div>
-				<router-link to="/filesystem/browse"><div class="item">Browse files</div></router-link>
+			<div class="header">File system</div>
+			<div class="item">
+				<router-link to="/filesystem/browse"><span>Browse files</span></router-link>
 			</div>
-			<div>
-				<div class="header">System information</div>
-				<router-link to="/system/temperature"><div class="item">Temperature</div></router-link>
-				<router-link to="/system/cpu"><div class="item">CPU usage</div></router-link>
-				<router-link to="/system/ram"><div class="item">RAM usage</div></router-link>
-				<router-link to="/system/disk"><div class="item">Disk usage</div></router-link>
+			<div class="header">System information</div>
+			<div class="item">
+				<router-link to="/system/temperature"><span>Temperature</span></router-link>
 			</div>
+			<div class="item">
+				<router-link to="/system/cpu"><span>CPU usage</span></router-link>
+			</div>
+			<div class="item">
+				<router-link to="/system/ram"><span>RAM usage</span></router-link>
+			</div>
+			<div class="item">
+			<router-link to="/system/disk"><span>Disk usage</span></router-link>
+				</div>
 		</section>
 	</div>
 </template>
@@ -30,14 +35,7 @@ export default {
 
 	components: {
     FontAwesomeIcon
-  },
-
-	data() {
-		return {
-			resources: {},
-			device: {}
-		}
-	}
+  }
 }
 </script>
 
@@ -47,6 +45,13 @@ export default {
 	color: 			#fff;
 	font-size: 	1.1em;
 	padding: 		10px;
+}
+
+.section {
+	display: 				flex;
+	flex-direction: column;
+	height: 				100vh;
+	width: 					100vw;
 }
 
 .section .header {
@@ -59,17 +64,28 @@ export default {
 }
 
 .section .item {
-	background: rgb(114, 186, 208);
-	color:			rgb(254,254,252);
-	font-size:  1.2em;
-	padding: 		10px;
+	flex: 			1;
+	height: 		100px;
+	text-align: center;
+	width: 			100%;
 }
 
-.section .item:hover {
+.section .item a {
+	background: rgb(114, 186, 208);
+	color:			rgb(254,254,252);
+	display: 		table;
+	font-size:  5vh;
+	height: 		100%;
+	width: 			100%;
+}
+
+.section .item a:hover {
 	background: rgba(114, 186, 208, 0.5);
 }
 
-a {
-	text-decoration: none;
+.section .item a span {
+	display: 				table-cell;
+	vertical-align: middle;
 }
+
 </style>

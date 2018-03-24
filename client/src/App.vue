@@ -23,6 +23,10 @@ body {
 	margin: 		0;
 }
 
+a {
+	text-decoration: none;
+}
+
 #app {
 	color: 										#2c3e50;
   font-family:							'Avenir', Helvetica, Arial, sans-serif;
