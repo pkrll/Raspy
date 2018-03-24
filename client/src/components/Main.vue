@@ -22,7 +22,6 @@
 
 <script>
 import axios from 'axios';
-import {HTTP} from '../http-common';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { desktop } from '@fortawesome/fontawesome-free-solid'
 
@@ -38,19 +37,7 @@ export default {
 			resources: {},
 			device: {}
 		}
-	},
-
-	created() {
-		HTTP.get('').then(
-			response => {
-				this.resources = response.data.resources;
-				this.device    = response.data.device;
-			}
-		).catch(e => {
-			console.log("ERROR " + e);
-		})
 	}
-
 }
 </script>
 

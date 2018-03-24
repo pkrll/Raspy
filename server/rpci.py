@@ -50,12 +50,15 @@ def api_root():
 @app.route('/api/system/temp')
 @requires_auth
 def getTemperature():
-    result = os.popen('cat /sys/class/thermal/thermal_zone0/temp').readline().replace("\n", "")
-    temperature = int(result) / 1000
-    remainder = int(result) / 100 % temperature
+    stat = {'temperature': 0}
 
-    stat = {}
-    stat['temperature'] = str(temperature) + '.' + str(remainder) + '°C'
+    try:
+        result = os.popen('cat /sys/class/thermal/thermal_zone0/temp').readline().replace("\n", "")
+        temperature = int(result) / 1000
+        remainder = int(result) / 100 % temperature
+        stat['temperature'] = str(temperature) + '.' + str(remainder) + '°C'
+    except:
+        pass
 
     return json.dumps(stat)
 
