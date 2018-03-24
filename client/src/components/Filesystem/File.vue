@@ -2,8 +2,6 @@
 	<div>
 		<Toolbar 	:path="path"
 							:goBack="goBack"
-							:toggleHidden="toggleHidden"
-							:toggleHiddenIcon="toggleHiddenIcon"
 							:showConfirmation="showConfirmation">
 			File
 		</Toolbar>

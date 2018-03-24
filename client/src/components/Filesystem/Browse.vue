@@ -45,7 +45,8 @@ export default {
 	components: { FontAwesomeIcon, Toolbar, ConfirmButton },
 	watch: {
 		'$route' (to, from) {
-			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/'
+			this.didClickDelete = false;
+			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
 			this.browseDirectory(path);
 		}
   },
