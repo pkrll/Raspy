@@ -24,16 +24,12 @@ export default {
 
 .header > div.title {
 	color: 				rgb(254,254,252);
-	font-size: 		1.3em;
+	font-size: 		5.4vw;
 	margin-left:	20px;
 }
 
 .header img {
 	height: 64px;
-}
-
-.header:hover div.title {
-	color: #000;
 }
 
 </style>

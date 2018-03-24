@@ -58,7 +58,7 @@ export default {
 	background: 		rgb(92, 107, 158);
 	color:					rgb(225,225,225);
 	font-variant: 	small-caps;
-	font-size:  		1.1em;
+	font-size:  		3vw;
 	text-transform: lowercase;
 	padding: 				10px;
 }
@@ -74,18 +74,24 @@ export default {
 	background: rgb(114, 186, 208);
 	color:			rgb(254,254,252);
 	display: 		table;
-	font-size:  5vh;
+	font-size:  5vw;
 	height: 		100%;
 	width: 			100%;
-}
-
-.section .item a:hover {
-	background: rgba(114, 186, 208, 0.5);
 }
 
 .section .item a span {
 	display: 				table-cell;
 	vertical-align: middle;
+}
+
+@media screen and (max-width: 540px) {
+  .section .item a {
+     font-size: 8vw;
+  }
+
+	.section .header {
+		font-size: 7vw;
+	}
 }
 
 </style>

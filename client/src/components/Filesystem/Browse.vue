@@ -113,7 +113,7 @@ export default {
 	cursor:						pointer;
 	color: 						#fff;
 	display: 					table;
-	font-size: 				7vw;
+	font-size: 				5vw;
 	height: 					100%;
 	text-decoration: 	none;
 	width: 						100%;
@@ -127,19 +127,23 @@ export default {
 	word-break: 		break-all;
 }
 
-.file-list div:hover {
-	background: 			rgba(115, 186, 208, 0.5);
+.empty {
+	display: 	table;
+	height: 	100%;
 }
 
 .empty div {
-	color: 			#fff;
-	font-size: 	1.4em;
-	text-align: center;
+	background: 		none;
+	color: 					#fff;
+	display: 				table-cell;
+	font-size: 			1.4em;
+	text-align: 		center;
+	vertical-align:	middle;
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (max-width: 540px) {
   .file-list div a {
-     font-size: 6vh;
+     font-size: 8vw;
   }
 }
 

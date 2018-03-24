@@ -51,9 +51,9 @@ export default {
 .header {
 	background: 	rgb(229, 73, 95);
 	color: 				#fff;
-	font-size: 		1.2em;
 	display:			flex;
 	align-items: 	center;
+	min-height: 	100px;
 }
 
 .header > div {
@@ -63,12 +63,15 @@ export default {
 }
 
 .toolbar {
-	justify-content: space-between;
+	justify-content: 	space-between;
+	padding: 					0 5px 0 5px;
+	font-size: 				5vw;
 }
 
 .optionsbar {
 	justify-content: space-around;
 	flex-wrap: wrap;
+	font-size: 4vw;
 }
 
 .optionsbar > div {
@@ -78,7 +81,19 @@ export default {
 .status-bar {
 	background: rgb(29, 49, 72);
 	color: 			#fff;
+	font-size: 	5vw;
 	padding: 		10px;
 	text-align: center;
 }
+
+@media screen and (max-width: 540px) {
+  .toolbar {
+     font-size: 7vw;
+  }
+
+	.optionsbar {
+		font-size: 6vw;
+	}
+}
+
 </style>
