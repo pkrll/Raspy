@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Bookmarker from '@/common/bookmarker'
+import Bookmarker from '@/shared/bookmarker'
 
 Vue.config.productionTip = false
 

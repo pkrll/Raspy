@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import shared from '@/common'
+import shared from '@/shared'
 import Spinner from '@/components/Common/Spinner'
 import ConfirmButton from '@/components/Common/ConfirmButton'
 import DirectoryListing from '@/components/Filesystem/DirectoryListing'

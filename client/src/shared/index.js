@@ -1,4 +1,4 @@
-import {HTTP} from '@/http-common'
+import {HTTP} from '@/shared/http'
 
 export default {
 	/**

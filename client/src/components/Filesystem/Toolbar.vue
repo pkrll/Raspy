@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import shared from '@/common'
+import shared from '@/shared'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { trashalt, cog, arrowaltcircleleft } from '@fortawesome/fontawesome-free-solid'
 

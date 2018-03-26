@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import shared from '@/common'
+import shared from '@/shared'
 import ConfirmButton from '@/components/Common/ConfirmButton'
 import Toolbar from '@/components/Filesystem/Toolbar'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
