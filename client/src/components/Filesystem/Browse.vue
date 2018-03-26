@@ -1,7 +1,7 @@
 <template>
 	<section class="wrapper">
 		<nav class="options">
-			<div class="noselect" v-on:click="setFavorite" v-bind:class="{active: isFavorite}">
+			<div class="noselect" v-on:click="toggleFavorite" v-bind:class="{active: isFavorite}">
 				<font-awesome-icon icon="star"/>
 				<div class="title">Set as favorite</div>
 			</div>
@@ -56,7 +56,7 @@ import shared from '@/common'
 import ConfirmButton from '@/components/ConfirmButton'
 import Toolbar from '@/components/Filesystem/Toolbar'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { trashalt, cog, arrowaltcircleleft, folderopen, file, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
+import { trashalt, cog, folderopen, file, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: { path: { default: '/' } },
@@ -76,6 +76,11 @@ export default {
 		}
   },
 	computed: {
+		/**
+		 * Returns the parent path of the current path, or itself if the path is the root folder.
+		 *
+		 * @return {String} The parent path of the current path.
+		 */
 		parentPath: function () {
 			let _path = this.prettyPath;
 			let index = _path.lastIndexOf('/');
@@ -85,13 +90,20 @@ export default {
 
 			return _path;
 		},
-
+		/**
+		 * Converts the current path to a human readable path.
+		 *
+		 * @return {String} The current path.
+		 */
 		prettyPath: function () {
 			return shared.prettyPath(this.path);
 		}
 	},
 	methods: {
-		setFavorite: function () {
+		/**
+		 * Toggles the current path as the bookmarked path.
+		 */
+		toggleFavorite: function () {
 			if (this.isFavorite) {
 				this.$bookmarker.clear();
 			} else {
@@ -100,19 +112,23 @@ export default {
 
 			this.isFavorite = !this.isFavorite;
 		},
+		/**
+		 * Shows the confirmation dialog.
+		 * @param  {Boolean} status True to show the dialog, otherwise false.
+		 */
 		showConfirmation: function (status) {
 			this.bottomComponent = (status) ? 'ConfirmButton' : '';
 		}
 	},
 	data() {
 		return {
+			files: [],
+			directories: [],
+			bottomComponent: '',
 			showHidden: false,
 			isFavorite: this.$bookmarker.get() == this.path,
 			didClickDelete: false,
-			toggleHiddenIcon: 'toggle-off',
-			files: [],
-			directories: [],
-			bottomComponent: ''
+			toggleHiddenIcon: 'toggle-off'
 		}
 	},
 	created () {
