@@ -19,6 +19,10 @@ def after_request(response):
 
   return response
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
 @app.route('/')
 def index():
     return render_template("index.html")
