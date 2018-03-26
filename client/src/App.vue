@@ -19,8 +19,10 @@ export default {
 <style>
 
 body {
-	background: rgb(23,173,145);
-	margin: 		0;
+	background: 	rgb(45, 49, 57);
+	color: 				#fff;
+	margin: 			0;
+	font-family: 	"Hind";
 }
 
 a {
@@ -28,10 +30,43 @@ a {
 }
 
 #app {
-	color: 										#2c3e50;
-  font-family:							'Avenir', Helvetica, Arial, sans-serif;
+	/* color: 										#2c3e50; */
+	color:						rgb(255,255,255);
+  font-family:							'Hind', 'Avenir', Helvetica, Arial, sans-serif;
    -webkit-font-smoothing:	antialiased;
   -moz-osx-font-smoothing:	grayscale;
+}
+
+.wrapper {
+	font-size: 4vw;
+}
+
+.options {
+	border-bottom: 1px solid #fff;
+	display: flex;
+	justify-content: space-around;
+	font-size: 3.5vw;
+	padding: 10px 0;
+}
+
+.options > div {
+	border-left:  1px solid #fff;
+	cursor:				pointer;
+	text-align:   center;
+	width:        50%;
+}
+
+.options > div:first-child {
+	border-left: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <div class="confirmButtonWrapper">
-		<div v-on:click="cancel"><span>Cancel</span></div>
-		<div v-on:click="confirm"><span>Confirm</span></div>
+	<div>
+		<nav class="bottom-dialog">
+			<div v-on:click="cancel"><span>Cancel</span></div>
+			<div v-on:click="confirm"><span>Confirm</span></div>
+		</nav>
 	</div>
 </template>
 
@@ -22,34 +24,27 @@ export default {
 
 <style>
 
-.confirmButtonWrapper {
-	align-items: 			center;
-	background: 			rgb(229, 73, 95);
-	bottom: 					0;
-	color: 						#fff;
-	display: 					flex;
-	font-size: 				1.5em;
-	height: 					100px;
-	justify-content: 	space-around;
-	position: 				fixed;
-	width: 						100%;
+.bottom-dialog {
+	background: rgb(82, 172, 120);
+	bottom:     0;
+	display: 		table;
+	font-size:  5vw;
+	padding:    10px 0;
+	position:   fixed;
+	width:      100%;
 }
 
-.confirmButtonWrapper > div {
-	display: 			table;
-	cursor:				pointer;
-	height: 			100%;
-	text-align: 	center;
-	width: 				50%;
-}
-
-.confirmButtonWrapper > div span {
+.bottom-dialog > div {
+	border-left:  	1px solid #fff;
+	cursor: 				pointer;
 	display: 				table-cell;
+	text-align:   	center;
 	vertical-align: middle;
+	width:        	49%;
 }
 
-.confirmButtonWrapper > div:first-child {
-	border-right: 1px solid #fff;
+.bottom-dialog > div:first-child {
+	border-left: none;
 }
 
 </style>

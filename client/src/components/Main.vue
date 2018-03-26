@@ -1,27 +1,5 @@
 <template>
 	<div>
-		<!-- <header class="titlebar">
-			<font-awesome-icon icon="desktop"/>
-		</header> -->
-		<section class="section">
-			<div class="header">File system</div>
-			<div class="item">
-				<router-link to="/filesystem/browse"><span>Browse files</span></router-link>
-			</div>
-			<div class="header">System information</div>
-			<div class="item">
-				<router-link to="/system/temperature"><span>Temperature</span></router-link>
-			</div>
-			<div class="item">
-				<router-link to="/system/cpu"><span>CPU usage</span></router-link>
-			</div>
-			<div class="item">
-				<router-link to="/system/ram"><span>RAM usage</span></router-link>
-			</div>
-			<div class="item">
-				<router-link to="/system/disk"><span>Disk usage</span></router-link>
-			</div>
-		</section>
 	</div>
 </template>
 

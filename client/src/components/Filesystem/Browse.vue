@@ -1,35 +1,54 @@
 <template>
-	<div>
-		<Toolbar 	:path="path"
-							:goBack="goBack"
-							:toggleHidden="toggleHidden"
-							:toggleHiddenIcon="toggleHiddenIcon"
-							:showConfirmation="showConfirmation">
-			Folder
-		</Toolbar>
+	<section class="wrapper">
+		<nav class="options">
+			<div class="noselect" v-on:click="setFavorite" v-bind:class="{active: isFavorite}">
+				<font-awesome-icon icon="star"/>
+				<div class="title">Set as favorite</div>
+			</div>
 
-		<nav class="file-list" v-if="files.length > 0 || directories.length > 0">
+			<div class="noselect" v-on:click="showHidden = !showHidden">
+				<font-awesome-icon v-bind:icon="(showHidden) ? 'toggle-on' : 'toggle-off'"/>
+				<div class="title">Show hidden files</div>
+			</div>
 
-			<div v-for="directory in directories" class="directory" v-if="showHidden || !startsWith(directory.name, '.')">
-				<router-link :to="{ name: 'Browses', params: {path: encodeURIComponent(directory.path) }}">
+			<div class="noselect" v-on:click="didClickDelete = !didClickDelete">
+				<font-awesome-icon icon="trash"/>
+				<div class="title">Delete folder</div>
+			</div>
+
+		</nav>
+
+		<nav class="file-list-view" v-if="files.length > 0 || directories.length > 0">
+			<div class="item" v-if="this.prettyPath != '/'">
+				<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}">
+					<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;...</span>
+				</router-link>
+			</div>
+
+			<div class="item" v-for="directory in directories" v-if="showHidden || !startsWith(directory.name, '.')">
+				<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(directory.path) }}">
 					<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;{{directory.name}}</span>
 				</router-link>
 			</div>
 
-			<div v-for="file in files" class="file" v-if="showHidden || !startsWith(file.name, '.')">
+			<div class="item" v-for="file in files" v-if="showHidden || !startsWith(file.name, '.')">
 				<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
 					<span><font-awesome-icon icon="file"/>&nbsp;&nbsp;{{file.name}}</span>
 				</router-link>
 			</div>
-
 		</nav>
+		<nav class="file-list-view" v-else>
+			<div class="item" v-if="this.prettyPath != '/'">
+				<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}">
+					<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;...</span>
+				</router-link>
+			</div>
+	  </nav>
 
-		<nav class="file-list empty" v-else>
-			<div>This folder contains no files.</div>
-		</nav>
+		<component v-bind:is="bottomComponent" v-bind:cancelCallback="cancelDeleteFile" v-bind:confirmCallback="deleteFile"></component>
 
-		<ConfirmButton v-show="didClickDelete" :cancelCallback="cancelDeleteFile" :confirmCallback="deleteFile"></ConfirmButton>
-	</div>
+	</section>
+
 </template>
 
 <script>
@@ -45,37 +64,55 @@ export default {
 	components: { FontAwesomeIcon, Toolbar, ConfirmButton },
 	watch: {
 		'$route' (to, from) {
+			// Remove any old stuff before changing view
 			this.didClickDelete = false;
+			this.isFavorite = this.$bookmarker.get() == this.path;
+
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
 			this.browseDirectory(path);
+		},
+		'didClickDelete' () {
+			this.showConfirmation(this.didClickDelete);
 		}
   },
-	methods: {
-		/**
-		 * Toggles hidden files and changes the toolbar.
-		 */
-		toggleHidden: function () {
-			// TODO: Improve this
-			if (this.showHidden) {
-				this.toggleHiddenIcon = 'toggle-off';
-				this.showHidden = false;
-			} else {
-				this.toggleHiddenIcon = 'toggle-on';
-				this.showHidden = true;
-			}
+	computed: {
+		parentPath: function () {
+			let _path = this.prettyPath;
+			let index = _path.lastIndexOf('/');
+
+			if (index > 0)  return _path.substring(0, index);
+			if (index == 0) return '/';
+
+			return _path;
 		},
 
+		prettyPath: function () {
+			return shared.prettyPath(this.path);
+		}
+	},
+	methods: {
+		setFavorite: function () {
+			if (this.isFavorite) {
+				this.$bookmarker.clear();
+			} else {
+				this.$bookmarker.set(this.prettyPath);
+			}
+
+			this.isFavorite = !this.isFavorite;
+		},
 		showConfirmation: function (status) {
-			this.didClickDelete = status;
+			this.bottomComponent = (status) ? 'ConfirmButton' : '';
 		}
 	},
 	data() {
 		return {
 			showHidden: false,
+			isFavorite: this.$bookmarker.get() == this.path,
 			didClickDelete: false,
 			toggleHiddenIcon: 'toggle-off',
 			files: [],
-			directories: []
+			directories: [],
+			bottomComponent: ''
 		}
 	},
 	created () {
@@ -84,9 +121,8 @@ export default {
 		this.cancelDeleteFile = shared.cancelDeleteFile.bind(this);
 		this.goBack 					= shared.goBack.bind(this);
 		this.startsWith 			= shared.startsWith;
-		this.prettyPath 			= shared.prettyPath;
 
-		this.browseDirectory(this.path);
+		this.browseDirectory(this.prettyPath);
 	}
 
 }
@@ -94,57 +130,32 @@ export default {
 
 <style scoped>
 
-.file-list {
-	display: 				flex;
-	flex-direction: column;
-	height: 				100vh;
-	width: 					100vw;
+.options .title {
+	font-size: 2.5vw;
 }
 
-.file-list div {
-	background: 			rgb(115, 186, 208);
-	width: 						100%;
-	flex: 						1;
-	height: 					100px;
-	max-height: 			100px;
+.options .active {
+	color: yellow;
 }
 
-.file-list div a {
-	cursor:						pointer;
-	color: 						#fff;
-	display: 					table;
-	font-size: 				5vw;
-	height: 					100%;
+.item a {
+	display: 					block;
+	color: 						rgb(255,255,255);
+	padding: 					0px 0 0px 20px;
 	text-decoration: 	none;
 	width: 						100%;
-
 }
 
-.file-list div a span {
-	display: 				table-cell;
-	vertical-align: middle;
-	padding: 				0 0px 0 30px;
-	word-break: 		break-all;
+.item {
+	background: rgb(45, 49, 57);
 }
 
-.empty {
-	display: 	table;
-	height: 	100%;
+.item:nth-child(even) {
+	background: rgb(32,35,44);
 }
 
-.empty div {
-	background: 		none;
-	color: 					#fff;
-	display: 				table-cell;
-	font-size: 			1.4em;
-	text-align: 		center;
-	vertical-align:	middle;
-}
+.file-list-view {
 
-@media screen and (max-width: 540px) {
-  .file-list div a {
-     font-size: 8vw;
-  }
 }
 
 </style>

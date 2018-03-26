@@ -18,24 +18,44 @@ export default new Router({
 		{
 			path: '/filesystem/browse/',
 			name: 'Browse',
-			component: Browse
+			component: Browse,
+			meta: {
+				tab: 1
+			}
 		},
 		{
 			path: '/filesystem/browse/:path',
-			name: 'Browses',
+			name: 'Browse path',
 			component: Browse,
-			props: true
+			props: true,
+			meta: {
+				tab: 1
+			}
 		},
 		{
 			path: '/filesystem/file/:path',
 			name: 'File',
 			component: File,
-			props: true
+			props: true,
+			meta: {
+				tab: 1
+			}
+		},
+		{
+			path: '/system',
+			name: 'System',
+			component: Temperature,
+			meta: {
+				tab: 2
+			}
 		},
 		{
 			path: '/system/temperature',
 			name: 'Temperature',
-			component: Temperature
+			component: Temperature,
+			meta: {
+				tab: 2
+			}
 		}
   ]
 })

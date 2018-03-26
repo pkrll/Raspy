@@ -1,35 +1,73 @@
 <template>
-	<a href="/" class="header">
-		<img src="../assets/img/pi.svg">
-		<div class="title">Raspberry Pi Control Interface</div>
-	</a>
+
+	<header>
+		<div class="header">Raspy v0.0.1 running on Linux 4.1.19-v7+</div>
+		<nav class="menu">
+				<router-link v-bind:to="this.browsePath" v-bind:class="{ active: this.$route.meta.tab == 1}">
+					<font-awesome-icon icon="hdd"/>
+					<div>Browse files</div>
+				</router-link>
+
+				<router-link to="/system" v-bind:class="{ active: this.$route.meta.tab == 2}">
+					<font-awesome-icon icon="server"/>
+					<div>System</div>
+				</router-link>
+
+				<router-link to="/sensors" v-bind:class="{ active: this.$route.meta.tab == 3}">
+					<font-awesome-icon icon="server"/>
+					<div>Sensors</div>
+				</router-link>
+		</nav>
+	</header>
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import { hdd, server } from '@fortawesome/fontawesome-free-solid'
+
 export default {
-	name: 'Header'
+	name: 'Header',
+	components: { FontAwesomeIcon },
+	computed: {
+		browsePath: function () {
+			let favorite = this.$bookmarker.get();
+			if (favorite != undefined) {
+				return { name: 'Browse path', params: {path: favorite }};
+			}
+
+			return { name: 'Browse' };
+		}
+	}
 }
 </script>
 
 <style scoped>
 
 .header {
-	background: 			rgb(23,173,145);
+	background: rgb(82, 172, 120);
+	font-size: 	3vw;
+	padding: 		10px 10px 0 10px;
+	text-align: right;
+}
+
+.menu {
+	background: 			rgb(82, 172, 120);
 	display: 					flex;
-	align-items:			center;
-	justify-content:	flex-start;
-	padding:					10px;
-	text-decoration:	none;
+	flex-direction: 	row;
+	align-items: 			center;
+	justify-content: 	space-around;
+	padding: 					10px;
 }
 
-.header > div.title {
-	color: 				rgb(254,254,252);
-	font-size: 		5.4vw;
-	margin-left:	20px;
+.menu > a {
+	color:						rgb(255,255,255);
+	font-size: 				4vw;
+	text-align: 			center;
+	text-decoration: 	none;
 }
 
-.header img {
-	height: 64px;
+.menu > a.active {
+	color: yellow;
 }
 
 </style>

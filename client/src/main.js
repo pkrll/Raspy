@@ -3,13 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Bookmarker from '@/common/bookmarker'
 
 Vue.config.productionTip = false
 
 router.beforeEach(function (to, from, next) {
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
   next();
 });
+
+Vue.use(Bookmarker);
 
 /* eslint-disable no-new */
 new Vue({
