@@ -11,7 +11,7 @@
 				<div class="title">Show hidden files</div>
 			</div>
 
-			<div class="noselect" v-on:click="didClickDelete = !didClickDelete">
+			<div class="noselect" v-on:click="didClickDelete = !didClickDelete" v-bind:class="{greyed: didClickDelete}">
 				<font-awesome-icon icon="trash"/>
 				<div class="title">Delete folder</div>
 			</div>
@@ -128,6 +128,10 @@ export default {
 
 .options .active {
 	color: yellow;
+}
+
+.options .greyed {
+	color: grey;
 }
 
 </style>
