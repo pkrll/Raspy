@@ -1,6 +1,6 @@
-# rpci
+# Raspy
 
-> A Vue.js project
+> Client for the Raspy REST API server.
 
 ## Build Setup
 

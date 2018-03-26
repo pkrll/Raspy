@@ -1,10 +1,10 @@
-# RPCi
+# Raspy
 
-RPCi (**R**aspbery **P**i **C**ontrol **i**nterface) is a small REST API server, designed for the **Raspberry Pi**.
+Raspy is a small REST API server, designed for the **Raspberry Pi**, written in Python, as well as a client web app, written with Vue 2.
 
 ### Installation
 
-RPCi requires:
+Raspy requires:
 
 * NPM
 * Python
