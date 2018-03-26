@@ -22,10 +22,13 @@
 							 v-bind:directories="directories"
 							 v-bind:files="files"
 							 v-bind:showHidden="showHidden"
-							 v-bind:prettyPath="prettyPath"
-		></component>
+							 v-bind:prettyPath="prettyPath">
+		</component>
 
-		<component v-bind:is="bottomComponent" v-bind:cancelCallback="cancelDeleteFile" v-bind:confirmCallback="deleteFile"></component>
+		<component v-bind:is="bottomComponent"
+							 v-bind:cancelCallback="cancelDeleteFile"
+							 v-bind:confirmCallback="deleteFile">
+		</component>
 
 	</section>
 
@@ -49,7 +52,9 @@ export default {
 			// Remove any old stuff before changing view
 			this.didClickDelete = false;
 			this.isFavorite = this.$bookmarker.get() == this.path;
+
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
+
 			this.browseDirectory(path, function() {
 				this.middleComponent = 'DirectoryListing';
 			}.bind(this));

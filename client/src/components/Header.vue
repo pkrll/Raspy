@@ -70,4 +70,12 @@ export default {
 	color: yellow;
 }
 
+@media screen and (max-width: 540px) {
+
+	.menu > a {
+		font-size: 6vw;
+	}
+
+}
+
 </style>

@@ -30,8 +30,7 @@ a {
 }
 
 #app {
-	/* color: 										#2c3e50; */
-	color:						rgb(255,255,255);
+	color:										rgb(255,255,255);
   font-family:							'Hind', 'Avenir', Helvetica, Arial, sans-serif;
    -webkit-font-smoothing:	antialiased;
   -moz-osx-font-smoothing:	grayscale;
@@ -42,11 +41,11 @@ a {
 }
 
 .options {
-	border-bottom: 1px solid #fff;
-	display: flex;
-	justify-content: space-around;
-	font-size: 3.5vw;
-	padding: 10px 0;
+	border-bottom: 		1px solid #fff;
+	display: 					flex;
+	justify-content: 	space-around;
+	font-size:	 			3.5vw;
+	padding: 					10px 0;
 }
 
 .options > div {
@@ -67,6 +66,18 @@ a {
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+@media screen and (max-width: 540px) {
+
+	.wrapper {
+		font-size: 8vw;
+	}
+
+	.options {
+		font-size: 7vw;
+	}
+
 }
 
 </style>
