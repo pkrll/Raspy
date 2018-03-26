@@ -3,7 +3,7 @@
 	<header>
 		<div class="header">Raspy v0.0.1 running on Linux 4.1.19-v7+</div>
 		<nav class="menu">
-				<router-link v-bind:to="this.browsePath" v-bind:class="{ active: this.$route.meta.tab == 1}">
+				<router-link v-bind:to="this.browsePath()" v-bind:class="{ active: this.$route.meta.tab == 1}">
 					<font-awesome-icon icon="hdd"/>
 					<div>Browse files</div>
 				</router-link>
@@ -28,7 +28,7 @@ import { hdd, server } from '@fortawesome/fontawesome-free-solid'
 export default {
 	name: 'Header',
 	components: { FontAwesomeIcon },
-	computed: {
+	methods: {
 		browsePath: function () {
 			let favorite = this.$bookmarker.get();
 			if (favorite != undefined) {

@@ -18,11 +18,12 @@ export default {
 	 *
 	 * @param  {[type]} path The path to list.
 	 */
-	browseDirectory: function (path) {
+	browseDirectory: function (path, callback) {
 		HTTP.get('filesystem/list' + path).then(
 			response => {
 				this.files = response.data.files;
 				this.directories = response.data.directories;
+				if (typeof callback === 'function') callback();
 			}
 		).catch(e => {
 			console.log("ERROR " + e);
