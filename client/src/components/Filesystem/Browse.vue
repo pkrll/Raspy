@@ -36,9 +36,9 @@
 
 <script>
 import shared from '@/common'
-import ConfirmButton from '@/components/ConfirmButton'
+import Spinner from '@/components/Common/Spinner'
+import ConfirmButton from '@/components/Common/ConfirmButton'
 import DirectoryListing from '@/components/Filesystem/DirectoryListing'
-import Spinner from '@/components/Spinner'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { trashalt, cog, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 

@@ -12,7 +12,7 @@
 
 <script>
 import shared from '@/common'
-import ConfirmButton from '@/components/ConfirmButton'
+import ConfirmButton from '@/components/Common/ConfirmButton'
 import Toolbar from '@/components/Filesystem/Toolbar'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { arrowaltcircleleft } from '@fortawesome/fontawesome-free-solid'
