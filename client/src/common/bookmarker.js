@@ -44,20 +44,5 @@ export default {
 				document.cookie =  "bookmark=" + this.currentBookmark + "; path=/; expires=Fri, 31 Dec 1970 23:59:59 GMT";
 			}
 		};
-
-		// Vue.prototype.$cookies = {
-		// 	setCookie(key, value) {
-		// 		document.cookie = key + "=" + encodeURIComponent(value) + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-		// 	},
-		// 	getCookie(key) {
-		// 		let value = "; " + document.cookie;
-		// 		if (value.indexOf(key) >= 0) {
-		// 			let parts = value.split("; " + key + "=");
-		// 			if (parts.length == 2) return parts.pop().split(";").shift();
-		// 		}
-		//
-		// 		return undefined;
-		// 	}
-		// };
 	}
 };
