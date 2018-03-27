@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Bookmarker from '@/shared/bookmarker'
+import DateFormatter from '@/shared/dateformatter'
 
 Vue.config.productionTip = false
 
@@ -13,6 +14,7 @@ router.beforeEach(function (to, from, next) {
 });
 
 Vue.use(Bookmarker);
+Vue.use(DateFormatter);
 
 /* eslint-disable no-new */
 new Vue({

@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="item" v-for="file in files" v-if="showHidden || !startsWith(file.name, '.')">
-			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
+			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path), name: file.name }}">
 				<span><font-awesome-icon icon="file"/>&nbsp;&nbsp;{{file.name}}</span>
 			</router-link>
 		</div>

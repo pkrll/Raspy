@@ -59,6 +59,15 @@ a {
 	border-left: none;
 }
 
+
+.options .active {
+	color: yellow;
+}
+
+.options .greyed {
+	color: grey;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -66,6 +75,10 @@ a {
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.right {
+	text-align: right;
 }
 
 @media screen and (max-width: 540px) {

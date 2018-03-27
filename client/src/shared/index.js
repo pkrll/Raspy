@@ -16,7 +16,8 @@ export default {
 	/**
 	 * Browse the specified path.
 	 *
-	 * @param  {[type]} path The path to list.
+	 * @param  {String} 	path 			The path to list.
+	 * @param  {Function} callback 	The callback to invoke on 200 response.
 	 */
 	browseDirectory: function (path, callback) {
 		HTTP.get('filesystem/list' + path).then(
@@ -29,6 +30,23 @@ export default {
 			console.log("ERROR " + e);
 		})
 	},
+	/**
+	 * Retrieves information on the specified file.
+	 *
+	 * @param  {String}   path     The path to the file.
+	 * @param  {Function} callback The callback to invoke on 200 response.
+	 */
+	viewFile: function (path, callback) {
+		HTTP.get('filesystem/file' + path).then(
+			response => {
+				this.metadata = response.data;
+				if (typeof callback === 'function') callback();
+			}
+		).catch(e => {
+			console.log("ERROR " + e);
+		});
+	},
+
 	deleteFile: function() {
 		let path = decodeURIComponent(this.path);
 		HTTP.delete('filesystem/file' + path).then(
@@ -62,5 +80,30 @@ export default {
 	 */
 	prettyPath: function (path) {
 		return decodeURIComponent(path);
+	},
+	/**
+	 * Converts bytes to a human readable format.
+	 *
+	 * @param  {int} 		 bytes  The number of bytes.
+	 * @param  {boolean} binary True if binary units, false if SI.
+	 * @return {String}        	The number of bytes converted.
+	 */
+	bytesToHumanReadable: function (bytes, binary) {
+		const unit = (binary) ? 1024 : 1000;
+
+		if (bytes < unit) {
+			return bytes;
+		}
+
+		const symbols  = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+		const exponent = Math.floor(Math.log(bytes) / Math.log(unit));
+
+		if (exponent <= symbols.length) {
+			const size = bytes / Math.pow(unit, exponent);
+			return size.toFixed(1) + symbols[exponent];
+		}
+
+		return bytes;
 	}
+
 }

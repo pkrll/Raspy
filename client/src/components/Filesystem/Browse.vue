@@ -126,12 +126,4 @@ export default {
 	font-size: 2.5vw;
 }
 
-.options .active {
-	color: yellow;
-}
-
-.options .greyed {
-	color: grey;
-}
-
 </style>
