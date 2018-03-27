@@ -1,13 +1,15 @@
 <template>
 	<div>
+		<Login></Login>
 	</div>
 </template>
 
 <script>
-import axios from 'axios';
+import Login from '@/components/Login/Main'
 
 export default {
-	name: 'Main'
+	name: 'Main',
+	components: { Login }
 }
 </script>
 
