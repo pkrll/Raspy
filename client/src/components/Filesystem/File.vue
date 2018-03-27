@@ -60,8 +60,8 @@
 
 <script>
 import shared from '@/shared'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import ConfirmButton from '@/components/Common/ConfirmButton'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { arrowcircleleft, download, trash, file } from '@fortawesome/fontawesome-free-solid'
 
 export default {
@@ -114,21 +114,6 @@ export default {
 </script>
 
 <style scoped>
-
-.table-view {
-	display:    table;
-	font-size:  5vw;
-	margin:     auto;
-	width:      95%;
-}
-
-.table-view .table-row-view {
-	display: table-row;
-}
-
-.table-row-view .table-cell-view {
-	display: table-cell;
-}
 
 .file-viewer-details {
 

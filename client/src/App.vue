@@ -59,13 +59,27 @@ a {
 	border-left: none;
 }
 
-
 .options .active {
 	color: yellow;
 }
 
 .options .greyed {
 	color: grey;
+}
+
+.table-view {
+	display:    table;
+	font-size:  5vw;
+	margin:     auto;
+	width:      95%;
+}
+
+.table-view .table-row-view {
+	display: table-row;
+}
+
+.table-row-view .table-cell-view {
+	display: table-cell;
 }
 
 .noselect {
