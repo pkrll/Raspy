@@ -1,22 +1,26 @@
 <template>
   <div id="app">
 		<app-header></app-header>
-    <router-view/>
+    <router-view class="container"/>
+		<app-footer></app-footer>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Common/Header.vue'
+import Footer from '@/components/Common/Footer.vue'
 
 export default {
   name: 'App',
-	components: {
-		'app-header': Header
-	}
+	components: { 'app-header': Header, 'app-footer': Footer }
 }
 </script>
 
 <style>
+
+html, body {
+	min-height: 100vh;
+}
 
 body {
 	background: 	rgb(45, 49, 57);
@@ -31,9 +35,16 @@ a {
 
 #app {
 	color:										rgb(255,255,255);
+	display: 									flex;
   font-family:							'Hind', 'Avenir', Helvetica, Arial, sans-serif;
+	flex-direction: 					column;
+	min-height: 							100vh;
    -webkit-font-smoothing:	antialiased;
   -moz-osx-font-smoothing:	grayscale;
+}
+
+#app > .container {
+	flex: 1 0;
 }
 
 .wrapper {
