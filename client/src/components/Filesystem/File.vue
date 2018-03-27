@@ -132,4 +132,9 @@ export default {
 .file-viewer-details .table-view {
 	margin-top: 50px;
 }
+
+.options .title {
+	font-size: 5vw;
+}
+
 </style>

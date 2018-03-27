@@ -123,7 +123,7 @@ export default {
 <style scoped>
 
 .options .title {
-	font-size: 2.5vw;
+	font-size: 3.5vw;
 }
 
 </style>
