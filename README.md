@@ -1,41 +1,52 @@
 # Raspy
+<img src="docs/logo.png" data-canonical-src="docs/logo.png"/>
 
-Raspy is a small REST API server, designed for the **Raspberry Pi**, written in Python, as well as a client web app, written with Vue 2.
+Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web app.
+
+### Requirements
+
+To run Raspy you need the following:
+
+* NPM (__recommended version 5.7.1+__)
+* Node (__recommended version 9.2.1+__)
+* Python (__developed for version 2.7.10__)
+* Flask (__developed for version 0.12.2__)
 
 ### Installation
 
-Raspy requires:
+Clone this repository on your Raspberry Pi:
 
-* NPM
-* Python
-* Flask
+```bash
+$ git clone https://github.com/pkrll/RPCI
+```
 
-Clone this repository, and run ``npm install`` in the ``client`` folder.
+And run ``make install`` in the project root folder:
 
-### Usage
+```bash
+$ cd RPCI
+$ make install
+```
 
-##### Building the front end
-
-Before usage, the front end needs to be built into a bundle in the ``dist`` folder. In the project root folder, type the following:
+Before usage, you need to build the client application. In the project root folder, type:
 
 ```bash
 $ make client
 ```
 
-Wait for the compilation to complete.
-
-##### Start the server
-
-In the project root folder, type the following:
+To start the server, run the command:
 
 ```bash
 $ make server
 ```
 
-Make sure the front end has ben built into a bundle.
+Make sure that the client application has been built into a bundle in the ``dist`` folder before running the server.
 
 You can do both at the same time with just the following command:
 
 ```bash
 $ make
 ```
+
+### Author
+
+Raspy was created by Ardalan Samimi
