@@ -62,6 +62,10 @@ def login():
         credentials = json.loads(request.data)
         if (auth.check_auth(credentials['username'], credentials['password'])):
             response['status'] = 1
+        else:
+            response['message'] = 'Wrong username or password!'
+    else:
+        response['message'] = 'An error occured. Could not sign in.'
 
     return json.dumps(response)
 
