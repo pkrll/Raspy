@@ -20,6 +20,18 @@ endif
 devclient:
 	make ENV=dev client
 
+major:
+	npm version major
+	git push
+
+minor:
+	npm version minor
+	git push
+
+patch:
+	npm version patch
+	git push
+
 clean:
 	find . -name \*.pyc -delete
 	rm -rf dist/*
