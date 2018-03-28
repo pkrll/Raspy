@@ -4,7 +4,6 @@ import Main from '@/components/Main'
 import Browse from '@/components/Filesystem/Browse'
 import File from '@/components/Filesystem/File'
 import SystemMain from '@/components/System/Main'
-import Temperature from '@/components/System/Temperature'
 
 Vue.use(Router)
 
@@ -46,14 +45,6 @@ export default new Router({
 			path: '/system',
 			name: 'System',
 			component: SystemMain,
-			meta: {
-				tab: 2
-			}
-		},
-		{
-			path: '/system/temperature',
-			name: 'Temperature',
-			component: Temperature,
 			meta: {
 				tab: 2
 			}

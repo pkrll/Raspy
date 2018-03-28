@@ -26,8 +26,8 @@
 		</component>
 
 		<component v-bind:is="bottomComponent"
-							 v-bind:cancelCallback="cancelDeleteFile"
-							 v-bind:confirmCallback="deleteFile">
+							 v-bind:cancelCallback="didSelectCancel"
+							 v-bind:confirmCallback="didSelectConfirm">
 		</component>
 
 	</section>
@@ -52,19 +52,14 @@ export default {
 			// Remove any old stuff before changing view
 			this.didClickDelete = false;
 			this.isFavorite = this.$bookmarker.get() == this.path;
-
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
-
-			this.browseDirectory(path, function() {
-				this.middleComponent = 'DirectoryListing';
-			}.bind(this));
+			this.$APIManager.listDirectory(path, this.didFinishRequest);
 		},
 		'didClickDelete' () {
 			this.showConfirmation(this.didClickDelete);
 		}
   },
 	computed: {
-
 		/**
 		 * Converts the current path to a human readable path.
 		 *
@@ -88,18 +83,47 @@ export default {
 			this.isFavorite = !this.isFavorite;
 		},
 		/**
+		 * Invoked by listDirectory requests.
+		 *
+		 * @param  {Object} data The response data.
+		 */
+		didFinishRequest: function (data) {
+			this.files = data.files;
+			this.directories = data.directories;
+			this.middleComponent = 'DirectoryListing';
+		},
+		/**
 		 * Shows the confirmation dialog.
 		 * @param  {Boolean} status True to show the dialog, otherwise false.
 		 */
 		showConfirmation: function (status) {
+			this.didClickDelete = status;
 			this.bottomComponent = (status) ? 'ConfirmButton' : '';
+		},
+		/**
+		 * Invoked when user clicks the cancel button on the confirm dialog.
+		 */
+		didSelectCancel: function () {
+			this.showConfirmation(false);
+		},
+		/**
+		 * Invoked when user clicks the confirm button on the confirm dialog.
+		 */
+		didSelectConfirm: function () {
+			this.$APIManager.deleteFile(this.prettyPath, function (response) {
+				if (response.status == 1) {
+					this.goBack();
+				} else {
+					console.log("ERROR" + response);
+				}
+			}.bind(this));
 		}
 	},
 	data() {
 		return {
 			files: [],
 			directories: [],
-			middleComponent: 'DirectoryListing',
+			middleComponent: 'Spinner',
 			bottomComponent: '',
 			showHidden: false,
 			isFavorite: this.$bookmarker.get() == this.path,
@@ -108,13 +132,10 @@ export default {
 		}
 	},
 	created () {
-		this.browseDirectory 	= shared.browseDirectory.bind(this);
-		this.deleteFile 			= shared.deleteFile.bind(this);
-		this.cancelDeleteFile = shared.cancelDeleteFile.bind(this);
 		this.goBack 					= shared.goBack.bind(this);
 		this.startsWith 			= shared.startsWith;
 
-		this.browseDirectory(this.prettyPath);
+		this.$APIManager.listDirectory(this.prettyPath, this.didFinishRequest);
 	}
 
 }

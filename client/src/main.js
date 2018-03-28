@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import Bookmarker from '@/shared/bookmarker'
 import DateFormatter from '@/shared/dateformatter'
+import APIManager from '@/shared/network/apimanager'
 
 Vue.config.productionTip = false
 
@@ -15,6 +16,7 @@ router.beforeEach(function (to, from, next) {
 
 Vue.use(Bookmarker);
 Vue.use(DateFormatter);
+Vue.use(APIManager);
 
 /* eslint-disable no-new */
 new Vue({

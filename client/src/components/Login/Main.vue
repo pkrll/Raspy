@@ -4,22 +4,38 @@
 			Login to Raspy
 		</div>
 		<div>
-				<input type="text" name="username" placeholder="Username...">
-				<input type="password" name="password" placeholder="Password...">
+				<input type="text" name="username" v-model="username" placeholder="Username...">
+				<input type="password" name="password" v-model="password" placeholder="Password...">
 			<div style="padding-top: 10px;">
-				<div class="button">Sign in</div>
+				<div class="button noselect" v-on:click="signIn">Sign in</div>
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
+import shared from '@/shared'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { key, user } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	name: 'Login',
-	components: { FontAwesomeIcon }
+	components: { FontAwesomeIcon },
+	methods: {
+		signIn: function () {
+			if (this.username.length > 0 && this.password.length > 0) {
+				this.$APIManager.login(this.username, this.password, function (data) {
+					console.log(data);
+				});
+			}
+		}
+	},
+	data() {
+		return {
+			username: '',
+			password: ''
+		}
+	},
 }
 </script>
 
@@ -53,6 +69,7 @@ input:focus {
 .button {
 	background: 		rgb(82, 172, 120);
 	border-radius: 	5px;
+	cursor:					pointer;
 	font-size: 			4vw;
 	padding: 				10px 10px 10px 10px;
 	text-align: 		center;

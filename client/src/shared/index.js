@@ -1,4 +1,4 @@
-import {HTTP} from '@/shared/http'
+// import { HTTPGet, HTTPPost } from '@/shared/http'
 
 export default {
 	/**
@@ -12,59 +12,6 @@ export default {
 		if (!value) return false;
 		value = value.toString();
 		return value.charAt(0) === character.toString();
-	},
-	/**
-	 * Browse the specified path.
-	 *
-	 * @param  {String} 	path 			The path to list.
-	 * @param  {Function} callback 	The callback to invoke on 200 response.
-	 */
-	browseDirectory: function (path, callback) {
-		HTTP.get('filesystem/list' + path).then(
-			response => {
-				this.files = response.data.files;
-				this.directories = response.data.directories;
-				if (typeof callback === 'function') callback();
-			}
-		).catch(e => {
-			console.log("ERROR " + e);
-		})
-	},
-	/**
-	 * Retrieves information on the specified file.
-	 *
-	 * @param  {String}   path     The path to the file.
-	 * @param  {Function} callback The callback to invoke on 200 response.
-	 */
-	viewFile: function (path, callback) {
-		HTTP.get('filesystem/file' + path).then(
-			response => {
-				this.metadata = response.data;
-				if (typeof callback === 'function') callback();
-			}
-		).catch(e => {
-			console.log("ERROR " + e);
-		});
-	},
-
-	deleteFile: function() {
-		let path = decodeURIComponent(this.path);
-		HTTP.delete('filesystem/file' + path).then(
-			response => {
-				let status = response.data.status;
-				if (status == "OK") {
-					this.$root._router.go(-1);
-				} else {
-					this.cancelDeleteFile();
-					console.log(response.data.message);
-				}
-			}
-		).catch(e => {
-			console.log("ERROR " + e);
-		});
-	},
-	cancelDeleteFile: function () {
-		this.showConfirmation(false);
 	},
 	/**
 	 * Navigates back to the previous page.

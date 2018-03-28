@@ -51,8 +51,8 @@
 		</div>
 
 		<component v-bind:is="bottomComponent"
-							 v-bind:cancelCallback="cancelDeleteFile"
-							 v-bind:confirmCallback="deleteFile">
+							 v-bind:cancelCallback="didSelectCancel"
+							 v-bind:confirmCallback="didSelectConfirm">
 		</component>
 
 	</section>
@@ -84,12 +84,38 @@ export default {
 			return this.$dateFormatter.unixtimeToString(timestamp*1000, true);
 		},
 		/**
+		 * Invoked by viewFile requests.
+		 *
+		 * @param  {Object} data The response data.
+		 */
+		didFinishRequest: function (data) {
+			this.metadata = data;
+		},
+		/**
 		 * Shows the confirmation dialog.
 		 * @param  {Boolean} status True to show the dialog, otherwise false.
 		 */
 		showConfirmation: function (status) {
 			this.didClickDelete = status;
 			this.bottomComponent = (status) ? 'ConfirmButton' : '';
+		},
+		/**
+		 * Invoked when user clicks the cancel button on the confirm dialog.
+		 */
+		didSelectCancel: function () {
+			this.showConfirmation(false);
+		},
+		/**
+		 * Invoked when user clicks the confirm button on the confirm dialog.
+		 */
+		didSelectConfirm: function () {
+			this.$APIManager.deleteFile(this.prettyPath, function (response) {
+				if (response.status == 1) {
+					this.goBack();
+				} else {
+					console.log("ERROR" + response);
+				}
+			}.bind(this));
 		}
 	},
 	data() {
@@ -100,14 +126,11 @@ export default {
 		}
 	},
 	created () {
-		this.viewFile					= shared.viewFile.bind(this);
-		this.deleteFile 			= shared.deleteFile.bind(this);
-		this.cancelDeleteFile = shared.cancelDeleteFile.bind(this);
 		this.goBack 					= shared.goBack.bind(this);
 		this.prettyPath 			= shared.prettyPath(this.path);
 		this.convertSize			= shared.bytesToHumanReadable;
 
-		this.viewFile(this.prettyPath);
+		this.$APIManager.viewFile(this.prettyPath, this.didFinishRequest);
 	}
 
 }
