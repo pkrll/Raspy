@@ -1,13 +1,16 @@
 {
   "name": "raspy",
-  "version": "0.1.1+6",
+  "version": "0.1.1+12",
   "description": "Client for the Raspy Rest API server.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "private": true,
   "scripts": {
-    "dev": "node build/increment-build.js && webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "node build/increment-version.js --version=build && webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/increment-build.js && node build/build.js"
+    "build": "node build/increment-version.js --version=build && node build/build.js",
+		"patch": "node build/increment-version.js --version=patch --skip-build",
+		"minor": "node build/increment-version.js --version=minor --skip-build",
+		"major": "node build/increment-version.js --version=major --skip-build"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.4",

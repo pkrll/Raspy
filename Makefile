@@ -1,4 +1,4 @@
-.PHONY: run install server client devclient clean
+.PHONY: all install server client devclient clean major minor patch
 
 ENV = prod
 
@@ -21,16 +21,16 @@ devclient:
 	make ENV=dev client
 
 major:
-	npm version major
-	git push
+	cd client && npm run major
+	git commit -S -am "Incremented major version"
 
 minor:
-	npm version minor
-	git push
+	cd client && npm run minor
+	git commit -S -am "Incremented minor version"
 
 patch:
-	npm version patch
-	git push
+	cd client && npm run patch
+	git commit -S -am "Incremented patch version"
 
 clean:
 	find . -name \*.pyc -delete
