@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .wrapper {
 	align-items: 			center;
 	display: 					flex;
