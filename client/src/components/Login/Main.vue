@@ -76,7 +76,7 @@ input {
 	border-radius: 			5px;
 	display: 						block;
 	font-family: 				'Hind';
-	font-size: 					4vw;
+	font-size: 					5vw;
 	padding: 						10px 20px 10px 20px;
 	-webkit-appearance: none;
 }
