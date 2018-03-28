@@ -7,8 +7,11 @@ import json, os
 from flask import Flask, request, render_template
 from server.lib.tools import bytes2human
 from server.core.auth import requires_auth
+from server.core.authenticator import Authenticator
 
 app = Flask(__name__, static_folder = "../dist/static", template_folder = "../dist")
+
+auth = Authenticator("config/default.ini")
 
 # Fixes auth problems
 @app.after_request
@@ -48,6 +51,17 @@ def api_root():
             ]
         }
     }
+
+    return json.dumps(response)
+
+@app.route('/api/user/login', methods = ['POST'])
+def login():
+    response = { 'status': 0 }
+
+    if request.method == 'POST':
+        credentials = json.loads(request.data)
+        if (auth.check_auth(credentials['username'], credentials['password'])):
+            response['status'] = 1
 
     return json.dumps(response)
 
@@ -136,10 +150,10 @@ def manageFile(filepath):
             elif os.path.isdir(filepath):
                 import shutil
                 shutil.rmtree(filepath)
-            return json.dumps({'status': 'OK'})
+            return json.dumps({'status': 1})
         except OSError:
             print OSError
-            return json.dumps({'status': 'ERROR', 'message': 'Could not delete file'})
+            return json.dumps({'status': 0, 'message': 'Could not delete file'})
     elif request.method == 'GET':
         try:
             stat = os.stat(filepath)
