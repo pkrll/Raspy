@@ -2,7 +2,7 @@
 
 	<header>
 		<div class="header">
-			<img src="../../assets/img/logo.svg" style="height:5vw;"> Raspy 0.1.0
+			<img src="../../assets/img/logo.svg" style="height:5vw;"> Raspy {{this.$Raspy.version}}
 		</div>
 		<nav class="menu">
 				<router-link v-bind:to="this.browsePath()" v-bind:class="{ active: this.$route.meta.tab == 1, greyed: !this.$root.isLoggedIn }">

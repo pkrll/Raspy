@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Raspy from '@/shared/raspy'
 import Bookmarker from '@/shared/bookmarker'
 import DateFormatter from '@/shared/dateformatter'
 import APIManager from '@/shared/network/apimanager'
@@ -21,7 +22,7 @@ router.beforeEach(function (to, from, next) {
 Vue.use(Bookmarker);
 Vue.use(DateFormatter);
 Vue.use(APIManager);
-
+Vue.use(Raspy);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
