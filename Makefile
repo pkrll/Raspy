@@ -22,15 +22,18 @@ devclient:
 
 major:
 	cd client && npm run major
-	git commit -S -am "Incremented major version"
+	git add client/package.json
+	git commit -S -m "Incremented major version"
 
 minor:
 	cd client && npm run minor
-	git commit -S -am "Incremented minor version"
+	git add client/package.json
+	git commit -S -m "Incremented minor version"
 
 patch:
 	cd client && npm run patch
-	git commit -S -am "Incremented patch version"
+	git add client/package.json
+	git commit -S -m "Incremented patch version"
 
 clean:
 	find . -name \*.pyc -delete
