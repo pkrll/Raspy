@@ -69,6 +69,7 @@ export default {
 	color: 						rgb(255,255,255);
 	padding: 					0px 0 0px 20px;
 	text-decoration: 	none;
+	overflow-x: 			scroll;
 }
 
 .item {
