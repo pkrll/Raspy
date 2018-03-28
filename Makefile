@@ -2,7 +2,10 @@
 
 ENV = prod
 
-all: client server
+all: client/node_modules client server
+
+client/node_modules: client/package.json client/package-lock.json
+	cd client && npm install
 
 install:
 	cd client && npm install
