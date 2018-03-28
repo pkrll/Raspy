@@ -1,19 +1,21 @@
 <template>
 
 	<header>
-		<div class="header">Raspy v0.0.1 running on Linux 4.1.19-v7+</div>
+		<div class="header">
+			<img src="../../assets/img/logo.svg" style="height:5vw;"> Raspy 0.1.0
+		</div>
 		<nav class="menu">
-				<router-link v-bind:to="this.browsePath()" v-bind:class="{ active: this.$route.meta.tab == 1}">
+				<router-link v-bind:to="this.browsePath()" v-bind:class="{ active: this.$route.meta.tab == 1, greyed: !this.$root.isLoggedIn }">
 					<font-awesome-icon icon="hdd"/>
 					<div>Browse files</div>
 				</router-link>
 
-				<router-link to="/system" v-bind:class="{ active: this.$route.meta.tab == 2}">
+				<router-link to="/system" v-bind:class="{ active: this.$route.meta.tab == 2, greyed: !this.$root.isLoggedIn }">
 					<font-awesome-icon icon="server"/>
 					<div>System</div>
 				</router-link>
 
-				<router-link to="/sensors" v-bind:class="{ active: this.$route.meta.tab == 3}">
+				<router-link to="/sensors" v-bind:class="{ active: this.$route.meta.tab == 3, greyed: !this.$root.isLoggedIn }">
 					<font-awesome-icon icon="server"/>
 					<div>Sensors</div>
 				</router-link>
@@ -44,9 +46,8 @@ export default {
 <style scoped>
 
 .header {
-	background: rgb(82, 172, 120);
-	font-size: 	3vw;
-	padding: 		10px 10px 0 10px;
+	font-size: 	5vw;
+	padding: 		5px 10px 5px 10px;
 	text-align: right;
 }
 
@@ -66,8 +67,8 @@ export default {
 	text-decoration: 	none;
 }
 
-.menu > a.active {
-	color: yellow;
+.menu > a.greyed {
+	color: rgb(210, 210, 210);
 }
 
 @media screen and (max-width: 540px) {

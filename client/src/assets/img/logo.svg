@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="364px" height="420px" viewBox="0 0 364 420" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="9.91239162%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#7BCD9E" offset="0%"></stop>
+            <stop stop-color="#459F65" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="9.91239162%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#5EA77D" offset="0%"></stop>
+            <stop stop-color="#459F65" offset="100%"></stop>
+        </linearGradient>
+        <text id="text-3" font-family="Menlo-Regular, Menlo" font-size="300" font-weight="normal">
+            <tspan x="91" y="339">R</tspan>
+        </text>
+        <filter x="-8.5%" y="-6.4%" width="117.0%" height="122.8%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Polygon" fill="url(#linearGradient-1)" points="181.599009 0.216835589 363.117708 111.355176 293.783734 418.734483 181.599009 418.734483 69.4142833 418.734483 0.0803098731 111.355176"></polygon>
+        <polygon id="Polygon" fill="url(#linearGradient-2)" points="182.040155 0.216835589 363.558854 111.355176 294.22488 418.734483 182.040155 418.734483 182.040155 111.355176"></polygon>
+        <g id="R">
+            <use stroke="#FFFFFF" fill="#1F2229" fill-opacity="1" stroke-width="1" stroke-opacity="1" filter="url(#filter-4)" xlink:href="#text-3"></use>
+            <use fill="#1F2229" fill-rule="evenodd" xlink:href="#text-3"></use>
+            <use stroke="#FFFFFF" stroke-width="1" xlink:href="#text-3"></use>
+        </g>
+    </g>
+</svg>
