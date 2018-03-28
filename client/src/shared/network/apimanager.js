@@ -26,7 +26,7 @@ export default {
 							});
 						}
 
-						if (typeof callback === 'function') callback(response.data.status);
+						if (typeof callback === 'function') callback(response.data);
 					}
 				).catch(e => {
 					console.log("Error " + e);

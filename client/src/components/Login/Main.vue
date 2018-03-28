@@ -1,14 +1,22 @@
 <template>
 	<section class="wrapper">
-		<div class="description">
-			Login to Raspy
-		</div>
-		<div>
-				<input type="text" name="username" v-model="username" placeholder="Username...">
-				<input type="password" name="password" v-model="password" placeholder="Password...">
-			<div style="padding-top: 10px;">
-				<div class="button noselect" v-on:click="signIn">Sign in</div>
+		<div v-if="signingIn == false">
+			<div class="description">
+				Login to Raspy
 			</div>
+			<div>
+					<input type="text" name="username" v-model="username" placeholder="Username...">
+					<input type="password" name="password" v-model="password" placeholder="Password...">
+				<div style="padding-top: 10px;">
+					<div class="button noselect" v-on:click="signIn">Sign in</div>
+				</div>
+			</div>
+			<div style="color: rgb(255,55,55)" v-if="message != undefined">
+				{{message}}
+			</div>
+		</div>
+		<div class="description" v-else>
+			Signing in, please wait...
 		</div>
 	</section>
 </template>
@@ -23,24 +31,35 @@ export default {
 	components: { FontAwesomeIcon },
 	methods: {
 		signIn: function () {
+			this.message = undefined;
+			this.signingIn = true;
+
 			if (this.username.length > 0 && this.password.length > 0) {
 				this.$APIManager.login(this.username, this.password, function (data) {
-					console.log(data);
-				});
+					if (data.status == 1) {
+						this.$root.isLoggedIn = true;
+					} else {
+						this.message = data.message;
+						this.signingIn = false;
+					}
+				}.bind(this));
 			}
 		}
 	},
 	data() {
 		return {
 			username: '',
-			password: ''
+			password: '',
+			message: undefined,
+			signingIn: false
 		}
-	},
+	}
 }
 </script>
 
 <style scoped>
-.wrapper {
+
+.wrapper > div {
 	align-items: 			center;
 	display: 					flex;
 	flex-direction: 	column;

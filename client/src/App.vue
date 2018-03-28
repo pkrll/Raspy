@@ -12,7 +12,12 @@ import Footer from '@/components/Common/Footer.vue'
 
 export default {
   name: 'App',
-	components: { 'app-header': Header, 'app-footer': Footer }
+	components: { 'app-header': Header, 'app-footer': Footer },
+	created () {
+		if (this.$root.isLoggedIn == false) {
+			this.$root._router.push('/');
+		}
+	}
 }
 </script>
 

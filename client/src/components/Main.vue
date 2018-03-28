@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Login></Login>
+		<Login v-if="this.$root.isLoggedIn == false"></Login>
 	</div>
 </template>
 

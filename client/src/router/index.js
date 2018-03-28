@@ -20,7 +20,8 @@ export default new Router({
 			name: 'Browse',
 			component: Browse,
 			meta: {
-				tab: 1
+				tab: 1,
+				requiresAuth: true
 			}
 		},
 		{
@@ -29,7 +30,8 @@ export default new Router({
 			component: Browse,
 			props: true,
 			meta: {
-				tab: 1
+				tab: 1,
+				requiresAuth: true
 			}
 		},
 		{
@@ -38,7 +40,8 @@ export default new Router({
 			component: File,
 			props: true,
 			meta: {
-				tab: 1
+				tab: 1,
+				requiresAuth: true
 			}
 		},
 		{
@@ -46,7 +49,8 @@ export default new Router({
 			name: 'System',
 			component: SystemMain,
 			meta: {
-				tab: 2
+				tab: 2,
+				requiresAuth: true
 			}
 		}
   ]

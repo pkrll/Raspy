@@ -10,8 +10,12 @@ import APIManager from '@/shared/network/apimanager'
 Vue.config.productionTip = false
 
 router.beforeEach(function (to, from, next) {
-  window.scrollTo(0, 0);
-  next();
+	if (to.matched.some(record => record.meta.requiresAuth) && router.app.isLoggedIn == false) {
+		next({ path: '/' });
+	} else {
+		window.scrollTo(0, 0);
+		next();
+	}
 });
 
 Vue.use(Bookmarker);
@@ -22,6 +26,9 @@ Vue.use(APIManager);
 new Vue({
   el: '#app',
   router,
+	data: {
+		isLoggedIn: false
+	},
   components: { App },
   template: '<App/>'
 })
