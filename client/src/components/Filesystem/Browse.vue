@@ -51,7 +51,7 @@ export default {
 			this.middleComponent = 'Spinner';
 			// Remove any old stuff before changing view
 			this.didClickDelete = false;
-			this.isFavorite = this.$CookieManager.getBookmark() == this.path;
+			this.isFavorite = this.$CookieManager.getBookmark() == this.prettyPath;
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
 			this.$APIManager.listDirectory(path, this.didFinishRequest);
 		},
