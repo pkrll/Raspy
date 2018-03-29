@@ -47,6 +47,10 @@ You can do both at the same time with just the following command:
 $ make
 ```
 
+### Work in progress
+
+Raspy is still a work in progress.
+
 ### Author
 
 Raspy was created by Ardalan Samimi
