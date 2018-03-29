@@ -1,4 +1,5 @@
 import axios from 'axios'
+import fileDownload from 'downloadjs'
 
 export default {
 	install: (Vue, username, password) => {
@@ -86,8 +87,28 @@ export default {
 				).catch(e => {
 					console.log("ERROR " + e);
 				});
-			}
+			},
+			/**
+			 * Downloads the specified file.
+			 *
+			 * @param  {String} path Path to the file on the server.
+			 */
+			downloadFile: function (path, saveAsName) {
+				let	fileName 	= (saveAsName != undefined) ? saveAsName : 'untitled';
+				let baseURL 	= this.HTTP.defaults.baseURL;
+				let usrAuth 	= this.HTTP.defaults.auth;
 
+				axios({
+					url: baseURL + 'filesystem/download' + path,
+					method: 'get',
+					responseType: 'blob',
+					auth: usrAuth
+				}).then(function (response) {
+					fileDownload(response.data, fileName);
+				}).catch(e => {
+					console.log("ERROR " + e);
+				});
+			}
 		}
 
 	}

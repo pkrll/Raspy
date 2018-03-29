@@ -7,7 +7,7 @@
 				<div class="title">Back</div>
 			</div>
 
-			<div class="noselect">
+			<div class="noselect" v-on:click="downloadFile">
 				<font-awesome-icon icon="download"/>
 				<div class="title">Download</div>
 			</div>
@@ -116,6 +116,12 @@ export default {
 					console.log("ERROR" + response);
 				}
 			}.bind(this));
+		},
+		/**
+		 * Downloads the current file.
+		 */
+		downloadFile: function () {
+			this.$APIManager.downloadFile(this.prettyPath, this.name);
 		}
 	},
 	data() {
