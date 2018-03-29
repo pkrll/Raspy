@@ -5,13 +5,13 @@
 				Login to Raspy
 			</div>
 			<div>
-					<input type="text" name="username" v-model="username" placeholder="Username...">
-					<input type="password" name="password" v-model="password" placeholder="Password...">
+				<input type="text" name="username" v-model="username" placeholder="Username...">
+				<input type="password" name="password" v-model="password" placeholder="Password...">
 				<div style="padding-top: 10px;">
 					<div class="button noselect" v-on:click="signIn">Sign in</div>
 				</div>
 			</div>
-			<div style="color: rgb(255,55,55)" v-if="message != undefined">
+			<div class="message" v-if="message != undefined">
 				{{message}}
 			</div>
 		</div>
@@ -31,10 +31,10 @@ export default {
 	components: { FontAwesomeIcon },
 	methods: {
 		signIn: function () {
-			this.message = undefined;
-			this.signingIn = true;
+			if (this.username.length > 0) {
+				this.message = undefined;
+				this.signingIn = true;
 
-			if (this.username.length > 0 && this.password.length > 0) {
 				this.$APIManager.login(this.username, this.password, function (data) {
 					if (data.status == 1) {
 						this.$root.isLoggedIn = true;
@@ -43,6 +43,8 @@ export default {
 						this.signingIn = false;
 					}
 				}.bind(this));
+			} else {
+				this.message = "You must specify a username to sign in."
 			}
 		}
 	},
@@ -93,4 +95,11 @@ input:focus {
 	padding: 				10px 10px 10px 10px;
 	text-align: 		center;
 }
+
+.message {
+	color: 			rgb(255,55,55);
+	font-size: 	5vw;
+	padding: 		10px 10px 0px 10px;
+}
+
 </style>

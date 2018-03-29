@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-		<app-header></app-header>
+		<app-header v-if="this.$root.isLoggedIn"></app-header>
     <router-view class="container"/>
 		<app-footer></app-footer>
   </div>
