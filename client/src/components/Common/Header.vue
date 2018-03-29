@@ -67,6 +67,10 @@ export default {
 	text-decoration: 	none;
 }
 
+.menu > a.active {
+	color: yellow;
+}
+
 .menu > a.greyed {
 	color: rgb(210, 210, 210);
 }
