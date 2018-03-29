@@ -13,8 +13,8 @@
 		</div>
 
 		<div class="item" v-for="file in files" v-if="showHidden || !startsWith(file.name, '.')">
-			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path), name: file.name }}">
-				<span><font-awesome-icon icon="file"/>&nbsp;&nbsp;{{file.name}}</span>
+			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
+				<span><font-awesome-icon v-bind:icon="icon(file.name)"/>&nbsp;&nbsp;{{file.name}}</span>
 			</router-link>
 		</div>
 	</nav>
@@ -52,8 +52,14 @@ export default {
 			return _path;
 		}
 	},
+	methods: {
+		icon: function (filename) {
+			return this.iconForFile(filename);
+		}
+	},
 	created() {
-		this.startsWith = shared.startsWith;
+		this.startsWith 	= shared.startsWith;
+		this.iconForFile 	= shared.iconForFile;
 	}
 }
 </script>

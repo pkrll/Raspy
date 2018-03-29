@@ -22,8 +22,8 @@
 
 		<div class="file-viewer-details column-view">
 			<div class="file-icon-container">
-				<font-awesome-icon icon="file"/>
-				<div class="file-name">{{name}}</div>
+				<font-awesome-icon v-bind:icon="icon" class="icon"/>
+				<div class="file-name">{{filename}}</div>
 			</div>
 
 			<div class="table-view">
@@ -65,12 +65,17 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { arrowcircleleft, download, trash, file } from '@fortawesome/fontawesome-free-solid'
 
 export default {
-	props: ['path', 'name'],
+	props: ['path'],
 	name: "File",
 	components: { FontAwesomeIcon, ConfirmButton },
 	watch: {
 		'didClickDelete' () {
 			this.showConfirmation(this.didClickDelete);
+		}
+	},
+	computed: {
+		icon: function () {
+			return this.iconForFile(this.filename);
 		}
 	},
 	methods: {
@@ -89,7 +94,8 @@ export default {
 		 * @param  {Object} data The response data.
 		 */
 		didFinishRequest: function (data) {
-			this.metadata = data;
+			this.metadata = data.metadata;
+			this.filename = data.filename;
 		},
 		/**
 		 * Shows the confirmation dialog.
@@ -124,17 +130,19 @@ export default {
 			this.$APIManager.downloadFile(this.prettyPath, this.name);
 		}
 	},
-	data() {
+	data: function () {
 		return {
 			didClickDelete: false,
 			bottomComponent: '',
+			filename: '',
 			metadata: {}
 		}
 	},
-	created () {
+	created: function () {
 		this.goBack 					= shared.goBack.bind(this);
 		this.prettyPath 			= shared.prettyPath(this.path);
 		this.convertSize			= shared.bytesToHumanReadable;
+		this.iconForExtension = shared.iconForExtension;
 
 		this.$APIManager.viewFile(this.prettyPath, this.didFinishRequest);
 	}
@@ -149,17 +157,22 @@ export default {
 }
 
 .file-viewer-details .file-icon-container {
-	font-size:  8vw;
-	text-align: center;
+	font-size:  	8vw;
+	text-align: 	center;
+	padding-top: 	20px;
+}
+
+.file-viewer-details .file-icon-container .icon {
+	font-size: 10vw;
 }
 
 .file-viewer-details .file-icon-container .file-name {
-	font-size:    4vw;
-	line-height:  0;
+	font-size: 4vw;
+	word-wrap: break-word;
 }
 
 .file-viewer-details .table-view {
-	margin-top: 50px;
+	margin-top: 25px;
 }
 
 .options .title {

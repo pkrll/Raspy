@@ -163,15 +163,18 @@ def manageFile(filepath):
             stat = os.stat(filepath)
 
             response = {
-                'size': stat.st_size,
-                'accessed': stat.st_atime,
-                'created': stat.st_ctime,
-                'modified': stat.st_mtime
+                'filename': os.path.basename(filepath.strip('/')),
+                'metadata': {
+                    'size': stat.st_size,
+                    'accessed': stat.st_atime,
+                    'created': stat.st_ctime,
+                    'modified': stat.st_mtime
+                }
             }
 
             return json.dumps(response)
         except OSError:
-            return 'Could not get file'
+            return json.dumps({'status': 0, 'message': 'Could not get file'})
 
 @app.route('/api/filesystem/download/<path:filepath>', methods = ['GET'])
 @requires_auth
