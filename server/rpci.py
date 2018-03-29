@@ -4,7 +4,7 @@
     RPCi
 """
 import json, os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
 from server.lib.tools import bytes2human
 from server.core.auth import requires_auth
 from server.core.authenticator import Authenticator
@@ -172,3 +172,14 @@ def manageFile(filepath):
             return json.dumps(response)
         except OSError:
             return 'Could not get file'
+
+@app.route('/api/filesystem/download/<path:filepath>', methods = ['GET'])
+@requires_auth
+def downloadFile(filepath):
+    filepath = '/' + filepath
+    resource = json.dumps({"status": 0, "message": "Could not download file"})
+
+    if request.method == 'GET':
+        resource = send_file(filepath)
+
+    return resource
