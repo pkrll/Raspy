@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Raspy from '@/shared/raspy'
-import Bookmarker from '@/shared/bookmarker'
+import Cookies from '@/shared/cookies'
 import DateFormatter from '@/shared/dateformatter'
 import APIManager from '@/shared/network/apimanager'
 
@@ -19,7 +19,7 @@ router.beforeEach(function (to, from, next) {
 	}
 });
 
-Vue.use(Bookmarker);
+Vue.use(Cookies);
 Vue.use(DateFormatter);
 Vue.use(APIManager);
 Vue.use(Raspy);
@@ -29,6 +29,22 @@ new Vue({
   router,
 	data: {
 		isLoggedIn: false
+	},
+	created: function () {
+		let username = this.$CookieManager.loadCookie('username');
+		let password = this.$CookieManager.loadCookie('password');
+
+		if (username != undefined) {
+			this.$APIManager.setCredentials(username, password);
+			this.isLoggedIn = true;
+		}
+	},
+	methods: {
+		createSession: function (username, password) {
+			this.$CookieManager.saveCookie('username', username);
+			this.$CookieManager.saveCookie('password', password);
+			this.isLoggedIn = true;
+		}
 	},
   components: { App },
   template: '<App/>'

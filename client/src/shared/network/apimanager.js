@@ -1,11 +1,21 @@
 import axios from 'axios'
 
 export default {
-	install: (Vue) => {
+	install: (Vue, username, password) => {
 
 		Vue.prototype.$APIManager = {
 
 			HTTP: axios.create({ baseURL: process.env.API_URL }),
+
+			setCredentials: function (username, password) {
+				this.HTTP = axios.create({
+					baseURL: process.env.API_URL,
+					auth: {
+						username: username,
+						password: password
+					}
+				});
+			},
 			/**
 			 * Logins to the server.
 			 *

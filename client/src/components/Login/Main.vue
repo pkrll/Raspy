@@ -37,7 +37,7 @@ export default {
 
 				this.$APIManager.login(this.username, this.password, function (data) {
 					if (data.status == 1) {
-						this.$root.isLoggedIn = true;
+						this.$root.createSession(this.username, this.password);
 					} else {
 						this.message = data.message;
 						this.signingIn = false;
