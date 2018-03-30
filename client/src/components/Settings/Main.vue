@@ -1,8 +1,6 @@
 <template>
 	<section class="wrapper">
-		<div style="color: #ddd; font-size: 4vw;">
-			Settings
-		</div>
+		<div class="heading">Settings</div>
 		<router-link to="/settings/browser" class="row">
 			<div><font-awesome-icon icon="hdd"/></div>
 			<div class="title">File browser</div>
@@ -31,7 +29,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
 	name: 'Settings',
-	components: {FontAwesomeIcon}
+	components: { FontAwesomeIcon }
 }
 </script>
 
@@ -41,12 +39,17 @@ export default {
 	margin: 10px 2vw;
 }
 
+.heading {
+	color: 			#ddd;
+	font-size: 	4vw;
+}
+
 .row {
-	color: inherit;
-	display: flex;
-	border-bottom: 1px solid #fff;
-	font-size: 6vw;
-	justify-content: space-between;
+	color: 						inherit;
+	display: 					flex;
+	border-bottom: 		1px solid #fff;
+	font-size: 				6vw;
+	justify-content: 	space-between;
 }
 
 .row div {
