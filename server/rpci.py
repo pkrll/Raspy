@@ -8,10 +8,11 @@ from flask import Flask, request, render_template, send_file
 from server.lib.tools import bytes2human
 from server.core.auth import requires_auth
 from server.core.authenticator import Authenticator
+from server.core.sysinfo import SysInfo
 
 app = Flask(__name__, static_folder = "../dist/static", template_folder = "../dist")
-
 auth = Authenticator("config/default.ini")
+sysinfo = SysInfo()
 
 # Fixes auth problems
 @app.after_request
@@ -69,54 +70,10 @@ def login():
 
     return json.dumps(response)
 
-@app.route('/api/system/temp')
+@app.route('/api/system', methods = ['GET'])
 @requires_auth
-def getTemperature():
-    stat = {'temperature': 0}
-
-    try:
-        result = os.popen('cat /sys/class/thermal/thermal_zone0/temp').readline().replace("\n", "")
-        temperature = int(result) / 1000
-        remainder = int(result) / 100 % temperature
-        stat['temperature'] = str(temperature) + '.' + str(remainder) + '°C'
-    except:
-        pass
-
-    return json.dumps(stat)
-
-@app.route('/api/system/cpu')
-@requires_auth
-def getCPUUsage():
-    import psutil
-    stat = {}
-    stat['usage'] = str(psutil.cpu_percent())+'%'
-    return json.dumps(stat)
-
-@app.route('/api/system/ram')
-@requires_auth
-def getRAMInfo():
-    import psutil
-    ram = psutil.phymem_usage()
-    stat = {}
-    stat['total'] = bytes2human(ram.total)
-    stat['used'] = bytes2human(ram.used)
-    stat['available'] = bytes2human(ram.available)
-    stat['percent'] = str(ram.percent)+'%'
-
-    return json.dumps(stat)
-
-@app.route('/api/system/disk')
-@requires_auth
-def getDiskInfo():
-    import psutil
-    disk = psutil.disk_usage('/')
-    stat = {}
-    stat['total'] = bytes2human(disk.total)
-    stat['used'] = bytes2human(disk.used)
-    stat['free'] = bytes2human(disk.free)
-    stat['percentage_used'] = str(disk.percent)+'%'
-
-    return json.dumps(stat)
+def getSystem():
+    return json.dumps(sysinfo.getAll())
 
 @app.route('/api/filesystem/list/', defaults={'directory': '/'})
 @app.route('/api/filesystem/list/<path:directory>')
