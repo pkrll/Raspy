@@ -7,7 +7,12 @@ export default {
 		Vue.prototype.$APIManager = {
 
 			HTTP: axios.create({ baseURL: process.env.API_URL }),
-
+			/**
+			 * Sets the credentials for the user.
+			 *
+			 * @param  {String]} username The username of the user.
+			 * @param  {String]} password The password of the user.
+			 */
 			setCredentials: function (username, password) {
 				this.HTTP = axios.create({
 					baseURL: process.env.API_URL,
@@ -19,6 +24,8 @@ export default {
 			},
 			/**
 			 * Logins to the server.
+			 *
+			 * * Calls the user/login endpoint.
 			 *
 			 * @param  {String}   username The username.
 			 * @param  {String}   password The password.
@@ -46,6 +53,8 @@ export default {
 			/**
 			 * Browse the specified path.
 			 *
+			 * Calls the filesystem/list endpoint.
+			 *
 			 * @param  {String} 	path 			The path to the directory list.
 			 * @param  {Function} callback 	The callback to invoke on response.
 			 */
@@ -60,6 +69,8 @@ export default {
 			},
 			/**
 			 * Retrieves information on the specified file.
+			 *
+			 * * Calls the filesystem/file endpoint with GET.
 			 *
 			 * @param  {String}   path     The path to the file.
 			 * @param  {Function} callback The callback to invoke on response.
@@ -76,6 +87,8 @@ export default {
 			/**
 			 * Deletes the specified directory or file.
 			 *
+			 * Calls the filesystem/file endpoint with DELETE.
+			 *
 			 * @param  {String}   path     The path to the directory or file file.
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
@@ -91,7 +104,10 @@ export default {
 			/**
 			 * Downloads the specified file.
 			 *
-			 * @param  {String} path Path to the file on the server.
+			 * Calls the filesystem/download endpoint.
+			 *
+			 * @param  {String} path 				Path to the file on the server.
+			 * @param  {String} saveAsName 	The name to save the file as.
 			 */
 			downloadFile: function (path, saveAsName) {
 				let	fileName 	= (saveAsName != undefined) ? saveAsName : 'untitled';
@@ -109,7 +125,13 @@ export default {
 					console.log("ERROR " + e);
 				});
 			},
-
+			/**
+			 * Retrieves system information.
+			 *
+			 * Calls the /system endpoint.
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
 			getSystemInformation: function (callback) {
 				this.HTTP.get('system').then(
 					response => {
