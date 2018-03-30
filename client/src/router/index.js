@@ -5,6 +5,9 @@ import Browse from '@/components/Filesystem/Browse'
 import File from '@/components/Filesystem/File'
 import SystemMain from '@/components/System/Main'
 
+import Settings from '@/components/Settings/Main'
+import SettingsBrowser from '@/components/Settings/Browser'
+
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +54,22 @@ export default new Router({
 			meta: {
 				tab: 2,
 				requiresAuth: true
+			}
+		},
+		{
+			path: '/settings',
+			name: 'Settings',
+			component: Settings,
+			meta: {
+				tab: 3
+			}
+		},
+		{
+			path: '/settings/browser',
+			name: 'Settings: Browser',
+			component: SettingsBrowser,
+			meta: {
+				tab: 3
 			}
 		}
   ]

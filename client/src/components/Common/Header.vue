@@ -11,13 +11,13 @@
 				</router-link>
 
 				<router-link to="/system" v-bind:class="{ active: this.$route.meta.tab == 2 }">
-					<font-awesome-icon icon="server"/>
-					<div>System</div>
+					<font-awesome-icon icon="tachometer-alt"/>
+					<div>Dashboard</div>
 				</router-link>
 
-				<router-link to="/sensors" v-bind:class="{ active: this.$route.meta.tab == 3 }">
-					<font-awesome-icon icon="server"/>
-					<div>Sensors</div>
+				<router-link to="/settings" v-bind:class="{ active: this.$route.meta.tab == 3 }">
+					<font-awesome-icon icon="sliders-h"/>
+					<div>Settings</div>
 				</router-link>
 		</nav>
 	</header>
