@@ -98,6 +98,27 @@ a {
 	display: table-cell;
 }
 
+.row {
+	color: 						inherit;
+	display: 					flex;
+	border-bottom: 		1px solid #fff;
+	font-size: 				6vw;
+	justify-content: 	space-between;
+}
+
+.row div {
+	padding: 10px;
+}
+
+.row .icon {
+	width: 7vw;
+}
+
+.row .title {
+	flex: 1;
+	overflow-x: scroll;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

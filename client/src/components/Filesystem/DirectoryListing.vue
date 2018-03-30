@@ -1,30 +1,36 @@
 <template>
-	<nav class="file-list-view" v-if="files.length > 0 || directories.length > 0">
-		<div class="item" v-if="this.prettyPath != '/'">
-			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}">
-				<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;...</span>
-			</router-link>
-		</div>
+	<section class="wrapper">
+		<nav class="file-list-view" v-if="files.length > 0 || directories.length > 0">
 
-		<div class="item" v-for="directory in directories" v-if="showHidden || !directory.name.startsWith('.')">
-			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(directory.path) }}">
-				<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;{{directory.name}}</span>
+			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}" class="row" v-if="this.prettyPath != '/'">
+				<div class="icon"><font-awesome-icon icon="folder-open"/></div>
+				<div class="title">...</div>
 			</router-link>
-		</div>
 
-		<div class="item" v-for="file in files" v-if="showHidden || !file.name.startsWith('.')">
-			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
-				<span><font-awesome-icon v-bind:icon="icon(file.name)"/>&nbsp;&nbsp;{{file.name}}</span>
+			<nav v-for="directory in directories" v-if="showHidden || !directory.name.startsWith('.')">
+				<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(directory.path) }}" class="row">
+					<div class="icon"><font-awesome-icon icon="folder-open"/></div>
+					<div class="title">{{directory.name}}</div>
+					<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
+				</router-link>
+			</nav>
+
+			<nav v-for="file in files" v-if="showHidden || !file.name.startsWith('.')">
+				<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}" class="row">
+					<div class="icon"><font-awesome-icon v-bind:icon="icon(file.name)"/></div>
+					<div class="title">{{file.name}}</div>
+					<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
+				</router-link>
+			</nav>
+
+		</nav>
+		<nav class="file-list-view" v-else>
+			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}" class="row" v-if="this.prettyPath != '/'">
+				<div class="icon"><font-awesome-icon icon="folder-open"/></div>
+				<div class="title">...</div>
 			</router-link>
-		</div>
-	</nav>
-	<nav class="file-list-view" v-else>
-		<div class="item" v-if="this.prettyPath != '/'">
-			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(this.parentPath) }}">
-				<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;...</span>
-			</router-link>
-		</div>
-	</nav>
+		</nav>
+	</section>
 </template>
 
 <script>
@@ -64,7 +70,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .file-list-view {
 
@@ -78,12 +84,21 @@ export default {
 	overflow-x: 			scroll;
 }
 
-.item {
+.file-list-view > * {
+	padding: 0px 2vw;
 	background: rgb(45, 49, 57);
 }
 
-.item:nth-child(even) {
+.file-list-view > *:nth-child(even) {
 	background: rgb(32,35,44);
+}
+
+.wrapper {
+	margin: 10px 0;
+}
+
+.row {
+	border-bottom: none;
 }
 
 </style>
