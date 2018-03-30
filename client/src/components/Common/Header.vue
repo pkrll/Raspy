@@ -10,7 +10,7 @@
 					<div>Browse files</div>
 				</router-link>
 
-				<router-link to="/system" v-bind:class="{ active: this.$route.meta.tab == 2 }">
+				<router-link to="/dashboard" v-bind:class="{ active: this.$route.meta.tab == 2 }">
 					<font-awesome-icon icon="tachometer-alt"/>
 					<div>Dashboard</div>
 				</router-link>
@@ -34,10 +34,10 @@ export default {
 		browsePath: function () {
 			let favorite = this.$CookieManager.getBookmark();
 			if (favorite != undefined) {
-				return { name: 'Browse path', params: {path: favorite }};
+				return { name: 'Directory', params: {path: favorite }};
 			}
 
-			return { name: 'Browse' };
+			return { name: 'Browser' };
 		}
 	}
 }

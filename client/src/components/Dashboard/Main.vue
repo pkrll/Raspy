@@ -46,7 +46,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { thermometerthreequarters, poweroff, redo } from '@fortawesome/fontawesome-free-solid'
 
 export default {
-	name: 'System',
+	name: 'Dashboard',
 	components: { FontAwesomeIcon }
 }
 </script>

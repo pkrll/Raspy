@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import Browser from '@/components/Browser/Main'
 import File from '@/components/Browser/File'
-import SystemMain from '@/components/System/Main'
+import Dashboard from '@/components/Dashboard/Main'
 import Settings from '@/components/Settings/Main'
 import SettingsBrowser from '@/components/Settings/Browser'
 
@@ -47,9 +47,9 @@ export default new Router({
 			}
 		},
 		{
-			path: '/system',
-			name: 'System',
-			component: SystemMain,
+			path: '/dashboard',
+			name: 'Dashboard',
+			component: Dashboard,
 			meta: {
 				tab: 2,
 				requiresAuth: true
