@@ -10,6 +10,7 @@ To run Raspy you need the following:
 * NPM (__recommended version 5.7.1+__)
 * Node (__recommended version 9.2.1+__)
 * Python (__developed for version 2.7.10__)
+  * psutil library (__developed using version 5.4.3__)
 * Flask (__developed for version 0.12.2__)
 
 ### Installation
