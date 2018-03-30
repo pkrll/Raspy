@@ -60,7 +60,8 @@ export default new Router({
 			name: 'Settings',
 			component: Settings,
 			meta: {
-				tab: 3
+				tab: 3,
+				requiresAuth: true
 			}
 		},
 		{
@@ -68,7 +69,8 @@ export default new Router({
 			name: 'Settings: Browser',
 			component: SettingsBrowser,
 			meta: {
-				tab: 3
+				tab: 3,
+				requiresAuth: true
 			}
 		}
   ]
