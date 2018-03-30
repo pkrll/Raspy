@@ -11,9 +11,9 @@ class SysInfo(object):
     def getAll(self):
         stat = {
             'temperature': self.getTemperature(),
-            'cpu usage': self.getCPUUsage(),
-            'ram usage': self.getRAMUsage(),
-            'disk usage': self.getDiskUsage()
+            'cpu': self.getCPUUsage(),
+            'ram': self.getRAMUsage(),
+            'disk': self.getDiskUsage()
         }
 
         return stat
