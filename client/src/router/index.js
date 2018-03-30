@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import Browse from '@/components/Filesystem/Browse'
-import File from '@/components/Filesystem/File'
+import Browser from '@/components/Browser/Main'
+import File from '@/components/Browser/File'
 import SystemMain from '@/components/System/Main'
-
 import Settings from '@/components/Settings/Main'
 import SettingsBrowser from '@/components/Settings/Browser'
 
@@ -19,18 +18,18 @@ export default new Router({
 			component: Main
 		},
 		{
-			path: '/filesystem/browse/',
-			name: 'Browse',
-			component: Browse,
+			path: '/browser/',
+			name: 'Browser',
+			component: Browser,
 			meta: {
 				tab: 1,
 				requiresAuth: true
 			}
 		},
 		{
-			path: '/filesystem/browse/:path',
-			name: 'Browse path',
-			component: Browse,
+			path: '/browser/:path',
+			name: 'Directory',
+			component: Browser,
 			props: true,
 			meta: {
 				tab: 1,
@@ -38,7 +37,7 @@ export default new Router({
 			}
 		},
 		{
-			path: '/filesystem/file/:path',
+			path: '/Browser/:path',
 			name: 'File',
 			component: File,
 			props: true,
