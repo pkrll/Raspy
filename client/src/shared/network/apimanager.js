@@ -108,8 +108,17 @@ export default {
 				}).catch(e => {
 					console.log("ERROR " + e);
 				});
+			},
+
+			getSystemInformation: function (callback) {
+				this.HTTP.get('system').then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("ERROR " + e);
+				});
 			}
 		}
-
 	}
 }
