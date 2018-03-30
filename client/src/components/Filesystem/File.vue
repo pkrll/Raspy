@@ -139,10 +139,10 @@ export default {
 		}
 	},
 	created: function () {
-		this.goBack 					= shared.goBack.bind(this);
-		this.prettyPath 			= shared.prettyPath(this.path);
-		this.convertSize			= shared.bytesToHumanReadable;
-		this.iconForExtension = shared.iconForExtension;
+		this.goBack 			= shared.goBack.bind(this);
+		this.prettyPath		= shared.prettyPath(this.path);
+		this.convertSize	= shared.bytesToHumanReadable;
+		this.iconForFile	= shared.iconForFile;
 
 		this.$APIManager.viewFile(this.prettyPath, this.didFinishRequest);
 	}

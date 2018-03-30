@@ -18,97 +18,39 @@ export default {
 		let nameComponents 	= filename.split('.');
 		let fileExtension		= nameComponents[nameComponents.length - 1];
 
-		switch (fileExtension) {
-			case 'pdf':
-				return 'file-pdf';
-				break;
-			case 'png':
-			case 'jpg':
-			case 'gif':
-			case 'svg':
-			case 'tif':
-			case 'bmp':
-				return 'file-image';
-				break;
-			case 'txt':
-			case 'odt':
-			case 'rtf':
-			case 'tex':
-			case 'md':
-				return 'file-alt';
-				break;
-			case 'doc':
-			case 'docx':
-				return 'file-word';
-				break;
-			case 'ppt':
-			case 'pptx':
-				return 'file-powerpoint';
-				break;
-			case 'ods':
-			case 'xlr':
-			case 'xls':
-			case 'xlsx':
-				return 'file-excel';
-				break;
-			case 'zip':
-			case 'rar':
-			case 'bz2':
-			case 'gz':
-			case '7z':
-			case 'arj':
-			case 'jar':
-			case 'tgz':
-			case 'zipx':
-				return 'file-archive';
-				break;
-			case 'c':
-			case 'cpp':
-			case 'java':
-			case 'class':
-			case 'cs':
-			case 'h':
-			case 'sh':
-			case 'swift':
-			case 'vb':
-			case 'py':
-			case 'erl':
-			case 'php':
-			case 'htm':
-			case 'html':
-			case 'css':
-			case 'js':
-			case 'vue':
-			case 'vue':
-				return 'file-code';
-				break;
-			case 'aif':
-			case 'cda':
-			case 'mid':
-			case 'mp3':
-			case 'mpa':
-			case 'ogg':
-			case 'wav':
-			case 'wma':
-			case 'midi':
-				return 'file-audio';
-				break;
-			case 'avi':
-			case 'flv':
-			case 'h264':
-			case 'm4v':
-			case 'mkv':
-			case 'mov':
-			case 'mp4':
-			case 'mpg':
-			case 'mpeg':
-			case 'vob':
-			case 'wmv':
-				return 'file-video';
-				break;
-			default:
-				return 'file';
+		let imgExtensions = ['png', 'jpg', 'gif', 'svg', 'tif', 'bmp'];
+		let txtExtensions = ['txt', 'odt', 'rtf', 'tex'];
+		let docExtensions = ['doc', 'docx'];
+		let pptExtensions = ['ppt', 'pptx'];
+		let xclExtensions = ['xls', 'xlr', 'xlsx', 'ods'];
+		let zipExtensions = ['zip', 'zipx', 'rar', 'bz2', 'gz', '7z', 'arj', 'jar', 'tgz'];
+		let audExtensions = ['aif', 'cda', 'mid', 'mp3', 'mpa', 'ogg', 'wav', 'wma', 'midi'];
+		let vidExtensions = ['avi', 'flv', 'h264', 'm4v', 'mkv', 'mov', 'mp4', 'mpg', 'mpeg', 'vob', 'wmv'];
+		let prgExtensions = ['c', 'cpp', 'java', 'class', 'cs', 'h', 'sh', 'swift', 'vb', 'py', 'erl', 'php', 'htm', 'html', 'css', 'js', 'vue', 'vue', 'md'];
+
+		if (fileExtension == 'pdf') {
+			return 'file-pdf';
+		} else if (imgExtensions.indexOf(fileExtension) > -1) {
+			return 'file-image';
+		} else if (txtExtensions.indexOf(fileExtension) > -1) {
+			return 'file-alt'
+		} else if (docExtensions.indexOf(fileExtension) > -1) {
+			return 'file-word';
+		} else if (pptExtensions.indexOf(fileExtension) > -1) {
+			return 'file-powerpoint';
+		} else if (xclExtensions.indexOf(fileExtension) > -1) {
+			return 'file-excel';
+		} else if (zipExtensions.indexOf(fileExtension) > -1) {
+			return 'file-archive';
+		} else if (audExtensions.indexOf(fileExtension) > -1) {
+			return 'file-audio';
+		} else if (vidExtensions.indexOf(fileExtension) > -1) {
+			return 'file-video';
+		} else if (prgExtensions.indexOf(fileExtension) > -1) {
+			return 'file-code';
 		}
+
+		return 'file';
 	},
 	/**
 	 * Navigates back to the previous page.

@@ -6,13 +6,13 @@
 			</router-link>
 		</div>
 
-		<div class="item" v-for="directory in directories" v-if="showHidden || !startsWith(directory.name, '.')">
+		<div class="item" v-for="directory in directories" v-if="showHidden || !directory.name.startsWith('.')">
 			<router-link :to="{ name: 'Browse path', params: {path: encodeURIComponent(directory.path) }}">
 				<span><font-awesome-icon icon="folder-open"/>&nbsp;&nbsp;{{directory.name}}</span>
 			</router-link>
 		</div>
 
-		<div class="item" v-for="file in files" v-if="showHidden || !startsWith(file.name, '.')">
+		<div class="item" v-for="file in files" v-if="showHidden || !file.name.startsWith('.')">
 			<router-link :to="{ name: 'File', params: {path: encodeURIComponent(file.path) }}">
 				<span><font-awesome-icon v-bind:icon="icon(file.name)"/>&nbsp;&nbsp;{{file.name}}</span>
 			</router-link>
