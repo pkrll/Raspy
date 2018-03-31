@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: iso-8859-15 -*-
-import psutil
+import psutil, os
 from server.lib.tools import bytes2human
 
 class SysInfo(object):
