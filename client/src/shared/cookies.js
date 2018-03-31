@@ -78,7 +78,7 @@ export default {
 			/**
 			 *	Clears the current bookmark.
 			 */
-			clear() {
+			clearBookmark() {
 				this.currentBookmark = undefined;
 				this.clearCookie("bookmark");
 			}

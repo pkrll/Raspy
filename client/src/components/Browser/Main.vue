@@ -40,7 +40,6 @@ import Spinner from '@/components/Common/Spinner'
 import ConfirmButton from '@/components/Common/ConfirmButton'
 import DirectoryListing from '@/components/Browser/DirectoryListing'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { trashalt, cog, toggleon, toggleoff } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: { path: { default: '/' } },
@@ -125,15 +124,15 @@ export default {
 			directories: [],
 			middleComponent: 'Spinner',
 			bottomComponent: '',
-			showHidden: false,
+			showHidden: this.$CookieManager.loadCookie('showHidden'),
 			isFavorite: this.$CookieManager.getBookmark() == this.path,
 			didClickDelete: false,
 			toggleHiddenIcon: 'toggle-off'
 		}
 	},
 	created () {
-		this.goBack 					= shared.goBack.bind(this);
-		this.startsWith 			= shared.startsWith;
+		this.goBack			= shared.goBack.bind(this);
+		this.startsWith = shared.startsWith;
 
 		this.$APIManager.listDirectory(this.prettyPath, this.didFinishRequest);
 	}
