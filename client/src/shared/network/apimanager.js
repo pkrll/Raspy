@@ -108,8 +108,9 @@ export default {
 			 *
 			 * @param  {String} path 				Path to the file on the server.
 			 * @param  {String} saveAsName 	The name to save the file as.
+			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			downloadFile: function (path, saveAsName) {
+			downloadFile: function (path, saveAsName, callback) {
 				let	fileName 	= (saveAsName != undefined) ? saveAsName : 'untitled';
 				let baseURL 	= this.HTTP.defaults.baseURL;
 				let usrAuth 	= this.HTTP.defaults.auth;
@@ -121,6 +122,7 @@ export default {
 					auth: usrAuth
 				}).then(function (response) {
 					fileDownload(response.data, fileName);
+					if (typeof callback === 'function')  callback();
 				}).catch(e => {
 					console.log("ERROR " + e);
 				});

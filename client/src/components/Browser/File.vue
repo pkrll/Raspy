@@ -20,7 +20,7 @@
 
 		</nav>
 
-		<div class="file-viewer-details column-view">
+		<!-- <div class="file-viewer-details column-view">
 			<div class="file-icon-container">
 				<font-awesome-icon v-bind:icon="icon" class="icon"/>
 				<div class="file-name">{{filename}}</div>
@@ -48,7 +48,11 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
+
+		<component v-bind:is="middleComponent"
+							 v-bind:file="file">
+		</component>
 
 		<component v-bind:is="bottomComponent"
 							 v-bind:cancelCallback="didSelectCancel"
@@ -60,42 +64,34 @@
 
 <script>
 import shared from '@/shared'
+import Spinner from '@/components/Common/Spinner'
 import ConfirmButton from '@/components/Common/ConfirmButton'
+import FileDetails from '@/components/Browser/FileDetails'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { arrowcircleleft, download, trash, file } from '@fortawesome/fontawesome-free-solid'
 
 export default {
 	props: ['path'],
 	name: "File",
-	components: { FontAwesomeIcon, ConfirmButton },
+	components: { FontAwesomeIcon, Spinner, ConfirmButton, FileDetails },
 	watch: {
 		'didClickDelete' () {
 			this.showConfirmation(this.didClickDelete);
 		}
 	},
-	computed: {
-		icon: function () {
-			return this.iconForFile(this.filename);
-		}
-	},
 	methods: {
-		/**
-		 * Converts milliseconds to a human readable format.
-		 *
-		 * @param  {Int} 		timestamp Time in milliseconds
-		 * @return {String}						The date in a human readable format.
-		 */
-		convertDate: function (timestamp) {
-			return this.$dateFormatter.unixtimeToString(timestamp*1000, true);
-		},
 		/**
 		 * Invoked by viewFile requests.
 		 *
 		 * @param  {Object} data The response data.
 		 */
 		didFinishRequest: function (data) {
-			this.metadata = data.metadata;
-			this.filename = data.filename;
+			this.file = {
+				filename: data.filename,
+				metadata: data.metadata
+			}
+
+			this.middleComponent = 'FileDetails';
 		},
 		/**
 		 * Shows the confirmation dialog.
@@ -115,10 +111,13 @@ export default {
 		 * Invoked when user clicks the confirm button on the confirm dialog.
 		 */
 		didSelectConfirm: function () {
+			this.middleComponent = 'Spinner';
+
 			this.$APIManager.deleteFile(this.prettyPath, function (response) {
 				if (response.status == 1) {
 					this.goBack();
 				} else {
+					this.middleComponent = 'FileDetails';
 					console.log("ERROR" + response);
 				}
 			}.bind(this));
@@ -127,22 +126,25 @@ export default {
 		 * Downloads the current file.
 		 */
 		downloadFile: function () {
-			this.$APIManager.downloadFile(this.prettyPath, this.name);
+			this.middleComponent = 'Spinner';
+
+			this.$APIManager.downloadFile(this.prettyPath, this.file.filename, function () {
+				this.middleComponent = 'FileDetails';
+			}.bind(this));
 		}
 	},
 	data: function () {
 		return {
 			didClickDelete: false,
+			middleComponent: 'Spinner',
 			bottomComponent: '',
-			filename: '',
-			metadata: {}
+			file: undefined,
 		}
 	},
 	created: function () {
 		this.goBack 			= shared.goBack.bind(this);
 		this.prettyPath		= shared.prettyPath(this.path);
 		this.convertSize	= shared.bytesToHumanReadable;
-		this.iconForFile	= shared.iconForFile;
 
 		this.$APIManager.viewFile(this.prettyPath, this.didFinishRequest);
 	}
@@ -151,29 +153,6 @@ export default {
 </script>
 
 <style scoped>
-
-.file-viewer-details {
-
-}
-
-.file-viewer-details .file-icon-container {
-	font-size:  	8vw;
-	text-align: 	center;
-	padding-top: 	20px;
-}
-
-.file-viewer-details .file-icon-container .icon {
-	font-size: 10vw;
-}
-
-.file-viewer-details .file-icon-container .file-name {
-	font-size: 4vw;
-	word-wrap: break-word;
-}
-
-.file-viewer-details .table-view {
-	margin-top: 25px;
-}
 
 .options .title {
 	font-size: 5vw;
