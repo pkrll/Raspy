@@ -1,6 +1,6 @@
 <template>
 	<section class="wrapper">
-
+		<div class="heading">Dashboard settings</div>
 		<div class="row">
 			<div class="title">
 				Dashboard refresh rate
