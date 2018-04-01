@@ -42,11 +42,20 @@ export default {
 		}
 	},
 	filters: {
+		/**
+		 * Replaces f with Fahrenheit, and everything else with Celsius
+		 *
+		 * @param  {String} value The value to replace.
+		 * @return {String}       Fahrenheit if the value is f, otherwise Celsius.
+		 */
 		temperatureLabel: function (value) {
 			return (value == 'f') ? 'Fahrenheit' : 'Celsius';
 		}
 	},
 	methods: {
+		/**
+		 * Toggles the temperature scale between Celsius and Fahrenheit.
+		 */
 		switchTemperatureScale: function () {
 			if (this.temperatureScale == 'c') {
 				this.temperatureScale =	'f';

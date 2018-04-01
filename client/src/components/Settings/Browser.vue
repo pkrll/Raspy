@@ -12,7 +12,7 @@
 
 		<div class="row">
 			<div class="title">Show hidden files</div>
-			<div class="button" v-on:click="toggleHiddenFiles">{{this.showHidden | label}}</div>
+			<div class="button" v-on:click="toggleHiddenFiles">{{this.showHidden | showHiddenLabel}}</div>
 		</div>
 
 	</section>
@@ -22,13 +22,18 @@
 export default {
 	name: 'Settings-Browser',
 	methods: {
+		/**
+		* Removes the current bookmark.
+		*/
 		clearBookmark: function () {
 			if (this.favoritFolder != 'None') {
 				this.$CookieManager.clearBookmark();
 				this.favoritFolder = 'None';
 			}
 		},
-
+		/**
+		* Toggle show hidden files.
+		*/
 		toggleHiddenFiles: function () {
 			this.showHidden = !this.showHidden;
 
@@ -40,7 +45,13 @@ export default {
 		}
 	},
 	filters: {
-		label: function (value) {
+		/**
+		 * Replaces true with on and false with off.
+		 *
+		 * @param  {Boolean} value 	The boolean value to replace.
+		 * @return {String}       	'On' if value is true, otherwise 'off'.
+		 */
+		showHiddenLabel: function (value) {
 			return (value) ? 'On' : 'Off';
 		}
 	},

@@ -30,6 +30,9 @@ export default {
 	name: 'Login',
 	components: { FontAwesomeIcon },
 	methods: {
+		/**
+		 * Signs in to Raspy.
+		 */
 		signIn: function () {
 			if (this.username.length > 0) {
 				this.message = undefined;
