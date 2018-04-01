@@ -6,8 +6,8 @@
 				Dashboard refresh rate
 			</div>
 			<div class="button">
-				<select class="select" name="">
-					<option class="test" value="0">Never</option>
+				<select class="select" v-model="refreshRate">
+					<option value="0">Never</option>
 					<option value="3">3 seconds</option>
 					<option value="5">5 seconds</option>
 					<option value="15">15 seconds</option>
@@ -20,7 +20,7 @@
 
 		<div class="row">
 			<div class="title">Show temperatures in</div>
-			<div class="button">Celsius</div>
+			<div class="button" v-on:click="switchTemperatureScale">{{this.temperatureScale | temperatureLabel}}</div>
 		</div>
 
 	</section>
@@ -31,7 +31,38 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
 	name: 'SettingsDashboard',
-	components: { FontAwesomeIcon }
+	components: { FontAwesomeIcon },
+	watch: {
+		'refreshRate' () {
+			this.$CookieManager.saveCookie('refreshRate', this.refreshRate);
+		},
+
+		'temperatureScale' () {
+			this.$CookieManager.saveCookie('temperatureScale', this.temperatureScale);
+		}
+	},
+	filters: {
+		temperatureLabel: function (value) {
+			return (value == 'f') ? 'Fahrenheit' : 'Celsius';
+		}
+	},
+	methods: {
+		switchTemperatureScale: function () {
+			if (this.temperatureScale == 'c') {
+				this.temperatureScale =	'f';
+			} else {
+				this.temperatureScale = 'c';
+			}
+		}
+	},
+	data: function () {
+		let temp = this.$CookieManager.loadCookie('temperatureScale');
+		let rate = this.$CookieManager.loadCookie('refreshRate');
+		return {
+			refreshRate: (rate != undefined) ? rate : 0,
+			temperatureScale: (temp) ? temp : 'c'
+		}
+	}
 }
 </script>
 
