@@ -5,18 +5,54 @@
 			<div class="title">
 				Stay logged in
 			</div>
-			<div class="button">On</div>
+			<div class="button" v-on:click="toggleAutoLogin">{{this.autoLogin | autoLoginFilter }}</div>
 		</div>
 
 		<div class="row">
-			<div class="single-button">Sign out of Raspy</div>
+			<div class="single-button" v-on:click="signOut">Sign out of Raspy</div>
 		</div>
 	</section>
 </template>
 
 <script>
 export default {
-	name: 'SettingsAccount'
+	name: 'SettingsAccount',
+	filters: {
+		/**
+		 * Replaces true with on and false with off.
+		 *
+		 * @param  {Boolean} value 	The boolean value to replace.
+		 * @return {String}       	'On' if value is true, otherwise 'off'.
+		 */
+		autoLoginFilter: function (value) {
+			return (value) ? 'On' : 'Off';
+		}
+	},
+	methods: {
+		/**
+		 * Signs out of Raspy.
+		 */
+		signOut: function () {
+			this.$root.deleteSession();
+			this.$root._router.push('/');
+		},
+		/**
+		 * Toggles the auto login options.
+		 */
+		toggleAutoLogin: function () {
+			this.autoLogin != autoLogin;
+			this.$CookieManager.saveCookie('autoLogin', this.autoLogin);
+		}
+	},
+	data: function () {
+		return {
+			autoLogin: false
+		}
+	},
+	created: function () {
+		let autoLogin = this.$CookieManager.loadCookie('autoLogin');
+		this.autoLogin = (autoLogin != undefined) ? autoLogin : false;
+	}
 }
 </script>
 
