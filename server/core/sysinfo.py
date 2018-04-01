@@ -24,7 +24,7 @@ class SysInfo(object):
             result = os.popen('cat /sys/class/thermal/thermal_zone0/temp').readline().replace("\n", "")
             temperature = int(result) / 1000
             remainder = int(result) / 100 % temperature
-            result = str(temperature) + '.' + str(remainder) + '°C'
+            result = str(temperature) + '.' + str(remainder)
         except:
             result = 'NaN'
 
