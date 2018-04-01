@@ -23,6 +23,12 @@ export default {
 				});
 			},
 			/**
+			 * Removes the credentials of the user from the axios object.
+			 */
+			clearCredentials: function () {
+				this.http = axios.create({ baseURL: process.env.API_URL });
+			},
+			/**
 			 * Logins to the server.
 			 *
 			 * * Calls the user/login endpoint.

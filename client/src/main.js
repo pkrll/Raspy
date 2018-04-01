@@ -40,10 +40,25 @@ new Vue({
 		}
 	},
 	methods: {
+		/**
+		 * Creates a new session.
+		 *
+		 * @param  {String} username The username.
+		 * @param  {String} password The password.
+		 */
 		createSession: function (username, password) {
 			this.$CookieManager.saveCookie('username', username);
 			this.$CookieManager.saveCookie('password', password);
 			this.isLoggedIn = true;
+		},
+		/**
+		 * Deletes an active session.
+		 */
+		deleteDession: function () {
+			this.$CookieManager.saveCookie('username', undefined);
+			this.$CookieManager.saveCookie('password', undefined);
+			this.$APIManager.clearCredentials();
+			this.isLoggedIn = false;
 		}
 	},
   components: { App },
