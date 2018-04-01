@@ -26,7 +26,7 @@ class SysInfo(object):
             remainder = int(result) / 100 % temperature
             result = str(temperature) + '.' + str(remainder) + '°C'
         except:
-            pass
+            result = 'NaN'
 
         return result
 
