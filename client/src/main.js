@@ -54,7 +54,7 @@ new Vue({
 		/**
 		 * Deletes an active session.
 		 */
-		deleteDession: function () {
+		deleteSession: function () {
 			this.$CookieManager.saveCookie('username', undefined);
 			this.$CookieManager.saveCookie('password', undefined);
 			this.$APIManager.clearCredentials();
