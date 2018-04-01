@@ -71,7 +71,15 @@ export default {
 			this.ram = response.ram;
 			this.cpu = response.cpu;
 			this.disk = response.disk;
-			this.temperature = response.temperature;
+			this.temperature = this.convertTemperature(response.temperature);
+		},
+
+		convertTemperature: function (temperature) {
+			if (this.temperatureScale == 'f') {
+				return temperature * (9/5) + 32 + '°F';
+			}
+
+			return temperature + '°C';
 		}
 	},
 	data: function () {
@@ -80,12 +88,18 @@ export default {
 			cpu: {},
 			disk: 0,
 			temperature: 0,
-			intervalID: null
+			intervalID: null,
+			temperatureScale: undefined
 		}
 	},
 	created: function () {
 		this.update();
-		this.intervalID = setInterval(this.update, 3000);
+		this.temperatureScale = this.$CookieManager.loadCookie('temperatureScale');
+
+		let refreshRate = this.$CookieManager.loadCookie('refreshRate');
+		if (refreshRate > 0) {
+			this.intervalID = setInterval(this.update, refreshRate * 1000);
+		}
 	},
 	beforeDestroy: function() {
 		if (this.intervalID != null) clearInterval(this.intervalID);
