@@ -17,6 +17,8 @@ export default {
 			saveCookie(key, value, expires) {
 				if (expires == undefined) {
 					expires = "";
+				} else if (expires == false) {
+					expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
 				} else {
 					expires = "; expires=" + expires;
 				}
