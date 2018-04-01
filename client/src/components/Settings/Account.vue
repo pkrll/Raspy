@@ -5,11 +5,11 @@
 			<div class="title">
 				Stay logged in
 			</div>
-			<div class="button" v-on:click="toggleAutoLogin">{{this.autoLogin | autoLoginFilter }}</div>
+			<div class="button noselect" v-on:click="toggleAutoLogin">{{this.autoLogin | autoLoginFilter }}</div>
 		</div>
 
 		<div class="row">
-			<div class="single-button" v-on:click="signOut">Sign out of Raspy</div>
+			<div class="single-button noselect" v-on:click="signOut">Sign out of Raspy</div>
 		</div>
 	</section>
 </template>
@@ -25,7 +25,7 @@ export default {
 		 * @return {String}       	'On' if value is true, otherwise 'off'.
 		 */
 		autoLoginFilter: function (value) {
-			return (value) ? 'On' : 'Off';
+			return (value == true) ? 'On' : 'Off';
 		}
 	},
 	methods: {
@@ -40,8 +40,17 @@ export default {
 		 * Toggles the auto login options.
 		 */
 		toggleAutoLogin: function () {
-			this.autoLogin != autoLogin;
-			this.$CookieManager.saveCookie('autoLogin', this.autoLogin);
+			this.autoLogin = !this.autoLogin;
+
+			this.$CookieManager.saveCookie('autoLogin', this.autoLogin, false);
+
+			let expires  = (this.autoLogin) ? false : undefined;
+
+			let username = this.$CookieManager.loadCookie('username');
+			let password = this.$CookieManager.loadCookie('password');
+
+			this.$CookieManager.saveCookie('username', username, expires);
+			this.$CookieManager.saveCookie('password', password, expires);
 		}
 	},
 	data: function () {
@@ -51,7 +60,7 @@ export default {
 	},
 	created: function () {
 		let autoLogin = this.$CookieManager.loadCookie('autoLogin');
-		this.autoLogin = (autoLogin != undefined) ? autoLogin : false;
+		this.autoLogin = (autoLogin != undefined && autoLogin == 'true') ? true : false;
 	}
 }
 </script>

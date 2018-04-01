@@ -27,6 +27,8 @@ Vue.use(Raspy);
 new Vue({
   el: '#app',
   router,
+	components: { App },
+  template: '<App/>',
 	data: {
 		isLoggedIn: false
 	},
@@ -47,8 +49,11 @@ new Vue({
 		 * @param  {String} password The password.
 		 */
 		createSession: function (username, password) {
-			this.$CookieManager.saveCookie('username', username);
-			this.$CookieManager.saveCookie('password', password);
+			let autoLogin = this.$CookieManager.loadCookie('autoLogin');
+			let expires  	= (autoLogin) ? false : undefined;
+
+			this.$CookieManager.saveCookie('username', username, expires);
+			this.$CookieManager.saveCookie('password', password, expires);
 			this.isLoggedIn = true;
 		},
 		/**
@@ -60,7 +65,5 @@ new Vue({
 			this.$APIManager.clearCredentials();
 			this.isLoggedIn = false;
 		}
-	},
-  components: { App },
-  template: '<App/>'
+	}
 })
