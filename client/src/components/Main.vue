@@ -1,8 +1,10 @@
 <template>
 	<section class="wrapper">
 		<Login v-if="this.$root.isLoggedIn == false"></Login>
-		<img src="../assets/img/logo.svg" alt="Raspy">
-		Raspy {{this.$Raspy.version.split("+")[0]}}
+		<div class="splash">
+			<img src="../assets/img/logo.svg" alt="Raspy" style="margin: auto;">
+			Raspy {{this.$Raspy.version.split("+")[0]}}
+	</div>
 	</section>
 </template>
 
@@ -24,9 +26,28 @@ export default {
 	justify-content: 	space-around;
 }
 
-.wrapper > img {
+.wrapper img {
+	display: 		block;
+	margin: 		auto;
+	max-width: 	60vw;
+}
+
+.splash {
+	text-align: center;
 	margin-top: 20px;
-	max-width: 60vw;
+	font-size: 8vw;
+}
+
+@media screen and (min-width: 600px) {
+	.splash {
+		font-size: 7vw;
+	}
+}
+
+@media screen and (min-width: 750px) {
+	.splash {
+		font-size: 6vw;
+	}
 }
 
 </style>
