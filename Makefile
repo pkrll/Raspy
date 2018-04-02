@@ -1,6 +1,6 @@
 .PHONY: all install server client devclient clean major minor patch
 
-ENV = prod
+ENV = production
 SERVICE = null
 
 all: client/node_modules client server
@@ -12,7 +12,14 @@ install:
 	cd client && npm install
 
 server:
-	cd server && npm run dev
+ifeq ($(ENV), dev)
+	cd server && NODE_ENV=development npm run dev
+else
+	cd server && NODE_ENV=production npm run dev
+endif
+
+devserver:
+	make ENV=dev server
 
 client:
 ifeq ($(ENV), dev)
