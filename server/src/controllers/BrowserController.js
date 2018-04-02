@@ -21,7 +21,18 @@ exports.getFile = function (req, res) {
   let request = path.join('/', req.params.path, req.params[0]);
   browser.getFile(request, function (err, response) {
     if (err) {
-      res.json({error: 'File not found!', message: err});
+      res.json({status: 0, message: err});
+    } else {
+      res.json(response);
+    }
+  });
+};
+
+exports.remove = function (req, res) {
+  let request = path.join('/', req.params.path, req.params[0]);
+  browser.remove(request, function (err, response) {
+    if (err) {
+      res.json({status: 0, message: err});
     } else {
       res.json(response);
     }

@@ -1,6 +1,6 @@
 {
   "name": "raspy-server",
-  "version": "0.3.0+ae",
+  "version": "0.4.0+bf",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",

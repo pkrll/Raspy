@@ -56,5 +56,33 @@ module.exports = {
       console.log(err);
       callback(err);
     }
+  },
+
+  remove: function (path, callback) {
+    try {
+      let response = {status: 1};
+      let stats = fs.statSync(path);
+
+      if (stats.isDirectory()) {
+        fs.rmdir(path, (err) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, response);
+          }          
+        });
+      } else {
+        fs.unlink(path, (err) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, response);
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      callback(err);
+    }
   }
 }

@@ -14,8 +14,18 @@ module.exports = function (app) {
   });
 
   router.route('/browser').get(browserController.index);
-  router.route('/browser/:path*').get(browserController.browse);
-  router.route('/file/:path*').get(browserController.getFile);
+
+  router.route('/browser/:path*')
+    // Get directory listing
+    .get(browserController.browse)
+    // Delete folder
+    .delete(browserController.remove);
+
+  router.route('/file/:path*')
+    // Get the requested file
+    .get(browserController.getFile)
+    // Delete the requested file
+    .delete(browserController.remove);
 
   // Register the routes
   app.use(express.static(app.get('dist')));
