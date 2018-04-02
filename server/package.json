@@ -1,9 +1,12 @@
 {
   "name": "raspy-server",
-  "version": "0.1.0+10",
+  "version": "0.1.1+51",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "patch": "node build/increment-version.js --version=patch --skip-build",
+    "minor": "node build/increment-version.js --version=minor --skip-build --reset-patch",
+    "major": "node build/increment-version.js --version=major --skip-build --reset-minor"
   },
   "dependencies": {
     "body-parser": "^1.0.2",
