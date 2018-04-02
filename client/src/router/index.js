@@ -8,6 +8,7 @@ import Settings from '@/components/Settings/Main'
 import SettingsBrowser from '@/components/Settings/Browser'
 import SettingsDashboard from '@/components/Settings/Dashboard'
 import SettingsAccount from '@/components/Settings/Account'
+import SettingsGeneral from '@/components/Settings/General'
 
 Vue.use(Router)
 
@@ -88,6 +89,15 @@ export default new Router({
 			path: '/settings/account',
 			name: 'Settings: Account',
 			component: SettingsAccount,
+			meta: {
+				tab: 3,
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/settings/general',
+			name: 'Settings: General',
+			component: SettingsGeneral,
 			meta: {
 				tab: 3,
 				requiresAuth: true
