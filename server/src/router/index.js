@@ -30,6 +30,12 @@ module.exports = function (app) {
     .get(browserController.getFile)
     // Delete the requested file
     .delete(browserController.remove);
+    // ------------------------------
+    //          /download
+    // ------------------------------
+    router.route('/download/:path*')
+      // Get the requested file
+      .get(browserController.download);
   // ------------------------------
   //          /system
   // ------------------------------

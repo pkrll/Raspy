@@ -38,3 +38,10 @@ exports.remove = function (req, res) {
     }
   });
 };
+
+exports.download = function (req, res) {
+  let request = path.join('/', req.params.path, req.params[0]);
+  res.download(request, path.basename(request), (err) => {
+    console.log(err);
+  });
+};
