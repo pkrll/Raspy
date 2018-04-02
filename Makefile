@@ -2,7 +2,10 @@
 
 ENV = prod
 
-all: client/node_modules client server
+all: client/node_modules client dev
+
+dev:
+	cd server && npm run dev
 
 client/node_modules: client/package.json client/package-lock.json
 	cd client && npm install
@@ -10,8 +13,8 @@ client/node_modules: client/package.json client/package-lock.json
 install:
 	cd client && npm install
 
-server:
-	cd server && export FLASK_APP=raspy.py && flask run --host=0.0.0.0
+#server:
+#	cd server && export FLASK_APP=raspy.py && flask run --host=0.0.0.0
 
 client:
 ifeq ($(ENV), dev)

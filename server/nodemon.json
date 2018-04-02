@@ -1,0 +1,9 @@
+{
+  "ignore": [
+    ".git", "node_modules/**/node_modules", "*.json", "config/*"
+  ],
+  "events": {
+    "restart": "node build/increment-version.js --version=build",
+    "start": "node build/increment-version.js --version=build"
+  }
+}

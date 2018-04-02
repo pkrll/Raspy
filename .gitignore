@@ -3,3 +3,4 @@ dist/*
 package-lock.json
 .tags
 .tags_swap
+tmp
