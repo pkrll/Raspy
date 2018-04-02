@@ -28,7 +28,7 @@ module.exports = {
 
       callback(null, result);
     } catch (err) {
-      console.log(err);
+      console.log('ERROR: Browser.getDirectory() > ' + err);
       callback(err);
     }
   },
@@ -53,7 +53,7 @@ module.exports = {
 
       callback(null, result);
     } catch (err) {
-      console.log(err);
+      console.log('ERROR: Browser.getFile() > ' + err);
       callback(err);
     }
   },
@@ -81,7 +81,7 @@ module.exports = {
         });
       }
     } catch (err) {
-      console.log(err);
+      console.log('ERROR: Browser.remove() > ' + err);
       callback(err);
     }
   }
