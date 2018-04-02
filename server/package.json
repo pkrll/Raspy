@@ -1,6 +1,6 @@
 {
   "name": "raspy-server",
-  "version": "0.1.1+51",
+  "version": "0.2.0+92",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "body-parser": "^1.0.2",
+    "cors": "^2.8.4",
     "express": "^4.0.0",
     "mongoose": "~3.6.13"
   }

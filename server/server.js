@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const express     = require('express');
 const app         = express();
+const cors        = require('cors');
 const bodyParser  = require('body-parser');
 const path        = require('path');
 
@@ -9,6 +10,7 @@ require('./src/config')(app, 5000, path.dirname(__dirname));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // ROUTES
 require('./src/router')(app);
