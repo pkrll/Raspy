@@ -11,7 +11,7 @@ install:
 	cd client && npm install
 
 server:
-	cd server && export FLASK_APP=rpci.py && flask run --host=0.0.0.0
+	cd server && export FLASK_APP=raspy.py && flask run --host=0.0.0.0
 
 client:
 ifeq ($(ENV), dev)
