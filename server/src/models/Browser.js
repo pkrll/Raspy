@@ -2,7 +2,7 @@ const fs = require('fs');
 const pt = require('path');
 module.exports = {
 
-  getFolder: function (path, callback) {
+  getDirectory: function (path, callback) {
     try {
       let result = {
         directories: [],
@@ -69,7 +69,7 @@ module.exports = {
             callback(err);
           } else {
             callback(null, response);
-          }          
+          }
         });
       } else {
         fs.unlink(path, (err) => {
