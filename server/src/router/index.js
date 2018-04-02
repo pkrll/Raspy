@@ -15,6 +15,7 @@ module.exports = function (app) {
 
   router.route('/browser').get(browserController.index);
   router.route('/browser/:path*').get(browserController.browse);
+  router.route('/file/:path*').get(browserController.getFile);
 
   // Register the routes
   app.use(express.static(app.get('dist')));
