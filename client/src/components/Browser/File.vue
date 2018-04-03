@@ -20,36 +20,6 @@
 
 		</nav>
 
-		<!-- <div class="file-viewer-details column-view">
-			<div class="file-icon-container">
-				<font-awesome-icon v-bind:icon="icon" class="icon"/>
-				<div class="file-name">{{filename}}</div>
-			</div>
-
-			<div class="table-view">
-				<div class="table-row-view">
-					<div class="table-cell-view">Size:</div><div class="table-cell-view right">
-						{{convertSize(metadata.size)}}
-					</div>
-				</div>
-				<div class="table-row-view">
-					<div class="table-cell-view">Created:</div><div class="table-cell-view right">
-						{{convertDate(metadata.created)}}
-					</div>
-				</div>
-				<div class="table-row-view">
-					<div class="table-cell-view">Last accessed:</div><div class="table-cell-view right">
-						{{convertDate(metadata.accessed)}}
-					</div>
-				</div>
-				<div class="table-row-view">
-					<div class="table-cell-view">Last modified:</div><div class="table-cell-view right">
-						{{convertDate(metadata.modified)}}
-					</div>
-				</div>
-			</div>
-		</div> -->
-
 		<component v-bind:is="middleComponent"
 							 v-bind:file="file">
 		</component>
@@ -118,7 +88,8 @@ export default {
 					this.goBack();
 				} else {
 					this.middleComponent = 'FileDetails';
-					console.log("ERROR" + response);
+					console.log("Error: ");
+					console.log(response);
 				}
 			}.bind(this));
 		},

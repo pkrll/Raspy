@@ -38,7 +38,7 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			login: function (username, password, callback) {
-				this.HTTP.post('user/login', { username: username, password: password }).then(
+				this.HTTP.post('login', { username: username, password: password }).then(
 					response => {
 						if (response.data.status == 1) {
 							this.HTTP = axios.create({
@@ -53,7 +53,8 @@ export default {
 						if (typeof callback === 'function') callback(response.data);
 					}
 				).catch(e => {
-					console.log("Error " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			},
 			/**
@@ -70,7 +71,8 @@ export default {
 						if (typeof callback === 'function') callback(response.data);
 					}
 				).catch(e => {
-					console.log("ERROR " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			},
 			/**
@@ -87,7 +89,8 @@ export default {
 						if (typeof callback === 'function') callback(response.data);
 					}
 				).catch(e => {
-					console.log("ERROR " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			},
 			/**
@@ -104,7 +107,8 @@ export default {
 						if (typeof callback === 'function')  callback(response.data);
 					}
 				).catch(e => {
-					console.log("ERROR " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			},
 			/**
@@ -130,7 +134,8 @@ export default {
 					fileDownload(response.data, fileName);
 					if (typeof callback === 'function')  callback();
 				}).catch(e => {
-					console.log("ERROR " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			},
 			/**
@@ -146,7 +151,8 @@ export default {
 						if (typeof callback === 'function') callback(response.data);
 					}
 				).catch(e => {
-					console.log("ERROR " + e);
+					console.log("Error: ");
+					console.log(e);
 				});
 			}
 		}

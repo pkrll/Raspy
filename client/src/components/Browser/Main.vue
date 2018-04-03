@@ -113,7 +113,8 @@ export default {
 				if (response.status == 1) {
 					this.goBack();
 				} else {
-					console.log("ERROR" + response);
+					console.log("Error: ");
+					console.log(response);
 				}
 			}.bind(this));
 		}
