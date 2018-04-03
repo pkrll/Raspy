@@ -1,13 +1,12 @@
 # Raspy
 <p align="center">
-<img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
+  <img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
 </p>
 <p align="center">
-[![GitHub version](https://badge.fury.io/gh/pkrll%2Frpci.svg)](https://badge.fury.io/gh/pkrll%2Frpci)
-[![Last Updated](https://img.shields.io/github/last-commit/pkrll/rpci.svg)](https://github.com/prkll/rpci/commits/master)
-[![Issues](https://img.shields.io/github/issues/pkrll/rpci.svg)](https://github.com/pkrll/rpci/issues)
-![Languages](https://img.shields.io/github/languages/count/pkrll/rpci.svg)
-![Top Language](https://img.shields.io/github/languages/top/pkrll/rpci.svg)
+  <a href="https://badge.fury.io/gh/pkrll%2Frpci"><img src="https://badge.fury.io/gh/pkrll%2Frpci.svg"></a>
+<a href="https://github.com/prkll/rpci/commits/master"><img src="https://img.shields.io/github/last-commit/pkrll/rpci.svg"></a>
+<a href="https://github.com/pkrll/rpci/issues"><img src="https://img.shields.io/github/issues/pkrll/rpci.svg"></a>
+<a href="https://img.shields.io/github/languages/top/pkrll/rpci.svg"><img src="https://img.shields.io/github/languages/top/pkrll/rpci.svg"></a>
 </p>
 
 Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web app that let's you control your Pi with ease.
