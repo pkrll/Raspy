@@ -65,7 +65,7 @@ export default {
 			 * @param  {Function} callback 	The callback to invoke on response.
 			 */
 			listDirectory: function (path, callback) {
-				this.HTTP.get('filesystem/list' + path).then(
+				this.HTTP.get('browser' + path).then(
 					response => {
 						if (typeof callback === 'function') callback(response.data);
 					}
@@ -82,7 +82,7 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			viewFile: function (path, callback) {
-				this.HTTP.get('filesystem/file' + path).then(
+				this.HTTP.get('file' + path).then(
 					response => {
 						if (typeof callback === 'function') callback(response.data);
 					}
@@ -99,7 +99,7 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			deleteFile: function (path, callback) {
-				this.HTTP.delete('filesystem/file' + path).then(
+				this.HTTP.delete('file' + path).then(
 					response => {
 						if (typeof callback === 'function')  callback(response.data);
 					}
@@ -122,7 +122,7 @@ export default {
 				let usrAuth 	= this.HTTP.defaults.auth;
 
 				axios({
-					url: baseURL + 'filesystem/download' + path,
+					url: baseURL + 'download' + path,
 					method: 'get',
 					responseType: 'blob',
 					auth: usrAuth
