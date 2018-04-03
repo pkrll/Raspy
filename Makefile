@@ -10,6 +10,7 @@ client/node_modules: client/package.json client/package-lock.json
 
 install:
 	cd client && npm install
+	cd server && npm install && npm run setup
 
 server:
 ifeq ($(ENV), dev)

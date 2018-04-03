@@ -3,10 +3,9 @@ const express     = require('express');
 const app         = express();
 const bodyParser  = require('body-parser');
 const path        = require('path');
-
+const config      = require('./config');
 // CONFIGURATIONS
-require('./src/config')(app, 5000, path.dirname(__dirname));
-
+require('./src/config')(app, config, 5000, path.dirname(__dirname));
 // ROUTES
 require('./src/router')(app);
 

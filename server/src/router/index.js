@@ -1,5 +1,6 @@
-const path    = require('path');
 const express = require('express');
+const path    = require('path');
+const auth    = require('./auth.js');
 
 const browserController = require('../controllers/BrowserController');
 const systemController  = require('../controllers/SystemController');
@@ -12,6 +13,10 @@ module.exports = function (app) {
   router.get('/', function(req, res) {
     res.json({ message: 'Raspy server'});
   });
+
+  // Authentication
+  router.use(auth(app.get('databasePath')));
+
   // ------------------------------
   //          /browser
   // ------------------------------
@@ -30,12 +35,12 @@ module.exports = function (app) {
     .get(browserController.getFile)
     // Delete the requested file
     .delete(browserController.remove);
-    // ------------------------------
-    //          /download
-    // ------------------------------
-    router.route('/download/:path*')
-      // Get the requested file
-      .get(browserController.download);
+  // ------------------------------
+  //          /download
+  // ------------------------------
+  router.route('/download/:path*')
+    // Get the requested file
+    .get(browserController.download);
   // ------------------------------
   //          /system
   // ------------------------------
