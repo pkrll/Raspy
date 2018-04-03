@@ -33,7 +33,7 @@ module.exports = function (app) {
   // ------------------------------
   //          /browser
   // ------------------------------
-  router.route('/browser').get(browserController.index);
+  router.route('/browser').get(browserController.browse);
 
   router.route('/browser/:path*')
     // Get directory listing
