@@ -6,7 +6,7 @@ SERVICE = null
 all: install server
 
 install: client/package.json server/package.json
-	cd client && npm install && np run build
+	cd client && npm install && npm run build
 	cd server && npm install && npm run setup
 
 server:
