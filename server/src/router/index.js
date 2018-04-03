@@ -64,5 +64,10 @@ module.exports = function (app) {
   // Register the routes
   app.use(express.static(app.get('dist')));
   app.use('/api', router);
+  // Catch all to handle direct routes
+  app.get('*', function(req, res) {
+    let file = path.join(app.get('dist'), '/index.html');
+    res.sendfile(file);
+  });
 
 }
