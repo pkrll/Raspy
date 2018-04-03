@@ -22,7 +22,7 @@
 		 <div class="table-view">
 			 <div class="table-row-view">
 				 <div class="table-cell-view">CPU usage:</div>
-				 <div class="table-cell-view right">{{this.cpu}}</div>
+				 <div class="table-cell-view right">{{this.cpu}} %</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">RAM total: </div>
@@ -76,7 +76,7 @@ export default {
 
 		convertTemperature: function (temperature) {
 			if (this.temperatureScale == 'f') {
-				return temperature * (9/5) + 32 + '°F';
+				return (temperature * (9/5) + 32).toFixed(2) + '°F';
 			}
 
 			return temperature + '°C';
