@@ -1,14 +1,11 @@
-.PHONY: all install server client devclient clean major minor patch
+.PHONY: all install server client devclient devserver major minor patch clean
 
 ENV = production
 SERVICE = null
 
-all: client/node_modules client server
+all: install client server
 
-client/node_modules: client/package.json client/package-lock.json
-	cd client && npm install
-
-install:
+install: client/package.json server/package.json
 	cd client && npm install
 	cd server && npm install && npm run setup
 
