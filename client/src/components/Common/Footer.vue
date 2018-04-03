@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		Built with <font-awesome-icon icon="heart"/> using <font-awesome-icon :icon="['fab', 'vuejs']"/> and <font-awesome-icon :icon="['fab', 'python']"/>
+		Built with <font-awesome-icon icon="heart"/> using <font-awesome-icon :icon="['fab', 'vuejs']"/>, <font-awesome-icon :icon="['fab', 'node-js']"/> and <font-awesome-icon :icon="['fab', 'python']"/>
 	</footer>
 </template>
 
@@ -9,9 +9,10 @@ import fontawesome from '@fortawesome/fontawesome'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { heart } from '@fortawesome/fontawesome-free-solid'
 import vuejs from '@fortawesome/fontawesome-free-brands/faVuejs'
+import node from '@fortawesome/fontawesome-free-brands/faNodejs'
 import python from '@fortawesome/fontawesome-free-brands/faPython'
 
-fontawesome.library.add(vuejs, python);
+fontawesome.library.add(vuejs, python, node);
 
 export default {
 	name: 'Footer',
