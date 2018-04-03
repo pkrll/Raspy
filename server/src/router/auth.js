@@ -6,25 +6,39 @@ module.exports = function (filePath) {
   const adapter = new FileSync(filePath);
   const database = require('lowdb')(adapter);
 
-  return function (req, res, next) {
+  let auth = {
 
-    function unauthorized(res) {
-      res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-      return res.send(401);
-    };
+    checkAuthentication: function (req, res, next) {
+      function unauthorized(res) {
+        res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+        return res.send(401);
+      };
 
-    const user = basicAuth(req);
+      const user = basicAuth(req);
 
-    if (!user || !user.name || !user.pass) return unauthorized(res);
+      if (!user || !user.name || !user.pass) return unauthorized(res);
 
-    const credentials = database.get('users').find({ username: user.name }).value();
+      const credentials = database.get('users').find({ username: user.name }).value();
 
-    if (credentials != undefined && credentials.password === user.pass) {
-      return next();
-    } else {
-      return unauthorized(res);
+      if (credentials != undefined && credentials.password === user.pass) {
+        return next();
+      } else {
+        return unauthorized(res);
+      }
+    },
+
+    checkCredentials: function (user) {
+      const credentials = database.get('users').find({ username: user.username }).value();
+
+      if (credentials != undefined && credentials.password === user.password) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
   };
+
+  return auth;
 
 };

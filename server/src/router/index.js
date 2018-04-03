@@ -1,21 +1,34 @@
 const express = require('express');
 const path    = require('path');
-const auth    = require('./auth.js');
 
 const browserController = require('../controllers/BrowserController');
 const systemController  = require('../controllers/SystemController');
 
 module.exports = function (app) {
 
-  const router = express.Router();
+  const router  = express.Router();
+  const auth    = require('./auth.js')(app.get('databasePath'));
 
   // Routes for the API
   router.get('/', function(req, res) {
     res.json({ message: 'Raspy server'});
   });
 
+  router.post('/login', function (req, res) {
+    let user = {
+      username: req.body.username,
+      password: req.body.password
+    }
+
+    if (auth.checkCredentials(user)) {
+      res.json({status: 1});
+    } else {
+      res.json({status: 0});
+    }
+  });
+
   // Authentication
-  router.use(auth(app.get('databasePath')));
+  router.use(auth.checkAuthentication);
 
   // ------------------------------
   //          /browser
