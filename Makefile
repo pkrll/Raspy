@@ -3,10 +3,10 @@
 ENV = production
 SERVICE = null
 
-all: install client server
+all: install server
 
 install: client/package.json server/package.json
-	cd client && npm install
+	cd client && npm install && np run build
 	cd server && npm install && npm run setup
 
 server:
