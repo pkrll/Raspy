@@ -9,9 +9,21 @@
 <a href="https://github.com/pkrll/RPCi/search?l=javascript"><img src="https://img.shields.io/github/languages/top/pkrll/rpci.svg"></a>
 </p>
 
-Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web app that let's you control your Pi with ease.
+<img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
+Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+
+Built with NodeJS, Express and Vue.
 
 **Raspy is still a work in progress**.
+
+**Features:**
+
+- [ ] Reboot and shutdown
+- [x] Browse file system
+- [x] Download files
+- [ ] Upload files
+- [x] Delete files
+- [x] Check temperature, CPU, memory and disk usage.
 
 ## Prerequisites
 
