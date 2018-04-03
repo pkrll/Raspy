@@ -3,17 +3,14 @@
 
 Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web app.
 
-### Requirements
+## Prerequisites
 
-To run Raspy you need the following:
-
-* NPM (__recommended version 5.7.1+__)
-* Node (__recommended version 9.2.1+__)
+* Node Package Manager (__recommended version 5.7.1+__)
+* NodeJS (__recommended version 9.2.1+__)
 * Python (__developed for version 2.7.10__)
   * psutil library (__developed using version 5.4.3__)
-* Flask (__developed for version 0.12.2__)
 
-### Installation
+## Installation
 
 Clone this repository on your Raspberry Pi:
 
@@ -28,30 +25,70 @@ $ cd RPCI
 $ make install
 ```
 
-Before usage, you need to build the client application. In the project root folder, type:
+This might take a while, so grab a snack and wait for the installation, build and setup processes to finish.
+
+## Running the server
+
+After installing all dependencies, building the client and setting up the server, you can run the server with ``make server`` in the root folder.
+
+### With a process manager
+
+To daemonize the application, you can use [``PM2``](https://github.com/Unitech/pm2), which is a process manager for NodeJS applications. If you do not have ``PM2`` already, install it:
 
 ```bash
-$ make client
+$ sudo npm install -g pm2
 ```
 
-To start the server, run the command:
+Use ``pm2 start`` to run the server in the background. Make sure to set ``NODE_ENV`` to "production" before proceeding.
 
 ```bash
-$ make server
+$ cd RPCI
+$ pm2 start server/server.js
+
+[PM2] Applying action restartProcessId on app [server](ids: 0)
+[PM2] [server](0) ✓
+[PM2] Process successfully started
+┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬───────┬──────────┐
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user  │ watching │
+├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────┼───────────┼───────┼──────────┤
+│ server   │ 0  │ fork │ 13141 │ online │ 0       │ 0s     │ 66% │ 13.9 MB   │ pkrll │ disabled │
+└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴───────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+
 ```
 
-Make sure that the client application has been built into a bundle in the ``dist`` folder before running the server.
-
-You can do both at the same time with just the following command:
+To make sure ``PM2`` will run on boot you can run the ``startup`` command:
 
 ```bash
-$ make
+$ pm2 startup systemd
 ```
 
-### Work in progress
+For more information on how to use PM2, check out **[the official documentation](http://pm2.keymetrics.io/docs/usage/cluster-mode/)** or **[this quickstart guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#manage-application-with-pm2)**.
+
+## Usage
+
+By default, Raspy runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+
+## Configuration
+
+Current configuration options:
+
+```js
+// server/config/index.js
+dev: {
+  port: 5000,
+  databasePath: 'db.json'
+},
+prod: {
+  port: 5000,
+  databasePath: 'db.json'
+}
+```
+
+## Work in progress
 
 Raspy is still a work in progress.
 
-### Author
+## Author
 
-Raspy was created by Ardalan Samimi
+Raspy was created by **Ardalan Samimi**.
