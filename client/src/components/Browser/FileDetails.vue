@@ -51,7 +51,7 @@ export default {
 		 * @return {String}						The date in a human readable format.
 		 */
 		convertDate: function (timestamp) {
-			return this.$dateFormatter.unixtimeToString(timestamp*1000, true);
+			return this.$dateFormatter.unixtimeToString(timestamp, true);
 		},
 
 		convertSize: function (bytes) {
