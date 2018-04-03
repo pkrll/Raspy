@@ -64,7 +64,9 @@ module.exports = {
       let stats = fs.statSync(path);
 
       if (stats.isDirectory()) {
-        fs.rmdir(path, (err) => {
+        const rimraf = require('rimraf');
+
+        rimraf(path, (err) => {
           if (err) {
             callback(err);
           } else {

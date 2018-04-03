@@ -23,7 +23,7 @@ module.exports = function (app) {
     if (auth.checkCredentials(user)) {
       res.json({status: 1});
     } else {
-      res.json({status: 0});
+      res.json({status: 0, message: 'Wrong username or password!'});
     }
   });
 
