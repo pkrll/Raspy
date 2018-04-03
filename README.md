@@ -10,6 +10,7 @@
 </p>
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
+
 Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS, Express and Vue.
