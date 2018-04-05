@@ -86,9 +86,14 @@ export default {
 		 *
 		 * @param  {Object} data The response data.
 		 */
-		didFinishRequest: function (data) {
-			this.files = data.files;
-			this.directories = data.directories;
+		didFinishRequest: function (response) {
+			this.files = response.files;
+			this.directories = response.directories;
+
+			if (response.status == 0) {
+				console.log(response);
+			}
+
 			this.middleComponent = 'DirectoryListing';
 		},
 		/**

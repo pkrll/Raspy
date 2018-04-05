@@ -55,10 +55,14 @@ export default {
 		 *
 		 * @param  {Object} data The response data.
 		 */
-		didFinishRequest: function (data) {
+		didFinishRequest: function (response) {
 			this.file = {
-				filename: data.filename,
-				metadata: data.metadata
+				filename: response.filename,
+				metadata: response.metadata
+			};
+
+			if (response.status == 0) {
+				console.log(response);
 			}
 
 			this.middleComponent = 'FileDetails';
