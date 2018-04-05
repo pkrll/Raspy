@@ -67,7 +67,7 @@ module.exports = function (app) {
   // Catch all to handle direct routes
   app.get('*', function(req, res) {
     let file = path.join(app.get('dist'), '/index.html');
-    res.sendfile(file);
+    res.sendFile(file);
   });
 
 }
