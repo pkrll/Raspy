@@ -62,11 +62,13 @@ To daemonize the application, you can use [``PM2``](https://github.com/Unitech/p
 $ sudo npm install -g pm2
 ```
 
-Use ``pm2 start`` to run the server in the background. Make sure to set ``NODE_ENV`` to "production" before proceeding.
+#### Run the server with PM2
+
+Use ``make start`` to run the server in the background. The ``NODE_ENV`` will automatically be set to "production" when using the ``start`` rule.
 
 ```bash
-$ cd RPCI
-$ pm2 start server/server.js
+$ cd RPCi
+$ make start
 
 [PM2] Applying action restartProcessId on app [server](ids: 0)
 [PM2] [server](0) ✓
@@ -74,11 +76,17 @@ $ pm2 start server/server.js
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬───────┬──────────┐
 │ App name │ id │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user  │ watching │
 ├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────┼───────────┼───────┼──────────┤
-│ server   │ 0  │ fork │ 13141 │ online │ 0       │ 0s     │ 66% │ 13.9 MB   │ pkrll │ disabled │
+│ Raspy    │ 0  │ fork │ 13141 │ online │ 0       │ 0s     │ 66% │ 13.9 MB   │ pkrll │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴───────┴──────────┘
  Use `pm2 show <id|name>` to get more details about an app
 
 ```
+
+#### Stop the server with PM2
+
+Use ``make stop`` to stop the server.
+
+#### Autostart server on boot
 
 To make sure ``PM2`` will run on boot you can run the ``startup`` command:
 
