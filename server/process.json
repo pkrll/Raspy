@@ -1,0 +1,12 @@
+module.exports = {
+  "apps" : [{
+    "name"   : "Raspy",
+    "script" : "./server.js",
+    "env_development": {
+      "NODE_ENV": "development"
+    },
+    "env" : {
+      "NODE_ENV": "production"
+    }
+  }]
+}
