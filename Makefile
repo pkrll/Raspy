@@ -2,6 +2,7 @@
 
 ENV = production
 SERVICE = null
+APPNAME = 'Raspy'
 
 all: install server
 
@@ -12,13 +13,13 @@ install: client/package.json server/package.json
 start: server
 
 stop:
-	pm2 stop Raspy
+	pm2 stop $(APPNAME)
 
 server:
 ifeq ($(ENV), dev)
 	cd server && NODE_ENV=development npm run dev
 else
-	NODE_ENV=production pm2 start server/server.js --name "Raspy"
+	NODE_ENV=production pm2 start server/server.js --name $(APPNAME)
 endif
 
 devserver:
