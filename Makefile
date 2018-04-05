@@ -3,13 +3,14 @@
 ENV = production
 SERVICE = null
 
-all: install server
+all: install start
 
 install: client/package.json server/package.json
 	cd client && npm install && npm run build
 	cd server && npm install && npm run setup
 
-start: server
+start:
+	cd server && pm2 start process.json
 
 stop:
 	cd server && pm2 stop process.json
@@ -18,7 +19,7 @@ server:
 ifeq ($(ENV), dev)
 	cd server && NODE_ENV=development npm run dev
 else
-	cd server && pm2 start process.json
+	cd server && NODE_ENV=production npm run dev
 endif
 
 devserver:
