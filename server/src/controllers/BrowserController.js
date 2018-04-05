@@ -9,23 +9,21 @@ exports.browse = function (req, res) {
     request = path.join(request, req.params.path, req.params[0]);
   }
 
-  browser.getDirectory(request, function (err, response) {
-    if (err) {
-      res.json({error: 'Directory not found!', message: err});
-    } else {
-      res.json(response);
-    }
+  browser.getDirectory(request, (err, response)  => {
+    response.status = (err == null) ? 1 : 0;
+    response.error  = err;
+
+    res.json(response);
   });
 };
 
 exports.getFile = function (req, res) {
   let request = path.join('/', req.params.path, req.params[0]);
   browser.getFile(request, function (err, response) {
-    if (err) {
-      res.json({status: 0, message: err});
-    } else {
-      res.json(response);
-    }
+    response.status = (err == null) ? 1 : 0;
+    response.error  = err;
+
+    res.json(response);
   });
 };
 
