@@ -14,4 +14,6 @@ require('./src/config')(app, config, path.dirname(__dirname));
 require('./src/router')(app);
 
 app.listen(app.get('port'));
+
+console.log('Server mode: ' + process.env.NODE_ENV);
 console.log('Server started on ' + app.get('port'));
