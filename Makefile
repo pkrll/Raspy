@@ -1,4 +1,4 @@
-.PHONY: all install server client devclient devserver major minor patch clean
+.PHONY: all install start stop server client devclient devserver major minor patch clean
 
 ENV = production
 SERVICE = null
@@ -9,11 +9,16 @@ install: client/package.json server/package.json
 	cd client && npm install && npm run build
 	cd server && npm install && npm run setup
 
+start: server
+
+stop:
+	pm2 stop Raspy
+
 server:
 ifeq ($(ENV), dev)
 	cd server && NODE_ENV=development npm run dev
 else
-	cd server && NODE_ENV=production npm run dev
+	NODE_ENV=production pm2 start server/server.js --name "Raspy"
 endif
 
 devserver:
