@@ -88,10 +88,28 @@ Use ``make stop`` to stop the server.
 
 #### Autostart server on boot
 
-To make sure ``PM2`` will run on boot you can run the ``startup`` command:
+Follow these steps to make ``PM2`` run on startup.
+
+1. Start the application with ``make start`` (if not already running).
+2. Save the current process list with ``pm2 save``.
+3. Run ``pm2 startup systemd`` and copy and paste the command produced by the script.
+
+**Example**
 
 ```bash
+$ cd Raspy
+$ make start
+
+$ pm2 save
+[PM2] Saving current process list...
+[PM2] Successfully saved in /home/pkrll/.pm2/dump.pm2
+
 $ pm2 startup systemd
+[PM2] Init System found: systemd
+[PM2] To setup the Startup Script, copy/paste the following command:
+sudo env PATH=$PATH:[...] startup systemd -u USER --hp /home/USER
+
+$ sudo env PATH=$PATH[:...] startup systemd -u USER --hp /home/USER
 ```
 
 For more information on how to use PM2, check out **[the official documentation](http://pm2.keymetrics.io/docs/usage/cluster-mode/)** or **[this quickstart guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#manage-application-with-pm2)**.
