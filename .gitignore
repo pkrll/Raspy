@@ -1,5 +1,4 @@
 *.pyc
-dist/*
 package-lock.json
 .tags
 .tags_swap
