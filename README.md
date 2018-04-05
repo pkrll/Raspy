@@ -13,7 +13,7 @@
 
 Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
-Built with NodeJS, Express and Vue.
+Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
 **Raspy is still a work in progress**.
 
@@ -109,7 +109,7 @@ $ pm2 startup systemd
 [PM2] To setup the Startup Script, copy/paste the following command:
 sudo env PATH=$PATH:[...] startup systemd -u USER --hp /home/USER
 
-$ sudo env PATH=$PATH[:...] startup systemd -u USER --hp /home/USER
+$ sudo env PATH=$PATH:[...] startup systemd -u USER --hp /home/USER
 ```
 
 For more information on how to use PM2, check out **[the official documentation](http://pm2.keymetrics.io/docs/usage/cluster-mode/)** or **[this quickstart guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#manage-application-with-pm2)**.
