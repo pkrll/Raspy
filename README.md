@@ -3,10 +3,10 @@
   <img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
 </p>
 <p align="center">
-  <a href="https://badge.fury.io/gh/pkrll%2Frpci"><img src="https://badge.fury.io/gh/pkrll%2Frpci.svg"></a>
-<a href="https://github.com/prkll/rpci/commits/master"><img src="https://img.shields.io/github/last-commit/pkrll/rpci.svg"></a>
-<a href="https://github.com/pkrll/rpci/issues"><img src="https://img.shields.io/github/issues/pkrll/rpci.svg"></a>
-<a href="https://github.com/pkrll/RPCi/search?l=javascript"><img src="https://img.shields.io/github/languages/top/pkrll/rpci.svg"></a>
+  <a href="https://badge.fury.io/gh/pkrll%2FRaspy"><img src="https://badge.fury.io/gh/pkrll%2FRaspy.svg"></a>
+<a href="https://github.com/prkll/Raspy/commits/master"><img src="https://img.shields.io/github/last-commit/pkrll/Raspy.svg"></a>
+<a href="https://github.com/pkrll/Raspy/issues"><img src="https://img.shields.io/github/issues/pkrll/Raspy.svg"></a>
+<a href="https://github.com/pkrll/Raspy/search?l=javascript"><img src="https://img.shields.io/github/languages/top/pkrll/Raspy.svg"></a>
 </p>
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
@@ -38,13 +38,13 @@ Built with NodeJS, Express and Vue.
 Clone this repository on your Raspberry Pi:
 
 ```bash
-$ git clone https://github.com/pkrll/RPCI
+$ git clone https://github.com/pkrll/Raspy
 ```
 
 And run ``make install`` in the project root folder:
 
 ```bash
-$ cd RPCI
+$ cd Raspy
 $ make install
 ```
 
@@ -67,7 +67,7 @@ $ sudo npm install -g pm2
 Use ``make start`` to run the server in the background. The ``NODE_ENV`` will automatically be set to "production" when using the ``start`` rule.
 
 ```bash
-$ cd RPCi
+$ cd Raspy
 $ make start
 
 [PM2] Applying action restartProcessId on app [server](ids: 0)
