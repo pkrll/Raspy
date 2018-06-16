@@ -44,3 +44,14 @@ exports.download = function (req, res) {
     if (err) console.log('Error: BrowserControllerdownload() > ' + err);
   });
 };
+
+exports.create = function (req, res) {
+  let fullPath = req.body.fullPath;
+  browser.create(fullPath, function (err, response) {
+    if (err) {
+      res.json({status: 0, message: err});
+    } else {
+      res.json(response)
+    }
+  })
+}

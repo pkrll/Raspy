@@ -49,6 +49,12 @@ module.exports = function (app) {
     // Delete the requested file
     .delete(browserController.remove);
   // ------------------------------
+  //          /folder
+  // ------------------------------
+  router.route('/folder/new')
+    // Create a new folder
+    .post(browserController.create);
+  // ------------------------------
   //          /download
   // ------------------------------
   router.route('/download/:path*')

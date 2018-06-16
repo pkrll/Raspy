@@ -88,5 +88,18 @@ module.exports = {
       console.log('ERROR: Browser.remove() > ' + err);
       callback(err);
     }
+  },
+
+  create: function (path, callback) {
+    try {
+      if (!fs.existsSync(path)) {
+        fs.mkdirSync(path)
+        callback(null, {status: 1, path: path})
+      } else {
+        callback("File already exists", path)
+      }
+    } catch (err) {
+      console.log('ERROR: Browser.create() > ' + err);
+    }
   }
 }
