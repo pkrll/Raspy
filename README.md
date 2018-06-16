@@ -24,6 +24,7 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 - [x] Download files
 - [ ] Upload files
 - [x] Delete files
+- [x] Create folders
 - [x] Check temperature, CPU, memory and disk usage.
 
 ## Prerequisites
