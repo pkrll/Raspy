@@ -112,6 +112,24 @@ export default {
 				});
 			},
 			/**
+			 * Creates a new folder.
+			 *
+			 * Calls the filesystem/folder/new endpoint with POST.
+			 *
+			 * @param  {String}   path     The path of the new folder.
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			createFolder: function (path, callback) {
+				this.HTTP.post('folder/new', { fullPath: path }).then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("Error: ");
+					console.log(e);
+				});
+			},
+			/**
 			 * Downloads the specified file.
 			 *
 			 * Calls the filesystem/download endpoint.

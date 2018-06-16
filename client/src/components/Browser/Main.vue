@@ -11,6 +11,11 @@
 				<div class="title">Show hidden files</div>
 			</div>
 
+			<div class="noselect" v-on:click="makeFolder">
+				<font-awesome-icon icon="folder"/>
+				<div class="title">Create folder</div>
+			</div>
+
 			<div class="noselect" v-on:click="didClickDelete = !didClickDelete" v-bind:class="{greyed: didClickDelete}">
 				<font-awesome-icon icon="trash"/>
 				<div class="title">Delete folder</div>
@@ -122,6 +127,25 @@ export default {
 					console.log(response);
 				}
 			}.bind(this));
+		},
+		makeFolder: function () {
+			let folderName = prompt("Set folder name:");
+			if (folderName != null || folderName != "") {
+				let directory = this.prettyPath + '/' + folderName
+				this.$APIManager.createFolder(directory, function (response) {
+					if (response.status == 1) {
+						this.$router.push({
+							name: 'Directory',
+							params: {
+								path: encodeURIComponent(response.path)
+							}
+						});
+					} else {
+						console.log("Error: ");
+						console.log(response);
+					}
+				}.bind(this));
+			}
 		}
 	},
 	data() {
