@@ -6,6 +6,12 @@
 				<div class="title">Set as favorite</div>
 			</div>
 
+			<div class="noselect" v-on:click="toggleAdvancedOptions" v-bind:class="{greyed: showAdvancedOptions}">
+				<font-awesome-icon icon="cogs"/>
+				<div class="title">Show advanced options</div>
+			</div>
+		</nav>
+		<nav class="options" v-show="showAdvancedOptions">
 			<div class="noselect" v-on:click="showHidden = !showHidden">
 				<font-awesome-icon v-bind:icon="(showHidden) ? 'toggle-on' : 'toggle-off'"/>
 				<div class="title">Show hidden files</div>
@@ -13,14 +19,13 @@
 
 			<div class="noselect" v-on:click="makeFolder">
 				<font-awesome-icon icon="folder"/>
-				<div class="title">Create folder</div>
+				<div class="title">New folder</div>
 			</div>
 
 			<div class="noselect" v-on:click="didClickDelete = !didClickDelete" v-bind:class="{greyed: didClickDelete}">
 				<font-awesome-icon icon="trash"/>
 				<div class="title">Delete folder</div>
 			</div>
-
 		</nav>
 
 		<component v-bind:is="middleComponent"
@@ -55,6 +60,7 @@ export default {
 			this.middleComponent = 'Spinner';
 			// Remove any old stuff before changing view
 			this.didClickDelete = false;
+			this.showAdvancedOptions = false;
 			this.isFavorite = this.$CookieManager.getBookmark() == this.prettyPath;
 			let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
 			this.$APIManager.listDirectory(path, this.didFinishRequest);
@@ -85,6 +91,12 @@ export default {
 			}
 
 			this.isFavorite = !this.isFavorite;
+		},
+		/**
+		 * Toggles the advanced options pane.
+		 */
+		toggleAdvancedOptions: function () {
+			this.showAdvancedOptions = !this.showAdvancedOptions
 		},
 		/**
 		 * Invoked by listDirectory requests.
@@ -128,9 +140,12 @@ export default {
 				}
 			}.bind(this));
 		},
+		/**
+		 * Invoked when user clicks the New Folder button.
+		 */
 		makeFolder: function () {
 			let folderName = prompt("Set folder name:");
-			if (folderName != null || folderName != "") {
+			if (folderName != null && folderName != "") {
 				let directory = this.prettyPath + '/' + folderName
 				this.$APIManager.createFolder(directory, function (response) {
 					if (response.status == 1) {
@@ -143,6 +158,7 @@ export default {
 					} else {
 						console.log("Error: ");
 						console.log(response);
+						alert(response.message)
 					}
 				}.bind(this));
 			}
@@ -157,6 +173,7 @@ export default {
 			showHidden: this.$CookieManager.loadCookie('showHidden'),
 			isFavorite: this.$CookieManager.getBookmark() == this.path,
 			didClickDelete: false,
+			showAdvancedOptions: false,
 			toggleHiddenIcon: 'toggle-off'
 		}
 	},
