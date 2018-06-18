@@ -5,11 +5,11 @@
 <script>
 import Spinner from '@/components/Common/Spinner'
 import Content from '@/components/Common/Content'
-import UpdateInformation from '@/components/Settings/UpdateInformation'
+import Changelog from '@/components/Settings/Changelog'
 
 export default {
 	name: "Update",
-	components: { Spinner, Content, UpdateInformation },
+	components: { Spinner, Content, Changelog },
 	data: function () {
 		return {
 			middleComponent: 'Spinner',
@@ -19,7 +19,6 @@ export default {
 	},
 	methods: {
 		didCheckForUpdate: function (response) {
-			console.log(response);
 			if (response.status == 1) {
 				let version = response.version.version;
 				let isNewer = response.version.isNewer;
@@ -27,7 +26,7 @@ export default {
 				if (isNewer) {
 					this.heading = 'Version ' + version + ' is available!'
 					this.content = '\r\n'+response.version.changes;
-					this.middleComponent = 'UpdateInformation';
+					this.middleComponent = 'Changelog';
 				} else {
 					this.content = "Software is up to date.";
 					this.middleComponent = 'Content';

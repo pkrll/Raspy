@@ -12,14 +12,9 @@
 import VueMarkdown from 'vue-markdown'
 
 export default {
-	name: "UpdateInformation",
+	name: "Changelog",
 	props: ["heading", "content"],
-	components: { 'vue-markdown' : VueMarkdown },
-	data: function () {
-		return {
-			content: ""
-		}
-	}
+	components: { 'vue-markdown' : VueMarkdown }
 }
 </script>
 
