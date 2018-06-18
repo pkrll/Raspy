@@ -13,7 +13,7 @@ import fontawesome from '@fortawesome/fontawesome'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import { heart } from '@fortawesome/fontawesome-free-solid'
 import vuejs from '@fortawesome/fontawesome-free-brands/faVuejs'
-import node from '@fortawesome/fontawesome-free-brands/faNodejs'
+import node from '@fortawesome/fontawesome-free-brands/faNodeJs'
 import python from '@fortawesome/fontawesome-free-brands/faPython'
 
 fontawesome.library.add(vuejs, python, node);
