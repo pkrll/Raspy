@@ -1,4 +1,4 @@
-.PHONY: all install start stop server client devclient devserver major minor patch clean
+.PHONY: all install start stop server client devclient devserver major minor patch clean updater
 
 ENV = production
 SERVICE = null
@@ -34,6 +34,9 @@ endif
 
 devclient:
 	make ENV=dev client
+
+updater:
+	cd updater && node app.js
 
 major:
 ifeq ($(SERVICE), client)

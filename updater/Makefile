@@ -1,8 +1,10 @@
 update:
-	@echo "Test"
+	cd ../ && git pull
 
-restart:
-	@echo "Restart"
+start:
+	cd ../ && make start
 
 stop:
-	@echo "Stop"
+	cd ../ && make stop
+
+restart: stop start
