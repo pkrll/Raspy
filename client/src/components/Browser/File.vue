@@ -21,7 +21,8 @@
 		</nav>
 
 		<component v-bind:is="middleComponent"
-							 v-bind:file="file">
+							 v-bind:file="file"
+							 v-bind:text="text">
 		</component>
 
 		<component v-bind:is="bottomComponent"
@@ -114,6 +115,7 @@ export default {
 			middleComponent: 'Spinner',
 			bottomComponent: '',
 			file: undefined,
+			text: 'Loading...'
 		}
 	},
 	created: function () {

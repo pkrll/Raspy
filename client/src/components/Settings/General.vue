@@ -1,12 +1,20 @@
 <template>
   <section class="wrapper">
 		<div class="heading">General settings</div>
+		<router-link to="/settings/update" class="row">
+			<div class="icon"><font-awesome-icon icon="cloud-download-alt"/></div>
+			<div class="title">Check for update</div>
+			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
+		</router-link>
   </section>
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
 export default {
-	name: 'SettingsGeneral'
+	name: 'SettingsGeneral',
+	components: { FontAwesomeIcon }
 }
 </script>
 
