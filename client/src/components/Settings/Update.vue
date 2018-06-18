@@ -1,20 +1,20 @@
 <template>
-	<component v-bind:is="middleComponent"
-						 v-bind:text="text">
-	</component>
+	<component v-bind:is="middleComponent" v-bind:content="content" v-bind:heading="heading"></component>
 </template>
 
 <script>
 import Spinner from '@/components/Common/Spinner'
 import Content from '@/components/Common/Content'
+import UpdateInformation from '@/components/Settings/UpdateInformation'
 
 export default {
 	name: "Update",
-	components: { Spinner, Content },
+	components: { Spinner, Content, UpdateInformation },
 	data: function () {
 		return {
 			middleComponent: 'Spinner',
-			text: 'Checking for update...'
+			heading: '',
+			content: 'Checking for update...'
 		}
 	},
 	methods: {
@@ -25,15 +25,17 @@ export default {
 				let isNewer = response.version.isNewer;
 
 				if (isNewer) {
-					this.text = "A newer version " + version + " is available.";
+					this.heading = 'Version ' + version + ' is available!'
+					this.content = '\r\n'+response.version.changes;
+					this.middleComponent = 'UpdateInformation';
 				} else {
-					this.text = "Software is up to date.";
+					this.content = "Software is up to date.";
+					this.middleComponent = 'Content';
 				}
 			} else {
-				this.text = "Something went wrong. Could not check for update."
+				this.content = "Something went wrong. Could not check for update."
+				this.middleComponent = 'Content';
 			}
-
-			this.middleComponent = 'Content';
 		}
 	},
 	created() {
@@ -43,4 +45,13 @@ export default {
 </script>
 
 <style scoped>
+
+.container {
+	align-items: 			center;
+	display: 					flex;
+	flex-direction: 	column;
+	justify-content: 	center;
+}
+
+
 </style>

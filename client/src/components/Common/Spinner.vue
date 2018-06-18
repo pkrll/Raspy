@@ -1,14 +1,14 @@
 <template>
 	<div class="loading-splash-view">
 			<div class="spinner"></div>
-			<div>{{text}}</div>
+			<div>{{content}}</div>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'Spinner',
-	props: ['text'],
+	props: ['content'],
 }
 </script>
 

@@ -22,7 +22,7 @@
 
 		<component v-bind:is="middleComponent"
 							 v-bind:file="file"
-							 v-bind:text="text">
+							 v-bind:content="text">
 		</component>
 
 		<component v-bind:is="bottomComponent"

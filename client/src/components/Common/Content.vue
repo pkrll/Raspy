@@ -1,7 +1,7 @@
 <template>
 	<section class="wrapper">
 		<div class="content">
-			{{text}}
+			{{content}}
 		</div>
 	</section>
 </template>
@@ -9,17 +9,11 @@
 <script>
 export default {
 	name: 'Content',
-	props: ['text']
+	props: ['content']
 }
 </script>
 
 <style scoped>
-.wrapper {
-	align-items: 			center;
-	display: 					flex;
-	flex-direction: 	column;
-	justify-content: 	center;
-}
 
 .content {
 	font-size: 5vw;
