@@ -17,6 +17,16 @@ module.exports = {
     }).catch(function (error) {
       res.json({status: 0});
     })
+  },
+
+  launchUpdater: function (req, res) {
+    system.launchUpdater().then(function (response) {
+      res.json(response);
+    }).catch(function (error) {
+      console.log("======== Error: launchUpdater ========");
+      console.log(error)
+      res.json({status: 0, error: error});
+    });
   }
 
 };

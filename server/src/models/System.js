@@ -1,5 +1,8 @@
 
 module.exports = {
+  /**
+   * Retrieves system information.
+   */
   index: function () {
     return new Promise(
       (resolve, reject) => {
@@ -21,7 +24,9 @@ module.exports = {
       }
     );
   },
-
+  /**
+   * Checks for a system update.
+   */
   checkForUpdate: function () {
     return new Promise(
       (resolve, reject) => {
@@ -34,12 +39,7 @@ module.exports = {
               let content = JSON.parse(data);
               let version = content.version.split('+')[0];
               let compare = require('compare-versions');
-              let response = {
-                heading: '',
-                version: version,
-                isNewer: false,
-                changes: ''
-              }
+              let response = { heading: '', version: version, isNewer: false, changes: '' }
 
               if (compare(json.version, version) == 0) {
                 response.version = json.version;
@@ -56,7 +56,23 @@ module.exports = {
         });
       }
     );
+  },
+
+  launchUpdater: function () {
+    return new Promise(
+      (resolve, reject) => {
+        const { exec } = require('child_process');
+        exec('cd ../ && make updater', (error, stdout, stderr) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve({status: 1, data: stdout});
+          }
+        });
+      }
+    );
   }
+
 };
 
 function getLatestRelease(callback, errback) {

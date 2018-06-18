@@ -70,6 +70,9 @@ module.exports = function (app) {
   router.route('/system/checkForUpdate')
     .get(systemController.checkForUpdate);
 
+  router.route('/system/launchUpdater')
+    .get(systemController.launchUpdater);
+
   // Register the routes
   app.use(express.static(app.get('dist')));
   app.use('/api', router);
