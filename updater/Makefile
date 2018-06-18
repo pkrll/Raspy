@@ -1,5 +1,7 @@
 update:
+	cd ../ && make clean
 	cd ../ && git pull
+	cd ../ && make install
 
 start:
 	cd ../ && make start
