@@ -26,6 +26,7 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 - [x] Delete files
 - [x] Create folders
 - [x] Check temperature, CPU, memory and disk usage.
+- [ ] Interface to update Raspy remotely
 
 ## Prerequisites
 
