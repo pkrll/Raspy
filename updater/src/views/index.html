@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Raspy Self-Updater</title>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/device.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/fa-solid.min.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="header">Raspy Self-Updater</div>
+      <div id="control">
+        <div onclick="update()"><i class="fas fa-cloud-download-alt"></i><br/>Update</div>
+        <div onclick="restart()"><i class="fas fa-power-off"></i><br/>Restart</div>
+        <div onclick="stop()"><i class="fas fa-power-off"></i><br/>Stop</div>
+      </div>
+      <div id="content">
+        <div id="console">
+          <pre>Running: Raspy Updater version 0.0.1...</pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
