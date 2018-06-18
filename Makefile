@@ -36,7 +36,7 @@ devclient:
 	make ENV=dev client
 
 updater:
-	cd updater && node app.js
+	cd updater && pm2 start process.json
 
 major:
 ifeq ($(SERVICE), client)
