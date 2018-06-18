@@ -67,6 +67,9 @@ module.exports = function (app) {
     // Get system information
     .get(systemController.index);
 
+  router.route('/system/checkForUpdate')
+    .get(systemController.checkForUpdate);
+
   // Register the routes
   app.use(express.static(app.get('dist')));
   app.use('/api', router);

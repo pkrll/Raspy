@@ -1,6 +1,6 @@
 {
   "name": "raspy-server",
-  "version": "0.12.0+27b",
+  "version": "0.12.0+2f6",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -12,10 +12,14 @@
   "dependencies": {
     "basic-auth": "^2.0.0",
     "body-parser": "^1.0.2",
+    "compare-versions": "^3.3.0",
     "cors": "^2.8.4",
     "express": "^4.0.0",
+    "follow-redirects": "^1.5.0",
+    "git-rev-sync": "^1.12.0",
     "lowdb": "^1.0.0",
     "python-shell": "^0.5.0",
+    "remote-json": "^4.1.3",
     "rimraf": "^2.6.2"
   }
 }
