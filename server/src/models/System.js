@@ -26,7 +26,7 @@ module.exports = {
       (resolve, reject) => {
         const remote = require('remote-json');
         remote.https = require('follow-redirects').https;
-        remote('https://api.github.com/repos/pkrll/raspy/tags', {
+        remote('https://api.github.com/repos/pkrll/Raspy/releases', {
           headers: {
             'User-Agent': 'Raspy'
           }
@@ -43,12 +43,19 @@ module.exports = {
                   let content = JSON.parse(data);
                   let version = content.version.split('+')[0];
                   let compare = require('compare-versions');
-                  let response = { version: version, isNewer: false }
-                  const tag = body[0]['name'];
+                  let response = {
+                    heading: '',
+                    version: version,
+                    isNewer: false,
+                    changes: ''
+                  }
+                  const tag = body[0]['tag_name'];
 
                   if (compare(tag, version) > 0) {
                     response.version = tag;
                     response.isNewer = true;
+                    response.changes = body[0]['body'];
+                    response.heading = body[0]['name'];
                   }
 
                   resolve(response);
