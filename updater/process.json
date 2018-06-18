@@ -1,7 +1,7 @@
 {
   "apps" : [{
     "name"   : "Raspy Updater",
-    "script" : "./server.js",
+    "script" : "./app.js",
     "env_development": {
       "NODE_ENV": "development"
     },
