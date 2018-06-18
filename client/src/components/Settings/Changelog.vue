@@ -19,7 +19,9 @@ export default {
 		launchUpdater: function () {
 			this.$APIManager.launchUpdater(function (response) {
 				if (response.status == 1) {
-					console.log("SUCCESS!");
+					let hostname = 'http://'+window.location.href+':5001';
+					window.open(hostname, '_blank');
+					window.location.href = hostname;
 				} else {
 					alert("An error occurred. Could not update the software.");
 				}
