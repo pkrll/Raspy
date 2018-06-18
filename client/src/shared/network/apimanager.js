@@ -176,7 +176,7 @@ export default {
 			/**
 			 * Checks for system update.
 			 *
-			 * Calls the /update/check endpoint
+			 * Calls the /system/checkForUpdate endpoint
 			 *
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
@@ -189,7 +189,25 @@ export default {
 					console.log("Error: ");
 					console.log(e);
 				});
+			},
+			/**
+			 * Requests the updater to launch.
+			 *
+			 * Calls the /system/launchUpdater endpoint
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			launchUpdater: function (callback) {
+				this.HTTP.get('system/launchUpdater').then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("Error: ");
+					console.log(e);
+				});
 			}
+
 		}
 	}
 }

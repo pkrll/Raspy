@@ -4,7 +4,7 @@
 		<vue-markdown class="changelog">
 			{{content}}
 		</vue-markdown>
-		<div class="button">Launch updater</div>
+		<div class="button" v-on:click="launchUpdater">Launch updater</div>
 	</div>
 </template>
 
@@ -14,7 +14,18 @@ import VueMarkdown from 'vue-markdown'
 export default {
 	name: "Changelog",
 	props: ["heading", "content"],
-	components: { 'vue-markdown' : VueMarkdown }
+	components: { 'vue-markdown' : VueMarkdown },
+	methods: {
+		launchUpdater: function () {
+			this.$APIManager.launchUpdater(function (response) {
+				if (response.status == 1) {
+					console.log("SUCCESS!");
+				} else {
+					alert("An error occurred. Could not update the software.");
+				}
+			});
+		}
+	}
 }
 </script>
 
