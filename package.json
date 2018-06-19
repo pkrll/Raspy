@@ -1,6 +1,6 @@
 {
   "name": "raspy",
-  "version": "0.1.2+a",
+  "version": "0.1.3+b",
   "description": "Raspy lets you control your Raspberry Pi.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "license": "AGPL-3.0",

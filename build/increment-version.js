@@ -12,8 +12,7 @@ let service = {
   server: "server/package.json",
   client: "client/package.json"
 };
-console.log(process.argv);
-process.exit(0);
+
 let argv = process.argv.slice(2);
 if (argv.length > 0 && argv.includes('-h')) {
   terminal.print("Usage: node " + process.argv[1] + " [arguments]", terminal.colors.cyan);
