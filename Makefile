@@ -1,13 +1,28 @@
-.PHONY: all install start stop server client devclient devserver major minor patch clean updater
+.PHONY: all install build start stop server devserver client devclient updater major minor patch clean
 
 ENV = production
 SERVICE = null
 
-all: install start
+all: install build start
 
-install: client/package.json server/package.json
-	cd client && npm install && npm run build
-	cd server && npm install && npm run setup
+install:
+ifeq ($(SERVICE), client)
+	npm run install_client
+else ifeq ($(SERVICE), server)
+	npm run install_server
+else
+	npm run install
+endif
+
+build:
+ifeq ($(SERVICE), client)
+	npm run build
+else ifeq ($(SERVICE), server)
+	npm run setup
+else
+	npm run build
+	npm run setup
+endif
 
 start:
 	cd server && pm2 start process.json
@@ -17,9 +32,9 @@ stop:
 
 server:
 ifeq ($(ENV), dev)
-	cd server && NODE_ENV=development npm run dev
+	NODE_ENV=development npm run dev_server
 else
-	cd server && NODE_ENV=production npm run dev
+	NODE_ENV=production npm run dev_server
 endif
 
 devserver:
@@ -27,9 +42,9 @@ devserver:
 
 client:
 ifeq ($(ENV), dev)
-	cd client && npm run dev
+	npm run dev_client
 else
-	cd client && npm run build
+	npm run build
 endif
 
 devclient:
@@ -39,45 +54,57 @@ updater:
 	cd updater && pm2 start process.json
 
 major:
-ifeq ($(SERVICE), client)
-	cd client && npm run major
-	git add client/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),client server))
+	npm run major service=$(SERVICE)
+	git add $(SERVICE)/package.json
 	git commit -S -m "Incremented major version"
-else ifeq ($(SERVICE), server)
-	cd server && npm run major
-	git add server/package.json
+else ifeq ($(SERVICE), app)
+	npm run major service=$(SERVICE)
+	git add package.json
+	git commit -S -m "Incremented major version"
+else ifeq ($(SERVICE), app)
+	npm run major
+	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented major version"
 else
 	@echo "ERROR:\tCould not increment major version."
-	@echo "USAGE:\tmake SERVICE=client/server major"
+	@echo "USAGE:\tmake SERVICE=[client|server|app|all] major"
 endif
 
 minor:
-ifeq ($(SERVICE), client)
-	cd client && npm run minor
-	git add client/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),client server))
+	npm run minor service=$(SERVICE)
+	git add $(SERVICE)/package.json
 	git commit -S -m "Incremented minor version"
-else ifeq ($(SERVICE), server)
-	cd server && npm run minor
-	git add server/package.json
+else ifeq ($(SERVICE), app)
+	npm run minor service=$(SERVICE)
+	git add package.json
+	git commit -S -m "Incremented minor version"
+else ifeq ($(SERVICE), app)
+	npm run minor
+	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented minor version"
 else
 	@echo "ERROR:\tCould not increment minor version."
-	@echo "USAGE:\tmake SERVICE=client/server minor"
+	@echo "USAGE:\tmake SERVICE=[client|server|app|all] minor"
 endif
 
 patch:
-ifeq ($(SERVICE), client)
-	cd client && npm run patch
-	git add client/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),client server))
+	npm run patch service=$(SERVICE)
+	git add $(SERVICE)/package.json
 	git commit -S -m "Incremented patch version"
-else ifeq ($(SERVICE), server)
-	cd server && npm run patch
-	git add server/package.json
+else ifeq ($(SERVICE), app)
+	npm run patch service=$(SERVICE)
+	git add package.json
+	git commit -S -m "Incremented patch version"
+else ifeq ($(SERVICE), app)
+	npm run patch
+	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented patch version"
 else
 	@echo "ERROR:\tCould not increment patch version."
-	@echo "USAGE:\tmake SERVICE=client/server patch"
+	@echo "USAGE:\tmake SERVICE=[client|server|app|all] patch"
 endif
 
 clean:
