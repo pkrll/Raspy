@@ -1,8 +1,21 @@
 @media only screen and (min-device-width: 320px)
-                   and (max-device-width: 736px) {
+                   and (max-device-width: 736px)
+                   and (orientation: portrait) {
 
-  #control {
-    font-size: 7vw;
+  #console {
+    font-size: 6vw;
+  }
+
+  #menu {
+    font-size: 8vw;
+  }
+
+  #menuButton div {
+    font-size: 4vw;
+  }
+
+  #menuButton div i {
+    font-size: 5vw;
   }
 
 }

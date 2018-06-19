@@ -7,32 +7,39 @@ const server  = require('http').Server(app);
 const socket  = require('socket.io')(server);
 const updater = require('./lib/updater.js');
 const path    = require('path');
+const logger  = require('./lib/logger.js')('logs/log.log');
 const port    = '5001';
 
 require('./src/router')(app);
 
+function performCommand(command, socket) {
+  logger.write("$ " + command);
+  updater.do(command, function (data) {
+    logger.write(data.data);
+    socket.emit('updater/log', data);
+  });
+}
+
 socket.on('connection', function (socket) {
 
+  logger.read(function (content) {
+    socket.emit('updater/log/dump', { data: content });
+  });
+
   socket.on('raspy/update', function (data) {
-    updater.do('update', function (data) {
-      socket.emit('updater/log', data);
-    });
+    performCommand('update', socket);
   });
 
   socket.on('raspy/restart', function (data) {
-    updater.do('restart', function (data) {
-      socket.emit('updater/log', data)
-    });
+    performCommand('restart', socket);
   });
 
   socket.on('raspy/stop', function (data) {
-    updater.do('stop', function (data) {
-      socket.emit('updater/log', data)
-    });
+    performCommand('stop', socket);
   });
 
   socket.on('updater/shutdown', function (data) {
-    process.exit(0);
+    performCommand('shutdown', socket);
   });
 
 });
