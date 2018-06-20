@@ -31,7 +31,8 @@ new Vue({
   template: '<App/>',
 	data: {
 		isLoggedIn: false,
-		fullScreen: false
+		fullScreen: false,
+		connectionError: undefined
 	},
 	created: function () {
 		let username = this.$CookieManager.loadCookie('username');
@@ -39,7 +40,7 @@ new Vue({
 
 		if (username != undefined) {
 			this.$APIManager.setCredentials(username, password);
-			this.isLoggedIn = true;
+			this.$APIManager.testCredentials(this.didTestCredentials);
 		}
 	},
 	methods: {
@@ -65,6 +66,14 @@ new Vue({
 			this.$CookieManager.clearCookie('password');
 			this.$APIManager.clearCredentials();
 			this.isLoggedIn = false;
+		},
+
+		didTestCredentials: function (response) {
+			if (response.status == 1) {
+				this.isLoggedIn = true;
+			} else {
+				this.connectionError = response.error;
+			}
 		}
 	}
 })

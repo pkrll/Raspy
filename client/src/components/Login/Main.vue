@@ -14,6 +14,9 @@
 			<div class="message" v-if="message != undefined">
 				{{message}}
 			</div>
+			<div class="message" v-if="this.$root.connectionError != undefined">
+				{{this.$root.connectionError}}
+			</div>
 		</div>
 		<div class="description" v-else>
 			Signing in, please wait...

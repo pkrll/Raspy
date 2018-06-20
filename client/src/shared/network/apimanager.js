@@ -13,7 +13,7 @@ export default {
 			 * @param  {String]} username The username of the user.
 			 * @param  {String]} password The password of the user.
 			 */
-			setCredentials: function (username, password) {
+			setCredentials: function (username, password, callback) {
 				this.HTTP = axios.create({
 					baseURL: process.env.API_URL,
 					auth: {
@@ -22,11 +22,23 @@ export default {
 					}
 				});
 			},
+
+			testCredentials: function (callback) {
+				let credentials = this.HTTP.defaults.auth;
+				this.HTTP.post('login', {
+					username: credentials.username,
+					password: credentials.password
+				}).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+			},
 			/**
 			 * Removes the credentials of the user from the axios object.
 			 */
 			clearCredentials: function () {
-				this.http = axios.create({ baseURL: process.env.API_URL });
+				this.HTTP = axios.create({ baseURL: process.env.API_URL });
 			},
 			/**
 			 * Logins to the server.
@@ -254,4 +266,22 @@ export default {
 			}
 		}
 	}
+}
+
+function handleError(error) {
+	let response = { status: 0, error: "Unknown error!" };
+
+	if (error.response) {
+		let status = error.response.status;
+
+		switch (status) {
+			case 404:
+				response.error = "Server not found."
+				break;
+			default:
+				break;
+		}
+	}
+
+	return response;
 }
