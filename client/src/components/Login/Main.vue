@@ -37,21 +37,26 @@ export default {
 		 * Signs in to Raspy.
 		 */
 		signIn: function () {
-			if (this.username.length > 0) {
-				this.message = undefined;
-				this.signingIn = true;
-
-				this.$APIManager.login(this.username, this.password, function (data) {
-
-					if (data.status == 1) {
-						this.$root.createSession(this.username, this.password);
-					} else {
-						this.message = data.message;
-						this.signingIn = false;
-					}
-				}.bind(this));
-			} else {
+			if (this.username.length == 0) {
 				this.message = "You must specify a username to sign in."
+				return;
+			}
+
+			this.message = undefined;
+			this.signingIn = true;
+			this.$APIManager.login(this.username, this.password, this.handleResponse);
+		},
+		/**
+		 * The callback for login.
+		 *
+		 * @param  {Object} response The response from the server.
+		 */
+		handleResponse: function (response) {
+			if (response.status == 1) {
+				this.$root.createSession(this.username, this.password);
+			} else {
+				this.message = response.message;
+				this.signingIn = false;
 			}
 		}
 	},

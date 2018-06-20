@@ -22,7 +22,11 @@ export default {
 					}
 				});
 			},
-
+			/**
+			 * Checks the credentials saved in cookie.
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
 			testCredentials: function (callback) {
 				let credentials = this.HTTP.defaults.auth;
 				this.HTTP.post('login', {
@@ -50,23 +54,23 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			login: function (username, password, callback) {
-				this.HTTP.post('login', { username: username, password: password }).then(
-					response => {
-						if (response.data.status == 1) {
-							this.HTTP = axios.create({
-								baseURL: process.env.API_URL,
-								auth: {
-									username: username,
-									password: password
-								}
-							});
-						}
-
-						if (typeof callback === 'function') callback(response.data);
+				this.HTTP.post('login', {
+					username: username,
+					password: password
+				}).then(response => {
+					if (response.data.status == 1) {
+						this.HTTP = axios.create({
+							baseURL: process.env.API_URL,
+							auth: {
+								username: username,
+								password: password
+							}
+						});
 					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**

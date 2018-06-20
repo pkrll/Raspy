@@ -67,7 +67,11 @@ new Vue({
 			this.$APIManager.clearCredentials();
 			this.isLoggedIn = false;
 		},
-
+		/**
+		 * Callback for testCredentials.
+		 *
+		 * @param  {Object} response The response from the server.
+		 */
 		didTestCredentials: function (response) {
 			if (response.status == 1) {
 				this.isLoggedIn = true;
