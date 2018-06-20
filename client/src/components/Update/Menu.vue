@@ -37,8 +37,8 @@ export default {
 	position: 								fixed;
 	color: 										#2c3e50;
 	font-family: 							'Avenir', Helvetica, Arial, sans-serif;
-	height: 									100vh;
 	margin-top: 							0;
+	height: 									100%;
 	text-align: 							center;
 	width: 										100%;
 	-moz-osx-font-smoothing: 	grayscale;
@@ -57,7 +57,7 @@ export default {
 	width: 					100%;
 }
 
-#updateMenu div {
+#updateMenu > div {
 	align-items: 			center;
 	display: 					flex;
 	height: 					inherit;
@@ -73,13 +73,15 @@ export default {
 }
 
 #updateMenu div.grouped {
-	justify-content: space-around;
+	align-items: 			stretch;
 }
 
 #updateMenu div.grouped > div {
 	display: 				flex;
+	flex: 					1;
 	flex-direction: column;
-	height: 				100%;
+	align-items: 		center;
+	justify-content: center;
 	width: 					100%;
 }
 
@@ -90,4 +92,25 @@ export default {
 #updateMenu> div:last-child {
 	border: none;
 }
+
+@media only screen and (min-device-width: 320px)
+									 and (max-device-width: 736px)
+									 and (orientation: portrait) {
+
+	#updateMenu {
+		font-size: 8vw;
+	}
+
+}
+
+@media only screen and (min-device-width: 736px)
+									 and (max-device-width: 1024px)
+									 and (orientation: portrait) {
+
+	#updateMenu {
+		font-size: 8vw
+	}
+
+}
+
 </style>

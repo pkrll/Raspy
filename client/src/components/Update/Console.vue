@@ -35,7 +35,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+body.body {
+	background: #000;
+}
 
 * {
 	-moz-box-sizing: border-box;
@@ -94,6 +98,42 @@ export default {
 
 #consoleBottomPanel div i {
   font-size: 3vw;
+}
+
+@media only screen and (min-width: 320px)
+									 and (max-width: 736px)
+									 and (orientation: portrait) {
+
+	#console {
+		font-size: 6vw;
+	}
+
+	#consoleBottomPanel div {
+		font-size: 4vw;
+	}
+
+	#consoleBottomPanel div i {
+		font-size: 5vw;
+	}
+
+}
+
+@media only screen and (min-device-width: 736px)
+									 and (max-device-width: 1024px)
+									 and (orientation: portrait) {
+
+	#console {
+		font-size: 6vw;
+	}
+
+	#consoleBottomPanel div {
+		font-size: 4vw;
+	}
+
+	#consoleBottomPanel div i {
+		font-size: 5vw;
+	}
+
 }
 
 </style>

@@ -1,14 +1,16 @@
 <template>
 	<section>
-		<transition name="slide">
+		<transition name="slide-menu">
 			<component 	v-bind:is="overlayComponent"
 										v-on:call="call"
 										v-on:showConsole="showConsole"></component>
 		</transition>
-		<component 	v-bind:is="bottomComponent"
-									v-on:showConsole="showConsole"
-									v-on:clearConsole="clearConsole"
-								v-bind:logs="logs"></component>
+		<transition name="slide-console">
+			<component 	v-bind:is="bottomComponent"
+										v-on:showConsole="showConsole"
+										v-on:clearConsole="clearConsole"
+										v-bind:logs="logs" v-if="menuHidden"></component>
+		</transition>
 	</section>
 </template>
 
@@ -22,6 +24,7 @@ export default {
 	data() {
 		return {
 			logs: [],
+			menuHidden: false,
 			overlayComponent: 'Menu',
 			bottomComponent: 'Console'
 		}
@@ -63,6 +66,7 @@ export default {
 		 */
 		showConsole: function (value) {
 			this.overlayComponent = (value) ? '' : 'Menu';
+			this.menuHidden = value;
 		},
 		/**
 		 * Invoked when the server sends the console history.
@@ -92,44 +96,39 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 body {
 	background: #000;
 }
 
-.slide-leave-active,
-.slide-enter-active {
+.slide-menu-leave-active,
+.slide-menu-enter-active {
 	transition: 0.5s;
 }
-.slide-enter {
+
+.slide-console-enter-active {
+	transition: 0s;
+}
+
+.slide-console-leave-active {
+	transition: 1s;
+}
+
+.slide-menu-enter {
 	transform: translate(0%, 100%);
 }
-.slide-leave-to {
+
+.slide-menu-leave-to {
 	transform: translate(0%, 100%);
 }
 
-@media only screen and (min-device-width: 320px)
-									 and (max-device-width: 736px)
-									 and (orientation: portrait) {
-
-	#console {
-		font-size: 6vw;
-	}
-
-	#updateMenu {
-		font-size: 8vw;
-	}
-
-	#consoleBottomPanel div {
-		font-size: 4vw;
-	}
-
-	#consoleBottomPanel div i {
-		font-size: 5vw;
-	}
-
+.slide-console-enter {
+	transform: translate(0%, 0%);
 }
 
+.slide-console-leave-to {
+	transform: translate(0%, 0%);
+}
 
 </style>
