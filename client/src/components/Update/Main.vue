@@ -1,9 +1,14 @@
 <template>
 	<section>
 		<transition name="slide">
-			<component 	v-bind:is="overlayComponent" v-on:showConsole="showConsole"></component>
+			<component 	v-bind:is="overlayComponent"
+										v-on:call="call"
+										v-on:showConsole="showConsole"></component>
 		</transition>
-		<component 	v-bind:is="bottomComponent" v-bind:logs="logs" v-on:showConsole="showConsole"></component>
+		<component 	v-bind:is="bottomComponent"
+									v-on:showConsole="showConsole"
+									v-on:clearConsole="clearConsole"
+								v-bind:logs="logs"></component>
 	</section>
 </template>
 
@@ -21,28 +26,68 @@ export default {
 			bottomComponent: 'Console'
 		}
 	},
-	sockets: {
-		connect() {
-			console.log("Is connect");
-		}
-	},
 	methods: {
+		/**
+		 * Requests the server to perform a specific command.
+		 *
+		 * @param  String command 	The command to perform
+		 */
+		call: function (command) {
+			this.logs.push("$ " +command);
+
+			switch (command) {
+				case 'update':
+					this.$APIManager.updateRaspy(this.didReceiveResponse);
+					this.showConsole(true);
+					break;
+				case 'restart':
+					this.$APIManager.restartRaspy(this.didReceiveResponse);
+					break;
+				case 'stop':
+					this.$APIManager.stopRaspy(this.didReceiveResponse);
+					break;
+				default:
+					break;
+			}
+		},
+		/**
+		 * Clears the console.
+		 */
+		clearConsole: function () {
+			this.logs = [];
+		},
+		/**
+		 * Toggles the console.
+		 *
+		 * @param  Boolean value 	True to show the console, otherwise false.
+		 */
 		showConsole: function (value) {
 			this.overlayComponent = (value) ? '' : 'Menu';
 		},
-		didReceiveLogDump: function (data) {
-			for (let log of data.data) {
+		/**
+		 * Invoked when the server sends the console history.
+		 *
+		 * @param  {Object} data 	The console log from the server.
+		 */
+		didReceiveConsoleHistory: function (data) {
+			for (let log of data.history) {
 				this.logs.push(log.message);
 			}
 		},
-		didReceiveLog: function (data) {
-			this.logs.push(data.data);
+		/**
+		 * Invoked when the server sends a respond to a command.
+		 *
+		 * @param  {Object} response 	The response.
+		 */
+		didReceiveResponse: function (response) {
+			this.logs.push(response.data);
 		}
 	},
-	created() {
-		this.$socket.on('updater/log/dump', this.didReceiveLogDump);
-		this.$socket.on('updater/log', this.didReceiveLog);
+	created: function() {
 		this.$root.fullScreen = true;
+	},
+	mounted: function () {
+		this.$APIManager.loadConsoleHistory(this.didReceiveConsoleHistory);
 	}
 }
 </script>
@@ -65,8 +110,8 @@ body {
 }
 
 @media only screen and (min-device-width: 320px)
-and (max-device-width: 736px)
-and (orientation: portrait) {
+									 and (max-device-width: 736px)
+									 and (orientation: portrait) {
 
 	#console {
 		font-size: 6vw;

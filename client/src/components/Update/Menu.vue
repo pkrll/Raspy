@@ -4,15 +4,19 @@
 			<div v-on:click="$emit('showConsole', true)">
 				<span><font-awesome-icon icon="terminal"/><br/>Show Console</span>
 			</div>
-			<div onclick="call('update')">
+			<div v-on:click="$emit('call', 'update')">
 				<span><font-awesome-icon icon="cloud-download-alt"/><br/>Update</span>
 			</div>
-			<div class="grouped" onclick="call('update')" style="">
-				<div onclick="call('restart')"><span><font-awesome-icon icon="redo-alt"/><br/>Restart</span></div>
-				<div onclick="call('stop')"><span><font-awesome-icon icon="plug"/><br/>Stop</span></div>
+			<div class="grouped">
+				<div v-on:click="$emit('call', 'restart')">
+					<span><font-awesome-icon icon="redo-alt"/><br/>Restart</span>
+				</div>
+				<div v-on:click="$emit('call', 'stop')">
+					<span><font-awesome-icon icon="plug"/><br/>Stop</span>
+				</div>
 			</div>
-			<div onclick="shutdown()">
-				<span><font-awesome-icon icon="power-off"/><br/>Shutdown Updater</span>
+			<div v-on:click="$emit('call', 'shutdown')">
+				<span><font-awesome-icon icon="power-off"/><br/>Exit Updater</span>
 			</div>
 		</div>
 	</section>
@@ -24,12 +28,7 @@ import { terminal, clouddownloadalt, poweroff, redoalt, plug } from '@fortawesom
 
 export default {
 	name: 'UpdateMenu',
-	components: { FontAwesomeIcon },
-	data() {
-		return {
-			show: false
-		}
-	},
+	components: { FontAwesomeIcon }
 }
 </script>
 

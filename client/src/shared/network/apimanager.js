@@ -191,14 +191,59 @@ export default {
 				});
 			},
 			/**
-			 * Requests the updater to launch.
+			 * Updates the software
 			 *
-			 * Calls the /system/launchUpdater endpoint
+			 * Calls the /system/update endpoint
 			 *
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			launchUpdater: function (callback) {
-				this.HTTP.get('system/launchUpdater').then(
+			updateRaspy: function (callback) {
+				this.HTTP.get('system/update').then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("Error: ");
+					console.log(e);
+				});
+			},
+			/**
+			 * Restarts the software
+			 *
+			 * Calls the /system/restart endpoint
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			restartRaspy: function (callback) {
+				this.HTTP.get('system/restart').then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("Error: ");
+					console.log(e);
+				});
+			},
+			/**
+			 * Stops the software
+			 *
+			 * Calls the /system/stop endpoint
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			stopRaspy: function (callback) {
+				this.HTTP.get('system/stop').then(
+					response => {
+						if (typeof callback === 'function') callback(response.data);
+					}
+				).catch(e => {
+					console.log("Error: ");
+					console.log(e);
+				});
+			},
+
+			loadConsoleHistory: function (callback) {
+				this.HTTP.get('system/logs/update').then(
 					response => {
 						if (typeof callback === 'function') callback(response.data);
 					}
@@ -207,7 +252,6 @@ export default {
 					console.log(e);
 				});
 			}
-
 		}
 	}
 }

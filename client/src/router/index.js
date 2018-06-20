@@ -124,9 +124,9 @@ export default new Router({
 				requiresAuth: true
 			},
 			beforeEnter (to, from, next) {
-				if (!Vue.prototype.$socket) {
-					Vue.use(VueSocketIO, 'http://localhost:5001');
-				}
+				// if (!Vue.prototype.$socket) {
+				// 	// Vue.use(VueSocketIO, 'http://localhost:5001');
+				// }
 				next()
 			}
 		}

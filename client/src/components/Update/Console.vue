@@ -1,9 +1,9 @@
 <template>
 	<div id="console">
 		<div id="output">
-			<pre>Running: Raspy Updater version 0.0.1...</pre>
-			<pre v-for="log in consolelogs">{{log}}</pre>
-			<pre id="cursor">$ <span class="blinking-cursor">_</span></pre>
+			<pre>Running: Raspy 0.1.1</pre>
+			<pre v-for="log in logs">{{log}}</pre>
+			<pre id="cursor">$ _</pre>
 		</div>
 		<div id="consoleBottomPanel">
 			<div v-on:click="showConsole">
@@ -24,37 +24,18 @@ export default {
 	name: 'UpdateConsole',
 	props: ['logs'],
 	components: { FontAwesomeIcon },
-	watch: {
-		logs: function (newValue, oldValue) {
-			this.consolelogs = newValue;
-		}
-	},
 	methods: {
 		clearConsole: function() {
-			this.consolelogs = [];
+			this.$emit('clearConsole');
 		},
 		showConsole: function() {
 			this.$emit('showConsole', false);
-		}
-	},
-	data() {
-		return {
-			consolelogs: []
 		}
 	}
 }
 </script>
 
 <style scoped>
-
-.slide-enter {
-  transform: translate(0%, -100%);
-}
-
-.slide-leave-to {
-  transform: translate(0%, -100%);
-	overflow-y: hidden;
-}
 
 * {
 	-moz-box-sizing: border-box;
