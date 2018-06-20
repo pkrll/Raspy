@@ -30,7 +30,8 @@ new Vue({
 	components: { App },
   template: '<App/>',
 	data: {
-		isLoggedIn: false
+		isLoggedIn: false,
+		fullScreen: false
 	},
 	created: function () {
 		let username = this.$CookieManager.loadCookie('username');

@@ -1,0 +1,18 @@
+{
+  "apps" : [{
+    "name"   : "Raspy",
+    "cwd" : "server",
+    "script" : "server.js",
+    "env_development": {
+      "NODE_ENV": "development"
+    },
+    "watch": ["server"],
+    "ignore_watch" : ["node_modules", "client/node_modules", "server/node_modules"],
+    "watch_options": {
+      "followSymlinks": false
+    },
+    "env" : {
+      "NODE_ENV": "production"
+    }
+  }]
+}

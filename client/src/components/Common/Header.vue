@@ -1,9 +1,5 @@
 <template>
-
 	<header>
-		<div class="header">
-			<img src="../../assets/img/logo.svg" style="height:5vw;"> Raspy {{this.$Raspy.version}}
-		</div>
 		<nav class="menu">
 				<router-link v-bind:to="this.browsePath()" v-bind:class="{ active: this.$route.meta.tab == 1 }">
 					<font-awesome-icon icon="hdd"/>
@@ -46,6 +42,7 @@ export default {
 <style scoped>
 
 .header {
+	font-family: 'Avenir';
 	font-size: 	5vw;
 	padding: 		5px 10px 5px 10px;
 	text-align: right;

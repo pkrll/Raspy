@@ -1,0 +1,24 @@
+{
+  "name": "raspy",
+  "version": "0.2.0",
+  "description": "Raspy lets you control your Raspberry Pi.",
+  "author": "Ardalan Samimi <ardalan@saturnfive.se>",
+  "license": "AGPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pkrll/raspy"
+  },
+  "scripts": {
+    "install": "npm run install_client && npm run install_server",
+    "install_client": "cd client && npm install",
+    "install_server": "cd server && npm install",
+    "dev_server": "cd server && npm run dev",
+    "dev_client": "cd client && npm run dev",
+    "setup": "cd server && npm run setup",
+    "build": "cd client && npm run build",
+    "patch": "node build/increment-version.js --version=patch --skip-build",
+    "minor": "node build/increment-version.js --version=minor --skip-build --reset-patch",
+    "major": "node build/increment-version.js --version=major --skip-build --reset-minor"
+  }
+}
