@@ -58,6 +58,21 @@ module.exports = {
     );
   },
 
+  updateRaspy: function () {
+    return new Promise(
+      (resolve, reject) => {
+        const { exec} = require('child_process');
+        exec('cd ../ && make update', (error, stdout, stderr) => {
+          if (error) {
+            reject(error)
+          } else {
+            resolve({status: 1, data: stdout});
+          }
+        });
+      }
+    );
+  },
+
   launchUpdater: function () {
     return new Promise(
       (resolve, reject) => {

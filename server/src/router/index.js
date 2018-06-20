@@ -70,8 +70,11 @@ module.exports = function (app) {
   router.route('/system/checkForUpdate')
     .get(systemController.checkForUpdate);
 
-  router.route('/system/launchUpdater')
-    .get(systemController.launchUpdater);
+  router.route('/system/update')
+    .get(systemController.updateRaspy);
+
+  router.route('/system/logs/update')
+    .get(systemController.loadConsoleHistory);
 
   // Register the routes
   app.use(express.static(app.get('dist')));
