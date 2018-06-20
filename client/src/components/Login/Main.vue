@@ -55,7 +55,7 @@ export default {
 			if (response.status == 1) {
 				this.$root.createSession(this.username, this.password);
 			} else {
-				this.message = response.message;
+				this.message = (response.message) ? response.message : response.error;
 				this.signingIn = false;
 			}
 		}

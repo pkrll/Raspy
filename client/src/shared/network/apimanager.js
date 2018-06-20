@@ -6,7 +6,7 @@ export default {
 
 		Vue.prototype.$APIManager = {
 
-			HTTP: axios.create({ baseURL: process.env.API_URL }),
+			HTTP: axios.create({ baseURL: process.env.API_URL, timeout: 60000 }),
 			/**
 			 * Sets the credentials for the user.
 			 *
@@ -16,6 +16,7 @@ export default {
 			setCredentials: function (username, password, callback) {
 				this.HTTP = axios.create({
 					baseURL: process.env.API_URL,
+					timeout: 60000,
 					auth: {
 						username: username,
 						password: password
@@ -42,7 +43,7 @@ export default {
 			 * Removes the credentials of the user from the axios object.
 			 */
 			clearCredentials: function () {
-				this.HTTP = axios.create({ baseURL: process.env.API_URL });
+				this.HTTP = axios.create({ baseURL: process.env.API_URL, timeout: 60000 });
 			},
 			/**
 			 * Logins to the server.
@@ -61,6 +62,7 @@ export default {
 					if (response.data.status == 1) {
 						this.HTTP = axios.create({
 							baseURL: process.env.API_URL,
+							timeout: 60000,
 							auth: {
 								username: username,
 								password: password
@@ -282,9 +284,17 @@ function handleError(error) {
 			case 404:
 				response.error = "Server not found."
 				break;
+			case 401:
+				response.error = "Unauthorized request."
+				break;
+			case 408:
+				response.error = "Request timed out."
+				break;
 			default:
 				break;
 		}
+	} else if (error.message) {
+		response.error = error.message;
 	}
 
 	return response;
