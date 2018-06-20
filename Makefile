@@ -53,6 +53,9 @@ devclient:
 updater:
 	cd updater && pm2 start process.json
 
+update:
+	git pull
+
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),client server))
 	npm run major service=$(SERVICE)
