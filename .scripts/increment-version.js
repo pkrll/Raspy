@@ -60,15 +60,15 @@ for (let index in argv) {
       else if (value[1] == 'minor') semindex = 1;
       else if (value[1] == 'patch') semindex = 2;
       else if (value[1] == 'build') semindex = -1;
-    } else if (value == '--skip-build') {
-			incrBuild = false;
-		} else if (value == '--reset-build') {
-			rsetBuild = true;
-		} else if (value == '--reset-patch') {
-			rsetPatch = true;
-		} else if (value == '--reset-minor') {
-			rsetMinor = true;
-		}
+    }
+  } else if (value == '--skip-build') {
+    incrBuild = false;
+  } else if (value == '--reset-build') {
+    rsetBuild = true;
+  } else if (value == '--reset-patch') {
+    rsetPatch = true;
+  } else if (value == '--reset-minor') {
+    rsetMinor = true;
   }
 }
 
@@ -89,7 +89,8 @@ function incrementBuild(filePath) {
   		if (semindex >= 0) {
   			if (semindex != 2 && rsetPatch) {
   				semver[2] = 0;
-  			} else if (semindex != 1 && rsetMinor) {
+  			}
+        if (semindex != 1 && rsetMinor) {
   				semver[1] = 0;
   			}
 
@@ -98,7 +99,7 @@ function incrementBuild(filePath) {
   			version[0] = semver.join('.');
   		}
 
-  		if (incrBuild) {
+  		if (incrBuild && version.length == 2) {
   			terminal.print(filePath + ": Incrementing build number ...", terminal.colors.magenta, terminal.styles.dim);
   			version[1] = (parseInt("0x"+version[1]) + 1).toString(16);
   		} else if (rsetBuild) {
