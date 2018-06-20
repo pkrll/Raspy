@@ -17,8 +17,8 @@
     "dev_client": "cd client && npm run dev",
     "setup": "cd server && npm run setup",
     "build": "cd client && npm run build",
-    "patch": "node build/increment-version.js --version=patch --skip-build",
-    "minor": "node build/increment-version.js --version=minor --skip-build --reset-patch",
-    "major": "node build/increment-version.js --version=major --skip-build --reset-minor"
+    "patch": "node .scripts/increment-version.js --version=patch --skip-build",
+    "minor": "node .scripts/increment-version.js --version=minor --skip-build --reset-patch",
+    "major": "node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch"
   }
 }
