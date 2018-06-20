@@ -4,9 +4,9 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "patch": "node build/increment-version.js --version=patch --skip-build",
-    "minor": "node build/increment-version.js --version=minor --skip-build --reset-patch",
-    "major": "node build/increment-version.js --version=major --skip-build --reset-minor",
+    "patch": "cd ../ && node .scripts/increment-version.js service=server --version=patch --skip-build",
+    "minor": "cd ../ && node .scripts/increment-version.js service=server --version=minor --skip-build --reset-patch",
+    "major": "cd ../ && node .scripts/increment-version.js service=server --version=major --skip-build --reset-minor --reset-patch",
     "setup": "node build/setup.js"
   },
   "dependencies": {
