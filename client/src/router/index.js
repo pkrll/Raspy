@@ -122,12 +122,6 @@ export default new Router({
 			meta: {
 				tab: 3,
 				requiresAuth: true
-			},
-			beforeEnter (to, from, next) {
-				// if (!Vue.prototype.$socket) {
-				// 	// Vue.use(VueSocketIO, 'http://localhost:5001');
-				// }
-				next()
 			}
 		}
   ]

@@ -45,9 +45,11 @@ export default {
 					break;
 				case 'restart':
 					this.$APIManager.restartRaspy(this.didReceiveResponse);
+					this.showConsole(true);
 					break;
 				case 'stop':
 					this.$APIManager.stopRaspy(this.didReceiveResponse);
+					this.showConsole(true);
 					break;
 				default:
 					break;
@@ -73,9 +75,14 @@ export default {
 		 *
 		 * @param  {Object} data 	The console log from the server.
 		 */
-		didReceiveConsoleHistory: function (data) {
-			for (let log of data.history) {
-				this.logs.push(log.message);
+		didReceiveConsoleHistory: function (response) {
+			if (response.status == 1) {
+				let history = response.history;
+				for (let log of history) {
+					this.logs.push(log.message);
+				}
+			} else {
+				this.logs.push("An error occured. Could not retrieve logs.");
 			}
 		},
 		/**
@@ -84,7 +91,14 @@ export default {
 		 * @param  {Object} response 	The response.
 		 */
 		didReceiveResponse: function (response) {
-			this.logs.push(response.data);
+			let message = "";
+			if (response.status == 1) {
+				message = response.data;
+			} else {
+				message = response.error;
+			}
+
+			this.logs.push(message);
 		}
 	},
 	created: function() {
@@ -99,6 +113,10 @@ export default {
 <style scoped>
 
 body {
+	background: #000;
+}
+
+section {
 	background: #000;
 }
 
