@@ -1,10 +1,10 @@
 <template>
-	<transition name="slide" v-on:after-enter="afterEnter">
-		<component 	v-bind:is="component"
-		v-bind:logs="consolelogs"
-		v-on:toggleConsole="toggleConsole">
-	</component>
-</transition>
+	<section>
+		<transition name="slide">
+			<component 	v-bind:is="overlayComponent" v-on:showConsole="showConsole"></component>
+		</transition>
+		<component 	v-bind:is="bottomComponent" v-bind:logs="logs" v-on:showConsole="showConsole"></component>
+	</section>
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
 	data() {
 		return {
 			logs: [],
-			consolelogs: [],
-			component: 'Menu'
+			overlayComponent: 'Menu',
+			bottomComponent: 'Console'
 		}
 	},
 	sockets: {
@@ -27,11 +27,8 @@ export default {
 		}
 	},
 	methods: {
-		afterEnter: function (el) {
-			this.consolelogs = this.logs;
-		},
-		toggleConsole: function (value) {
-			this.component = (value) ? 'Console' : 'Menu';
+		showConsole: function (value) {
+			this.overlayComponent = (value) ? '' : 'Menu';
 		},
 		didReceiveLogDump: function (data) {
 			for (let log of data.data) {
@@ -58,7 +55,7 @@ body {
 
 .slide-leave-active,
 .slide-enter-active {
-	transition: 1s;
+	transition: 0.5s;
 }
 .slide-enter {
 	transform: translate(0%, 100%);

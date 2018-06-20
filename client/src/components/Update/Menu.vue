@@ -1,7 +1,7 @@
 <template>
 	<section class="container">
 		<div id="updateMenu">
-			<div v-on:click="$emit('toggleConsole', true)">
+			<div v-on:click="$emit('showConsole', true)">
 				<span><font-awesome-icon icon="terminal"/><br/>Show Console</span>
 			</div>
 			<div onclick="call('update')">
@@ -34,14 +34,8 @@ export default {
 </script>
 
 <style scoped>
-* {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
 .container {
-	position: absolute;
+	position: 								fixed;
 	color: 										#2c3e50;
 	font-family: 							'Avenir', Helvetica, Arial, sans-serif;
 	height: 									100vh;
@@ -50,6 +44,7 @@ export default {
 	width: 										100%;
 	-moz-osx-font-smoothing: 	grayscale;
 	-webkit-font-smoothing:		antialiased;
+	z-index: 99;
 }
 
 #updateMenu {

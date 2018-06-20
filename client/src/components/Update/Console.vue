@@ -2,14 +2,14 @@
 	<div id="console">
 		<div id="output">
 			<pre>Running: Raspy Updater version 0.0.1...</pre>
-			<pre v-for="log in logs">{{log}}</pre>
+			<pre v-for="log in consolelogs">{{log}}</pre>
 			<pre id="cursor">$ <span class="blinking-cursor">_</span></pre>
 		</div>
 		<div id="consoleBottomPanel">
-			<div v-on:click="clearConsole">
+			<div v-on:click="showConsole">
 				<span><font-awesome-icon icon="caret-square-up"/><br/>Show menu</span>
 			</div>
-			<div onclick="clearConsole()">
+			<div v-on:click="clearConsole">
 				<span><font-awesome-icon icon="minus-square"/><br/>Clear console</span>
 			</div>
 		</div>
@@ -26,13 +26,20 @@ export default {
 	components: { FontAwesomeIcon },
 	watch: {
 		logs: function (newValue, oldValue) {
-			let output = this.$el.querySelector("#output");
-			output.scrollTop = output.scrollHeight;
+			this.consolelogs = newValue;
 		}
 	},
 	methods: {
 		clearConsole: function() {
-			this.$emit('toggleConsole', false);
+			this.consolelogs = [];
+		},
+		showConsole: function() {
+			this.$emit('showConsole', false);
+		}
+	},
+	data() {
+		return {
+			consolelogs: []
 		}
 	}
 }
@@ -46,7 +53,15 @@ export default {
 
 .slide-leave-to {
   transform: translate(0%, -100%);
+	overflow-y: hidden;
 }
+
+* {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 
 #console {
   background: #000;
@@ -57,11 +72,11 @@ export default {
   font-size: 2vw;
   padding: 30px 20px  20px 20px;
   height: 100%;
+	overflow: hidden;
 }
 
 #output {
-	padding-bottom: 50px;
-  overflow: auto;
+	padding-bottom: 55px;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
