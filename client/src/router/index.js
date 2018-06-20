@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueSocketIO from 'vue-socket.io';
 import Main from '@/components/Main'
 import Browser from '@/components/Browser/Main'
 import File from '@/components/Browser/File'
@@ -10,6 +11,7 @@ import SettingsDashboard from '@/components/Settings/Dashboard'
 import SettingsAccount from '@/components/Settings/Account'
 import SettingsGeneral from '@/components/Settings/General'
 import SettingsUpdate from '@/components/Settings/Update'
+import Update from '@/components/Update/Main'
 
 Vue.use(Router)
 
@@ -111,6 +113,21 @@ export default new Router({
 			meta: {
 				tab: 3,
 				requiresAuth: true
+			}
+		},
+		{
+			path: '/update',
+			name: 'Update',
+			component: Update,
+			meta: {
+				tab: 3,
+				requiresAuth: true
+			},
+			beforeEnter (to, from, next) {
+				if (!Vue.prototype.$socket) {
+					Vue.use(VueSocketIO, 'http://localhost:5001');
+				}
+				next()
 			}
 		}
   ]

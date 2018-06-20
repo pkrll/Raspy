@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-		<app-header v-if="this.$root.isLoggedIn"></app-header>
+		<app-header v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-header>
     <router-view class="container"/>
-		<app-footer></app-footer>
+		<app-footer v-if="!this.$root.fullScreen"></app-footer>
   </div>
 </template>
 
