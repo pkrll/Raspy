@@ -25,10 +25,13 @@ else
 endif
 
 start:
-	cd server && pm2 start process.json
+	pm2 start process.json --watch
+
+restart:
+	pm2 restart process.json
 
 stop:
-	cd server && pm2 stop process.json
+	pm2 stop process.json --watch 0
 
 server:
 ifeq ($(ENV), dev)
@@ -65,7 +68,7 @@ else ifeq ($(SERVICE), app)
 	npm run major service=$(SERVICE)
 	git add package.json
 	git commit -S -m "Incremented major version"
-else ifeq ($(SERVICE), app)
+else ifeq ($(SERVICE), all)
 	npm run major
 	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented major version"
@@ -83,7 +86,7 @@ else ifeq ($(SERVICE), app)
 	npm run minor service=$(SERVICE)
 	git add package.json
 	git commit -S -m "Incremented minor version"
-else ifeq ($(SERVICE), app)
+else ifeq ($(SERVICE), all)
 	npm run minor
 	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented minor version"
@@ -101,7 +104,7 @@ else ifeq ($(SERVICE), app)
 	npm run patch service=$(SERVICE)
 	git add package.json
 	git commit -S -m "Incremented patch version"
-else ifeq ($(SERVICE), app)
+else ifeq ($(SERVICE), all)
 	npm run patch
 	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented patch version"
