@@ -3,7 +3,6 @@
   <img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
 </p>
 <p align="center">
-
   <a href="https://github.com/pkrll/Raspy/releases"><img src="https://img.shields.io/github/release/pkrll/raspy/all.svg?style=for-the-badge"></a>
 <a href="https://github.com/prkll/Raspy/commits/master"><img src="https://img.shields.io/github/last-commit/pkrll/Raspy.svg?style=for-the-badge"></a>
 <a href="https://github.com/pkrll/Raspy/issues"><img src="https://img.shields.io/github/issues/pkrll/Raspy.svg?style=for-the-badge"></a>
