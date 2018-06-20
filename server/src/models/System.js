@@ -41,7 +41,7 @@ module.exports = {
               let compare = require('compare-versions');
               let response = { heading: '', version: version, isNewer: false, changes: '' }
 
-              if (compare(json.version, version) == 0) {
+              if (compare(json.version, version) > 0) {
                 response.version = json.version;
                 response.isNewer = true;
                 response.changes = json.changes;
@@ -61,12 +61,12 @@ module.exports = {
   updateRaspy: function () {
     return new Promise(
       (resolve, reject) => {
-        const { exec} = require('child_process');
+        const { exec } = require('child_process');
         exec('cd ../ && make update', (error, stdout, stderr) => {
           if (error) {
-            reject(error)
+            reject(stderr)
           } else {
-            resolve({status: 1, data: stdout});
+            resolve(stdout);
           }
         });
       }
@@ -79,9 +79,39 @@ module.exports = {
         const { exec } = require('child_process');
         exec('cd ../ && make updater', (error, stdout, stderr) => {
           if (error) {
-            reject(error);
+            reject(stderr);
           } else {
-            resolve({status: 1, data: stdout});
+            resolve(stdout);
+          }
+        });
+      }
+    );
+  },
+
+  stopRaspy: function () {
+    return new Promise(
+      (resolve, reject) => {
+        const { exec } = require('child_process');
+        exec('cd ../ && make stop', (error, stdout, stderr) => {
+          if (error) {
+            reject(stderr);
+          } else {
+            resolve(stdout);
+          }
+        });
+      }
+    );
+  },
+
+  restartRaspy: function () {
+    return new Promise(
+      (resolve, reject) => {
+        const { exec } = require('child_process');
+        exec('cd ../ && make restart', (error, stdout, stderr) => {
+          if (error) {
+            reject(stderr);
+          } else {
+            resolve(stdout);
           }
         });
       }
@@ -94,9 +124,7 @@ function getLatestRelease(callback, errback) {
   const remote = require('remote-json');
   remote.https = require('follow-redirects').https;
   remote('https://api.github.com/repos/pkrll/Raspy/releases', {
-    headers: {
-      'User-Agent': 'Raspy'
-    }
+    headers: { 'User-Agent': 'Raspy' }
   }).get(function (err, res, body) {
     if (err) {
       errback(err);

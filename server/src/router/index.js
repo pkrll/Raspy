@@ -73,6 +73,12 @@ module.exports = function (app) {
   router.route('/system/update')
     .get(systemController.updateRaspy);
 
+  router.route('/system/stop')
+    .get(systemController.stopRaspy);
+
+  router.route('/system/restart')
+    .get(systemController.restartRaspy);
+
   router.route('/system/logs/update')
     .get(systemController.loadConsoleHistory);
 

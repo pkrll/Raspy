@@ -26,12 +26,40 @@ module.exports = {
   },
 
   updateRaspy: function (req, res) {
+    logger.write("update", "$ update");
     system.updateRaspy().then(function (response) {
-      logger.write("update", "$ update");
-      logger.write("update", response.data);
-      res.json(response);
+      logger.write("update", response);
+      res.json({status: 1, data: response});
     }).catch(function (error) {
+      logger.write("update", "======== Error: updateRaspy ========");
+      logger.write("update", error);
       console.log("======== Error: updateRaspy ========");
+      console.log(error)
+      res.json({status: 0, error: error});
+    });
+  },
+
+  stopRaspy: function (req, res) {
+    logger.write("update", "$ stop");
+    system.stopRaspy().then(function (response) {
+      logger.write("update", "Stopping Raspy...");
+      logger.write("update", response);
+      res.json({status: 1, data: response});
+    }).catch(function (error) {
+      logger.write("update", error);
+      console.log(error)
+      res.json({status: 0, error: error});
+    });
+  },
+
+  restartRaspy: function (req, res) {
+    logger.write("update", "$ restart");
+    system.restartRaspy().then(function (response) {
+      logger.write("update", "Restarting Raspy...");
+      logger.write("update", response);
+      res.json({status: 1, data: response});
+    }).catch(function (error) {
+      logger.write("update", error);
       console.log(error)
       res.json({status: 0, error: error});
     });
@@ -39,7 +67,7 @@ module.exports = {
 
   launchUpdater: function (req, res) {
     system.launchUpdater().then(function (response) {
-      res.json(response);
+      res.json({status: 1, data: response});
     }).catch(function (error) {
       console.log("======== Error: launchUpdater ========");
       console.log(error)
