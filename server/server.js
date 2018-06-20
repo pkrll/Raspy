@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-const express     = require('express');
-const app         = express();
-const bodyParser  = require('body-parser');
-const path        = require('path');
-const config      = require('./config');
+const express = require('express');
+const parser  = require('body-parser');
+const path    = require('path');
+const config  = require('./config');
+const app     = express();
 
 // CONFIGURATIONS
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(parser.urlencoded({ extended: true }));
+app.use(parser.json());
 require('./src/config')(app, config, path.dirname(__dirname));
 
 // ROUTES

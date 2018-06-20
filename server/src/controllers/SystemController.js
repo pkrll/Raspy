@@ -31,9 +31,7 @@ module.exports = {
       logger.write("update", response);
       res.json({status: 1, data: response});
     }).catch(function (error) {
-      logger.write("update", "======== Error: updateRaspy ========");
       logger.write("update", error);
-      console.log("======== Error: updateRaspy ========");
       console.log(error)
       res.json({status: 0, error: error});
     });
@@ -69,7 +67,6 @@ module.exports = {
     system.launchUpdater().then(function (response) {
       res.json({status: 1, data: response});
     }).catch(function (error) {
-      console.log("======== Error: launchUpdater ========");
       console.log(error)
       res.json({status: 0, error: error});
     });

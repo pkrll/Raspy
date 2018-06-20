@@ -51,71 +51,25 @@ module.exports = {
               resolve(response);
             }
           });
-        }, function (err) {
-          reject(err);
-        });
+        }, reject);
       }
     );
   },
 
   updateRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make update', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr)
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
+    return executeCommand('cd ../ && make update');
   },
 
   launchUpdater: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make updater', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
+    return executeCommand('cd ../ && make updater');
   },
 
   stopRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make stop', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
+    return executeCommand('cd ../ && make stop');
   },
 
   restartRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make restart', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
+    return executeCommand('cd ../ && make restart');
   }
 
 };
@@ -142,4 +96,19 @@ function getLatestRelease(callback, errback) {
       }
     }
   });
+}
+
+function executeCommand(command, arguments = '') {
+  return new Promise(
+    (resolve, reject) => {
+      const { exec } = require('child_process');
+      exec(command, arguments, (error, stdout, stderr) => {
+        if (error) {
+          reject(stderr);
+        } else {
+          resolve(stdout);
+        }
+      });
+    }
+  );
 }
