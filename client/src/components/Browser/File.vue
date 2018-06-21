@@ -65,8 +65,8 @@ export default {
 			if (response.status == 1) {
 				this.middleComponent = 'FileDetails';
 			} else {
-				// this.text = response.error;
-				// this.middleComponent = 'Content';
+				this.text = response.error;
+				this.middleComponent = 'Content';
 			}
 		},
 		/**
