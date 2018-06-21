@@ -26,7 +26,7 @@ exports.getFile = function (req, res) {
 };
 
 exports.remove = function (req, res) {
-  let request = path.join('/', req.params.path, req.params[0] + "2354535345");
+  let request = path.join('/', req.params.path, req.params[0]);
   browser.remove(request).then(response => {
     res.json(response);
   }).catch(error => {
