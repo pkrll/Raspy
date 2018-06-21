@@ -84,13 +84,10 @@ export default {
 			 * @param  {Function} callback 	The callback to invoke on response.
 			 */
 			listDirectory: function (path, callback) {
-				this.HTTP.get('browser' + path).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('browser' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -290,6 +287,9 @@ function handleError(error) {
 			case 408:
 				response.error = "Request timed out."
 				break;
+			case 500:
+				response.error = handleInternalError(error.response.data.error);
+				break;
 			default:
 				break;
 		}
@@ -298,4 +298,23 @@ function handleError(error) {
 	}
 
 	return response;
+}
+
+function handleInternalError(error) {
+	switch (error.code) {
+		case "ENOENT":
+			return "No such file or directory: " + error.path;
+		case "ENOTDIR":
+			return "Not a directory";
+		case "ENOTEMPTY":
+			return "Directory not empty";
+		case "EEXIST":
+			return "File exists";
+		case "EACCES":
+			return "Permission denied";
+		default:
+			break;
+	}
+
+	return "Internal server error.";
 }
