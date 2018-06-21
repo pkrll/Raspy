@@ -1,0 +1,16 @@
+{
+  "name": "raspy-bootstrapper",
+  "version": "1.0.0",
+  "description": "Bootstrapper for Raspy",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon main.js",
+    "start:client": "cd web && npm start",
+    "start:server": "npm run dev",
+    "build": "node web/build/build.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-basic-auth": "^1.1.5"
+  }
+}
