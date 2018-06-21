@@ -99,13 +99,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			viewFile: function (path, callback) {
-				this.HTTP.get('file' + path).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('file' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -163,12 +160,11 @@ export default {
 					method: 'get',
 					responseType: 'blob',
 					auth: usrAuth
-				}).then(function (response) {
+				}).then(response => {
 					fileDownload(response.data, fileName);
-					if (typeof callback === 'function')  callback();
-				}).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+					if (typeof callback === 'function') callback({status: 1});
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -272,14 +268,19 @@ export default {
 }
 
 function handleError(error) {
-	let response = { status: 0, error: "Unknown error!" };
+	let response = {
+		status: 0,
+		error: { statusCode: 0, statusText: '' },
+		result: (error.result) ? error.result : {}
+	};
 
 	if (error.response) {
 		let status = error.response.status;
 
 		switch (status) {
 			case 404:
-				response.error = "Server not found."
+				response.error.statusText = error.response.statusText
+				response.error.statusCode = error.response.status
 				break;
 			case 401:
 				response.error = "Unauthorized request."

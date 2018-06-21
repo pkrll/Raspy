@@ -12,17 +12,16 @@ exports.browse = function (req, res) {
   browser.getDirectory(request).then(function (response) {
     res.json(response);
   }).catch(function (error) {
-    res.status(500).json({status: 0, error: error})
+    res.status(500).json(error)
   });
 };
 
 exports.getFile = function (req, res) {
   let request = path.join('/', req.params.path, req.params[0]);
-  browser.getFile(request, function (err, response) {
-    response.status = (err == null) ? 1 : 0;
-    response.error  = err;
-
+  browser.getFile(request).then(response => {
     res.json(response);
+  }).catch(error => {
+    res.status(500).json(error);
   });
 };
 
@@ -39,8 +38,16 @@ exports.remove = function (req, res) {
 
 exports.download = function (req, res) {
   let request = path.join('/', req.params.path, req.params[0]);
-  res.download(request, path.basename(request), (err) => {
-    if (err) console.log('Error: BrowserControllerdownload() > ' + err);
+  res.download(request, path.basename(request), (error) => {
+    if (error) {
+      if (error.statusCode) {
+        res.status(error.statusCode).json(error);
+      } else {
+        res.status(500).json(error);
+      }
+      console.log('Error: BrowserControllerdownload():');
+      console.log(error);
+    }
   });
 };
 

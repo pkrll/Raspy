@@ -43,7 +43,7 @@ export default new Router({
 			}
 		},
 		{
-			path: '/Browser/:path',
+			path: '/browser/file/:path',
 			name: 'File',
 			component: File,
 			props: true,

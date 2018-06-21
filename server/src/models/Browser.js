@@ -6,7 +6,7 @@ module.exports = {
     return new Promise(
       (resolve, reject) => {
         try {
-          let result = { status: 1, directories: [], files: [] };
+          let result = { directories: [], files: [] };
           fs.readdirSync(path).forEach(file => {
             let fullPath = pt.join(path, file);
 
@@ -25,38 +25,42 @@ module.exports = {
             }
           });
 
-          resolve(result);
+          resolve({status: 1, result: result});
         } catch (error) {
           console.log('ERROR: Browser.getDirectory() (line 37) > ' + error);
-          reject(error);
+          reject({status: 0, error: error, result: {}});
         }
       }
     );
   },
 
   getFile: function (path, callback) {
-    let result = {
-      filename: pt.basename(path),
-      metadata: {
-        size: 0,
-        accessed: 0,
-        created: 0,
-        modified: 0
+    return new Promise(
+      (resolve, reject) => {
+        let result = {
+          filename: pt.basename(path),
+          metadata: {
+            size: 0,
+            accessed: 0,
+            created: 0,
+            modified: 0
+          }
+        };
+
+        try {
+          let stats = fs.statSync(path);
+          result.metadata.size = stats.size;
+          result.metadata.accessed = stats.atimeMs;
+          result.metadata.created = stats.birthtimeMs;
+          result.metadata.modified = stats.mtimeMs;
+
+          resolve({status: 1, result: result});
+        } catch (error) {
+          console.log('ERROR: Browser.getFile() (line 58) > ' + error);
+          reject({status: 0, error: error, result: result});
+        }
       }
-    };
-
-    try {
-      let stats = fs.statSync(path);
-      result.metadata.size = stats.size;
-      result.metadata.accessed = stats.atimeMs;
-      result.metadata.created = stats.birthtimeMs;
-      result.metadata.modified = stats.mtimeMs;
-
-      callback(null, result);
-    } catch (err) {
-      console.log('ERROR: Browser.getFile() (line 58) > ' + err);
-      callback(err, result);
-    }
+    );
   },
 
   remove: function (path, callback) {

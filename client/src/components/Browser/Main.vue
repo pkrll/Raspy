@@ -107,8 +107,8 @@ export default {
 		 */
 		didFinishRequest: function (response) {
 			if (response.status == 1) {
-				this.files = response.files;
-				this.directories = response.directories;
+				this.files = response.result.files;
+				this.directories = response.result.directories;
 				this.middleComponent = 'DirectoryListing';
 			} else {
 				this.errorMessage = response.error;

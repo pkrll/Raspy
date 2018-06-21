@@ -41,7 +41,7 @@ new Vue({
 		if (username != undefined) {
 			this.$APIManager.setCredentials(username, password);
 			this.isLoggedIn = true;
-			this.$APIManager.testCredentials(this.didTestCredentials);
+			// this.$APIManager.testCredentials(this.didTestCredentials);
 		}
 	},
 	methods: {
