@@ -9,11 +9,10 @@ exports.browse = function (req, res) {
     request = path.join(request, req.params.path, req.params[0]);
   }
 
-  browser.getDirectory(request, (err, response)  => {
-    response.status = (err == null) ? 1 : 0;
-    response.error  = err;
-
+  browser.getDirectory(request).then(function (response) {
     res.json(response);
+  }).catch(function (error) {
+    res.status(500).json({status: 0, error: error})
   });
 };
 

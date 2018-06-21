@@ -2,37 +2,36 @@ const fs = require('fs');
 const pt = require('path');
 module.exports = {
 
-  getDirectory: function (path, callback) {
-    let result = {
-      directories: [],
-      files: []
-    };
-
-    try {
-
-      fs.readdirSync(path).forEach(file => {
-        let fullPath = pt.join(path, file);
-
+  getDirectory: function (path) {
+    return new Promise(
+      (resolve, reject) => {
         try {
-          let stat = fs.statSync(fullPath);
+          let result = { status: 1, directories: [], files: [] };
+          fs.readdirSync(path).forEach(file => {
+            let fullPath = pt.join(path, file);
 
-          if (stat.isDirectory()) {
-            result.directories.push({ name: file, path: fullPath });
-          } else {
-            result.files.push({ name: file, path: fullPath });
-          }
-        } catch (err) {
-          console.log('ERROR: Browser.getDirectory (line 31) > ' + err);
-          // temp fix for libuv bug
-          result.files.push({ name: file, path: fullPath, error: err });
+            try {
+              let stat = fs.statSync(fullPath);
+
+              if (stat.isDirectory()) {
+                result.directories.push({ name: file, path: fullPath });
+              } else {
+                result.files.push({ name: file, path: fullPath });
+              }
+            } catch (err) {
+              console.log('ERROR: Browser.getDirectory (line 31) > ' + err);
+              // temp fix for libuv bug
+              result.files.push({ name: file, path: fullPath, error: err });
+            }
+          });
+
+          resolve(result);
+        } catch (error) {
+          console.log('ERROR: Browser.getDirectory() (line 37) > ' + error);
+          reject(error);
         }
-      });
-
-      callback(null, result);
-    } catch (err) {
-      console.log('ERROR: Browser.getDirectory() (line 37) > ' + err);
-      callback(err, result);
-    }
+      }
+    );
   },
 
   getFile: function (path, callback) {
