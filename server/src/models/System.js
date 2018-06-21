@@ -16,9 +16,9 @@ module.exports = {
 
         PythonShell.run('sysinfo.py', options, function (err, response) {
           if (err) {
-            reject(err);
+            reject({status: 0, error: err});
           } else {
-            resolve(response[0]);
+            resolve({status: 1, result: response[0]});
           }
         });
       }

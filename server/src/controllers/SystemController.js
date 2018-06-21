@@ -8,7 +8,8 @@ module.exports = {
     system.index().then(function (response) {
       res.json(response);
     }).catch(function (error) {
-      res.json({status: 0});
+      console.log(error);
+      res.json(error);
     });
   },
 
