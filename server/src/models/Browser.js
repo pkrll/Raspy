@@ -34,7 +34,7 @@ module.exports = {
     );
   },
 
-  getFile: function (path, callback) {
+  getFile: function (path) {
     return new Promise(
       (resolve, reject) => {
         let result = {
@@ -63,34 +63,38 @@ module.exports = {
     );
   },
 
-  remove: function (path, callback) {
-    try {
-      let response = {status: 1};
-      let stats = fs.statSync(path);
+  remove: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        try {
+          let stats = fs.statSync(path);
 
-      if (stats.isDirectory()) {
-        const rimraf = require('rimraf');
+          if (stats.isDirectory()) {
+            const rimraf = require('rimraf');
 
-        rimraf(path, (err) => {
-          if (err) {
-            callback(err);
+            rimraf(path, (error) => {
+              if (error) {
+                reject({status: 0, error: error});
+              } else {
+                resolve({status: 1});
+              }
+            });
           } else {
-            callback(null, response);
+            fs.unlink(path, (error) => {
+              if (error) {
+                reject({status: 0, error: error});
+              } else {
+                resolve({status: 1});
+              }
+            });
           }
-        });
-      } else {
-        fs.unlink(path, (err) => {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, response);
-          }
-        });
+        } catch (error) {
+          console.log('ERROR: Browser.remove() > ');
+          console.log(error);
+          reject({status: 0, error: error});
+        }
       }
-    } catch (err) {
-      console.log('ERROR: Browser.remove() > ' + err);
-      callback(err);
-    }
+    );
   },
 
   create: function (path, callback) {

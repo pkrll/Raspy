@@ -9,9 +9,9 @@ exports.browse = function (req, res) {
     request = path.join(request, req.params.path, req.params[0]);
   }
 
-  browser.getDirectory(request).then(function (response) {
+  browser.getDirectory(request).then(response => {
     res.json(response);
-  }).catch(function (error) {
+  }).catch(error => {
     res.status(500).json(error)
   });
 };
@@ -27,12 +27,10 @@ exports.getFile = function (req, res) {
 
 exports.remove = function (req, res) {
   let request = path.join('/', req.params.path, req.params[0]);
-  browser.remove(request, function (err, response) {
-    if (err) {
-      res.json({status: 0, message: err});
-    } else {
-      res.json(response);
-    }
+  browser.remove(request).then(response => {
+    res.json(response);
+  }).catch(error => {
+    res.status(500).json(error);
   });
 };
 

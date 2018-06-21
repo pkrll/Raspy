@@ -114,12 +114,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			deleteFile: function (path, callback) {
-				this.HTTP.delete('file' + path).then(
-					response => {
-						if (typeof callback === 'function')  callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
+				this.HTTP.delete('file' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 					console.log(e);
 				});
 			},

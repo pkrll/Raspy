@@ -65,8 +65,8 @@ export default {
 			if (response.status == 1) {
 				this.middleComponent = 'FileDetails';
 			} else {
-				this.text = response.error;
-				this.middleComponent = 'Content';
+				// this.text = response.error;
+				// this.middleComponent = 'Content';
 			}
 		},
 		/**
@@ -89,15 +89,14 @@ export default {
 		didSelectConfirm: function () {
 			this.middleComponent = 'Spinner';
 
-			this.$APIManager.deleteFile(this.prettyPath, function (response) {
+			this.$APIManager.deleteFile(this.prettyPath, response => {
 				if (response.status == 1) {
 					this.goBack();
 				} else {
-					this.middleComponent = 'FileDetails';
-					console.log("Error: ");
-					console.log(response);
+					this.text = response.error;
+					this.middleComponent = 'Content';
 				}
-			}.bind(this));
+			});
 		},
 		/**
 		 * Downloads the current file.
