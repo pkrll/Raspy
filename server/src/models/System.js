@@ -34,7 +34,7 @@ module.exports = {
           const fs = require('fs');
           fs.readFile('../package.json', function(err, data) {
             if (err) {
-              reject(err);
+              reject({status: 0, error: err});
             } else {
               let content = JSON.parse(data);
               let version = content.version.split('+')[0];
@@ -48,7 +48,7 @@ module.exports = {
                 response.heading = json.heading;
               }
 
-              resolve(response);
+              resolve({status: 1, result: response});
             }
           });
         }, reject);
@@ -74,14 +74,14 @@ module.exports = {
 
 };
 
-function getLatestRelease(callback, errback) {
+function getLatestRelease(callback, reject) {
   const remote = require('remote-json');
   remote.https = require('follow-redirects').https;
   remote('https://api.github.com/repos/pkrll/Raspy/releases', {
     headers: { 'User-Agent': 'Raspy' }
   }).get(function (err, res, body) {
     if (err) {
-      errback(err);
+      reject({status: 0, error: err});
     } else {
       if (res.statusCode == 200 && body.length > 0) {
         let response = {
@@ -92,7 +92,7 @@ function getLatestRelease(callback, errback) {
 
         callback(response);
       } else {
-        errback(null);
+        reject({status: 0, error: Error("An error occured: " + res.statusCode)});
       }
     }
   });

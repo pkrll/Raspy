@@ -8,16 +8,15 @@ module.exports = {
     system.index().then(function (response) {
       res.json(response);
     }).catch(function (error) {
-      console.log(error);
       res.json(error);
     });
   },
 
   checkForUpdate: function (req, res) {
     system.checkForUpdate().then(function (response) {
-      res.json({status: 1, version: response})
+      res.json(response)
     }).catch(function (error) {
-      res.json({status: 0});
+      res.json(error);
     })
   },
 
