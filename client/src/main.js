@@ -40,6 +40,7 @@ new Vue({
 
 		if (username != undefined) {
 			this.$APIManager.setCredentials(username, password);
+			this.isLoggedIn = true;
 			this.$APIManager.testCredentials(this.didTestCredentials);
 		}
 	},
@@ -73,10 +74,9 @@ new Vue({
 		 * @param  {Object} response The response from the server.
 		 */
 		didTestCredentials: function (response) {
-			if (response.status == 1) {
-				this.isLoggedIn = true;
-			} else {
+			if (response.status == 0) {
 				this.connectionError = response.error;
+				this.isLoggedIn = false;
 			}
 		}
 	}
