@@ -118,7 +118,6 @@ export default {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
-					console.log(e);
 				});
 			},
 			/**
@@ -130,13 +129,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			createFolder: function (path, callback) {
-				this.HTTP.post('folder/new', { fullPath: path }).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.post('folder/new', { fullPath: path }).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**

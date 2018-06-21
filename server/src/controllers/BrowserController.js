@@ -26,7 +26,7 @@ exports.getFile = function (req, res) {
 };
 
 exports.remove = function (req, res) {
-  let request = path.join('/', req.params.path, req.params[0]);
+  let request = path.join('/', req.params.path, req.params[0] + "2354535345");
   browser.remove(request).then(response => {
     res.json(response);
   }).catch(error => {
@@ -51,11 +51,9 @@ exports.download = function (req, res) {
 
 exports.create = function (req, res) {
   let fullPath = req.body.fullPath;
-  browser.create(fullPath, function (err, response) {
-    if (err) {
-      res.json({status: 0, message: err});
-    } else {
-      res.json(response)
-    }
-  })
+  browser.create(fullPath).then(response => {
+    res.json(response);
+  }).catch(error => {
+    res.status(500).json(error);
+  });
 }

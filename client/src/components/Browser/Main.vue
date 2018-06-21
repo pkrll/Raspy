@@ -6,7 +6,7 @@
 				<div class="title">Set as favorite</div>
 			</div>
 
-			<div class="noselect" v-on:click="toggleAdvancedOptions" v-bind:class="{greyed: showAdvancedOptions}">
+			<div class="noselect" v-on:click="showAdvancedOptions = !showAdvancedOptions" v-bind:class="{greyed: showAdvancedOptions}">
 				<font-awesome-icon icon="cogs"/>
 				<div class="title">Show advanced options</div>
 			</div>
@@ -95,12 +95,6 @@ export default {
 			this.isFavorite = !this.isFavorite;
 		},
 		/**
-		 * Toggles the advanced options pane.
-		 */
-		toggleAdvancedOptions: function () {
-			this.showAdvancedOptions = !this.showAdvancedOptions
-		},
-		/**
 		 * Invoked by listDirectory requests.
 		 *
 		 * @param  {Object} data The response data.
@@ -133,14 +127,14 @@ export default {
 		 * Invoked when user clicks the confirm button on the confirm dialog.
 		 */
 		didSelectConfirm: function () {
-			this.$APIManager.deleteFile(this.prettyPath, function (response) {
+			this.$APIManager.deleteFile(this.prettyPath, response => {
 				if (response.status == 1) {
 					this.goBack();
 				} else {
-					console.log("Error: ");
-					console.log(response);
+					this.errorMessage = response.error;
+					this.middleComponent = 'Content';
 				}
-			}.bind(this));
+			});
 		},
 		/**
 		 * Invoked when user clicks the New Folder button.
@@ -148,21 +142,18 @@ export default {
 		makeFolder: function () {
 			let folderName = prompt("Set folder name:");
 			if (folderName != null && folderName != "") {
-				let directory = this.prettyPath + '/' + folderName
-				this.$APIManager.createFolder(directory, function (response) {
+				let directory = this.prettyPath + '/' + folderName;
+
+				this.$APIManager.createFolder(directory, response => {
 					if (response.status == 1) {
 						this.$router.push({
 							name: 'Directory',
-							params: {
-								path: encodeURIComponent(response.path)
-							}
+							params: { path: encodeURIComponent(response.result.path) }
 						});
 					} else {
-						console.log("Error: ");
-						console.log(response);
-						alert(response.message)
+						alert(response.error);
 					}
-				}.bind(this));
+				});
 			}
 		}
 	},

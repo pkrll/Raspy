@@ -97,16 +97,16 @@ module.exports = {
     );
   },
 
-  create: function (path, callback) {
-    try {
-      if (!fs.existsSync(path)) {
-        fs.mkdirSync(path)
-        callback(null, {status: 1, path: path})
-      } else {
-        callback("File already exists", path)
+  create: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        try {
+          fs.mkdirSync(path);
+          resolve({status: 1, result: { path: path} });
+        } catch (error) {
+          reject({status: 0, error: error, result: { path: path} });
+        }
       }
-    } catch (err) {
-      console.log('ERROR: Browser.create() > ' + err);
-    }
+    );
   }
 }
