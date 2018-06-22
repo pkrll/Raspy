@@ -4,6 +4,13 @@
 	box-sizing: border-box;
 }
 
+.running {
+  color: green;
+}
+
+.stopped {
+  color: red;
+}
 
 #console {
   background: #000;

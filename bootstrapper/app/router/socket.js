@@ -18,10 +18,19 @@ module.exports = socket => {
       case 'update':
         Raspy.update(message => socket.emit('command', message));
         break;
+      case 'install':
+        Raspy.install(message => socket.emit('command', message));
+        break;
+      case 'restart':
+        Raspy.restart(message => socket.emit('command', message));
+        break;
+      case 'stop':
+        Raspy.stop(message => socket.emit('command', message));
+        break;
       default:
         socket.emit('command', {
           status: 0,
-          error: new Error('Unrecognized command ' + request.command)
+          error: { message: 'Unrecognized command ' + request.command }
         });
         break;
     }

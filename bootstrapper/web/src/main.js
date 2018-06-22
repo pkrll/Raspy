@@ -55,7 +55,9 @@ new Vue({
     // 'Status' events just tells if Raspy is running.
     this.$socket.on('status', response => {
       this.serverStatus = response.running;
-      this._router.push('/console');
+      if (this.$route.path != '/console') {
+        this._router.push('/console');
+      }
     });
 
     this.$socket.on('connect', () => {

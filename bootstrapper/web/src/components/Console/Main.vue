@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section id="container">
 		<transition name="slide-menu">
 			<component 	v-bind:commandInprogress="commandInprogress"
                   v-bind:is="overlayComponent"

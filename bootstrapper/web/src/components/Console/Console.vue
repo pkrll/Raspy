@@ -9,7 +9,7 @@
       </div>
     </div>
     <div id="output">
-      <pre>Raspbot 1.0.0: {{status}}</pre>
+      <pre>Raspbot 1.0.0: <span v-bind:class="status">{{status}}</span></pre>
       <pre v-for="log in logs">{{log}}</pre>
       <pre id="cursor" v-if="!commandInprogress">$ <span class="animation">_</span></pre>
     </div>
@@ -34,4 +34,5 @@ export default {
 </script>
 
 <style scoped src="@/components/Console/Console.css">
+
 </style>

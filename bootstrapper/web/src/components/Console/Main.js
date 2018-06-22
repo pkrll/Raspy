@@ -48,6 +48,11 @@ exports.created = function() {
     } else {
       this.logs.push(response.error.message);
     }
+
+    let timer = setInterval( () => {
+      clearInterval(timer);
+      this.$socket.emit('client:status', null);
+    }, 1000);
   });
 
   this.$socket.on('history', response => {
