@@ -21,15 +21,18 @@ new Vue({
   template: '<App/>',
   data: function() {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      serverStatus: false
     }
   },
   methods: {
-
-    setSession: function (username, password) {
-      this.isLoggedIn = true;
-    },
-
+    /**
+     * Attempts to authenticate with the server.
+     *
+     * @param  String     username  The username.
+     * @param  String     password  The password.
+     * @param  Function   callback  A callback invoked on response.
+     */
     authenticate: function (username, password, callback) {
       let auth = { username: username, password: password };
       this.$socket.emit('authentication', auth);
@@ -48,6 +51,12 @@ new Vue({
     }
   },
   created: function() {
+    // 'Status' events just tells if Raspy is running.
+    this.$socket.on('status', response => {
+      this.serverStatus = response.running;
+      this._router.push('/console');
+    });
+
     let username = this.$cookie.get('username');
     let password = this.$cookie.get('password');
 

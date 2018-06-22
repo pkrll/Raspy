@@ -9,7 +9,7 @@
       </div>
     </div>
     <div id="output">
-      <pre>Raspbot 1.0.0: Running</pre>
+      <pre>Raspbot 1.0.0: {{status}}</pre>
       <pre v-for="log in logs">{{log}}</pre>
       <pre id="cursor" v-if="!commandInprogress">$ <span class="animation">_</span></pre>
     </div>
@@ -24,10 +24,14 @@ library.add(faMinusSquare, faCaretSquareDown);
 
 export default {
   name: 'Console',
-  props: ['logs', 'commandInprogress']
+  props: ['logs', 'commandInprogress'],
+  computed: {
+    status: function () {
+      return (this.$root.serverStatus) ? 'running' : 'stopped';
+    }
+  }
 }
 </script>
 
 <style scoped src="@/components/Console/Console.css">
-
 </style>

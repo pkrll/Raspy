@@ -8,9 +8,23 @@ exports.data = function () {
 }
 
 exports.computed = {
+  /**
+   * Determines if the current view is on login or not.
+   *
+   * This function is used to make sure the design is responsive.
+   *
+   * @return  Boolean  True if the view is Login.
+   */
   onLogin: function () {
     return (this.component == 'Login')
   },
+  /**
+   * Determines if the current view is empty.
+   *
+   * This function is used to make sure the design is responsive.
+   *
+   * @return  Boolean  True if the view is Login.
+   */
   onEmpty: function () {
     return (this.component == '')
   }
@@ -29,10 +43,19 @@ exports.methods = {
    */
   handleAuthResponse: function (didSucceed, message) {
     if (didSucceed) {
-      this.$root._router.push('/console');
+      this.requestStatusCheck();
     } else {
       this.message = message;
     }
+  },
+  /**
+   * Requests a status check from the server. Invoked after the user
+   * has been authenticated.
+   *
+   * The Vue root instance is responsible for handling the response.
+   */
+  requestStatusCheck: function () {
+    this.$socket.emit('client:status', null);
   }
 }
 
@@ -43,7 +66,7 @@ exports.mounted = function () {
       this.component = 'Login'
       this.message = ''
     } else {
-      this.$root._router.push('/console');
+      this.requestStatusCheck();
     }
   }, 1000);
 }
