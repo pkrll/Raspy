@@ -1,9 +1,25 @@
 'use strict'
 
-exports.methods = {
+exports.data = function() {
+  return {
+    commandInprogress: false,
+    overlayComponent: 'Console',
+    menuHidden: true,
+    logs: []
+  }
+}
 
+exports.methods = {
+  /**
+   * Requests the server to perform the specified command.
+   *
+   * The response can be caught by listening on 'command'.
+   *
+   * @param  String command The command to perform.
+   */
   performCommand: function (command) {
-    this.$socket.on('client:perform', { command: command });
+    console.log(command);
+    this.$socket.emit('client:perform', { command: command });
     this.logs.push("$ " + command);
     this.showConsole(true);
     this.commandInprogress = true;
@@ -17,17 +33,10 @@ exports.methods = {
     this.overlayComponent = (value) ? 'Console' : 'Menu';
     this.menuHidden = value;
   },
-
+  /**
+   * Clears the console.
+   */
   clearConsole: function () {
-
+    this.logs = [];
   },
-}
-
-exports.data = function() {
-  return {
-    commandInprogress: false,
-    overlayComponent: 'Console',
-    menuHidden: true,
-    logs: []
-  }
 }

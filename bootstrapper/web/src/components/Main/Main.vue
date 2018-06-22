@@ -6,7 +6,7 @@
     <transition name="slide-up">
         <component  v-bind:is="component"
                     v-bind:message="message"
-                    v-on:handleLoginResponse="handleLoginResponse"></component>
+                    v-on:handleAuthResponse="handleAuthResponse"></component>
     </transition>
   </div>
 </template>
@@ -15,8 +15,8 @@
 import { data, computed, methods, mounted } from '@/components/Main/Main.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRobot } from '@fortawesome/free-solid-svg-icons'
-import Splash from '@/components/Main/Splash'
-import Login from '@/components/Login/Main'
+import Splash from '@/components/Main/Splash.vue'
+import Login from '@/components/Login/Main.vue'
 
 library.add(faRobot);
 

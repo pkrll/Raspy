@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { data, methods, created } from '@/components/Login/Main.js'
+import { data, methods, mounted } from '@/components/Login/Main.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRobot } from '@fortawesome/free-solid-svg-icons'
 
@@ -21,7 +21,7 @@ export default {
   props: ['message'],
   data: data,
   methods: methods,
-  created: created
+  mounted: mounted
 }
 </script>
 

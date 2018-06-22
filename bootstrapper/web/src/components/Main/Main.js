@@ -3,7 +3,7 @@
 exports.data = function () {
   return {
     message: 'Initializing...',
-    component: Splash
+    component: 'Splash'
   }
 }
 
@@ -17,18 +17,21 @@ exports.computed = {
 }
 
 exports.methods = {
-
-  handleLoginResponse: function (response) {
-    if (response.status == 1) {
-      let username = response.username;
-      let password = response.password;
-
-      this.$cookie.set('username', username, { expires: '1Y' });
-      this.$cookie.set('password', password, { expires: '1Y' });
-      this.$root.setSession(username, password);
+  /**
+   * Invoked by the Login component on an authentication attempt.
+   *
+   * This function is responsible for changing router view to
+   * /console, if the login was successful.
+   *
+   * @param  Boolean  didSucced   True if the login was successful,
+   *                              otherwise false.
+   * @param  String   message     The error message on failure.
+   */
+  handleAuthResponse: function (didSucceed, message) {
+    if (didSucceed) {
       this.$root._router.push('/console');
     } else {
-      this.message = response.message;
+      this.message = message;
     }
   }
 }

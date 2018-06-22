@@ -5,19 +5,22 @@ exports.data = function () {
     username: '',
     password: ''
   }
-};
+}
 
 exports.methods = {
+  /**
+   * Invoked when the user presses the sign in button.
+   *
+   * This function sends an authentication request to
+   * the server.
+   */
   signIn: function () {
-    let message = {
-      params: { username: this.username, password: this.password }
-    };
-    this.$socket.emit('client:login', message);
+    this.$root.authenticate(this.username, this.password, (status, message) => {
+      this.$emit('handleAuthResponse', status, message);
+    });
   }
-};
+}
 
-exports.created = function () {
-  this.$socket.on('login', response => {
-    this.$emit('handleLoginResponse', response);
-  });
-};
+exports.mounted = function () {
+
+}

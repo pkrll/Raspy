@@ -6,35 +6,31 @@ const app     = express();
 const server  = require('http').Server(app);
 const socket  = require('socket.io')(server);
 const path    = require('path');
+const sioAuth = require("socketio-auth");
 
 require('./helpers/config.js')(app);
 require('./app/router')(app);
 
-socket.on('connection', socket => {
 
-	socket.on('client:login', request => {
-		let response = {
-			status: 0,
-			params: request.params,
-			message: ''
-		};
+const authenticate = async (socket, data, callback) => {
+  //get credentials sent by the client
+  console.log(data);
+  var username = data.username;
+  var password = data.password;
+  var check = (username == 'admin' && password == 'secret');
 
-		if (request.params.username == 'admin' && request.params.password == 'secret') {
-			response.status = 1;
-		} else {
-			response.status = 0;
-			response.message = "Wrong username or password";
-		}
+  return callback(null, check);
+}
 
-		socket.emit('login', response);
-	});
+const postAuthenticate = socket => {
 
-	socket.on('client:update', request => {
-		if (!socket.handshake.query.token) {
-			socket.emit('authentication:required', { message: "Authentication required" });
-		}
-	});
+  socket.on('client:perform', request => {
+    console.log(request);
+  });
 
-});
+};
+
+sioAuth(socket, { authenticate, postAuthenticate, timeout: "none" });
+
 
 server.listen(app.get('port'), () => console.log('Listening on port ' + app.get('port')));

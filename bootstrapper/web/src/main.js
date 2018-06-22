@@ -25,21 +25,34 @@ new Vue({
     }
   },
   methods: {
+
     setSession: function (username, password) {
-      this.$socket.query="u="+username+"&p="+password;
       this.isLoggedIn = true;
+    },
+
+    authenticate: function (username, password, callback) {
+      let auth = { username: username, password: password };
+      this.$socket.emit('authentication', auth);
+
+      this.$socket.on('authenticated', () => {
+        this.$cookie.set('username', username, { expires: '1Y' });
+        this.$cookie.set('password', password, { expires: '1Y' });
+        this.isLoggedIn = true;
+
+        if (typeof callback === 'function') callback(true, null);
+      });
+
+      this.$socket.on('unauthorized', (error) => {
+        if (typeof callback === 'function') callback(false, error.message);
+      });
     }
   },
   created: function() {
     let username = this.$cookie.get('username');
     let password = this.$cookie.get('password');
 
-    if (username != undefined) {
-      this.setSession(username, password);
+    if (username != undefined || username != null) {
+      this.authenticate(username, password);
     }
-
-    this.$socket.on('authentication:required', response => {
-      this._router.push('/');
-    });
   }
 });
