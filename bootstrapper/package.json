@@ -4,7 +4,7 @@
   "description": "Bootstrapper for Raspy",
   "private": true,
   "scripts": {
-    "dev": "nodemon main.js",
+    "dev": "nodemon app.js",
     "start:client": "cd web && npm start",
     "start:server": "npm run dev",
     "build": "node web/build/build.js"

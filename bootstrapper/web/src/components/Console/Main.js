@@ -18,7 +18,6 @@ exports.methods = {
    * @param  String command The command to perform.
    */
   performCommand: function (command) {
-    console.log(command);
     this.$socket.emit('client:perform', { command: command });
     this.logs.push("$ " + command);
     this.showConsole(true);
