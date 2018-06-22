@@ -8,3 +8,4 @@ run:
 
 clean:
 	rm -rf dist/*
+	rm -f tmp/info.log

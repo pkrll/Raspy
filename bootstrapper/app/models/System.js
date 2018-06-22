@@ -17,3 +17,18 @@ exports.isNodeAppRunning = appName => {
 		})
 	});
 };
+
+exports.getLogHistory = options => {
+	const winston = require('winston').loggers.get('command-logger');
+
+	return new Promise( (resolve, reject) => {
+		winston.query(options, (error, results) => {
+	     if (error) {
+				 reject({status: 0, error: error});
+	     } else {
+				 let result = (results.file) ? results.file : [];
+				 resolve({status: 1, result: result});
+			 }
+	   });
+	});
+}

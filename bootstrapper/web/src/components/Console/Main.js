@@ -49,4 +49,14 @@ exports.created = function() {
       this.logs.push(response.error.message);
     }
   });
+
+  this.$socket.on('history', response => {
+    if (response.status == 1) {
+      response.result.forEach(item => {
+  			this.logs.push(item.message);
+  		});
+    }
+  });
+
+  this.$socket.emit('client:history', null);
 }
