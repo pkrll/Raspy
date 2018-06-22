@@ -4,8 +4,13 @@
 			<div v-on:click="$emit('showConsole', true)">
 				<span><font-awesome-icon icon="terminal"/><br/>Show Console</span>
 			</div>
-			<div v-on:click="call('update')" v-bind:class="{inactive: commandInprogress}">
-				<span><font-awesome-icon icon="cloud-download-alt"/><br/>Update</span>
+      <div class="grouped">
+        <div v-on:click="call('update')" v-bind:class="{inactive: commandInprogress}">
+          <span><font-awesome-icon icon="cloud-download-alt"/><br/>Update</span>
+        </div>
+        <div v-on:click="call('install')" v-bind:class="{inactive: commandInprogress}">
+          <span><font-awesome-icon icon="cog"/><br/>Update</span>
+        </div>
 			</div>
 			<div class="grouped">
 				<div v-on:click="call('restart')" v-bind:class="{inactive: commandInprogress}">
@@ -24,9 +29,9 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTerminal, faCloudDownloadAlt, faPowerOff, faRedoAlt, faPlug } from '@fortawesome/free-solid-svg-icons'
+import { faTerminal, faCloudDownloadAlt, faCog, faPowerOff, faRedoAlt, faPlug } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTerminal, faCloudDownloadAlt, faPowerOff, faRedoAlt, faPlug)
+library.add(faTerminal, faCloudDownloadAlt, faCog, faPowerOff, faRedoAlt, faPlug)
 
 export default {
   name: 'Menu',

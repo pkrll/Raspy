@@ -54,10 +54,6 @@
   font-size: 2vw;
 }
 
-#consoleBottomPanel div i {
-  font-size: 3vw;
-}
-
 @media only screen and (min-width: 320px)
 									 and (max-width: 736px)
 									 and (orientation: portrait) {
@@ -67,11 +63,18 @@
 	}
 
 	#consoleBottomPanel div {
-		font-size: 4vw;
+		font-size: 6vw;
 	}
 
-	#consoleBottomPanel div i {
-		font-size: 5vw;
+}
+
+@media only screen and (min-width: 320px)
+									 and (max-width: 736px)
+									 and (orientation: landscape) {
+
+
+	#consoleBottomPanel div {
+		font-size: 2.5vw;
 	}
 
 }
@@ -86,10 +89,6 @@
 
 	#consoleBottomPanel div {
 		font-size: 4vw;
-	}
-
-	#consoleBottomPanel div i {
-		font-size: 5vw;
 	}
 
 }
