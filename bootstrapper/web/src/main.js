@@ -8,7 +8,7 @@ import VueSocketio from 'vue-socket.io';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(VueCookie);
-Vue.use(VueSocketio, 'http://localhost:5001');
+Vue.use(VueSocketio, process.env.SOCKET_URL);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
