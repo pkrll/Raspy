@@ -39,3 +39,14 @@ exports.methods = {
     this.logs = [];
   },
 }
+
+exports.created = function() {
+  this.$socket.on('command', response => {
+    this.commandInprogress = false;
+    if (response.status == 1) {
+      this.logs.push(response.result);
+    } else {
+      this.logs.push(response.error.message);
+    }
+  });
+}

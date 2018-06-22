@@ -13,8 +13,7 @@
 </template>
 
 <script>
-
-import { methods, data } from '@/components/Console/Main.js'
+import { data, methods, created } from '@/components/Console/Main.js'
 import Menu from '@/components/Menu/Main'
 import Console from '@/components/Console/Console'
 
@@ -22,7 +21,8 @@ export default {
   name: 'ConsoleMain',
   components: { Menu, Console },
   data: data,
-  methods: methods
+  methods: methods,
+  created: created
 }
 </script>
 
