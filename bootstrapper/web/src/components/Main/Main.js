@@ -1,5 +1,21 @@
 'use strict'
 
+exports.data = function () {
+  return {
+    message: 'Initializing...',
+    component: Splash
+  }
+}
+
+exports.computed = {
+  onLogin: function () {
+    return (this.component == 'Login')
+  },
+  onEmpty: function () {
+    return (this.component == '')
+  }
+}
+
 exports.methods = {
 
   handleLoginResponse: function (response) {

@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { data, methods, created } from '@/components/Login/Main.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRobot } from '@fortawesome/free-solid-svg-icons'
 
@@ -18,25 +19,9 @@ library.add(faRobot);
 export default {
   name: 'Login',
   props: ['message'],
-  data: function () {
-    return {
-      username: '',
-      password: ''
-    }
-  },
-  methods: {
-    signIn: function () {
-      let message = {
-        params: { username: this.username, password: this.password }
-      };
-      this.$socket.emit('client:login', message);
-    }
-  },
-  created: function () {
-    this.$socket.on('login', response => {
-      this.$emit('handleLoginResponse', response);
-    });
-  }
+  data: data,
+  methods: methods,
+  created: created
 }
 </script>
 

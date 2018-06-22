@@ -1,0 +1,41 @@
+.slide-enter-active {
+	transition: opacity 0.2s;
+}
+
+.slide-enter {
+	opacity: 0;
+}
+
+.slide-menu-leave-active,
+.slide-menu-enter-active {
+	transition: 0.5s;
+}
+
+.slide-console-enter-active {
+	transition: 0s;
+}
+
+.slide-console-leave-active {
+	transition: 0s;
+}
+
+.slide-menu-enter {
+	transform: translate(0%, 100%);
+}
+
+.slide-menu-leave-to {
+	transform: translate(0%, 100%);
+}
+
+.slide-console-enter {
+	transform: translate(0%, 0%);
+}
+
+.slide-console-leave-to {
+	transform: translate(0%, 0%);
+}
+
+section {
+  display: flex;
+  justify-content: center;
+}

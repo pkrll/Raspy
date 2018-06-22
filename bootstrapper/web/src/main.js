@@ -37,5 +37,9 @@ new Vue({
     if (username != undefined) {
       this.setSession(username, password);
     }
+
+    this.$socket.on('authentication:required', response => {
+      this._router.push('/');
+    });
   }
 });

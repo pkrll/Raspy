@@ -1,6 +1,13 @@
 'use strict'
 
 exports.methods = {
+
+  performCommand: function (command) {
+    this.$socket.on('client:perform', { command: command });
+    this.logs.push("$ " + command);
+    this.showConsole(true);
+    this.commandInprogress = true;
+  },
   /**
    * Toggles the console.
    *
@@ -13,5 +20,14 @@ exports.methods = {
 
   clearConsole: function () {
 
+  },
+}
+
+exports.data = function() {
+  return {
+    commandInprogress: false,
+    overlayComponent: 'Console',
+    menuHidden: true,
+    logs: []
   }
 }

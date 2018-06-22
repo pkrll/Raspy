@@ -12,9 +12,9 @@
 </template>
 
 <script>
+import { data, computed, methods, mounted } from '@/components/Main/Main.js'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRobot } from '@fortawesome/free-solid-svg-icons'
-import { methods, mounted } from '@/components/Main/Main.js'
 import Splash from '@/components/Main/Splash'
 import Login from '@/components/Login/Main'
 
@@ -23,177 +23,12 @@ library.add(faRobot);
 export default {
   name: 'Main',
   components: { Login, Splash },
+  data: data,
+  computed: computed,
   methods: methods,
-  mounted: mounted,
-  data: function () {
-    return {
-      message: 'Initializing...',
-      component: Splash
-    }
-  },
-  computed: {
-    onLogin: function () {
-      return (this.component == 'Login')
-    },
-    onEmpty: function () {
-      return (this.component == '')
-    }
-  }
+  mounted: mounted
 }
 </script>
 
-<style scoped>
-.slide-leave-active {
-	transition: opacity 0.75s;
-}
-
-.slide-leave-to {
-	opacity: 0;
-}
-
-.title {
-  top: 20%;
-  position: absolute;
-  font-size: 8vw;
-}
-
-.slide-up-leave-active,
-.slide-up-enter-active {
-	transition: 1s ease-in-out;
-  opacity: 1;
-}
-
-.slide-up-enter {
-	transform: translate(0, 100%);
-  opacity: 0;
-}
-
-.slide-up-leave-to {
-  transform: translate(0, 100%);
-	opacity: 0;
-}
-
-#wrapper {
-  width:            100%;
-  background:       rgb(45, 49, 57);
-  display:          flex;
-  height:           100%;
-  min-height:       100vh;
-  flex-direction:   column;
-  align-items:      center;
-  justify-content:  center;
-}
-
-@media only screen and (min-device-width: 320px)
-									 and (max-device-width: 424px)
-									 and (orientation: portrait) {
-
-   .title { font-size: 10vw; }
-
-}
-
-@media only screen and (min-device-width: 520px)
-									 and (max-device-width: 1023px)
-									 and (orientation: portrait) {
-
-   .title { font-size: 10vw; }
-
-   .title-login {
-     transition: 1s;
-     top: 10%;
-   }
-
-   .title-empty {
-     transition: 1s;
-     position: inherit;
-   }
-
-}
-
-@media only screen and (min-device-width: 1024px)
-                   and (max-device-width: 2048px)
-									 and (orientation: portrait) {
-
-   .title { font-size: 10vw; }
-
-   .title-login {
-     transition: 1s;
-     top: 10%;
-   }
-
-   .title-empty {
-     transition: 1s;
-     position: inherit;
-   }
-
-}
-
-@media only screen and (min-device-width: 320px)
-									 and (max-device-width: 812px)
-									 and (orientation: landscape) {
-
-   .title {
-     position: inherit;
-     font-size: 10vw;
-   }
-
-   .title-login {
-     transition: 1s;
-     opacity: 0;
-   }
-
-   .title-empty {
-     transition: 1s;
-     opacity: 1;
-   }
-
-}
-
-@media only screen and (min-device-width: 813px)
-									 and (max-device-width: 1365px)
-									 and (orientation: landscape) {
-
-   .title {
-     position: inherit;
-     font-size: 10vw;
-   }
-
-   .title-login {
-     position: absolute;
-     font-size: 3.5vw;
-     transition: 1s;
-     top: 5%;
-   }
-
-   .title-empty {
-     transition: 1s;
-     position: inherit;
-   }
-
-}
-
-@media only screen and (min-device-width: 1366px)
-									 and (max-device-width: 2560px)
-                   and (min-device-height: 600px)
-									 and (orientation: landscape) {
-
-   .title {
-     position: inherit;
-     font-size: 10vw;
-   }
-
-   .title-login {
-     position: absolute;
-     font-size: 5vw;
-     transition: 1s;
-     top: 10%;
-   }
-
-   .title-empty {
-     transition: 1s;
-     position: inherit;
-   }
-
-}
-
+<style scoped src="@/components/Main/Main.css">
 </style>
