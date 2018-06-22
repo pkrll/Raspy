@@ -2,40 +2,25 @@
 	<section>
 		<transition name="slide-menu">
 			<component 	v-bind:is="overlayComponent"
-									v-on:showConsole="showConsole"></component>
+									v-on:showConsole="showConsole"
+									v-on:clearConsole="clearConsole"
+                  v-bind:logs="logs"></component>
 		</transition>
-    <div id="console">
-  		<div id="output">
-  			<pre>Running: Raspy Bootstrapper 1.0.0</pre>
-  			<pre v-for="log in logs">{{log}}</pre>
-  			<pre id="cursor">$ _</pre>
-  		</div>
-  		<div id="consoleBottomPanel">
-  			<div v-on:click="showConsole(false)">
-  				<span><font-awesome-icon icon="caret-square-up"/><br/>Show menu</span>
-  			</div>
-  			<div v-on:click="clearConsole">
-  				<span><font-awesome-icon icon="minus-square"/><br/>Clear console</span>
-  			</div>
-  		</div>
-  	</div>
-	</section>
+  </section>
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMinusSquare, faCaretSquareUp } from '@fortawesome/free-solid-svg-icons'
-import { methods } from '@/components/Console/Main.js'
-import Menu from '@/components/Menu'
 
-library.add(faMinusSquare, faCaretSquareUp);
+import { methods } from '@/components/Console/Main.js'
+import Menu from '@/components/Menu/Main'
+import Console from '@/components/Console/Console'
 
 export default {
-  name: 'Console',
-  components: { Menu },
+  name: 'ConsoleMain',
+  components: { Menu, Console },
   data: function() {
     return {
-      overlayComponent: 'Menu',
+      overlayComponent: 'Console',
       menuHidden: true,
       logs: []
     }
@@ -45,6 +30,14 @@ export default {
 </script>
 
 <style scoped>
+
+.slide-enter-active {
+	transition: opacity 0.2s;
+}
+
+.slide-enter {
+	opacity: 0;
+}
 
 .slide-menu-leave-active,
 .slide-menu-enter-active {
@@ -75,99 +68,9 @@ export default {
 	transform: translate(0%, 0%);
 }
 
-* {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-
-#console {
-  background: #000;
+section {
   display: flex;
-  flex-direction: column;
-  text-align: left;
-  color: #fff;
-  font-size: 2vw;
-  padding: 30px 20px  20px 20px;
-  height: 100%;
-	overflow: hidden;
-  padding: 0;
-}
-
-#output {
-	padding-bottom: 55px;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-}
-
-#output pre {
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-}
-
-#consoleBottomPanel {
-  position: absolute;
-  padding-top: 10px;
-  bottom: 0;
-  background: #2c3e50;
-  width: 100%;
-  left: 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-#consoleBottomPanel div {
-  cursor: pointer;
-  width: 100%;
-  align-items: center;
   justify-content: center;
-  display: flex;
-  text-align: center;
-  font-size: 2vw;
-}
-
-#consoleBottomPanel div i {
-  font-size: 3vw;
-}
-
-@media only screen and (min-width: 320px)
-									 and (max-width: 736px)
-									 and (orientation: portrait) {
-
-	#console {
-		font-size: 6vw;
-	}
-
-	#consoleBottomPanel div {
-		font-size: 4vw;
-	}
-
-	#consoleBottomPanel div i {
-		font-size: 5vw;
-	}
-
-}
-
-@media only screen and (min-device-width: 736px)
-									 and (max-device-width: 1024px)
-									 and (orientation: portrait) {
-
-	#console {
-		font-size: 6vw;
-	}
-
-	#consoleBottomPanel div {
-		font-size: 4vw;
-	}
-
-	#consoleBottomPanel div i {
-		font-size: 5vw;
-	}
-
 }
 
 </style>

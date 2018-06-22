@@ -36,11 +36,11 @@ export default {
 <style scoped>
 
 .container {
-	position: 								fixed;
+  position:                 fixed;
 	color: 										#2c3e50;
 	font-family: 							'Avenir', Helvetica, Arial, sans-serif;
 	margin-top: 							0;
-	height: 									100%;
+  height:                   100%;
 	text-align: 							center;
 	width: 										100%;
 	-moz-osx-font-smoothing: 	grayscale;

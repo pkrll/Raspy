@@ -4,6 +4,7 @@
       <div><input type="text" name="username" placeholder="Username" v-model="username"></div>
       <div><input type="password" name="password" placeholder="Password" v-model="password"></div>
       <div><div class="button noselect" v-on:click="signIn">Sign in</div></div>
+      <div>{{message}}&nbsp;</div>
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ library.add(faRobot);
 
 export default {
   name: 'Login',
+  props: ['message'],
   data: function () {
     return {
       username: '',
@@ -24,8 +26,16 @@ export default {
   },
   methods: {
     signIn: function () {
-
+      let message = {
+        params: { username: this.username, password: this.password }
+      };
+      this.$socket.emit('client:login', message);
     }
+  },
+  created: function () {
+    this.$socket.on('login', response => {
+      this.$emit('handleLoginResponse', response);
+    });
   }
 }
 </script>

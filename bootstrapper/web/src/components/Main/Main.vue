@@ -1,18 +1,22 @@
 <template>
   <div id="wrapper">
-    <div class="title" v-on:click="go" v-bind:class="{ 'title-fade': onSplash }"><font-awesome-icon icon="robot"/><br>Raspbot</div>
+    <div class="title" v-bind:class="{ 'title-login': onLogin, 'title-empty': onEmpty }">
+      <font-awesome-icon icon="robot"/><br>Raspbot
+    </div>
     <transition name="slide-up">
-        <component v-bind:is="component"></component>
+        <component  v-bind:is="component"
+                    v-bind:message="message"
+                    v-on:handleLoginResponse="handleLoginResponse"></component>
     </transition>
   </div>
 </template>
 
 <script>
-import { methods, created } from '@/components/Main/Main.js'
-import Splash from '@/components/Main/Splash'
-import Login from '@/components/Login/Main'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRobot } from '@fortawesome/free-solid-svg-icons'
+import { methods, mounted } from '@/components/Main/Main.js'
+import Splash from '@/components/Main/Splash'
+import Login from '@/components/Login/Main'
 
 library.add(faRobot);
 
@@ -20,21 +24,33 @@ export default {
   name: 'Main',
   components: { Login, Splash },
   methods: methods,
-  created: created,
+  mounted: mounted,
   data: function () {
     return {
+      message: 'Initializing...',
       component: Splash
     }
   },
   computed: {
-    onSplash: function () {
+    onLogin: function () {
       return (this.component == 'Login')
+    },
+    onEmpty: function () {
+      return (this.component == '')
     }
   }
 }
 </script>
 
 <style scoped>
+.slide-leave-active {
+	transition: opacity 0.75s;
+}
+
+.slide-leave-to {
+	opacity: 0;
+}
+
 .title {
   top: 20%;
   position: absolute;
@@ -53,6 +69,7 @@ export default {
 }
 
 .slide-up-leave-to {
+  transform: translate(0, 100%);
 	opacity: 0;
 }
 
@@ -61,6 +78,7 @@ export default {
   background:       rgb(45, 49, 57);
   display:          flex;
   height:           100%;
+  min-height:       100vh;
   flex-direction:   column;
   align-items:      center;
   justify-content:  center;
@@ -80,9 +98,14 @@ export default {
 
    .title { font-size: 10vw; }
 
-   .title-fade {
+   .title-login {
      transition: 1s;
      top: 10%;
+   }
+
+   .title-empty {
+     transition: 1s;
+     position: inherit;
    }
 
 }
@@ -93,9 +116,14 @@ export default {
 
    .title { font-size: 10vw; }
 
-   .title-fade {
+   .title-login {
      transition: 1s;
      top: 10%;
+   }
+
+   .title-empty {
+     transition: 1s;
+     position: inherit;
    }
 
 }
@@ -109,9 +137,14 @@ export default {
      font-size: 10vw;
    }
 
-   .title-fade {
+   .title-login {
      transition: 1s;
      opacity: 0;
+   }
+
+   .title-empty {
+     transition: 1s;
+     opacity: 1;
    }
 
 }
@@ -125,11 +158,16 @@ export default {
      font-size: 10vw;
    }
 
-   .title-fade {
+   .title-login {
      position: absolute;
      font-size: 3.5vw;
      transition: 1s;
      top: 5%;
+   }
+
+   .title-empty {
+     transition: 1s;
+     position: inherit;
    }
 
 }
@@ -144,11 +182,16 @@ export default {
      font-size: 10vw;
    }
 
-   .title-fade {
+   .title-login {
      position: absolute;
      font-size: 5vw;
      transition: 1s;
      top: 10%;
+   }
+
+   .title-empty {
+     transition: 1s;
+     position: inherit;
    }
 
 }

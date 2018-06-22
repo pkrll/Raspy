@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
+    <transition name="slide" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+  created: function () {
+    if (this.$root.isLoggedIn == false) {
+      this.$root._router.push('/');
+    }
+  }
 }
 
 </script>
@@ -26,8 +33,6 @@ body {
 #app {
   color:                    #fff;
   font-family:              'Avenir', Helvetica, Arial, sans-serif;
-  height:                   100vh;
-  min-height:               100vh;
   text-align:               center;
   -moz-osx-font-smoothing:  grayscale;
    -webkit-font-smoothing:  antialiased;

@@ -12,6 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.1.0",
     "@fortawesome/vue-fontawesome": "^0.1.0",
     "vue": "^2.5.2",
+    "vue-cookie": "^1.1.4",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^2.1.1-b"
   },

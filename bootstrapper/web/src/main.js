@@ -3,9 +3,11 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import VueCookie from 'vue-cookie';
 import VueSocketio from 'vue-socket.io';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+Vue.use(VueCookie);
 Vue.use(VueSocketio, 'http://localhost:5001');
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
@@ -20,6 +22,20 @@ new Vue({
   data: function() {
     return {
       isLoggedIn: false
+    }
+  },
+  methods: {
+    setSession: function (username, password) {
+      this.$socket.query="u="+username+"&p="+password;
+      this.isLoggedIn = true;
+    }
+  },
+  created: function() {
+    let username = this.$cookie.get('username');
+    let password = this.$cookie.get('password');
+
+    if (username != undefined) {
+      this.setSession(username, password);
     }
   }
 });

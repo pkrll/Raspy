@@ -7,7 +7,7 @@ exports.methods = {
    * @param  Boolean value 	True to show the console, otherwise false.
    */
   showConsole: function (value) {
-    this.overlayComponent = (value) ? '' : 'Menu';
+    this.overlayComponent = (value) ? 'Console' : 'Menu';
     this.menuHidden = value;
   },
 

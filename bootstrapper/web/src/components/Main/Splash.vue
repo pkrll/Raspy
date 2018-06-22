@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div class="animation">Initializing...</div>
+    <div class="animation">{{message}}</div>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Splash'
+  name: 'Splash',
+  props: ['message']
 }
 </script>
 
