@@ -61,11 +61,16 @@ exports.methods = {
 
 exports.mounted = function () {
   let timer = setInterval( () => {
-    clearInterval(timer);
     if (this.$root.isLoggedIn == false) {
-      this.component = 'Login'
-      this.message = ''
+      if (this.$root.connected) {
+        clearInterval(timer);
+        this.component = 'Login';
+        this.message = '';
+      } else {
+        this.message = 'Server not responding...';
+      }
     } else {
+      clearInterval(timer);
       this.requestStatusCheck();
     }
   }, 1000);

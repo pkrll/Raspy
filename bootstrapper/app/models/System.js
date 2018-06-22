@@ -8,8 +8,6 @@ exports.isNodeAppRunning = appName => {
 			command: 'node',
 			arguments: appName
 		}, function(error, result) {
-			console.log(error);
-			console.log(result);
 			if (error) {
 				reject({status: 0, error: error});
 			} else {

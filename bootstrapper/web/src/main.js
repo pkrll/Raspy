@@ -22,7 +22,8 @@ new Vue({
   data: function() {
     return {
       isLoggedIn: false,
-      serverStatus: false
+      serverStatus: false,
+      connected: true
     }
   },
   methods: {
@@ -55,6 +56,17 @@ new Vue({
     this.$socket.on('status', response => {
       this.serverStatus = response.running;
       this._router.push('/console');
+    });
+
+    this.$socket.on('connect', () => {
+      this.connected = true;
+    });
+
+    this.$socket.on('disconnect', () => {
+      this.isLoggedIn = false;
+      this.serverStatus = false;
+      this.connected = false;
+      this._router.push('/');
     });
 
     let username = this.$cookie.get('username');
