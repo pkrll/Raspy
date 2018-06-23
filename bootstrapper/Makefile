@@ -12,4 +12,4 @@ run:
 
 clean:
 	rm -rf dist/*
-	rm -f tmp/info.log
+	rm -f logs/info.log
