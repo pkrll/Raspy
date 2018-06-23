@@ -54,22 +54,6 @@ module.exports = {
         }, reject);
       }
     );
-  },
-
-  updateRaspy: function () {
-    return executeCommand('cd ../ && make update');
-  },
-
-  launchUpdater: function () {
-    return executeCommand('cd ../ && make updater');
-  },
-
-  stopRaspy: function () {
-    return executeCommand('cd ../ && make stop');
-  },
-
-  restartRaspy: function () {
-    return executeCommand('cd ../ && make restart');
   }
 
 };
