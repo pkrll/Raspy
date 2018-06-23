@@ -27,7 +27,7 @@ body, html {
 }
 
 body {
-  background: #000;
+  background: #2c3e50;
 }
 
 #app {

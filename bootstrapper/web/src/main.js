@@ -4,10 +4,12 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import VueCookie from 'vue-cookie';
+import Application from '@/shared/Application.js';
 import VueSocketio from 'vue-socket.io';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(VueCookie);
+Vue.use(Application);
 Vue.use(VueSocketio, process.env.SOCKET_URL);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
