@@ -1,0 +1,19 @@
+{
+  "name": "rasbot",
+  "main": "rasbot.js",
+  "version": "0.3.0",
+  "build": "0",
+  "description": "Rasbot lets you control your Raspberry Pi.",
+  "author": "Ardalan Samimi <ardalan@saturnfive.se>",
+  "license": "AGPL-3.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pkrll/raspy"
+  },
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "cors": "^2.8.4",
+    "express": "^4.0.0"
+  }
+}
