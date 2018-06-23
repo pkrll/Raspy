@@ -70,18 +70,6 @@ module.exports = function (app) {
   router.route('/system/checkForUpdate')
     .get(systemController.checkForUpdate);
 
-  router.route('/system/update')
-    .get(systemController.updateRaspy);
-
-  router.route('/system/stop')
-    .get(systemController.stopRaspy);
-
-  router.route('/system/restart')
-    .get(systemController.restartRaspy);
-
-  router.route('/system/logs/update')
-    .get(systemController.loadConsoleHistory);
-
   // Register the routes
   app.use(express.static(app.get('dist')));
   app.use('/api', router);

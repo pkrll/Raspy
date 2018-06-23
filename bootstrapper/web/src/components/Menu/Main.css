@@ -1,44 +1,13 @@
-<template>
-	<section class="container">
-		<div id="updateMenu">
-			<div v-on:click="$emit('showConsole', true)">
-				<span><font-awesome-icon icon="terminal"/><br/>Show Console</span>
-			</div>
-			<div v-on:click="$emit('call', 'update')">
-				<span><font-awesome-icon icon="cloud-download-alt"/><br/>Update</span>
-			</div>
-			<div class="grouped">
-				<div v-on:click="$emit('call', 'restart')">
-					<span><font-awesome-icon icon="redo-alt"/><br/>Restart</span>
-				</div>
-				<div v-on:click="$emit('call', 'stop')">
-					<span><font-awesome-icon icon="plug"/><br/>Stop</span>
-				</div>
-			</div>
-			<div v-on:click="$emit('call', 'shutdown')">
-				<span><font-awesome-icon icon="power-off"/><br/>Exit Updater</span>
-			</div>
-		</div>
-	</section>
-</template>
-
-<script>
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import { terminal, clouddownloadalt, poweroff, redoalt, plug } from '@fortawesome/fontawesome-free-solid'
-
-export default {
-	name: 'UpdateMenu',
-	components: { FontAwesomeIcon }
+.inactive {
+  color: grey;
 }
-</script>
 
-<style scoped>
 .container {
-	position: 								fixed;
+  position:                 fixed;
 	color: 										#2c3e50;
 	font-family: 							'Avenir', Helvetica, Arial, sans-serif;
 	margin-top: 							0;
-	height: 									100%;
+  height:                   100%;
 	text-align: 							center;
 	width: 										100%;
 	-moz-osx-font-smoothing: 	grayscale;
@@ -112,5 +81,3 @@ export default {
 	}
 
 }
-
-</style>

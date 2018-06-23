@@ -4,9 +4,7 @@
 		<vue-markdown class="changelog">
 			{{content}}
 		</vue-markdown>
-		<router-link to="/update">
-			<div class="button">Update</div>
-		</router-link>
+		<div class="button">Update</div>
 	</div>
 </template>
 

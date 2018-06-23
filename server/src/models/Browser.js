@@ -2,104 +2,111 @@ const fs = require('fs');
 const pt = require('path');
 module.exports = {
 
-  getDirectory: function (path, callback) {
-    let result = {
-      directories: [],
-      files: []
-    };
+  getDirectory: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        try {
+          let result = { directories: [], files: [] };
+          fs.readdirSync(path).forEach(file => {
+            let fullPath = pt.join(path, file);
 
-    try {
+            try {
+              let stat = fs.statSync(fullPath);
 
-      fs.readdirSync(path).forEach(file => {
-        let fullPath = pt.join(path, file);
+              if (stat.isDirectory()) {
+                result.directories.push({ name: file, path: fullPath });
+              } else {
+                result.files.push({ name: file, path: fullPath });
+              }
+            } catch (err) {
+              console.log('ERROR: Browser.getDirectory (line 31) > ' + err);
+              // temp fix for libuv bug
+              result.files.push({ name: file, path: fullPath, error: err });
+            }
+          });
+
+          resolve({status: 1, result: result});
+        } catch (error) {
+          console.log('ERROR: Browser.getDirectory() (line 37) > ' + error);
+          reject({status: 0, error: error, result: {}});
+        }
+      }
+    );
+  },
+
+  getFile: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        let result = {
+          filename: pt.basename(path),
+          metadata: {
+            size: 0,
+            accessed: 0,
+            created: 0,
+            modified: 0
+          }
+        };
 
         try {
-          let stat = fs.statSync(fullPath);
+          let stats = fs.statSync(path);
+          result.metadata.size = stats.size;
+          result.metadata.accessed = stats.atimeMs;
+          result.metadata.created = stats.birthtimeMs;
+          result.metadata.modified = stats.mtimeMs;
 
-          if (stat.isDirectory()) {
-            result.directories.push({ name: file, path: fullPath });
-          } else {
-            result.files.push({ name: file, path: fullPath });
-          }
-        } catch (err) {
-          console.log('ERROR: Browser.getDirectory (line 31) > ' + err);
-          // temp fix for libuv bug
-          result.files.push({ name: file, path: fullPath, error: err });
+          resolve({status: 1, result: result});
+        } catch (error) {
+          console.log('ERROR: Browser.getFile() (line 58) > ' + error);
+          reject({status: 0, error: error, result: result});
         }
-      });
-
-      callback(null, result);
-    } catch (err) {
-      console.log('ERROR: Browser.getDirectory() (line 37) > ' + err);
-      callback(err, result);
-    }
-  },
-
-  getFile: function (path, callback) {
-    let result = {
-      filename: pt.basename(path),
-      metadata: {
-        size: 0,
-        accessed: 0,
-        created: 0,
-        modified: 0
       }
-    };
-
-    try {
-      let stats = fs.statSync(path);
-      result.metadata.size = stats.size;
-      result.metadata.accessed = stats.atimeMs;
-      result.metadata.created = stats.birthtimeMs;
-      result.metadata.modified = stats.mtimeMs;
-
-      callback(null, result);
-    } catch (err) {
-      console.log('ERROR: Browser.getFile() (line 58) > ' + err);
-      callback(err, result);
-    }
+    );
   },
 
-  remove: function (path, callback) {
-    try {
-      let response = {status: 1};
-      let stats = fs.statSync(path);
+  remove: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        try {
+          let stats = fs.statSync(path);
 
-      if (stats.isDirectory()) {
-        const rimraf = require('rimraf');
+          if (stats.isDirectory()) {
+            const rimraf = require('rimraf');
 
-        rimraf(path, (err) => {
-          if (err) {
-            callback(err);
+            rimraf(path, (error) => {
+              if (error) {
+                reject({status: 0, error: error});
+              } else {
+                resolve({status: 1});
+              }
+            });
           } else {
-            callback(null, response);
+            fs.unlink(path, (error) => {
+              if (error) {
+                reject({status: 0, error: error});
+              } else {
+                resolve({status: 1});
+              }
+            });
           }
-        });
-      } else {
-        fs.unlink(path, (err) => {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, response);
-          }
-        });
+        } catch (error) {
+          console.log('ERROR: Browser.remove() > ');
+          console.log(error);
+          reject({status: 0, error: error});
+        }
       }
-    } catch (err) {
-      console.log('ERROR: Browser.remove() > ' + err);
-      callback(err);
-    }
+    );
   },
 
-  create: function (path, callback) {
-    try {
-      if (!fs.existsSync(path)) {
-        fs.mkdirSync(path)
-        callback(null, {status: 1, path: path})
-      } else {
-        callback("File already exists", path)
+  create: function (path) {
+    return new Promise(
+      (resolve, reject) => {
+        try {
+          fs.mkdirSync(path);
+          resolve({status: 1, result: { path: path} });
+        } catch (error) {
+          reject({status: 0, error: error, result: { path: path} });
+        }
       }
-    } catch (err) {
-      console.log('ERROR: Browser.create() > ' + err);
-    }
+    );
   }
 }

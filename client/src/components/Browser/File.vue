@@ -36,6 +36,7 @@
 <script>
 import shared from '@/shared'
 import Spinner from '@/components/Common/Spinner'
+import Content from '@/components/Common/Content'
 import ConfirmButton from '@/components/Common/ConfirmButton'
 import FileDetails from '@/components/Browser/FileDetails'
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
@@ -44,7 +45,7 @@ import { arrowcircleleft, download, trash, file } from '@fortawesome/fontawesome
 export default {
 	props: ['path'],
 	name: "File",
-	components: { FontAwesomeIcon, Spinner, ConfirmButton, FileDetails },
+	components: { FontAwesomeIcon, Spinner, Content, ConfirmButton, FileDetails },
 	watch: {
 		'didClickDelete' () {
 			this.showConfirmation(this.didClickDelete);
@@ -58,15 +59,15 @@ export default {
 		 */
 		didFinishRequest: function (response) {
 			this.file = {
-				filename: response.filename,
-				metadata: response.metadata
+				filename: response.result.filename,
+				metadata: response.result.metadata
 			};
-
-			if (response.status == 0) {
-				console.log(response);
+			if (response.status == 1) {
+				this.middleComponent = 'FileDetails';
+			} else {
+				this.text = response.error;
+				this.middleComponent = 'Content';
 			}
-
-			this.middleComponent = 'FileDetails';
 		},
 		/**
 		 * Shows the confirmation dialog.
@@ -88,15 +89,14 @@ export default {
 		didSelectConfirm: function () {
 			this.middleComponent = 'Spinner';
 
-			this.$APIManager.deleteFile(this.prettyPath, function (response) {
+			this.$APIManager.deleteFile(this.prettyPath, response => {
 				if (response.status == 1) {
 					this.goBack();
 				} else {
-					this.middleComponent = 'FileDetails';
-					console.log("Error: ");
-					console.log(response);
+					this.text = response.error;
+					this.middleComponent = 'Content';
 				}
-			}.bind(this));
+			});
 		},
 		/**
 		 * Downloads the current file.
@@ -104,9 +104,14 @@ export default {
 		downloadFile: function () {
 			this.middleComponent = 'Spinner';
 
-			this.$APIManager.downloadFile(this.prettyPath, this.file.filename, function () {
-				this.middleComponent = 'FileDetails';
-			}.bind(this));
+			this.$APIManager.downloadFile(this.prettyPath, this.file.filename, response => {
+				if (response.status == 1) {
+					this.middleComponent = 'FileDetails';
+				} else {
+					this.text = "Could not download file."
+					this.middleComponent = 'Content';
+				}
+			});
 		}
 	},
 	data: function () {

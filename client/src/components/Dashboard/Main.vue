@@ -68,10 +68,12 @@ export default {
 		},
 
 		didFinishRequest: function (response) {
-			this.ram = response.ram;
-			this.cpu = response.cpu;
-			this.disk = response.disk;
-			this.temperature = this.convertTemperature(response.temperature);
+			if (response.status == 1) {
+				this.ram = response.result.ram;
+				this.cpu = response.result.cpu;
+				this.disk = response.result.disk;
+				this.temperature = this.convertTemperature(response.result.temperature);
+			}
 		},
 
 		convertTemperature: function (temperature) {

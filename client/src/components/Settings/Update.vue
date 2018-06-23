@@ -20,12 +20,12 @@ export default {
 	methods: {
 		didCheckForUpdate: function (response) {
 			if (response.status == 1) {
-				let version = response.version.version;
-				let isNewer = response.version.isNewer;
+				let version = response.result.version.version;
+				let isNewer = response.result.version.isNewer;
 
 				if (isNewer) {
 					this.heading = 'Version ' + version + ' is available!'
-					this.content = '\r\n'+response.version.changes;
+					this.content = '\r\n'+response.result.version.changes;
 					this.middleComponent = 'Changelog';
 				} else {
 					this.content = "Software is up to date.";

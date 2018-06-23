@@ -6,16 +6,17 @@ export default {
 
 		Vue.prototype.$APIManager = {
 
-			HTTP: axios.create({ baseURL: process.env.API_URL }),
+			HTTP: axios.create({ baseURL: process.env.API_URL, timeout: 60000 }),
 			/**
 			 * Sets the credentials for the user.
 			 *
 			 * @param  {String]} username The username of the user.
 			 * @param  {String]} password The password of the user.
 			 */
-			setCredentials: function (username, password) {
+			setCredentials: function (username, password, callback) {
 				this.HTTP = axios.create({
 					baseURL: process.env.API_URL,
+					timeout: 60000,
 					auth: {
 						username: username,
 						password: password
@@ -23,10 +24,26 @@ export default {
 				});
 			},
 			/**
+			 * Checks the credentials saved in cookie.
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			testCredentials: function (callback) {
+				let credentials = this.HTTP.defaults.auth;
+				this.HTTP.post('login', {
+					username: credentials.username,
+					password: credentials.password
+				}).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+			},
+			/**
 			 * Removes the credentials of the user from the axios object.
 			 */
 			clearCredentials: function () {
-				this.http = axios.create({ baseURL: process.env.API_URL });
+				this.HTTP = axios.create({ baseURL: process.env.API_URL, timeout: 60000 });
 			},
 			/**
 			 * Logins to the server.
@@ -38,23 +55,24 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			login: function (username, password, callback) {
-				this.HTTP.post('login', { username: username, password: password }).then(
-					response => {
-						if (response.data.status == 1) {
-							this.HTTP = axios.create({
-								baseURL: process.env.API_URL,
-								auth: {
-									username: username,
-									password: password
-								}
-							});
-						}
-
-						if (typeof callback === 'function') callback(response.data);
+				this.HTTP.post('login', {
+					username: username,
+					password: password
+				}).then(response => {
+					if (response.data.status == 1) {
+						this.HTTP = axios.create({
+							baseURL: process.env.API_URL,
+							timeout: 60000,
+							auth: {
+								username: username,
+								password: password
+							}
+						});
 					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -66,13 +84,10 @@ export default {
 			 * @param  {Function} callback 	The callback to invoke on response.
 			 */
 			listDirectory: function (path, callback) {
-				this.HTTP.get('browser' + path).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('browser' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -84,13 +99,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			viewFile: function (path, callback) {
-				this.HTTP.get('file' + path).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('file' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -102,13 +114,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			deleteFile: function (path, callback) {
-				this.HTTP.delete('file' + path).then(
-					response => {
-						if (typeof callback === 'function')  callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.delete('file' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -120,13 +129,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			createFolder: function (path, callback) {
-				this.HTTP.post('folder/new', { fullPath: path }).then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.post('folder/new', { fullPath: path }).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -148,12 +154,11 @@ export default {
 					method: 'get',
 					responseType: 'blob',
 					auth: usrAuth
-				}).then(function (response) {
+				}).then(response => {
 					fileDownload(response.data, fileName);
-					if (typeof callback === 'function')  callback();
-				}).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+					if (typeof callback === 'function') callback({status: 1});
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -164,13 +169,10 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			getSystemInformation: function (callback) {
-				this.HTTP.get('system').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('system').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 			/**
@@ -181,77 +183,65 @@ export default {
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			checkForUpdate: function (callback) {
-				this.HTTP.get('system/checkForUpdate').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
-				});
-			},
-			/**
-			 * Updates the software
-			 *
-			 * Calls the /system/update endpoint
-			 *
-			 * @param  {Function} callback The callback to invoke on response.
-			 */
-			updateRaspy: function (callback) {
-				this.HTTP.get('system/update').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
-				});
-			},
-			/**
-			 * Restarts the software
-			 *
-			 * Calls the /system/restart endpoint
-			 *
-			 * @param  {Function} callback The callback to invoke on response.
-			 */
-			restartRaspy: function (callback) {
-				this.HTTP.get('system/restart').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
-				});
-			},
-			/**
-			 * Stops the software
-			 *
-			 * Calls the /system/stop endpoint
-			 *
-			 * @param  {Function} callback The callback to invoke on response.
-			 */
-			stopRaspy: function (callback) {
-				this.HTTP.get('system/stop').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
-				});
-			},
-
-			loadConsoleHistory: function (callback) {
-				this.HTTP.get('system/logs/update').then(
-					response => {
-						if (typeof callback === 'function') callback(response.data);
-					}
-				).catch(e => {
-					console.log("Error: ");
-					console.log(e);
+				this.HTTP.get('system/checkForUpdate').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
 				});
 			}
 		}
 	}
+}
+
+function handleError(error) {
+	let response = {
+		status: 0,
+		error: { statusCode: 0, statusText: '' },
+		result: (error.result) ? error.result : {}
+	};
+
+	if (error.response) {
+		let status = error.response.status;
+
+		switch (status) {
+			case 404:
+				response.error.statusText = error.response.statusText
+				response.error.statusCode = error.response.status
+				break;
+			case 401:
+				response.error = "Unauthorized request."
+				break;
+			case 408:
+				response.error = "Request timed out."
+				break;
+			case 500:
+				response.error = handleInternalError(error.response.data.error);
+				break;
+			default:
+				break;
+		}
+	} else if (error.message) {
+		response.error = error.message;
+	}
+
+	return response;
+}
+
+function handleInternalError(error) {
+	switch (error.code) {
+		case "ENOENT":
+			return "No such file or directory: " + error.path;
+		case "ENOTDIR":
+			return "Not a directory";
+		case "ENOTEMPTY":
+			return "Directory not empty";
+		case "EEXIST":
+			return "File exists";
+		case "EACCES":
+			return "Permission denied";
+		default:
+			break;
+	}
+
+	return "Internal server error.";
 }

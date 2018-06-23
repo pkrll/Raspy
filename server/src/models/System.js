@@ -16,9 +16,9 @@ module.exports = {
 
         PythonShell.run('sysinfo.py', options, function (err, response) {
           if (err) {
-            reject(err);
+            reject({status: 0, error: err});
           } else {
-            resolve(response[0]);
+            resolve({status: 1, result: response[0]});
           }
         });
       }
@@ -34,7 +34,7 @@ module.exports = {
           const fs = require('fs');
           fs.readFile('../package.json', function(err, data) {
             if (err) {
-              reject(err);
+              reject({status: 0, error: err});
             } else {
               let content = JSON.parse(data);
               let version = content.version.split('+')[0];
@@ -48,86 +48,24 @@ module.exports = {
                 response.heading = json.heading;
               }
 
-              resolve(response);
+              resolve({status: 1, result: response});
             }
           });
-        }, function (err) {
-          reject(err);
-        });
-      }
-    );
-  },
-
-  updateRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make update', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr)
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
-  },
-
-  launchUpdater: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make updater', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
-  },
-
-  stopRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make stop', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
-      }
-    );
-  },
-
-  restartRaspy: function () {
-    return new Promise(
-      (resolve, reject) => {
-        const { exec } = require('child_process');
-        exec('cd ../ && make restart', (error, stdout, stderr) => {
-          if (error) {
-            reject(stderr);
-          } else {
-            resolve(stdout);
-          }
-        });
+        }, reject);
       }
     );
   }
 
 };
 
-function getLatestRelease(callback, errback) {
+function getLatestRelease(callback, reject) {
   const remote = require('remote-json');
   remote.https = require('follow-redirects').https;
   remote('https://api.github.com/repos/pkrll/Raspy/releases', {
     headers: { 'User-Agent': 'Raspy' }
   }).get(function (err, res, body) {
     if (err) {
-      errback(err);
+      reject({status: 0, error: err});
     } else {
       if (res.statusCode == 200 && body.length > 0) {
         let response = {
@@ -138,8 +76,23 @@ function getLatestRelease(callback, errback) {
 
         callback(response);
       } else {
-        errback(null);
+        reject({status: 0, error: Error("An error occured: " + res.statusCode)});
       }
     }
   });
+}
+
+function executeCommand(command, arguments = '') {
+  return new Promise(
+    (resolve, reject) => {
+      const { exec } = require('child_process');
+      exec(command, arguments, (error, stdout, stderr) => {
+        if (error) {
+          reject(stderr);
+        } else {
+          resolve(stdout);
+        }
+      });
+    }
+  );
 }
