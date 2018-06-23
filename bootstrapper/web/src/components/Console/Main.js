@@ -42,17 +42,18 @@ exports.methods = {
 
 exports.created = function() {
   this.$socket.on('command', response => {
-    this.commandInprogress = false;
     if (response.status == 1) {
       this.logs.push(response.result);
-    } else {
+    } else if (response.status == 0) {
       this.logs.push(response.error.message);
-    }
+    } else {
+      this.commandInprogress = false;
 
-    let timer = setInterval( () => {
-      clearInterval(timer);
-      this.$socket.emit('client:status', null);
-    }, 1000);
+      let timer = setInterval( () => {
+        clearInterval(timer);
+        this.$socket.emit('client:status', null);
+      }, 1000);
+    }
   });
 
   this.$socket.on('history', response => {

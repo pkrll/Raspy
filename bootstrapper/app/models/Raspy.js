@@ -1,23 +1,36 @@
 'use strict'
 
-exports.update  = () => executeCommand('cd ../ && make update');
-exports.install = () => executeCommand('cd ../ && make install');
-exports.restart = () => executeCommand('cd ../ && make restart');
-exports.stop 		= () => executeCommand('cd ../ && make stop');
+exports.update  = callback => execute('cd ../ && make update', callback);
+exports.install = callback => execute('cd ../ && make install', callback);
+exports.restart = callback => execute('cd ../ && make restart', callback);
+exports.stop 		= callback => execute('cd ../ && make stop', callback);
 
-function executeCommand(command, argument = '') {
-	const winston = require('winston').loggers.get('command-logger');
+function execute(process, callback) {
+	const spawn 	= require('child_process').spawn;
+	const command = spawn(process, { shell: true });
 
-	return new Promise( (resolve, reject) => {
-		const { exec } = require('child_process');
-		exec(command, argument, (error, stdout, stderr) => {
-			if (error) {
-				winston.log('error', stderr);
-				reject(stderr);
-			} else {
-				winston.log('info', stdout);
-				resolve(stdout);
-			}
+	let history = '';
+
+	command.stdout.on('data', function (data) {
+		history += data.toString();
+		callback({
+			status: 1,
+			result: data.toString()
 		});
 	});
+
+	command.stderr.on('data', function (data) {
+		history += data.toString();
+		callback({
+			status: 0,
+			error: { message: data.toString() }
+		});
+	});
+
+	command.on('exit', function (code) {
+		const winston = require('winston').loggers.get('command-logger');
+		winston.log('info', history);
+		callback({ status: -1 });
+	});
+
 }
