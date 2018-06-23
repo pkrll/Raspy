@@ -26,7 +26,7 @@ exports.getLogHistory = options => {
 	     if (error) {
 				 reject({status: 0, error: error});
 	     } else {
-				 let result = (results.file) ? results.file : [];
+				 let result = (results.file) ? results.file.reverse() : [];
 				 resolve({status: 1, result: result});
 			 }
 	   });

@@ -45,7 +45,7 @@ module.exports = socket => {
       until: new Date,
       limit: 20,
       start: 0,
-      order: 'asc',
+      order: 'desc',
       fields: ['message', 'level']
     };
 
