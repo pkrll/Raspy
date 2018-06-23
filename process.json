@@ -1,18 +1,36 @@
 {
-  "apps" : [{
-    "name"   : "Raspy",
-    "cwd" : "server",
-    "script" : "server.js",
-    "env_development": {
-      "NODE_ENV": "development"
+  "apps" : [
+    {
+      "name": "Raspy",
+      "cwd": "server",
+      "script": "server.js",
+      "env_development": {
+        "NODE_ENV": "development"
+      },
+      "watch": ["server"],
+      "ignore_watch" : ["node_modules", "client/node_modules", "server/node_modules"],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "env" : {
+        "NODE_ENV": "production"
+      }
     },
-    "watch": ["server"],
-    "ignore_watch" : ["node_modules", "client/node_modules", "server/node_modules"],
-    "watch_options": {
-      "followSymlinks": false
-    },
-    "env" : {
-      "NODE_ENV": "production"
+    {
+      "name": "Bootstrapper",
+      "cwd": "bootstrapper",
+      "script": "app.js",
+      "env_development": {
+        "NODE_ENV": "development"
+      },
+      "watch": ["bootstrapper"],
+      "ignore_watch" : ["node_modules", "web/node_modules"],
+      "watch_options": {
+        "followSymlinks": false
+      },
+      "env" : {
+        "NODE_ENV": "production"
+      }
     }
-  }]
+  ]
 }

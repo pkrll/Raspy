@@ -25,13 +25,19 @@ else
 endif
 
 start:
-	pm2 start process.json --watch
+	pm2 start process.json --only Raspy --watch
 
 restart:
-	pm2 restart process.json
+	pm2 restart process.json --only Raspy
 
 stop:
-	pm2 stop process.json --watch 0
+	pm2 stop process.json --only Raspy --watch 0
+
+start_updater:
+	pm2 start process.json --only Bootstrapper --watch
+
+stop_updater:
+	pm2 stop process.json --only Bootstrapper --watch 0
 
 server:
 ifeq ($(ENV), dev)
@@ -52,9 +58,6 @@ endif
 
 devclient:
 	make ENV=dev client
-
-updater:
-	cd updater && pm2 start process.json
 
 update:
 	git pull
