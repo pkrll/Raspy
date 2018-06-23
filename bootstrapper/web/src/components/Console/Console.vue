@@ -25,6 +25,34 @@ library.add(faMinusSquare, faCaretSquareDown);
 export default {
   name: 'Console',
   props: ['logs', 'commandInprogress'],
+  watch: {
+    /**
+     * Watches changes to logs, and scrolls down to the bottom
+     * of the console on change.
+     *
+     * @param  Array  newValue  The new value
+     * @param  Array  oldValue  The old value
+     */
+    logs: function (newValue, oldValue) {
+      this.$nextTick(function () {
+        this.$el.scrollTop = this.$el.scrollHeight;
+      });
+    },
+    /**
+     * Watches changes to commandInprogress, and scrolls down
+     * to the bottom of the console on change.
+     *
+     * @param  Boolean  newValue  The new value
+     * @param  Boolean  oldValue  The old value
+     */
+    commandInprogress: function (newValue, oldValue) {
+      if (newValue == false) {
+        this.$nextTick(function () {
+          this.$el.scrollTop = this.$el.scrollHeight;
+        });
+      }
+    }
+  },
   computed: {
     status: function () {
       return (this.$root.serverStatus) ? 'running' : 'stopped';
@@ -34,5 +62,4 @@ export default {
 </script>
 
 <style scoped src="@/components/Console/Console.css">
-
 </style>

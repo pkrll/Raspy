@@ -22,7 +22,7 @@ export default {
   components: { Menu, Console },
   data: data,
   methods: methods,
-  created: created
+  created: created,
 }
 </script>
 
