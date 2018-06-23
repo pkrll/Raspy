@@ -1,6 +1,6 @@
 {
   "name": "raspy",
-  "version": "0.17.1+7b",
+  "version": "0.17.1+7d",
   "description": "Client for the Raspy Rest API server.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "private": true,

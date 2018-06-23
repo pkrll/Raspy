@@ -4,7 +4,7 @@
 		<vue-markdown class="changelog">
 			{{content}}
 		</vue-markdown>
-		<div class="button">Update</div>
+		<div class="button" v-on:click="launchBootstrapper">Update</div>
 	</div>
 </template>
 
@@ -14,7 +14,25 @@ import VueMarkdown from 'vue-markdown'
 export default {
 	name: "Changelog",
 	props: ["heading", "content"],
-	components: { 'vue-markdown' : VueMarkdown }
+	components: { 'vue-markdown' : VueMarkdown },
+	methods: {
+		launchBootstrapper: function () {
+			// Because Safari doesnt let us use window.open inside
+			// an async function, we need to create it outside.
+			let newWindow = window.open();
+			let url = window.location.protocol + '//' + window.location.hostname + ':5001';
+			this.$APIManager.launchBootstrapper(response => {
+				if (response.status == 1) {
+					let timer = setInterval(() => {
+						clearInterval(timer);
+						newWindow.location = url;
+					}, 500);
+				} else {
+					console.log(response);
+				}
+			});
+		}
+	}
 }
 </script>
 

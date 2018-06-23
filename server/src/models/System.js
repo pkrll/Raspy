@@ -1,4 +1,4 @@
-
+const oauth = require('../../config/index.js').oauth;
 module.exports = {
   /**
    * Retrieves system information.
@@ -41,7 +41,7 @@ module.exports = {
               let compare = require('compare-versions');
               let response = { heading: '', version: version, isNewer: false, changes: '' }
 
-              if (compare(json.version, version) > 0) {
+              if (compare(json.version, version) == -1) {
                 response.version = json.version;
                 response.isNewer = true;
                 response.changes = json.changes;
@@ -54,14 +54,24 @@ module.exports = {
         }, reject);
       }
     );
+  },
+
+  launchBootstrapper: function () {
+    return executeCommand('cd ../ && make start_updater');
   }
 
 };
 
 function getLatestRelease(callback, reject) {
+  if (oauth.id == 'changeme' || oauth.secret == 'changeme') {
+    reject({status: 0, error: { message: "The application is not authorized to access Github. Check the documentation on how to fix this." }});
+  }
+
+  let url = 'https://api.github.com/repos/pkrll/Raspy/releases';
+  url += '?client_id=' + oauth.id + '&client_secret=' + oauth.secret;
   const remote = require('remote-json');
   remote.https = require('follow-redirects').https;
-  remote('https://api.github.com/repos/pkrll/Raspy/releases', {
+  remote(url, {
     headers: { 'User-Agent': 'Raspy' }
   }).get(function (err, res, body) {
     if (err) {
@@ -76,7 +86,7 @@ function getLatestRelease(callback, reject) {
 
         callback(response);
       } else {
-        reject({status: 0, error: Error("An error occured: " + res.statusCode)});
+        reject({status: 0, error: { message: "An error occured: " + res.statusCode }});
       }
     }
   });

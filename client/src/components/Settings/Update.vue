@@ -20,19 +20,23 @@ export default {
 	methods: {
 		didCheckForUpdate: function (response) {
 			if (response.status == 1) {
-				let version = response.result.version.version;
-				let isNewer = response.result.version.isNewer;
+				let version = response.result.version;
+				let isNewer = response.result.isNewer;
 
 				if (isNewer) {
 					this.heading = 'Version ' + version + ' is available!'
-					this.content = '\r\n'+response.result.version.changes;
+					this.content = '\r\n'+response.result.changes;
 					this.middleComponent = 'Changelog';
 				} else {
 					this.content = "Software is up to date.";
 					this.middleComponent = 'Content';
 				}
 			} else {
-				this.content = "Something went wrong. Could not check for update."
+				if (response.error && response.error.message) {
+					this.content = response.error.message;
+				} else {
+					this.content = "Something went wrong. Could not check for update."
+				}
 				this.middleComponent = 'Content';
 			}
 		}

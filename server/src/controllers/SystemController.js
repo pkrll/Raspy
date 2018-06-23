@@ -1,6 +1,5 @@
 // SystemController.js
 const system = require('../models/System');
-const logger = require('../shared/logger.js');
 
 module.exports = {
 
@@ -20,11 +19,10 @@ module.exports = {
     })
   },
 
-  launchUpdater: function (req, res) {
-    system.launchUpdater().then(function (response) {
+  launchBootstrapper: function (req, res) {
+    system.launchBootstrapper().then(function (response) {
       res.json({status: 1, data: response});
     }).catch(function (error) {
-      console.log(error)
       res.json({status: 0, error: error});
     });
   }

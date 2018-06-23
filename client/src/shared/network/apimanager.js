@@ -188,6 +188,14 @@ export default {
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});
+			},
+
+			launchBootstrapper: function (callback) {
+				this.HTTP.get('system/launchBootstrapper').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
 			}
 		}
 	}
