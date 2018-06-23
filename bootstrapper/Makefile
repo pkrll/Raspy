@@ -3,6 +3,10 @@
 build:
 	npm run build
 
+install:
+	npm install
+	cd web && npm install
+
 run:
 	npm run start:server
 
