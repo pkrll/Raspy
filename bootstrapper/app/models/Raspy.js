@@ -1,9 +1,10 @@
 'use strict'
 
-exports.update  = callback => execute('cd ../ && make update', callback);
-exports.install = callback => execute('cd ../ && make install', callback);
-exports.restart = callback => execute('cd ../ && make restart', callback);
-exports.stop 		= callback => execute('cd ../ && make stop', callback);
+exports.update   = callback => execute('cd ../ && make update', callback);
+exports.install  = callback => execute('cd ../ && make install', callback);
+exports.restart  = callback => execute('cd ../ && make restart', callback);
+exports.stop 		 = callback => execute('cd ../ && make stop', callback);
+exports.shutdown = callback => execute('cd ../ && make shutdown', callback);
 
 function execute(process, callback) {
 	const spawn 	= require('child_process').spawn;

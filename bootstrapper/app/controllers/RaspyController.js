@@ -16,3 +16,7 @@ exports.restart = (callback) => {
 exports.stop = (callback) => {
 	Raspy.stop(callback);
 }
+
+exports.shutdown = (callback) => {
+	Raspy.shutdown(callback);
+}

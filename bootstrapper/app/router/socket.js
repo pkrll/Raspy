@@ -27,6 +27,9 @@ module.exports = socket => {
       case 'stop':
         Raspy.stop(message => socket.emit('command', message));
         break;
+      case 'shutdown':
+        Raspy.shutdown(message => socket.emit('command', message));
+        break;
       default:
         socket.emit('command', {
           status: 0,
