@@ -9,12 +9,12 @@
           <span><font-awesome-icon icon="cloud-download-alt"/><br/>Update</span>
         </div>
         <div v-on:click="call('install')" v-bind:class="{inactive: commandInprogress}">
-          <span><font-awesome-icon icon="cog"/><br/>Update</span>
+          <span><font-awesome-icon icon="cog"/><br/>Install</span>
         </div>
 			</div>
 			<div class="grouped">
 				<div v-on:click="call('restart')" v-bind:class="{inactive: commandInprogress}">
-					<span><font-awesome-icon icon="redo-alt"/><br/>Restart</span>
+					<span><font-awesome-icon icon="redo-alt"/><br/>(Re)start</span>
 				</div>
 				<div v-on:click="call('stop')" v-bind:class="{inactive: commandInprogress}">
 					<span><font-awesome-icon icon="plug"/><br/>Stop</span>
