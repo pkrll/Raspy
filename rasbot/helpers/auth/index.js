@@ -1,53 +1,74 @@
 'use strict'
-const bcrypt = require('bcrypt');
-const parser = require('./parser.js');
+const bcrypt 	 = require('bcrypt');
+const parser 	 = require('./parser.js');
+const token 	 = require('./token.js');
 const FileSync = require('lowdb/adapters/FileSync');
+
+const decodeBasicAuth = req => {
+	if (req.headers == null || req.headers.authorization == null) {
+		return null;
+	}
+
+	return parser.basicAuth(req.headers.authorization);
+}
+
+const decodeTokenAuth = req => {
+	if (req.headers == null || req.headers.authorization == null) {
+		return null;
+	}
+
+	return parser.tokenAuth(req.headers.authorization);
+}
 
 module.exports = databasePath => {
 
-	const database = require('lowdb')(new FileSync(databasePath));
-
 	const auth = {
 
-		authenticate: (data, callback) => {
-			let username = data.username;
-			let password = data.password;
-			let response = { status: 0, error: { message: 'No username given.' } };
+		authenticate: req => {
+			return new Promise((resolve, reject) => {
+				let credentials = decodeBasicAuth(req);
 
-			if (username == undefined || username == null) { callback(response); }
+				if (!credentials) {
+					reject(Error("Missing headers."));
+				}
 
-			const credentials = database.get('users').find({ username: username }).value();
+				let username = credentials.username;
+				let password = credentials.password;
 
-			if (credentials != undefined) {
-				bcrypt.compare(password, credentials.password, (err, res) => {
-				  if(res) {
-						let response = {
-							status: 1,
-							result: {
-								token: '1234'
-							}
-						};
+				if (username == undefined || username == null) {
+					reject(Error("Missing username."));
+				}
 
-						callback(response);
-				  } else {
-						response.error.message = 'Wrong username or password!';
-						callback(response);
-				  }
-				});
-			} else {
-				response.error.message = 'Username not found!';
-				callback(response);
-			}
+				const lowdb = require('lowdb')(new FileSync(databasePath));
+				const user  = lowdb.get('users').find({ username: username }).value();
+
+				if (user != undefined) {
+					bcrypt.compare(password, user.password, (err, res) => {
+						if (err != null) { reject(err); }
+						if (res == false) {
+							reject(Error("Wrong username or password!"));
+						}
+
+						token.generate((error, userToken) => {
+							if (error) { throw error; }
+							token.save(userToken);
+							resolve(userToken);
+						});
+					});
+				} else {
+					reject(Error("User not found."));
+				}
+			});
 		},
 
 		isAuthorized: (req, res, next) => {
-			const credentials = parser(req.headers.authorization);
-			console.log(credentials);
-			// if (credentials && checkAuth(credentials.username, credentials.token)) {
-			// 	return next();
-			// }
+			const credential = decodeTokenAuth(req);
 
-			return res.status(401).json({status: 0, error: { message: 'Unauthorized' } });
+			if (credential && token.check(credential)) {
+				return next();
+			}
+
+			return res.status(401).json({status: 0, error: { message: 'Unauthorized access.' } });
 		}
 	}
 

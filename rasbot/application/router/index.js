@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express');
-const path    = require('path');
+const path = require('path');
+const auth = require('../../helpers/auth/');
 
 module.exports = app => {
 
@@ -15,12 +16,12 @@ module.exports = app => {
 		res.status(404).send({ status: 0, error: { message: "Not found." } });
 	});
 
-	router.post('/login', (req, res) => {
-		if (req.body) {
-			auther.authenticate(req.body, response => res.json(response));
-		} else {
-			res.status(401).send({ status: 0, error: { message: "No data."}});
-		}
+	router.get('/login', (req, res) => {
+		auther.authenticate(req).then(token => {
+			res.json({ success: true, result: { token: token } });
+		}).catch(error => {
+			res.status(401).json({ success: false, error: { message: error.message } });
+		});
 	});
 
 	// ------------------------------

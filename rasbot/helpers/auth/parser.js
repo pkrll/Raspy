@@ -1,13 +1,30 @@
 'use strict'
-const CREDENTIALS_BASE_REGEXP = /^ *(basic) +([A-Za-z0-9._~+\/-]+=*) *$/;
+const BASIC_AUTH_REGEXP = /^ *(basic) +([A-Za-z0-9._~+\/-]+=*) *$/;
+const TOKEN_AUTH_REGEXP = /^ *(bearer) +([A-Za-z0-9._~+\/-]+=*) *$/;
 
-module.exports = function(string) {
-	let result = new RegExp(CREDENTIALS_BASE_REGEXP, 'i').exec(string);
+exports.basicAuth = string => {
+	let result = parse(string, BASIC_AUTH_REGEXP);
 
 	if (result) {
-		let credentials = Buffer.from(result[2], 'base64').toString().split(':');
-		return { username: credentials[0], token: credentials[1] };
+		let credentials = result.split(':');
+		return {
+			username: credentials[0],
+			password: credentials[1]
+		};
 	}
 
-	return false;
+	return null;
+}
+
+exports.tokenAuth = string => {
+	let result = new RegExp(TOKEN_AUTH_REGEXP, 'i').exec(string);
+	return result[2];
+}
+
+function parse(string, regularExpression) {
+	let result = new RegExp(regularExpression, 'i').exec(string);
+
+	if (!result) return null;
+
+	return Buffer.from(result[2], 'base64').toString();
 }
