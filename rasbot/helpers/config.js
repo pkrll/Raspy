@@ -7,8 +7,9 @@ const config	= require('../config');
 module.exports = function (app, _path) {
 	const productionMode = (process.env.NODE_ENV == 'production');
 	const configurations = (productionMode) ? config.production : config.development;
+	const databasePath 	 = path.join(_path, configurations.databasePath);
 
-	app.set('databasePath', configurations.databasePath);
+	app.set('databasePath', databasePath);
 	app.set('port', process.env.PORT || configurations.port);
   app.set('dist', path.join(_path, 'dist'));
 

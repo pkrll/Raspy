@@ -1,10 +1,10 @@
 'use strict'
 const express = require('express');
 const path    = require('path');
-const auther  = require('../../helpers/auth/');
 
 module.exports = app => {
 
+	const auther = require('../../helpers/auth/')(app.get('databasePath'));
 	const router = express.Router();
 
 	// ------------------------------
