@@ -1,0 +1,96 @@
+.slide-leave-active,
+.slide-enter-active {
+	transition: 1s ease-in-out;
+  opacity: 1;
+}
+
+.slide-enter {
+	transform: translate(0, 100%);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translate(0, 100vh);
+  opacity: 0;
+  position: absolute;
+}
+
+#wrapper {
+  align-items:      center;
+  display:          flex;
+  flex-direction:   column;
+  height:           100%;
+  justify-content:  center;
+  min-height:       100vh;
+  width:            100%;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 50%;
+  font-size: 6vw;
+  transition: 1s ease-in-out;
+}
+
+.logo-on-login {
+  height: 30%;
+}
+
+.logo-animation {
+   -webkit-animation: color-change 2s ease-in-out;
+      -moz-animation: color-change 2s ease-in-out;
+        -o-animation: color-change 2s ease-in-out;
+           animation: color-change 2s ease-in-out;
+}
+
+@media only screen and (min-device-width: 320px)
+									 and (max-device-width: 812px) {
+
+  .logo {
+    font-size: 10vw;
+  }
+
+
+}
+
+@media only screen and (min-device-width: 320px)
+									 and (max-device-width: 812px)
+									 and (orientation: landscape) {
+
+   .logo {
+     height: 60%;
+   }
+
+   .logo-on-login {
+     transition: 1s ease-in-out;
+     opacity: 0;
+   }
+   .slide-leave-to {
+     position: inherit;
+   }
+
+}
+
+@keyframes color-change {
+  0%   { color:red; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flicker {
+  0%   { color:red; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flicker {
+  0%   { color:red; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flicker {
+  0%   { color:red; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
