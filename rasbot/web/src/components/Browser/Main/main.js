@@ -24,6 +24,9 @@ exports.watch = {
     this.isFavorite = this.$root.getBookmark() == this.prettyPath;
     let path = (to.params.path != undefined) ? decodeURIComponent(to.params.path) : '/';
     this.$APIManager.browseDirectory(path, this.browseDirectory);
+  },
+  'didClickDelete' () {
+    this.showConfirmation(this.didClickDelete);
   }
 };
 
@@ -36,6 +39,11 @@ exports.computed = {
 };
 
 exports.methods = {
+
+  showConfirmation: function (show) {
+    this.didClickDelete = show;
+    this.bottomComponent = (show) ? 'ConfirmButton' : '';
+  },
 
   browseDirectory: function (response) {
     if (response.success) {
@@ -65,8 +73,21 @@ exports.methods = {
     }
   },
 
-  deleteDirectory: function() {
+  deleteDirectory: function (confirmation) {
+    if (confirmation) {
+      this.middleComponent = 'Spinner';
 
+      this.$APIManager.deleteFile(this.prettyPath, response => {
+        if (response.success) {
+          this.$shared.goBack(this);
+        } else {
+          this.textElement = response.error;
+          this.middleComponent = 'Content';
+        }
+      });
+    } else {
+      this.showConfirmation(false);
+    }
   },
   /**
    * Toggles the current path as the bookmarked path.

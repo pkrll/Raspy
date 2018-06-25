@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<nav class="bottom-dialog">
-			<div v-on:click="$emit('deleteFile', false)"><span>Cancel</span></div>
-			<div v-on:click="$emit('deleteFile', true)"><span>Confirm</span></div>
+			<div v-on:click="$emit('confirm', false)"><span>Cancel</span></div>
+			<div v-on:click="$emit('confirm', true)"><span>Confirm</span></div>
 		</nav>
 	</div>
 </template>
