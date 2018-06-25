@@ -11,7 +11,7 @@ exports.data = function () {
 };
 
 exports.created = function () {
-  // this.$APIManager.viewFile(this.prettyPath, this.viewFile);
+  this.$APIManager.viewFile(this.prettyPath, this.viewFile);
 };
 
 exports.watch = {

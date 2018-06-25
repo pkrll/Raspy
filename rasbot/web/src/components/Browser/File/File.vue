@@ -25,7 +25,7 @@
 		</component>
 
 		<component v-bind:is="bottomComponent"
-               v-on:deleteFile="deleteFile">
+               v-on:confirm="deleteFile">
 		</component>
 	</section>
 </template>
