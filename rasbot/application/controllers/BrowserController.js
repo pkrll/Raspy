@@ -2,7 +2,7 @@
 const path = require('path');
 const browser = require('../models/Browser');
 
-const buildPath = (params) {
+const buildPath = (params) => {
 	let request = '/';
 
 	if (params.path != undefined) {

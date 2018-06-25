@@ -31,7 +31,7 @@ module.exports = app => {
   // ------------------------------
 
 	// Checks if call is authorized
-  router.use(auther.isAuthorized);
+  // router.use(auther.isAuthorized);
 
 	// ------------------------------
   //          /browse
@@ -56,7 +56,7 @@ module.exports = app => {
   // ------------------------------
   router.route('/folder/new')
     // Create a new folder
-    .post(browserController.create);
+    .post(browserController.makeDirectory);
   // ------------------------------
   //          /download
   // ------------------------------

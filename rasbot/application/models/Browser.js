@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const parseDirContent = (parent, file, list) => {
+const parseContent = (parent, file, list) => {
 	const fullPath = path.join(parent, file);
 	let fileObject = { name: file, path: fullPath };
 
