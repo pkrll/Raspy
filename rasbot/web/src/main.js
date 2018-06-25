@@ -5,11 +5,13 @@ import App from './App';
 import router from './router';
 import VueCookie from 'vue-cookie';
 import APIManager from '@/shared/APIManager.js';
+import Application from '@/shared/application.js';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.config.productionTip = false;
 
 Vue.use(VueCookie);
+Vue.use(Application);
 Vue.use(APIManager, process.env.API_URL, 60000);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

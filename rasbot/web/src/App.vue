@@ -6,15 +6,19 @@
     <transition name="route-change" mode="out-in">
       <router-view/>
     </transition>
+    <transition name="slide-down">
+      <app-footer v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-footer>
+    </transition>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Common/Header/Header.vue';
+import Footer from '@/components/Common/Footer/Footer.vue';
 
 export default {
   name: 'App',
-  components: { 'app-header': Header }
+  components: { 'app-header': Header, 'app-footer': Footer }
 }
 </script>
 

@@ -1,0 +1,38 @@
+.slide-down-leave-active,
+.slide-down-enter-active {
+	transition: 1s ease-in-out;
+  opacity: 1;
+}
+
+.slide-down-enter {
+	transform: translate(0, 100%);
+  opacity: 0;
+}
+
+.slide-down-leave-to {
+  transform: translate(0, 100vh);
+  opacity: 0;
+  position: absolute;
+}
+
+footer {
+	bottom:						0;
+	font-size:				2vw;
+	position: 				absolute;
+  width:            100%;
+}
+
+#container {
+  display:					flex;
+  flex-shrink:			0;
+  justify-content: 	space-between;
+  padding:          10px;
+}
+
+@media screen and (max-width: 540px) {
+
+	footer {
+		font-size: 	3.4vw;
+	}
+
+}
