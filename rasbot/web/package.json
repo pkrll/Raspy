@@ -7,13 +7,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
-    "vue-cookie": "^1.1.4",
-    "axios": "^0.18.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0",
     "@fortawesome/free-solid-svg-icons": "^5.1.0",
-    "@fortawesome/vue-fontawesome": "^0.1.0"
+    "@fortawesome/vue-fontawesome": "^0.1.0",
+    "axios": "^0.18.0",
+    "vue": "^2.5.2",
+    "vue-cookie": "^1.1.4",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
