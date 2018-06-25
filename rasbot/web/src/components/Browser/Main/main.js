@@ -13,7 +13,7 @@ exports.data = function() {
     toggleHiddenIcon: 'toggle-off',
     errorMessage: undefined
   }
-}
+};
 
 exports.watch = {
   '$route' (to, from) {
@@ -48,15 +48,41 @@ exports.methods = {
   },
 
   makeDirectory: function() {
+    let folderName = prompt("Set folder name:");
+    if (folderName != null && folderName != "") {
+      let directory = this.prettyPath + '/' + folderName;
 
+      this.$APIManager.createFolder(directory, response => {
+        if (response.success) {
+          this.$router.push({
+            name: 'Directory',
+            params: { path: encodeURIComponent(response.result.path) }
+          });
+        } else {
+          alert(response.error);
+        }
+      });
+    }
   },
 
   deleteDirectory: function() {
 
+  },
+  /**
+   * Toggles the current path as the bookmarked path.
+   */
+  toggleFavorite: function () {
+    if (this.isFavorite) {
+      this.$root.clearBookmark();
+    } else {
+      this.$root.setBookmark(this.prettyPath);
+    }
+
+    this.isFavorite = !this.isFavorite;
   }
 
-}
+};
 
 exports.created = function() {
   this.$APIManager.browseDirectory(this.prettyPath, this.browseDirectory);
-}
+};

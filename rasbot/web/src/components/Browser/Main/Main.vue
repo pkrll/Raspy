@@ -1,7 +1,7 @@
 <template>
-	<section class="wrapper">
+	<section id="content">
 		<nav class="options" v-show="this.errorMessage == undefined">
-			<div class="noselect" v-bind:class="{active: isFavorite}">
+			<div class="noselect" v-on:click="toggleFavorite" v-bind:class="{active: isFavorite}">
 				<font-awesome-icon icon="star"/>
 				<div class="title">Set as favorite</div>
 			</div>
@@ -47,11 +47,12 @@
 <script>
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Directory from '@/components/Browser/Directory/Directory.vue';
-import { watch, computed, methods, data, created } from '@/components/Browser/Main/main.js';
+import { watch, computed, methods, data, created, fontAwesomeIcons } from '@/components/Browser/Main/main.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faCogs, faToggleOn, faToggleOff, faFolder, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faFileImage, faFilePdf, faFileArchive, faFileAlt, faFileWord, faFilePowerpoint, faFileExcel, faFileAudio, faFileVideo, faFileCode } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faStar, faCogs, faToggleOn, faToggleOff, faFolder, faTrash);
+library.add(faStar, faCogs, faToggleOn, faToggleOff, faFolder, faTrash, faFileImage, faFilePdf, faFileArchive, faFileAlt, faFileWord, faFilePowerpoint, faFileExcel, faFileAudio, faFileVideo, faFileCode);
 
 export default {
 	props: { path: { default: '/' } },

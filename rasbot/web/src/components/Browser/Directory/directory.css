@@ -12,7 +12,7 @@
 	background: rgb(32,35,44);
 }
 
-.wrapper {
+#content {
 	margin: 10px 0;
   text-align: left;
 }

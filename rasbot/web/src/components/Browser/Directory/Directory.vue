@@ -1,5 +1,5 @@
 <template>
-	<section class="wrapper">
+	<section id="content">
 		<nav class="file-list-view" v-if="files.length > 0 || directories.length > 0">
 
 			<router-link :to="{ name: 'Directory', params: {path: encodeURIComponent(this.parentPath) }}" class="row" v-if="this.prettyPath != '/'">

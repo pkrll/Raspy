@@ -52,7 +52,7 @@ body {
   flex-direction: column;
 }
 
-.wrapper {
+#content {
 	font-size: 4vw;
   flex-grow: 1;
 }
