@@ -60,7 +60,7 @@ module.exports = databasePath => {
 						token.generate((error, userToken) => {
 							if (error) { throw error; }
 							const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-							token.save(userToke, clientIP);
+							token.save(userToken, clientIP);
 							resolve(userToken);
 						});
 					});
@@ -78,7 +78,12 @@ module.exports = databasePath => {
 				return next();
 			}
 
-			return res.status(401).json({success: false, error: { message: 'Unauthorized access.' } });
+			return res.status(401).json({
+				success: false,
+				error: {
+					message: 'Unauthorized access.'
+				}
+			});
 		}
 	}
 

@@ -19,7 +19,7 @@ exports.save = (token, clientIP) => {
 	console.log(lowdb.get('tokens').size().value());
 }
 
-exports.check = token => {
+exports.check = (token, clientIP) => {
 	const credentials = lowdb.get('tokens').find({ token: token }).value();
 	if (credentials && credentials.clientIP == clientIP) {
 		return true;
