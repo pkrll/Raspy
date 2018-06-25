@@ -39,20 +39,12 @@
   height: 30%;
 }
 
-.logo-animation {
-   -webkit-animation: color-change 2s ease-in-out;
-      -moz-animation: color-change 2s ease-in-out;
-        -o-animation: color-change 2s ease-in-out;
-           animation: color-change 2s ease-in-out;
-}
-
 @media only screen and (min-device-width: 320px)
 									 and (max-device-width: 812px) {
 
   .logo {
     font-size: 10vw;
   }
-
 
 }
 
@@ -74,23 +66,27 @@
 
 }
 
+.logo-animation {
+   display: inline-block;
+   -webkit-animation: color-change 1s ease-in-out;
+      -moz-animation: color-change 1s ease-in-out;
+        -o-animation: color-change 1s ease-in-out;
+           animation: color-change 1s ease-in-out;
+}
+
 @keyframes color-change {
-  0%   { color:red; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+  0%   { opacity: 0; transform:translateX(-100vh); }
+  100% { opacity: 1; transform:translateX(0px);    }
 }
 @-o-keyframes flicker {
-  0%   { color:red; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+  0%   { opacity: 0; transform:translateX(-100vh); }
+  100% { opacity: 1; transform:translateX(0px);    }
 }
 @-moz-keyframes flicker {
-  0%   { color:red; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+  0%   { opacity: 0; transform:translateX(-100vh); }
+  100% { opacity: 1; transform:translateX(0px);    }
 }
 @-webkit-keyframes flicker {
-  0%   { color:red; }
-  50%  { opacity:0; }
-  100% { opacity:1; }
+  0%   { opacity: 0; transform:translateX(-100vh); }
+  100% { opacity: 1; transform:translateX(0px);    }
 }

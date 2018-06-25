@@ -3,7 +3,7 @@
 exports.data = () => {
   return {
     component: 'Splash',
-    textElement: 'Initializing...'
+    textElement: 'Initializing'
   }
 }
 

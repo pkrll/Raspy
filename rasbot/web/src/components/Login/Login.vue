@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { data, methods, mounted } from '@/components/Login/Login.js'
+import { data, methods, mounted } from '@/components/Login/login.js'
 
 export default {
   name: 'Login',

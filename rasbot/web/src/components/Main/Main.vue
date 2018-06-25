@@ -1,7 +1,7 @@
 <template>
   <section id="wrapper">
     <div class="logo" v-bind:class="{ 'logo-on-login': onLogin }" v-on:click="test">
-      <div><font-awesome-icon icon="robot"/><br>Raspb<span class="logo-animation">ot</span></div>
+      <div><font-awesome-icon icon="robot"/><br>Raspb<div class="logo-animation">ot</div></div>
     </div>
     <transition name="slide">
       <component v-bind:is="component" v-bind:textElement="textElement">
@@ -13,7 +13,7 @@
 <script>
 import Splash from '@/components/Common/Splash/Splash.vue';
 import Login from '@/components/Login/Login.vue';
-import { data, computed, created, mounted, methods } from '@/components/Main/Main.js';
+import { data, computed, created, mounted, methods } from '@/components/Main/main.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faRobot } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,5 +30,5 @@ export default {
 }
 </script>
 
-<style scoped src="@/components/Main/Main.css">
+<style scoped src="@/components/Main/main.css">
 </style>
