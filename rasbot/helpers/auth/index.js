@@ -20,6 +20,14 @@ const decodeTokenAuth = req => {
 	return parser.tokenAuth(req.headers.authorization);
 }
 
+const retrieveClientIP = req => {
+	if (req.headers == null || req.headers.authorization == null) {
+		return null;
+	}
+
+	return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+}
+
 module.exports = databasePath => {
 
 	const auth = {
@@ -51,7 +59,8 @@ module.exports = databasePath => {
 
 						token.generate((error, userToken) => {
 							if (error) { throw error; }
-							token.save(userToken);
+							const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+							token.save(userToke, clientIP);
 							resolve(userToken);
 						});
 					});
@@ -63,12 +72,13 @@ module.exports = databasePath => {
 
 		isAuthorized: (req, res, next) => {
 			const credential = decodeTokenAuth(req);
+			const clientIP = retrieveClientIP(req);
 
-			if (credential && token.check(credential)) {
+			if (credential && clientIP && token.check(credential, clientIP)) {
 				return next();
 			}
 
-			return res.status(401).json({status: 0, error: { message: 'Unauthorized access.' } });
+			return res.status(401).json({success: false, error: { message: 'Unauthorized access.' } });
 		}
 	}
 

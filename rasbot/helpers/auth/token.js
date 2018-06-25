@@ -14,13 +14,14 @@ exports.generate = callback => {
 	});
 }
 
-exports.save = token => {
-	lowdb.get('tokens').push({ token: token }).write();
+exports.save = (token, clientIP) => {
+	lowdb.get('tokens').push({ token: token, clientIP: clientIP }).write();
 	console.log(lowdb.get('tokens').size().value());
 }
 
 exports.check = token => {
-	if (lowdb.get('tokens').find({ token: token }).value()) {
+	const credentials = lowdb.get('tokens').find({ token: token }).value();
+	if (credentials && credentials.clientIP == clientIP) {
 		return true;
 	}
 

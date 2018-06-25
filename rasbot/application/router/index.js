@@ -16,11 +16,11 @@ module.exports = app => {
 		res.status(404).send({ status: 0, error: { message: "Not found." } });
 	});
 
-	router.get('/login', (req, res) => {
+	router.post('/login', (req, res) => {
 		auther.authenticate(req).then(token => {
 			res.json({ success: true, result: { token: token } });
 		}).catch(error => {
-			res.status(401).json({ success: false, error: { message: error.message } });
+			res.json({ success: false, error: { message: error.message } });
 		});
 	});
 
