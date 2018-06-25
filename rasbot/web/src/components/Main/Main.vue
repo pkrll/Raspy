@@ -1,11 +1,12 @@
 <template>
   <section id="wrapper">
-    <div class="logo" v-bind:class="{ 'logo-on-login': onLogin }">
+    <div class="logo" v-bind:class="{ 'logo-on-login': onLogin }" v-on:click="test">
       <div><font-awesome-icon icon="robot"/><br>Raspb<div class="logo-animation">ot</div></div>
     </div>
     <transition name="slide">
       <component v-bind:is="component"
                  v-bind:textElement="textElement"
+                 v-bind:animation="animation"
                  v-on:signIn="signIn">
       </component>
     </transition>

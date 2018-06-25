@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <transition name="slide-down">
+      <app-header v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-header>
+    </transition>
     <transition name="route-change" mode="out-in">
       <router-view/>
     </transition>
@@ -7,8 +10,11 @@
 </template>
 
 <script>
+import Header from '@/components/Common/Header/Header.vue';
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { 'app-header': Header }
 }
 </script>
 

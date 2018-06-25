@@ -39,6 +39,14 @@
   height: 30%;
 }
 
+.logo-animation {
+   display: inline-block;
+   -webkit-animation: color-change 1s ease-in-out;
+      -moz-animation: color-change 1s ease-in-out;
+        -o-animation: color-change 1s ease-in-out;
+           animation: color-change 1s ease-in-out;
+}
+
 @media only screen and (min-device-width: 320px)
 									 and (max-device-width: 812px) {
 
@@ -60,18 +68,11 @@
      transition: 1s ease-in-out;
      opacity: 0;
    }
+
    .slide-leave-to {
      position: inherit;
    }
 
-}
-
-.logo-animation {
-   display: inline-block;
-   -webkit-animation: color-change 1s ease-in-out;
-      -moz-animation: color-change 1s ease-in-out;
-        -o-animation: color-change 1s ease-in-out;
-           animation: color-change 1s ease-in-out;
 }
 
 @keyframes color-change {

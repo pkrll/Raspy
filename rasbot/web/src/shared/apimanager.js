@@ -18,22 +18,34 @@ export default {
             password: password
           }
         }).then(response => {
+          console.log(response);
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
           console.log(error);
         });
       },
-
-      test: function (callback) {
-        this.HTTP.get('test').then(response => {
-          callback(response);
-        }).catch(error => {
-          console.log(error.response);
-        })
-      }
+      /**
+			 * Browse the specified path.
+			 *
+			 * Calls the /browser endpoint.
+			 *
+			 * @param  {String} 	path 			The path to the directory list.
+			 * @param  {Function} callback 	The callback to invoke on response.
+			 */
+			browseDirectory: function (path, callback) {
+				this.HTTP.get('browse' + path).then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+			},
 
     }
 
   }
+
+}
+
+function handleError(error) {
 
 }

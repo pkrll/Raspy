@@ -3,7 +3,8 @@
 exports.data = () => {
   return {
     component: 'Splash',
-    textElement: 'Initializing'
+    textElement: 'Initializing',
+    animation: true
   }
 }
 
@@ -17,16 +18,6 @@ exports.computed = {
    */
   onLogin: function () {
     return (this.component == 'Login')
-  },
-  /**
-   * Determines if the current view is empty.
-   *
-   * This function is used to make sure the design is responsive.
-   *
-   * @return  Boolean  True if the view is Login.
-   */
-  onEmpty: function () {
-    return (this.component == '')
   }
 }
 
@@ -35,19 +26,41 @@ exports.created = function() {
 }
 
 exports.mounted = function() {
-  let timer = setInterval( () => {
-    this.component = 'Login';
-    this.textElement = '';
-    clearInterval(timer);
-  }, 1000);
+  this.delayExecution(() => this.toggleView(), 1000);
 }
 
 exports.methods = {
+
+  test: function() {
+    this.$root.isLoggedIn = true
+  },
+
+  delayExecution: function(func, delay = 1000) {
+    let timer = setInterval(() => {
+      func();
+      clearInterval(timer);
+    }, delay);
+  },
+
+  toggleView: function(textElement = '') {
+    this.component   = (this.onLogin) ? 'Splash' : 'Login';
+    this.textElement = textElement;
+  },
+
   signIn: function(username, password) {
+    this.textElement = "Signing in...";
     this.$APIManager.authenticate(username, password, response => {
       if (response.success) {
-        this.$root.setToken(response.result.token);
+        this.$root.didAuthenticate(response.result.token);
+        this.stopAnimation();
+        this.toggleView('0.3.0');
+      } else {
+        this.textElement = response.error.message;
       }
     });
+  },
+
+  stopAnimation: function() {
+    this.animation = false;
   }
 }
