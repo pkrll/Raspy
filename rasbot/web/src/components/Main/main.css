@@ -10,7 +10,7 @@
 }
 
 .slide-leave-to {
-  transform: translate(0, 100vh);
+  transform: translate(0, -100vh);
   opacity: 0;
   position: absolute;
 }
@@ -21,7 +21,6 @@
   flex-direction:   column;
   height:           100%;
   justify-content:  center;
-  min-height:       100vh;
   width:            100%;
 }
 

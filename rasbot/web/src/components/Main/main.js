@@ -32,7 +32,7 @@ exports.mounted = function() {
 exports.methods = {
 
   test: function() {
-    this.$root.isLoggedIn = true
+    this.$root.isLoggedIn = !this.$root.isLoggedIn;
   },
 
   delayExecution: function(func, delay = 1000) {

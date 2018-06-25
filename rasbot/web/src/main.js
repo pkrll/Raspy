@@ -4,12 +4,14 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import VueCookie from 'vue-cookie';
+import shared from '@/shared/index.js';
 import APIManager from '@/shared/APIManager.js';
 import Application from '@/shared/application.js';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.config.productionTip = false;
 
+Vue.use(shared);
 Vue.use(VueCookie);
 Vue.use(Application);
 Vue.use(APIManager, process.env.API_URL, 60000);
@@ -23,7 +25,7 @@ new Vue({
   template: '<App/>',
   data: function () {
     return {
-      isLoggedIn: false,
+      isLoggedIn: true,
     }
   },
   methods: {
@@ -40,6 +42,10 @@ new Vue({
 
     setBookmark: function(bookmark) {
       this.$cookie.set('bookmark', bookmark);
+    },
+
+    clearBookmark: function() {
+      this.$cookie.delete('bookmark');
     }
 
   }
