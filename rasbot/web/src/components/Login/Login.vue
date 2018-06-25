@@ -3,7 +3,7 @@
     <div class="input">
       <div><input type="text" name="username" placeholder="Username" v-model="username"></div>
       <div><input type="password" name="password" placeholder="Password" v-model="password"></div>
-      <div><div class="button noselect" v-on:click="signIn">Sign in</div></div>
+      <div><div class="button noselect" v-on:click="_signIn">Sign in</div></div>
       <div>{{textElement}}&nbsp;</div>
     </div>
   </div>

@@ -35,12 +35,19 @@ exports.created = function() {
 }
 
 exports.mounted = function() {
-
+  let timer = setInterval( () => {
+    this.component = 'Login';
+    this.textElement = '';
+    clearInterval(timer);
+  }, 1000);
 }
 
 exports.methods = {
-  test: function() {
-    this.component = (this.onLogin) ? 'Splash' : 'Login';
-    this.textElement = (this.onLogin) ? '' : 'Initializing';
+  signIn: function(username, password) {
+    this.$APIManager.authenticate(username, password, response => {
+      if (response.success) {
+        this.$root.setToken(response.result.token);
+      }
+    });
   }
 }

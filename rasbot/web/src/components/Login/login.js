@@ -8,8 +8,8 @@ exports.data = function () {
 }
 
 exports.methods = {
-  signIn: function () {
-
+  _signIn: function () {
+    this.$emit('signIn', this.username, this.password);
   }
 }
 
