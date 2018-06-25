@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const auth = require('../../helpers/auth/');
 
+const browserController = require('../controllers/BrowserController');
+
 module.exports = app => {
 
 	const auther = require('../../helpers/auth/')(app.get('databasePath'));
@@ -13,7 +15,7 @@ module.exports = app => {
   // ------------------------------
 
 	router.get('/', function(req, res) {
-		res.status(404).send({ status: 0, error: { message: "Not found." } });
+		res.status(404).send({ success: false, error: { message: "Not found." } });
 	});
 
 	router.post('/login', (req, res) => {
@@ -31,7 +33,37 @@ module.exports = app => {
 	// Checks if call is authorized
   router.use(auther.isAuthorized);
 
-	// Register the routes
+	// ------------------------------
+  //          /browse
+  // ------------------------------
+	router.route('/browse').get(browserController.browse);
+
+	router.route('/browse/:path*')
+    // Get directory listing
+    .get(browserController.browse)
+    // Delete folder
+    .delete(browserController.remove);
+	// ------------------------------
+  //          /file
+  // ------------------------------
+  router.route('/file/:path*')
+    // Get the requested file
+    .get(browserController.viewFile)
+    // Delete the requested file
+    .delete(browserController.remove);
+  // ------------------------------
+  //          /folder
+  // ------------------------------
+  router.route('/folder/new')
+    // Create a new folder
+    .post(browserController.create);
+  // ------------------------------
+  //          /download
+  // ------------------------------
+  router.route('/download/:path*')
+    // Get the requested file
+    .get(browserController.download);
+
   app.use(express.static(app.get('dist')));
   app.use('/api', router);
   // Catch all to handle direct routes
