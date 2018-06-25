@@ -7,6 +7,7 @@ import File from '@/components/Browser/File/File.vue';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

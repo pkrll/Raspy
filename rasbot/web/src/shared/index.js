@@ -65,8 +65,8 @@ export default {
       /**
        *  Navigates back to the previous page.
        */
-      goBack: function() {
-        this.$root._router.go(-1);
+      goBack: function(self) {
+        self.$root._router.go(-1);
       },
       /**
        *  Prettifies the specified path.

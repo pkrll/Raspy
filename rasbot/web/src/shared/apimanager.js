@@ -31,7 +31,6 @@ export default {
             password: password
           }
         }).then(response => {
-          console.log(response);
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
           console.log(error);
@@ -120,7 +119,7 @@ export default {
           }
 				}).then(response => {
 					fileDownload(response.data, fileName);
-					if (typeof callback === 'function') callback({status: 1});
+					if (typeof callback === 'function') callback({success: true});
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});

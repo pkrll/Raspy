@@ -7,6 +7,7 @@ import VueCookie from 'vue-cookie';
 import shared from '@/shared/index.js';
 import APIManager from '@/shared/APIManager.js';
 import Application from '@/shared/application.js';
+import DateFormatter from '@/shared/dateformatter.js';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.config.productionTip = false;
@@ -14,6 +15,7 @@ Vue.config.productionTip = false;
 Vue.use(shared);
 Vue.use(VueCookie);
 Vue.use(Application);
+Vue.use(DateFormatter);
 Vue.use(APIManager, process.env.API_URL, 60000);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -48,5 +50,11 @@ new Vue({
       this.$cookie.delete('bookmark');
     }
 
+  },
+  created: function () {
+    // const token = this.$cookie.get('_token');
+    // if (token) {
+    //   this.$APIManager.setToken(token);
+    // }
   }
 });

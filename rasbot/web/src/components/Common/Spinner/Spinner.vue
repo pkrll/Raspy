@@ -29,6 +29,7 @@ export default {
   border-radius: 	50%;
   width: 					120px;
   height: 				120px;
+  margin-bottom:  10px;
   animation: 			spin 2s linear infinite;
 }
 

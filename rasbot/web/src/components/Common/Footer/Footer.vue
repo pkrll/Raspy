@@ -4,7 +4,7 @@
   		<div>
   			Built with <font-awesome-icon icon="heart"/> using <font-awesome-icon :icon="['fab', 'vuejs']"/>, <font-awesome-icon :icon="['fab', 'node-js']"/> and <font-awesome-icon :icon="['fab', 'python']"/>
   		</div>
-      <div>Version {{this.$Application.version}}+{{this.$Application.build}}</div>
+      <div>Version {{this.$application.version}}+{{this.$application.build}}</div>
     </div>
 	</footer>
 

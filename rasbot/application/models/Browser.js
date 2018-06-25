@@ -41,7 +41,7 @@ exports.viewFile = filePath => {
 
 	return new Promise((resolve, reject) => {
 		try {
-			let stats = fs.statSync(path);
+			let stats = fs.statSync(filePath);
 			result.metadata.size = stats.size;
 			result.metadata.accessed = stats.atimeMs;
 			result.metadata.created = stats.birthtimeMs;

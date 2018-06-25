@@ -21,11 +21,11 @@ exports.methods = {
   /**
    * Returns the correct icon for the file.
    *
-   * @param  {String} filename The file name.
+   * @param {String} filename The file name.
    */
-	icon: function (filename) {
-		return this.$shared.iconForFile(filename);
-	}
+  icon: function (filename) {
+    return this.$shared.iconForFile(filename);
+  }
 };
 
 exports.created = function() {
