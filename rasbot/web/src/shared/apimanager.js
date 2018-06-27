@@ -45,7 +45,7 @@ export default {
         }).then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
-          console.log(error);
+          if (typeof callback === 'function') callback(handleError(error));
         });
       },
       /**
@@ -144,5 +144,46 @@ export default {
 }
 
 function handleError(error) {
+	let response = {
+		status: 0,
+		error: { statusCode: 0, statusText: '' },
+		result: (error.result) ? error.result : {}
+	};
 
+	if (error.response) {
+		let status = error.response.status;
+
+		switch (status) {
+			case 500:
+				response.error.message = handleInternalError(error.response.data.error);
+				break;
+			default:
+        response.error.message = error.response.statusText;
+        response.error.statusCode = error.response.status;
+        break;
+		}
+	} else if (error.message) {
+		response.error = error.message;
+	}
+
+	return response;
+}
+
+function handleInternalError(error) {
+	switch (error.code) {
+		case "ENOENT":
+			return "No such file or directory: " + error.path;
+		case "ENOTDIR":
+			return "Not a directory";
+		case "ENOTEMPTY":
+			return "Directory not empty";
+		case "EEXIST":
+			return "File exists";
+		case "EACCES":
+			return "Permission denied";
+		default:
+			break;
+	}
+
+	return "Internal server error.";
 }

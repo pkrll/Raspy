@@ -51,7 +51,12 @@ exports.methods = {
       this.directories = response.result.directories;
       this.middleComponent = 'Directory';
     } else {
-      this.errorMessage = response.error;
+      if (response.error.statusCode == 401) {
+        this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+      } else {
+        this.middleComponent = 'Content';
+        this.errorMessage = response.error.message;
+      }
     }
   },
 

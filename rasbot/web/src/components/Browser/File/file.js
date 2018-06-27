@@ -48,8 +48,12 @@ exports.methods = {
 
       this.middleComponent = 'Details';
     } else {
-      this.textElement = response.error;
-      this.middleComponent = 'Content';
+      if (response.error.statusCode == 401) {
+        this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+      } else {
+        this.textElement = response.error.message;
+        this.middleComponent = 'Content';
+      }
     }
   },
 
@@ -74,7 +78,7 @@ exports.methods = {
         if (response.success) {
           this.$shared.goBack(this);
         } else {
-          this.textElement = response.error;
+          this.textElement = response.error.message;
           this.middleComponent = 'Content';
         }
       });

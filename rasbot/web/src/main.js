@@ -27,15 +27,26 @@ new Vue({
   template: '<App/>',
   data: function () {
     return {
-      isLoggedIn: false
+      isLoggedIn: false,
+      lastPath: null
     }
   },
   methods: {
+
+    didReceiveAuthenticationError: function(path) {
+      this.lastPath = path;
+      this.isLoggedIn = false;
+      this._router.push('/');
+    },
 
     didAuthenticate: function(token) {
       this.$APIManager.setToken(token);
       this.$cookie.set('_token', token);
       this.isLoggedIn = true;
+      if (this.lastPath) {
+        this._router.push(decodeURIComponent(this.lastPath));
+        this.lastPath = null;
+      }
     },
 
     getToken: function() {

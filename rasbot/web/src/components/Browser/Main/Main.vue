@@ -37,7 +37,7 @@
                v-bind:files="files"
                v-bind:showHidden="showHidden"
                v-bind:prettyPath="prettyPath"
-               v-bind:content="errorMessage">
+               v-bind:textElement="errorMessage">
 		</component>
 
 		<component v-bind:is="bottomComponent"
@@ -50,6 +50,7 @@
 
 <script>
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
+import Content from '@/components/Common/Content/Content.vue';
 import Directory from '@/components/Browser/Directory/Directory.vue';
 import ConfirmButton from '@/components/Common/ConfirmButton/ConfirmButton.vue';
 import { watch, computed, methods, data, created } from '@/components/Browser/Main/main.js';
@@ -62,7 +63,7 @@ library.add(faStar, faCogs, faToggleOn, faToggleOff, faFolder, faTrash, faFileIm
 export default {
 	props: { path: { default: '/' } },
 	name: 'Browser',
-	components: { Directory, Spinner, ConfirmButton },
+	components: { Directory, Spinner, Content, ConfirmButton },
 	watch: watch,
 	computed: computed,
 	methods: methods,

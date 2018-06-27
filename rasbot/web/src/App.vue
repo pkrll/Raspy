@@ -62,16 +62,16 @@ body {
 }
 
 #app {
-  background:               rgb(45, 49, 57);
-  color:                    #ffffff;
-  font-family:              'Avenir', Helvetica, Arial, sans-serif;
-  height:                   inherit;
-  text-align:               center;
-  -webkit-font-smoothing:   antialiased;
-  -moz-osx-font-smoothing:  grayscale;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
+  background:                 rgb(45, 49, 57);
+  color:                      #ffffff;
+  display:                    flex;
+  flex-direction:             column;
+  font-family:                'Avenir', Helvetica, Arial, sans-serif;
+  height:                     inherit;
+  overflow-y:                 scroll;
+  text-align:                 center;
+  -webkit-font-smoothing:     antialiased;
+  -moz-osx-font-smoothing:    grayscale;
   -webkit-overflow-scrolling: touch;
 }
 

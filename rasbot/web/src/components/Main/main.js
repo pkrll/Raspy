@@ -48,8 +48,8 @@ exports.methods = {
     this.textElement = "Signing in...";
     this.$APIManager.authenticate(username, password, response => {
       if (response.success) {
-        this.$root.didAuthenticate(response.result.token);
         this.toggleView('Splash', '0.3.0', false);
+        this.$root.didAuthenticate(response.result.token);
       } else {
         this.textElement = response.error.message;
       }

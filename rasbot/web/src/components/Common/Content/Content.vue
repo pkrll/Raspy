@@ -1,5 +1,5 @@
 <template>
-  <section id="content">
+  <section id="content-wrapper">
     <div class="content">
       {{textElement}}
     </div>
@@ -17,7 +17,13 @@ export default {
 
 .content {
   font-size: 5vw;
-  text-align: center;
+  padding: 30px;
+}
+
+#content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 </style>
