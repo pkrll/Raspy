@@ -1,7 +1,7 @@
 <template>
   <section id="wrapper">
-    <div class="logo" v-bind:class="{ 'logo-on-login': onLogin }" v-on:click="test">
-      <div><font-awesome-icon icon="robot"/><br>Raspb<div class="logo-animation">ot</div></div>
+    <div class="logo" v-bind:class="{ 'logo-on-login': onLogin }">
+      <div><font-awesome-icon icon="robot"/><br>Raspb<div class="ot" v-bind:class="{'logo-animation': animation }">ot</div></div>
     </div>
     <transition name="slide">
       <component v-bind:is="component"

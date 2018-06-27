@@ -22,6 +22,7 @@
   height:           100%;
   justify-content:  center;
   width:            100%;
+  overflow: hidden;
 }
 
 .logo {
@@ -38,8 +39,11 @@
   height: 30%;
 }
 
+.ot {
+  display: inline-block;
+}
+
 .logo-animation {
-   display: inline-block;
    -webkit-animation: color-change 1s ease-in-out;
       -moz-animation: color-change 1s ease-in-out;
         -o-animation: color-change 1s ease-in-out;

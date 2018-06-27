@@ -15,6 +15,18 @@ export default {
       setToken: function(token) {
         this.HTTP.defaults.headers.common['Authorization'] = "bearer " + token;
       },
+
+      verifyToken: function(token, callback) {
+        this.HTTP.post('verify', {}, {
+          headers: {
+            'Authorization': "bearer " + token
+          }
+        }).then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          console.log(error);
+        });
+      },
       /**
        * Authenticates the user.
        *

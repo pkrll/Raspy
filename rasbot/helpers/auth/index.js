@@ -28,6 +28,13 @@ const retrieveClientIP = req => {
 	return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 }
 
+const verify = req => {
+	const credential = decodeTokenAuth(req);
+	const clientIP = retrieveClientIP(req);
+
+	return (credential && clientIP && token.check(credential, clientIP));
+}
+
 module.exports = databasePath => {
 
 	const auth = {
@@ -70,13 +77,10 @@ module.exports = databasePath => {
 			});
 		},
 
-		isAuthorized: (req, res, next) => {
-			const credential = decodeTokenAuth(req);
-			const clientIP = retrieveClientIP(req);
+		verify: verify,
 
-			if (credential && clientIP && token.check(credential, clientIP)) {
-				return next();
-			}
+		isAuthorized: (req, res, next) => {
+			if (verify(req)) { return next(); }
 
 			return res.status(401).json({
 				success: false,

@@ -26,12 +26,18 @@ module.exports = app => {
 		});
 	});
 
+	router.post('/verify', (req, res) => {
+		res.json({
+			success: auther.verify(req)
+		});
+	});
+
 	// ------------------------------
   //      Authorized calls
   // ------------------------------
 
 	// Checks if call is authorized
-  // router.use(auther.isAuthorized);
+  router.use(auther.isAuthorized);
 
 	// ------------------------------
   //          /browse

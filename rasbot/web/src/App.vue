@@ -4,7 +4,7 @@
       <app-header v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-header>
     </transition>
     <transition name="route-change" mode="out-in">
-      <router-view/>
+      <router-view :key="this.$root._route.params.path"/>
     </transition>
     <transition name="slide-down" mode="out-in">
       <app-footer v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-footer>
@@ -18,11 +18,32 @@ import Footer from '@/components/Common/Footer/Footer.vue';
 
 export default {
   name: 'App',
-  components: { 'app-header': Header, 'app-footer': Footer }
+  components: { 'app-header': Header, 'app-footer': Footer },
+  created: function () {
+    if (this.$root.isLoggedIn == false) {
+      this.$root._router.push('/');
+    }
+	}
 }
 </script>
 
 <style>
+
+.route-change-leave-active,
+.route-change-enter-active {
+	transition: 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.route-change-enter {
+	transform: translate(-100%, 0);
+  opacity: 0;
+}
+
+.route-change-leave-to {
+  transform: translate(-100%, 0);
+  opacity: 0;
+}
 
 body, html {
   background: rgb(45, 49, 57);
@@ -50,6 +71,8 @@ body {
   -moz-osx-font-smoothing:  grayscale;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 #content {

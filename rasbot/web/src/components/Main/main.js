@@ -21,19 +21,15 @@ exports.computed = {
   }
 }
 
-exports.created = function() {
-
-}
-
 exports.mounted = function() {
-  this.delayExecution(() => this.toggleView(), 1000);
+  if (this.$root.isLoggedIn) {
+    this.toggleView('Splash', '', false);
+  } else {
+    this.delayExecution(() => this.toggleView('Login'), 1000);
+  }
 }
 
 exports.methods = {
-
-  test: function() {
-    this.$root.isLoggedIn = !this.$root.isLoggedIn;
-  },
 
   delayExecution: function(func, delay = 1000) {
     let timer = setInterval(() => {
@@ -42,9 +38,10 @@ exports.methods = {
     }, delay);
   },
 
-  toggleView: function(textElement = '') {
-    this.component   = (this.onLogin) ? 'Splash' : 'Login';
+  toggleView: function(component = '', textElement = '', animation = true) {
+    this.component   = component;
     this.textElement = textElement;
+    this.animation   = animation;
   },
 
   signIn: function(username, password) {
@@ -52,15 +49,10 @@ exports.methods = {
     this.$APIManager.authenticate(username, password, response => {
       if (response.success) {
         this.$root.didAuthenticate(response.result.token);
-        this.stopAnimation();
-        this.toggleView('0.3.0');
+        this.toggleView('Splash', '0.3.0', false);
       } else {
         this.textElement = response.error.message;
       }
     });
-  },
-
-  stopAnimation: function() {
-    this.animation = false;
   }
 }

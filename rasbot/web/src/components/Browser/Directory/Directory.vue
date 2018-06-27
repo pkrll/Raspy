@@ -4,7 +4,7 @@
 
 			<router-link :to="{ name: 'Directory', params: {path: encodeURIComponent(this.parentPath) }}" class="row" v-if="this.prettyPath != '/'">
 				<div class="icon"><font-awesome-icon icon="folder-open"/></div>
-				<div class="title">...</div>
+				<div class="title">..</div>
 			</router-link>
 
 			<nav v-for="directory in directories" v-if="showHidden || !directory.name.startsWith('.')">
@@ -27,7 +27,7 @@
 		<nav class="file-list-view" v-else>
 			<router-link :to="{ name: 'Directory', params: {path: encodeURIComponent(this.parentPath) }}" class="row" v-if="this.prettyPath != '/'">
 				<div class="icon"><font-awesome-icon icon="folder-open"/></div>
-				<div class="title">...</div>
+				<div class="title">..</div>
 			</router-link>
 		</nav>
 	</section>
@@ -50,4 +50,23 @@ export default {
 </script>
 
 <style scoped src="@/components/Browser/Directory/directory.css">
+</style>
+<style>
+
+.route-change-leave-active,
+.route-change-enter-active {
+	transition: 0.25s ease-in-out;
+  opacity: 1;
+}
+
+.route-change-enter {
+	transform: translate(-100%, 0);
+  opacity: 0;
+}
+
+.route-change-leave-to {
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+
 </style>

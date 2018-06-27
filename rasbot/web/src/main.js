@@ -27,15 +27,19 @@ new Vue({
   template: '<App/>',
   data: function () {
     return {
-      isLoggedIn: true,
+      isLoggedIn: false
     }
   },
   methods: {
 
     didAuthenticate: function(token) {
       this.$APIManager.setToken(token);
-      // this.$cookie.set('_token', token);
+      this.$cookie.set('_token', token);
       this.isLoggedIn = true;
+    },
+
+    getToken: function() {
+      return this.$cookie.get("_token");
     },
 
     getBookmark: function() {
@@ -52,9 +56,7 @@ new Vue({
 
   },
   created: function () {
-    // const token = this.$cookie.get('_token');
-    // if (token) {
-    //   this.$APIManager.setToken(token);
-    // }
+    const token = this.$root.getToken();
+    if (token) this.didAuthenticate(token);
   }
 });
