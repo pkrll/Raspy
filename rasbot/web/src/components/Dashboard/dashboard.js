@@ -26,27 +26,40 @@ exports.beforeDestroy = function() {
 };
 
 exports.methods = {
+  /**
+   * Converts the given bytes to a human readable format.
+   *
+   * This function uses the shared plugin function
+   * `bytesToHumanReadable`.
+   *
+   * @param  {Int}    bytes   The bytes to convert.
+   * @return {String}         The bytes converted.
+   */
   convert: function (bytes) {
     return this.$shared.bytesToHumanReadable(bytes);
   },
-
+  /**
+   * Updates the dashboard.
+   */
   update: function () {
-    this.$APIManager.getSystemInformation(this.didFinishRequest);
-  },
-
-  didFinishRequest: function (response) {
-    if (response.success) {
-      this.ram = response.result.ram;
-      this.cpu = response.result.cpu;
-      this.disk = response.result.disk;
-      this.temperature = this.convertTemperature(response.result.temperature);
-    } else {
-      if (response.error.statusCode == 401) {
-        this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+    this.$APIManager.getSystemInformation(response => {
+      if (response.success) {
+        this.ram = response.result.ram;
+        this.cpu = response.result.cpu;
+        this.disk = response.result.disk;
+        this.temperature = this.convertTemperature(response.result.temperature);
+      } else {
+        if (response.error.statusCode == 401) {
+          this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+        }
       }
-    }
+    });
   },
-
+  /**
+   * Conversts
+   * @param  {[type]} temperature [description]
+   * @return {[type]}             [description]
+   */
   convertTemperature: function (temperature) {
     if (temperature == null || temperature == 'NaN') return 'N/A';
     if (this.temperatureScale == 'f') {
