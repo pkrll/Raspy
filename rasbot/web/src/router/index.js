@@ -4,6 +4,7 @@ import Main from '@/components/Main/Main.vue';
 import Browser from '@/components/Browser/Main/Main.vue';
 import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
+import Settings from '@/components/Settings/Main.vue';
 
 Vue.use(Router);
 
@@ -50,6 +51,15 @@ export default new Router({
 			component: Dashboard,
 			meta: {
 				tab: 2,
+				requiresAuth: true
+			}
+		},
+    {
+			path: '/settings',
+			name: 'Settings',
+			component: Settings,
+			meta: {
+				tab: 3,
 				requiresAuth: true
 			}
 		}
