@@ -23,27 +23,27 @@
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">RAM total: </div>
-				 <div class="table-cell-view right">{{this.convert(this.ram.total)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.ram.total)}}</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">RAM used: </div>
-				 <div class="table-cell-view right">{{this.convert(this.ram.used)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.ram.used)}}</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">RAM available: </div>
-				 <div class="table-cell-view right">{{this.convert(this.ram.available)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.ram.available)}}</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">HDD total:</div>
-				 <div class="table-cell-view right">{{this.convert(this.disk.total)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.disk.total)}}</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">HDD used:</div>
-				 <div class="table-cell-view right">{{this.convert(this.disk.used)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.disk.used)}}</div>
 			 </div>
 			 <div class="table-row-view">
 				 <div class="table-cell-view">HDD free:</div>
-				 <div class="table-cell-view right">{{this.convert(this.disk.free)}}</div>
+				 <div class="table-cell-view right">{{this.convertSize(this.disk.free)}}</div>
 			 </div>
 		 </div>
 	 </div>

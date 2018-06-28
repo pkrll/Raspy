@@ -27,18 +27,6 @@ exports.beforeDestroy = function() {
 
 exports.methods = {
   /**
-   * Converts the given bytes to a human readable format.
-   *
-   * This function uses the shared plugin function
-   * `bytesToHumanReadable`.
-   *
-   * @param  {Int}    bytes   The bytes to convert.
-   * @return {String}         The bytes converted.
-   */
-  convert: function (bytes) {
-    return this.$shared.bytesToHumanReadable(bytes);
-  },
-  /**
    * Updates the dashboard.
    */
   update: function () {
@@ -56,9 +44,10 @@ exports.methods = {
     });
   },
   /**
-   * Conversts
-   * @param  {[type]} temperature [description]
-   * @return {[type]}             [description]
+   * Converts temperature from Celsius to Fahrenheit.
+   *
+   * @param  {Int} temperature The original temperature.
+   * @return {Int}             The converted temperature.
    */
   convertTemperature: function (temperature) {
     if (temperature == null || temperature == 'NaN') return 'N/A';
@@ -68,4 +57,16 @@ exports.methods = {
 
     return temperature + '°C';
   }
+  /**
+   * Converts the given bytes to a human readable format.
+   *
+   * This function uses the shared plugin function
+   * `bytesToHumanReadable`.
+   *
+   * @param  {Int}    bytes   The bytes to convert.
+   * @return {String}         The bytes converted.
+   */
+  convertSize: function (bytes) {
+    return this.$shared.bytesToHumanReadable(bytes);
+  },
 };
