@@ -56,7 +56,7 @@ exports.methods = {
     }
 
     return temperature + '°C';
-  }
+  },
   /**
    * Converts the given bytes to a human readable format.
    *
@@ -68,5 +68,5 @@ exports.methods = {
    */
   convertSize: function (bytes) {
     return this.$shared.bytesToHumanReadable(bytes);
-  },
+  }
 };
