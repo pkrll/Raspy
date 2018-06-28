@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Main from '@/components/Main/Main.vue';
 import Browser from '@/components/Browser/Main/Main.vue';
 import File from '@/components/Browser/File/File.vue';
+import Dashboard from '@/components/Dashboard/Dashboard.vue';
 
 Vue.use(Router);
 
@@ -40,6 +41,15 @@ export default new Router({
 			props: true,
 			meta: {
 				tab: 1,
+				requiresAuth: true
+			}
+		},
+    {
+			path: '/dashboard',
+			name: 'Dashboard',
+			component: Dashboard,
+			meta: {
+				tab: 2,
 				requiresAuth: true
 			}
 		}

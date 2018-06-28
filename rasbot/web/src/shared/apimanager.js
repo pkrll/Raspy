@@ -135,6 +135,20 @@ export default {
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});
+			},
+      /**
+			 * Retrieves system information.
+			 *
+			 * Calls the /dashboard endpoint.
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			getSystemInformation: function (callback) {
+				this.HTTP.get('dashboard').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
 			}
 
     }
@@ -145,7 +159,7 @@ export default {
 
 function handleError(error) {
 	let response = {
-		status: 0,
+		success: false,
 		error: { statusCode: 0, statusText: '' },
 		result: (error.result) ? error.result : {}
 	};
@@ -184,6 +198,5 @@ function handleInternalError(error) {
 		default:
 			break;
 	}
-
-	return "Internal server error.";
+	return error;
 }
