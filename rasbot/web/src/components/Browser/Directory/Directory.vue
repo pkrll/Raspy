@@ -51,22 +51,3 @@ export default {
 
 <style scoped src="@/components/Browser/Directory/directory.css">
 </style>
-<style>
-
-.route-change-leave-active,
-.route-change-enter-active {
-	transition: 0.25s ease-in-out;
-  opacity: 1;
-}
-
-.route-change-enter {
-	transform: translate(-100%, 0);
-  opacity: 0;
-}
-
-.route-change-leave-to {
-  transform: translate(100%, 0);
-  opacity: 0;
-}
-
-</style>

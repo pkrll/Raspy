@@ -31,7 +31,7 @@ export default {
 
 .route-change-leave-active,
 .route-change-enter-active {
-	transition: 0.5s ease-in-out;
+	transition: 0.25s ease-in-out;
   opacity: 1;
 }
 
@@ -41,7 +41,7 @@ export default {
 }
 
 .route-change-leave-to {
-  transform: translate(-100%, 0);
+  transform: translate(100%, 0);
   opacity: 0;
 }
 
