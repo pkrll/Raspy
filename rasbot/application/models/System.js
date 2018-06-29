@@ -25,7 +25,11 @@ exports.checkForUpdate = () => {
 			});
 		}, reject);
 	});
-}
+};
+
+exports.launchBootstrapper = () => {
+	return executeCommand('cd ../ && make start_bootstrapper');
+};
 
 function getLatestRelease(callback, reject) {
 	let url = 'https://api.github.com/repos/pkrll/Raspy/releases';
@@ -54,4 +58,19 @@ function getLatestRelease(callback, reject) {
 			}
 		}
 	});
+}
+
+function executeCommand(command, arguments = '') {
+  return new Promise(
+    (resolve, reject) => {
+      const { exec } = require('child_process');
+      exec(command, arguments, (error, stdout, stderr) => {
+        if (error) {
+          reject(stderr);
+        } else {
+          resolve(stdout);
+        }
+      });
+    }
+  );
 }

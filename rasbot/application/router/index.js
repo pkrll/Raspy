@@ -39,7 +39,7 @@ module.exports = app => {
   // ------------------------------
 
 	// Checks if call is authorized
-  router.use(auther.isAuthorized);
+  // router.use(auther.isAuthorized);
 
 	// ------------------------------
   //          /browse
@@ -79,6 +79,10 @@ module.exports = app => {
   //          /checkForUpdate
   // ------------------------------
 	router.route('/checkForUpdate').get(systemController.checkForUpdate);
+	// ------------------------------
+  //          /bootstrapper
+  // ------------------------------
+	router.route('/bootstrapper').get(systemController.launchBootstrapper);
 
   app.use(express.static(app.get('dist')));
   app.use('/api', router);

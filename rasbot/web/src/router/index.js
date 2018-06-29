@@ -10,6 +10,7 @@ import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsGeneral from '@/components/Settings/General/General.vue';
 import SettingsUpdate from '@/components/Settings/General/Update/Main.vue';
+import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
 
 Vue.use(Router);
 
@@ -108,6 +109,15 @@ export default new Router({
       path: '/settings/general/Update',
       name: 'SettingsUpdate',
       component: SettingsUpdate,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/bootstrapper',
+      name: 'Bootstrapper',
+      component: Bootstrapper,
       meta: {
         tab: 3,
         requiresAuth: true

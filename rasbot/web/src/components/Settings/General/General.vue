@@ -6,11 +6,11 @@
       <div class="title">Check for update</div>
       <div class="arrow"><font-awesome-icon icon="angle-right"/></div>
     </router-link>
-    <div class="row" v-on:click="launchBootstrapper">
+    <router-link to="/bootstrapper" class="row">
       <div class="icon"><font-awesome-icon icon="terminal"/></div>
       <div class="title">Launch bootstrapper</div>
       <div class="arrow"><font-awesome-icon icon="angle-right"/></div>
-    </div>
+    </router-link>
   </section>
 </template>
 
@@ -21,12 +21,7 @@ import { faCloudDownloadAlt, faTerminal, faAngleRight } from '@fortawesome/free-
 library.add(faCloudDownloadAlt, faTerminal, faAngleRight);
 
 export default {
-  name: 'SettingsGeneral',
-  methods: {
-    launchBootstrapper: function() {
-      this.$root._router.push('bootstrapper');
-    }
-  }
+  name: 'SettingsGeneral'
 }
 </script>
 

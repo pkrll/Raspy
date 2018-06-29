@@ -165,6 +165,14 @@ export default {
 				});
 			},
 
+      launchBootstrapper: function(callback) {
+        this.HTTP.get('bootstrapper').then(response => {
+          if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+      }
+
     }
 
   }
@@ -178,13 +186,13 @@ function handleError(error) {
 		result: (error.result) ? error.result : {}
 	};
 
-	if (error.response) {
+  if (error.response.data) {
 		let status = error.response.status;
 
 		switch (status) {
 			case 500:
 				response.error.message = handleInternalError(error.response.data.error);
-				break;
+        break;
 			default:
         response.error.message = error.response.statusText;
         response.error.statusCode = error.response.status;
@@ -210,7 +218,9 @@ function handleInternalError(error) {
 		case "EACCES":
 			return "Permission denied";
 		default:
+      if (error.message) return error.message;
 			break;
 	}
+
 	return error;
 }
