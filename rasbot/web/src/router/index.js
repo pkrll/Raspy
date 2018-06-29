@@ -5,9 +5,10 @@ import Browser from '@/components/Browser/Main/Main.vue';
 import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
 import Settings from '@/components/Settings/Main.vue';
-import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
+import SettingsAccount from '@/components/Settings/Account/Account.vue';
+import SettingsGeneral from '@/components/Settings/General/General.vue';
 
 Vue.use(Router);
 
@@ -88,6 +89,15 @@ export default new Router({
       path: '/settings/account',
       name: 'SettingsAccount',
       component: SettingsAccount,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/general',
+      name: 'SettingsGeneral',
+      component: SettingsGeneral,
       meta: {
         tab: 3,
         requiresAuth: true
