@@ -1,0 +1,29 @@
+.heading {
+	font-size: 	4vw;
+	text-align: center;
+}
+
+.row {
+	font-size: 				5vw;
+	align-items: 			center;
+}
+
+.row .title {
+	width: 70vw;
+}
+
+.row .button {
+	width: 			20vw;
+}
+
+.select {
+	text-align: center;
+	border: none;
+	appearance: none;
+	font-size: 4vw;
+	width: 100%;
+	padding: 10px;
+	font-family: 'Hind';
+	background: none;
+	color: #fff;
+}
