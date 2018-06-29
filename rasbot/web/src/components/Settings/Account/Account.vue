@@ -27,30 +27,5 @@ export default {
 
 </script>
 
-<style scoped src="@/components/Settings/main.css">
-</style>
-<style scoped>
-.row .title {
-	width: 75vw;
-}
-
-.single-button {
-	color: 			red;
-	cursor: 		pointer;
-	text-align: center;
-	width: 			100%;
-}
-
-.row .button {
-	cursor:			pointer;
-	width: 			25vw;
-	text-align: center;
-}
-
-.subscript {
-	color: 			#ccc;
-	font-size: 	4vw;
-	overflow-x: scroll;
-	padding: 		0 10px 0 0;
-}
-</style>
+<style scoped src="@/components/Settings/main.css"></style>
+<style scoped src="@/components/Settings/Account/account.css"></style>

@@ -1,0 +1,9 @@
+
+.row {
+	font-size: 				5vw;
+	align-items: 			center;
+}
+
+.row .title {
+	width: 70vw;
+}

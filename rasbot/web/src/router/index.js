@@ -6,6 +6,7 @@ import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
 import Settings from '@/components/Settings/Main.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
+import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 
 Vue.use(Router);
 
@@ -68,6 +69,15 @@ export default new Router({
       path: '/settings/account',
       name: 'SettingsAccount',
       component: SettingsAccount,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/browser',
+      name: 'SettingsBrowser',
+      component: SettingsBrowser,
       meta: {
         tab: 3,
         requiresAuth: true
