@@ -5,6 +5,7 @@ const auth = require('../../helpers/auth/');
 
 const browserController 	= require('../controllers/BrowserController');
 const dashboardController = require('../controllers/DashboardController');
+const systemController = require('../controllers/SystemController');
 
 module.exports = app => {
 
@@ -70,6 +71,14 @@ module.exports = app => {
   router.route('/download/:path*')
     // Get the requested file
     .get(browserController.download);
+	// ------------------------------
+  //          /dashboard
+  // ------------------------------
+	router.route('/dashboard').get(dashboardController.systemInformation);
+	// ------------------------------
+  //          /checkForUpdate
+  // ------------------------------
+	router.route('/checkForUpdate').get(systemController.checkForUpdate);
 
   app.use(express.static(app.get('dist')));
   app.use('/api', router);
@@ -78,10 +87,5 @@ module.exports = app => {
     let file = path.join(app.get('dist'), '/index.html');
     res.sendFile(file);
   });
-
-	// ------------------------------
-  //          /dashboard
-  // ------------------------------
-	router.route('/dashboard').get(dashboardController.systemInformation);
 
 }

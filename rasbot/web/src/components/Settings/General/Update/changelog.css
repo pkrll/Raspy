@@ -1,0 +1,33 @@
+a {
+	color: 						#fff;
+	text-decoration: 	none;
+}
+
+#container {
+	align-items: 			center;
+	display: 					flex;
+	flex-direction: 	column;
+	justify-content: 	flex-start;
+}
+
+.heading {
+	font-size: 	8vw;
+	margin-top: 40px;
+	text-align: center;
+}
+
+.changelog {
+	font-size: 3.5vw;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.button {
+	background: 		rgb(82, 172, 120);
+	border-radius: 	5px;
+	cursor:					pointer;
+	font-size: 			5vw;
+	margin-top: 		40px;
+	padding: 				10px;
+
+}

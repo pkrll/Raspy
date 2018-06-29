@@ -149,7 +149,21 @@ export default {
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});
-			}
+			},
+      /**
+			 * Checks for system update.
+			 *
+			 * Calls the /system/checkForUpdate endpoint
+			 *
+			 * @param  {Function} callback The callback to invoke on response.
+			 */
+			checkForUpdate: function (callback) {
+				this.HTTP.get('checkForUpdate').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+			},
 
     }
 
