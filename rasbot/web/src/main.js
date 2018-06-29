@@ -30,7 +30,8 @@ new Vue({
   data: function () {
     return {
       isLoggedIn: false,
-      lastPath: null
+      lastPath: null,
+      debugMode: (process.env.NODE_ENV != 'production')
     }
   },
   methods: {

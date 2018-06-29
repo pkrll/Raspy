@@ -27,7 +27,6 @@ exports.methods = {
         this.middleComponent = 'Content';
       }
     } else {
-      console.log(response);
       if (response.error && response.error.message) {
         this.content = response.error.message;
       } else {

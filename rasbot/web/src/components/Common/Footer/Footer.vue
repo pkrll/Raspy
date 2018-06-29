@@ -4,7 +4,7 @@
   		<div>
   			Built with <font-awesome-icon icon="heart"/> using <font-awesome-icon :icon="['fab', 'vuejs']"/>, <font-awesome-icon :icon="['fab', 'node-js']"/> and <font-awesome-icon :icon="['fab', 'python']"/>
   		</div>
-      <div>Version {{this.$application.version}}+{{this.$application.build}}</div>
+      <div>Version {{this.$application.version}}{{this.build}}</div>
     </div>
 	</footer>
 
@@ -19,6 +19,15 @@ library.add(faHeart, faVuejs, faNodeJs, faPython);
 
 export default {
 	name: 'Footer',
+  computed: {
+    build: function() {
+      if (this.$root.debugMode) {
+        return '+' + this.$application.build;
+      }
+
+      return '';
+    }
+  }
 }
 
 </script>
