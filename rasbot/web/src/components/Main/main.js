@@ -25,7 +25,13 @@ exports.mounted = function() {
   if (this.$root.isLoggedIn) {
     this.toggleView('Splash', '', false);
   } else {
-    this.delayExecution(() => this.toggleView('Login'), 1000);
+    const credentials = this.$keyring.load();
+
+    if (credentials != false) {
+      this.signIn(credentials.username, credentials.password);
+    } else {
+      this.delayExecution(() => this.toggleView('Login'), 1000);
+    }
   }
 }
 
@@ -48,6 +54,7 @@ exports.methods = {
     this.textElement = "Signing in...";
     this.$APIManager.authenticate(username, password, response => {
       if (response.success) {
+        this.$keyring.save(username, password);
         this.toggleView('Splash', '0.3.0', false);
         this.$root.didAuthenticate(response.result.token);
       } else {

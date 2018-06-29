@@ -5,7 +5,8 @@ import App from './App';
 import router from './router';
 import VueCookie from 'vue-cookie';
 import shared from '@/shared/index.js';
-import APIManager from '@/shared/APIManager.js';
+import APIManager from '@/shared/apimanager.js';
+import Keyring from '@/shared/keyring.js';
 import Application from '@/shared/application.js';
 import DateFormatter from '@/shared/dateformatter.js';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -14,6 +15,7 @@ Vue.config.productionTip = false;
 
 Vue.use(shared);
 Vue.use(VueCookie);
+Vue.use(Keyring, VueCookie);
 Vue.use(Application);
 Vue.use(DateFormatter);
 Vue.use(APIManager, process.env.API_URL, 60000);
@@ -41,7 +43,7 @@ new Vue({
 
     didAuthenticate: function(token) {
       this.$APIManager.setToken(token);
-      this.$cookie.set('_token', token);
+      this.setToken(token);
       this.isLoggedIn = true;
       if (this.lastPath) {
         this._router.push(decodeURIComponent(this.lastPath));
@@ -50,7 +52,11 @@ new Vue({
     },
 
     getToken: function() {
-      return this.$cookie.get("_token");
+      return this.$cookie.get('_token');
+    },
+
+    setToken: function(token) {
+      return this.$cookie.set('_token', token, '0');
     },
 
     getBookmark: function() {
@@ -58,7 +64,7 @@ new Vue({
     },
 
     setBookmark: function(bookmark) {
-      this.$cookie.set('bookmark', bookmark);
+      this.$cookie.set('bookmark', bookmark, { expires: '1Y' });
     },
 
     clearBookmark: function() {
@@ -68,6 +74,9 @@ new Vue({
   },
   created: function () {
     const token = this.$root.getToken();
-    if (token) this.didAuthenticate(token);
+    if (token) {
+      console.log("HAS TOKEN!");
+      this.didAuthenticate(token);
+    }
   }
 });

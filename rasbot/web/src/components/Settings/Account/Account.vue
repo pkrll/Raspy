@@ -1,12 +1,56 @@
 <template>
-  <section></section>
+  <section id="content">
+    <div class="heading">Account settings</div>
+		<div class="row">
+			<div class="title">
+				Stay logged in
+			</div>
+			<div class="button noselect" v-on:click="toggleAutoLogin">{{this.autoLogin | autoLoginFilter }}</div>
+		</div>
+
+		<div class="row">
+			<div class="single-button noselect" v-on:click="signOut">Sign out of Raspy</div>
+		</div>
+  </section>
 </template>
 
 <script>
+import { data, created, methods, filters } from '@/components/Settings/Account/account.js';
+
 export default {
-  name: 'SettingsAccount'
+  name: 'SettingsAccount',
+  data: data,
+  created: created,
+  methods: methods,
+  filters: filters
 }
+
 </script>
 
 <style scoped src="@/components/Settings/main.css">
+</style>
+<style scoped>
+.row .title {
+	width: 75vw;
+}
+
+.single-button {
+	color: 			red;
+	cursor: 		pointer;
+	text-align: center;
+	width: 			100%;
+}
+
+.row .button {
+	cursor:			pointer;
+	width: 			25vw;
+	text-align: center;
+}
+
+.subscript {
+	color: 			#ccc;
+	font-size: 	4vw;
+	overflow-x: scroll;
+	padding: 		0 10px 0 0;
+}
 </style>
