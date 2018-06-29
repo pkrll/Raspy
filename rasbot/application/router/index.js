@@ -39,7 +39,7 @@ module.exports = app => {
   // ------------------------------
 
 	// Checks if call is authorized
-  // router.use(auther.isAuthorized);
+  router.use(auther.isAuthorized);
 
 	// ------------------------------
   //          /browse

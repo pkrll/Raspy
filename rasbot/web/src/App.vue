@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="this.$root.initializing">
+    <app-logo></app-logo>
+    <app-splash v-bind:textElement="textElement" v-bind:animation="true"></app-splash>
+  </div>
+  <div id="app" v-else>
     <transition name="slide-down" mode="out-in">
-      <app-header v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-header>
+      <app-header v-if="this.$root.loggedIn && !this.$root.fullScreen"></app-header>
     </transition>
     <transition name="route-change" mode="out-in">
       <router-view :key="this.$root._route.params.path"/>
     </transition>
     <transition name="slide-down" mode="out-in">
-      <app-footer v-if="this.$root.isLoggedIn && !this.$root.fullScreen"></app-footer>
+      <app-footer v-if="this.$root.loggedIn && !this.$root.fullScreen"></app-footer>
     </transition>
   </div>
 </template>
@@ -15,15 +19,22 @@
 <script>
 import Header from '@/components/Common/Header/Header.vue';
 import Footer from '@/components/Common/Footer/Footer.vue';
+import Splash from '@/components/Common/Splash/Splash.vue';
+import Logo from '@/components/Common/Logo/Logo.vue';
 
 export default {
   name: 'App',
-  components: { 'app-header': Header, 'app-footer': Footer },
-  created: function () {
-    if (this.$root.isLoggedIn == false) {
-      this.$root._router.push('/');
+  components: {
+    'app-header': Header,
+    'app-footer': Footer,
+    'app-splash': Splash,
+    'app-logo': Logo
+  },
+  data: function() {
+    return {
+      textElement: 'Initializing'
     }
-	}
+  }
 }
 </script>
 

@@ -38,7 +38,7 @@ exports.methods = {
         this.temperature = this.convertTemperature(response.result.temperature);
       } else {
         if (response.error.statusCode == 401) {
-          this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+          this.$root.didReceiveAuthenticationError();
         }
       }
     });

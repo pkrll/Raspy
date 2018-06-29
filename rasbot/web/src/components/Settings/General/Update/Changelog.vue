@@ -6,7 +6,9 @@
 
 *Launch the bootstrapper to update to the latest version.*
     </vue-markdown>
-    <div class="button" v-on:click="launchBootstrapper">Launch bootstrapper</div>
+    <router-link to="/bootstrapper">
+      <div class="button">Launch bootstrapper</div>
+    </router-link>
   </div>
 </template>
 

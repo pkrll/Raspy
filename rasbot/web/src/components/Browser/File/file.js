@@ -49,7 +49,7 @@ exports.methods = {
       this.middleComponent = 'Details';
     } else {
       if (response.error.statusCode == 401) {
-        this.$root.didReceiveAuthenticationError(this.$root._route.fullPath);
+        this.$root.didReceiveAuthenticationError();
       } else {
         this.textElement = response.error.message;
         this.middleComponent = 'Content';
