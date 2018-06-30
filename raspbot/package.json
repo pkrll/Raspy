@@ -2,7 +2,7 @@
   "name": "raspbot",
   "main": "server.js",
   "version": "0.3.0",
-  "build": "1",
+  "build": "3",
   "description": "Raspbot lets you control your Raspberry Pi.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "license": "AGPL-3.0",
@@ -12,11 +12,10 @@
     "url": "https://github.com/pkrll/raspy"
   },
   "scripts": {
-		"dev": "npm run dev:server",
+    "dev": "npm run dev:server",
     "dev:server": "nodemon",
-		"dev:client": "cd web && npm run dev",
-		"install": "npm install && cd web && npm install",
-		"build": "node ../.scripts/increment-version.js --file=package.json && node .build/setup.js && cd web && npm run build",
+    "dev:client": "cd web && npm run dev",
+    "build": "node ../.scripts/increment-version.js --file=package.json && node .build/setup.js && cd web && npm run build",
     "patch": "node ../.scripts/increment-version.js --file=package.json --version=patch --skip-build",
     "minor": "node ../.scripts/increment-version.js --file=package.json --version=minor --skip-build --reset-patch",
     "major": "node ../.scripts/increment-version.js --file=package.json --version=major --skip-build --reset-minor --reset-patch"

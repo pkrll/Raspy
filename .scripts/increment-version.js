@@ -1,7 +1,7 @@
 'use strict'
 let terminal = require('./colors.js')();
 
-let semindex 	= 2;
+let semindex 	= -1;
 let incrBuild = true;
 let rsetBuild = false;
 let rsetPatch = false;
@@ -50,9 +50,9 @@ for (let index in argv) {
   }
 }
 
-if (jsonfile) incrementBuild(jsonfile);
+if (jsonfile) incrementVersion(jsonfile);
 
-function incrementBuild(filePath) {
+function incrementVersion(filePath) {
   fs.readFile(filePath, function(err, data) {
   	if (err) throw err;
 
@@ -60,7 +60,7 @@ function incrementBuild(filePath) {
   	let version = content.version;
     let build   = content.build;
 
-  	if (version) {
+  	if (version && semindex >= 0) {
   		let semver = version.split('.');
 
   		if (semindex >= 0) {
@@ -75,21 +75,21 @@ function incrementBuild(filePath) {
   			semver[semindex] = parseInt(semver[semindex]) + 1;
   			version = semver.join('.');
   		}
+    }
 
-  		if (incrBuild && build) {
-  			terminal.print(filePath + ": Incrementing build number ...", terminal.colors.magenta, terminal.styles.dim);
-  			build = (parseInt("0x"+build) + 1).toString(16);
-  		} else if (rsetBuild) {
-  			build = 0;
-  		}
-  	}
+		if (incrBuild && build) {
+			terminal.print(filePath + ": Incrementing build number ...", terminal.colors.magenta, terminal.styles.dim);
+			build = (parseInt("0x"+build) + 1).toString(16);
+		} else if (rsetBuild) {
+			build = 0;
+		}
 
   	if (version)  content.version = version;
     if (build)    content.build = build;
 
     fs.writeFile(filePath, JSON.stringify(content, null, 2), function(err) {
   		if(err) throw err;
-  		terminal.print(filePath + ": Version set to " + content.version, terminal.colors.green, terminal.styles.bright);
+  		terminal.print(filePath + ": Version set to " + content.version + "+" + content.build, terminal.colors.green, terminal.styles.bright);
   	})
   });
 }

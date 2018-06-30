@@ -59,7 +59,7 @@ update:
 
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run major --file=$(SERVICE)/package.json
+	npm run major -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment major version."
 	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] major"
@@ -67,7 +67,7 @@ endif
 
 minor:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run minor --file=$(SERVICE)/package.json
+	npm run minor -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment minor version."
 	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] minor"
@@ -75,7 +75,7 @@ endif
 
 patch:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run patch service=$(SERVICE)/package.json
+	npm run patch -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment patch version."
 	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] patch"
