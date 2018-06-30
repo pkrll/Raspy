@@ -14,10 +14,13 @@ module.exports = function (app, _path) {
 
 	if (fs.existsSync(certPath) && fs.existsSync(keyPath)) {
 		app.set('httpsOptions', configurations.httpsOpts);
+	} else {
+		app.set('httpsOptions', {});
 	}
 
 	app.set('databasePath', databasePath);
 	app.set('port', process.env.PORT || configurations.port);
+	app.set('httpsPort', process.env.HTTPSPORT || configurations.httpsPort);
   app.set('dist', path.join(_path, 'dist'));
 
 	if (productionMode == false) {
