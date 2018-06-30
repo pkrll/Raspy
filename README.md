@@ -27,6 +27,21 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 - [x] Check temperature, CPU, memory and disk usage.
 - [x] Interface to update RaspBot remotely
 
+## Table of Contents
+
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+  * [Manually building the client (optional)](#manually-building-the-client-optional)
+* [Running the server](#running-the-server)
+  * [With a process manager](#with-a-process-manager)
+    * [Run the server with PM2](#run-the-server-with-pm2)
+    * [Stop the server with PM2](#stop-the-server-with-pm2)
+    * [Autostart server on boot](#autostart-server-on-boot)
+* [Usage](#usage)
+* [Configurations](#configurations)
+  * [Enabling HTTPS](#enabling-https)
+
+
 ## Prerequisites
 
 * Node Package Manager (__recommended version 5.7.1+__)
@@ -50,7 +65,7 @@ $ cd Raspy
 $ make install
 ```
 
-#### Manually building the client (optional)
+### Manually building the client (optional)
 
 The folder ``dist`` inside ``./raspbot`` already contains the latest build of the client. Running the server will use the files there. You can also manually build the client app, by typing ``make build`` in the root folder. This might take a while, so grab a snack and wait for the installation and build processes to finish.
 
@@ -120,23 +135,43 @@ For more information on how to use PM2, check out **[the official documentation]
 
 ## Usage
 
-By default, RaspBot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+By default, ``RaspBot`` runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
 
-## Configuration
+## Configurations
 
 Current configuration options:
 
 ```js
 // raspbot/config/index.js
-dev: {
-  port: 5000,
-  databasePath: 'db.json'
-},
-prod: {
-  port: 5000,
-  databasePath: 'db.json'
+module.exports = {
+  oauth: {
+    id: '',
+    secret: ''
+  },
+  development: {
+    port: 5000,
+    databasePath: 'config/db.json',
+		httpsPort: 5443,
+		httpsOpts: {
+			cert: 'config/.sslcert/fullchain.pem',
+			key: 'config/.sslcert/privkey.pem'
+		}
+  },
+  production: {
+    port: 5000,
+    databasePath: 'config/db.json',
+		httpsPort: 5443,
+		httpsOpts: {
+			cert: 'config/.sslcert/fullchain.pem',
+			key: 'config/.sslcert/privkey.pem'
+		}
+  }
 }
 ```
+
+### Enabling HTTPS
+
+To enable HTTPS with ``RaspBot``, you need an SSL certificate. After obtaining it, put the certificate (``fullchain.pem``) and the key (``privkey.pem``) files (or symbolic links to them) in the folder ``config/.sslcert`` and restart the server. (Don't forget to forward port ``443`` to ``5443``.)
 
 ## Author
 
