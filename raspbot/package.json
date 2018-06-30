@@ -15,7 +15,7 @@
     "dev": "npm run dev:server",
     "dev:server": "nodemon",
     "dev:client": "cd web && npm run dev",
-    "build": "node ../.scripts/increment-version.js --file=package.json && node .build/setup.js && cd web && npm run build",
+    "build": "node ../.scripts/increment-version.js --file=package.json && node .build/setup.js && cd web && npm install && npm run build",
     "patch": "node ../.scripts/increment-version.js --file=package.json --version=patch --skip-build",
     "minor": "node ../.scripts/increment-version.js --file=package.json --version=minor --skip-build --reset-patch",
     "major": "node ../.scripts/increment-version.js --file=package.json --version=major --skip-build --reset-minor --reset-patch"
