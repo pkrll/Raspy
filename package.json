@@ -11,8 +11,8 @@
   "scripts": {
     "install:bootstrapper": "cd bootstrapper && make install",
     "install": "cd raspbot && npm run install",
-    "dev:server": "cd raspbot && npm run dev",
-    "dev:client": "cd raspbot && npm run dev:client",
+    "server": "cd raspbot && npm run dev",
+    "client": "cd raspbot && npm run dev:client",
     "build": "cd raspbot && npm run build",
     "patch": "node .scripts/increment-version.js --version=patch --skip-build",
     "minor": "node .scripts/increment-version.js --version=minor --skip-build --reset-patch",

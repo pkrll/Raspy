@@ -16,7 +16,7 @@ build:
 ifeq ($(SERVICE), bootstrapper)
 	npm run build:bootstrapper
 else
-	npm run setup
+	npm run build
 endif
 
 start:
@@ -36,9 +36,9 @@ stop_boostrapper:
 
 server:
 ifeq ($(ENV), dev)
-	NODE_ENV=development npm run dev:server
+	NODE_ENV=development npm run server
 else
-	NODE_ENV=production npm run dev:server
+	NODE_ENV=production npm run server
 endif
 
 devserver:
@@ -60,33 +60,27 @@ update:
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
 	npm run major --file=$(SERVICE)/package.json
-	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented major version"
 else
 	@echo "ERROR:\tCould not increment major version."
-	@echo "USAGE:\tmake SERVICE=[client|server|app|all] major"
+	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] major"
 endif
 
 minor:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
 	npm run minor --file=$(SERVICE)/package.json
-	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented minor version"
 else
 	@echo "ERROR:\tCould not increment minor version."
-	@echo "USAGE:\tmake SERVICE=[client|server|app|all] minor"
+	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] minor"
 endif
 
 patch:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
 	npm run patch service=$(SERVICE)/package.json
-	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented patch version"
 else
 	@echo "ERROR:\tCould not increment patch version."
-	@echo "USAGE:\tmake SERVICE=[client|server|app|all] patch"
+	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] patch"
 endif
 
 clean:
 	find . -name \*.pyc -delete
-	rm -rf raspbot/dist/*
+	rm -rf raspbot/dist/* raspbot/node_modules/ raspbot/web/node_modules
