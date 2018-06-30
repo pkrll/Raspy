@@ -9,7 +9,7 @@ install:
 ifeq ($(SERVICE), bootstrapper)
 	npm run install:bootstrapper
 else
-	npm run install
+	npm run install:server
 endif
 
 build:
@@ -46,7 +46,7 @@ devserver:
 
 client:
 ifeq ($(ENV), dev)
-	npm run dev:client
+	npm run client
 else
 	npm run build
 endif
