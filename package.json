@@ -1,6 +1,5 @@
 {
-  "name": "raspy",
-  "version": "0.2.2",
+  "name": "raspbot",
   "description": "Raspy lets you control your Raspberry Pi.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "license": "AGPL-3.0",
@@ -10,13 +9,11 @@
     "url": "https://github.com/pkrll/raspy"
   },
   "scripts": {
-    "install": "npm run install_client && npm run install_server",
-    "install_client": "cd client && npm install",
-    "install_server": "cd server && npm install",
-    "dev_server": "cd server && npm run dev",
-    "dev_client": "cd client && npm run dev",
-    "setup": "cd server && npm run setup",
-    "build": "cd client && npm run build",
+    "install:bootstrapper": "cd bootstrapper && make install",
+    "install": "cd raspbot && npm run install",
+    "dev:server": "cd raspbot && npm run dev",
+    "dev:client": "cd raspbot && npm run dev:client",
+    "build": "cd raspbot && npm run build",
     "patch": "node .scripts/increment-version.js --version=patch --skip-build",
     "minor": "node .scripts/increment-version.js --version=minor --skip-build --reset-patch",
     "major": "node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch"

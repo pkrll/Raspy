@@ -6,44 +6,39 @@ SERVICE = null
 all: install build start
 
 install:
-ifeq ($(SERVICE), client)
-	npm run install_client
-else ifeq ($(SERVICE), server)
-	npm run install_server
+ifeq ($(SERVICE), bootstrapper)
+	npm run install:bootstrapper
 else
 	npm run install
 endif
 
 build:
-ifeq ($(SERVICE), client)
-	npm run build
-else ifeq ($(SERVICE), server)
-	npm run setup
+ifeq ($(SERVICE), bootstrapper)
+	npm run build:bootstrapper
 else
-	npm run build
 	npm run setup
 endif
 
 start:
-	pm2 start process.json --only Raspy --watch
+	pm2 start process.json --only Raspbot --watch
 
 restart:
-	pm2 restart process.json --only Raspy
+	pm2 restart process.json --only Raspbot
 
 stop:
-	pm2 stop process.json --only Raspy --watch 0
+	pm2 stop process.json --only Raspbot --watch 0
 
-start_updater:
+start_boostrapper:
 	pm2 start process.json --only Bootstrapper --watch
 
-stop_updater:
+stop_boostrapper:
 	pm2 stop process.json --only Bootstrapper --watch 0
 
 server:
 ifeq ($(ENV), dev)
-	NODE_ENV=development npm run dev_server
+	NODE_ENV=development npm run dev:server
 else
-	NODE_ENV=production npm run dev_server
+	NODE_ENV=production npm run dev:server
 endif
 
 devserver:
@@ -51,7 +46,7 @@ devserver:
 
 client:
 ifeq ($(ENV), dev)
-	npm run dev_client
+	npm run dev:client
 else
 	npm run build
 endif
@@ -63,17 +58,9 @@ update:
 	git pull
 
 major:
-ifeq ($(SERVICE), $(filter $(SERVICE),client server))
-	npm run major service=$(SERVICE)
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+	npm run major --file=$(SERVICE)/package.json
 	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented major version"
-else ifeq ($(SERVICE), app)
-	npm run major service=$(SERVICE)
-	git add package.json
-	git commit -S -m "Incremented major version"
-else ifeq ($(SERVICE), all)
-	npm run major
-	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented major version"
 else
 	@echo "ERROR:\tCould not increment major version."
@@ -81,17 +68,9 @@ else
 endif
 
 minor:
-ifeq ($(SERVICE), $(filter $(SERVICE),client server))
-	npm run minor service=$(SERVICE)
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+	npm run minor --file=$(SERVICE)/package.json
 	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented minor version"
-else ifeq ($(SERVICE), app)
-	npm run minor service=$(SERVICE)
-	git add package.json
-	git commit -S -m "Incremented minor version"
-else ifeq ($(SERVICE), all)
-	npm run minor
-	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented minor version"
 else
 	@echo "ERROR:\tCould not increment minor version."
@@ -99,17 +78,9 @@ else
 endif
 
 patch:
-ifeq ($(SERVICE), $(filter $(SERVICE),client server))
-	npm run patch service=$(SERVICE)
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+	npm run patch service=$(SERVICE)/package.json
 	git add $(SERVICE)/package.json
-	git commit -S -m "Incremented patch version"
-else ifeq ($(SERVICE), app)
-	npm run patch service=$(SERVICE)
-	git add package.json
-	git commit -S -m "Incremented patch version"
-else ifeq ($(SERVICE), all)
-	npm run patch
-	git add package.json server/package.json client/package.json
 	git commit -S -m "Incremented patch version"
 else
 	@echo "ERROR:\tCould not increment patch version."
@@ -118,4 +89,4 @@ endif
 
 clean:
 	find . -name \*.pyc -delete
-	rm -rf dist/*
+	rm -rf raspbot/dist/*
