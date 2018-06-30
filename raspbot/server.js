@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const express = require('express');
+const https		= require('https');
 const parser  = require('body-parser');
 const app     = express();
 
@@ -14,3 +15,4 @@ app.listen(app.get('port'));
 
 console.log('Server mode: ' + (process.env.NODE_ENV || 'development'));
 console.log('Server started on ' + app.get('port'));
+https.createServer(app.get('httpsOptions'), app).listen(app.get('httpsPort'));
