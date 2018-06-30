@@ -1,0 +1,18 @@
+
+.file-list-view > * {
+	padding: 0px 2vw;
+	background: rgb(45, 49, 57);
+}
+
+.file-list-view > *:nth-child(even) {
+	background: rgb(32,35,44);
+}
+
+#content {
+	margin: 10px 0;
+  text-align: left;
+}
+
+.row {
+	border-bottom: none;
+}

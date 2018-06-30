@@ -1,0 +1,14 @@
+.row .title {
+  width: 75vw;
+}
+
+.single-button {
+	color: 			red;
+	cursor: 		pointer;
+	text-align: center;
+	width: 			100%;
+}
+
+.row .button {
+	width: 			25vw;
+}

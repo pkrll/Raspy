@@ -1,5 +1,4 @@
 *.pyc
-package-lock.json
 .tags
 .tags_swap
 tmp
