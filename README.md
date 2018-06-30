@@ -139,35 +139,19 @@ By default, ``RaspBot`` runs on port 5000 and can be accessed by ``http://ip-to-
 
 ## Configurations
 
-Current configuration options:
+The configuration options can be found in the file ``index.js`` inside the ``./raspbot/config`` directory:
 
-```js
-// raspbot/config/index.js
-module.exports = {
-  oauth: {
-    id: '',
-    secret: ''
-  },
-  development: {
-    port: 5000,
-    databasePath: 'config/db.json',
-		httpsPort: 5443,
-		httpsOpts: {
-			cert: 'config/.sslcert/fullchain.pem',
-			key: 'config/.sslcert/privkey.pem'
-		}
-  },
-  production: {
-    port: 5000,
-    databasePath: 'config/db.json',
-		httpsPort: 5443,
-		httpsOpts: {
-			cert: 'config/.sslcert/fullchain.pem',
-			key: 'config/.sslcert/privkey.pem'
-		}
-  }
-}
-```
+| Option | Description |
+|--------|-------------|
+| ``oauth.id`` | Github OAuth key for making authenticated requests when checking for updates (optional) |
+| ``oauth.secret`` | Github OAuth secret for making authenticated requests when checking for updates (optional) |
+| ``port`` | The server port (**default: 5000**) |
+| ``httpsPort`` | The port to use for HTTPs (**default: 5443**) |
+| ``databasePath`` | Path to user credentials database (**default: config/db.json**) |
+| ``httpsOpts.cert`` | Path to SSL certificate (**default: config/.sslcert/fullchain.pem**) |
+| ``httpsOpts.key`` | Path to SSL certificate key (**default: config/.sslcert/privkey.pem**) |
+
+**Note:** The ``httpsOpts`` options are used when enabling HTTPs (See [Enabling HTTPs](#enabling-https) below).
 
 ## Enabling HTTPS
 
