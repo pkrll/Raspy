@@ -1,21 +1,20 @@
 <template>
   <section id="content">
     <div class="heading">Account settings</div>
-		<div class="row">
-			<div class="title">
-				Stay logged in
-			</div>
-			<div class="button noselect" v-on:click="toggleAutoLogin">{{this.autoLogin | autoLoginFilter }}</div>
-		</div>
-
-		<div class="row">
-			<div class="single-button noselect" v-on:click="signOut">Sign out of Raspy</div>
-		</div>
+    <router-link to="/settings/account/password" class="row">
+      <div class="icon"><font-awesome-icon icon="key"/></div>
+      <div class="title">Change password</div>
+      <div class="arrow"><font-awesome-icon icon="angle-right"/></div>
+    </router-link>
   </section>
 </template>
 
 <script>
 import { data, created, methods, filters } from '@/components/Settings/Account/account.js';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faKey } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faKey);
 
 export default {
   name: 'SettingsAccount',
