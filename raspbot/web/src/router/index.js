@@ -10,6 +10,7 @@ import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsGeneral from '@/components/Settings/General/General.vue';
 import SettingsUpdate from '@/components/Settings/General/Update/Main.vue';
+import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
 import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
 
 Vue.use(Router);
@@ -91,6 +92,15 @@ export default new Router({
       path: '/settings/account',
       name: 'SettingsAccount',
       component: SettingsAccount,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/account/password',
+      name: 'AccountPassword',
+      component: SettingsAccountPassword,
       meta: {
         tab: 3,
         requiresAuth: true

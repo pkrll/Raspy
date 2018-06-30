@@ -171,6 +171,14 @@ export default {
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});
+      },
+
+      updatePassword: function(password, callback) {
+        this.HTTP.post('account/password', { password: password }).then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          if (typeof callback === 'function') callback(handleError(error));
+        });
       }
 
     }

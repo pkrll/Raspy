@@ -3,7 +3,7 @@
     <div class="heading">Account settings</div>
     <router-link to="/settings/account/password" class="row">
       <div class="icon"><font-awesome-icon icon="key"/></div>
-      <div class="title">Change password</div>
+      <div class="title">Edit password</div>
       <div class="arrow"><font-awesome-icon icon="angle-right"/></div>
     </router-link>
   </section>

@@ -21,13 +21,3 @@ a {
   text-align: left;
   padding: 0 20px;
 }
-
-.button {
-	background: 		rgb(82, 172, 120);
-	border-radius: 	5px;
-	cursor:					pointer;
-	font-size: 			5vw;
-	margin-top: 		40px;
-	padding: 				10px;
-
-}

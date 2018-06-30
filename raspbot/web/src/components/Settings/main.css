@@ -38,6 +38,17 @@
 	padding: 		0 10px 0 0;
 }
 
+
+.button {
+	background: 		rgb(82, 172, 120);
+	border-radius: 	5px;
+	cursor:					pointer;
+	font-size: 			5vw;
+	margin-top: 		40px;
+	padding: 				10px;
+
+}
+
 .greyed {
 	color: grey;
 }
