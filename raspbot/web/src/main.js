@@ -43,7 +43,7 @@ new Vue({
       if (this._route.name != 'Main') {
         this.lastPath = this._route.path;
         this.loggedIn = false;
-        this._route.push('/');
+        this._router.push('/');
       }
     },
     /**
