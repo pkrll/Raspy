@@ -83,4 +83,4 @@ endif
 
 clean:
 	find . -name \*.pyc -delete
-	rm -rf raspbot/dist/* raspbot/node_modules/ raspbot/web/node_modules
+	rm -rf raspbot/node_modules/ raspbot/web/node_modules
