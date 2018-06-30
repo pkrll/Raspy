@@ -14,5 +14,10 @@ require('./application/router')(app);
 app.listen(app.get('port'));
 
 console.log('Server mode: ' + (process.env.NODE_ENV || 'development'));
-console.log('Server started on ' + app.get('port'));
-https.createServer(app.get('httpsOptions'), app).listen(app.get('httpsPort'));
+
+if (app.get('httpsOptions')) {
+	console.log('Secure server started on ' + app.get('httpsPort'));
+	https.createServer(app.get('httpsOptions'), app).listen(app.get('httpsPort'));
+} else {
+	console.log('Server started on ' + app.get('port'));
+}
