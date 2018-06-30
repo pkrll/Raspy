@@ -28,10 +28,10 @@ restart:
 stop:
 	pm2 stop process.json --only Raspbot --watch 0
 
-start_boostrapper:
+start_bootstrapper:
 	pm2 start process.json --only Bootstrapper --watch
 
-stop_boostrapper:
+stop_bootstrapper:
 	pm2 stop process.json --only Bootstrapper --watch 0
 
 server:
