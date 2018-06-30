@@ -4,7 +4,7 @@ exports.checkForUpdate = () => {
 	return new Promise((resolve, reject) => {
 		getLatestRelease(json => {
 			const fs = require('fs');
-			fs.readFile('../package.json', function(err, data) {
+			fs.readFile('package.json', function(err, data) {
 				if (err) {
 					reject(err);
 				} else {
@@ -13,7 +13,7 @@ exports.checkForUpdate = () => {
 					const compare = require('compare-versions');
 					let response = { heading: '', version: version, isNewer: false, changes: '' }
 
-					if (compare(json.version, version) == 0) {
+					if (compare(json.version, version) > 0) {
 						response.version = json.version;
 						response.isNewer = true;
 						response.changes = json.changes;
