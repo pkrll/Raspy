@@ -10,7 +10,7 @@
   },
   "scripts": {
     "install:bootstrapper": "cd bootstrapper && make install",
-    "install": "cd raspbot && npm setup",
+    "install": "cd raspbot && npm run setup",
     "server": "cd raspbot && npm run dev",
     "client": "cd raspbot && npm run dev:client",
     "build": "cd raspbot && npm run build",
