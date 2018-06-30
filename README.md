@@ -1,4 +1,3 @@
-# Raspy
 <p align="center">
   <img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
 </p>
@@ -11,11 +10,11 @@
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
 
-Raspbot is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+``RaspBot`` is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
-**Raspy is still a work in progress**.
+**``RaspBot`` is still a work in progress**.
 
 **Features:**
 
@@ -26,14 +25,15 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 - [x] Delete files
 - [x] Create folders
 - [x] Check temperature, CPU, memory and disk usage.
-- [ ] Interface to update Raspy remotely
+- [x] Interface to update RaspBot remotely
 
 ## Prerequisites
 
 * Node Package Manager (__recommended version 5.7.1+__)
-* NodeJS (__recommended version 9.2.1+__)
+* NodeJS (__recommended version 10.4.1+__)
 * Python (__developed for version 2.7.10__)
   * psutil library (__developed using version 5.4.3__)
+* PM2 (__required to use the Bootstrapper app__)
 
 ## Installation
 
@@ -43,20 +43,22 @@ Clone this repository on your Raspberry Pi:
 $ git clone https://github.com/pkrll/Raspy
 ```
 
-And run ``make install`` followed by ``make build`` in the project root folder:
+And run ``make install`` in the project root folder to install and set up the server:
 
 ```bash
 $ cd Raspy
 $ make install
-...
-$ make build
 ```
 
-This might take a while, so grab a snack and wait for the installation, build and setup processes to finish.
+#### Manually building the client (optional)
+
+The folder ``dist`` inside ``./raspbot`` already contains the latest build of the client. Running the server will use the files there. You can also manually build the client app, by typing ``make build`` in the root folder. This might take a while, so grab a snack and wait for the installation and build processes to finish.
 
 ## Running the server
 
-After installing all dependencies, building the client and setting up the server, you can run the server with ``make server`` in the root folder.
+After installing all dependencies and setting up the server, you can run the server with ``make server`` in the root folder.
+
+It is, though, recommended to use a process manager to run the server.
 
 ### With a process manager
 
@@ -71,7 +73,6 @@ $ sudo npm install -g pm2
 Use ``make start`` to run the server in the background. The ``NODE_ENV`` will automatically be set to "production" when using the ``start`` rule.
 
 ```bash
-$ cd Raspy
 $ make start
 
 [PM2] Applying action restartProcessId on app [server](ids: 0)
@@ -80,7 +81,7 @@ $ make start
 ┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬───────┬──────────┐
 │ App name │ id │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user  │ watching │
 ├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────┼───────────┼───────┼──────────┤
-│ Raspy    │ 0  │ fork │ 13141 │ online │ 0       │ 0s     │ 66% │ 13.9 MB   │ pkrll │ disabled │
+│ Raspbot    │ 0  │ fork │ 13141 │ online │ 0       │ 0s     │ 66% │ 13.9 MB   │ pkrll │ disabled │
 └──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴───────┴──────────┘
  Use `pm2 show <id|name>` to get more details about an app
 
@@ -101,7 +102,6 @@ Follow these steps to make ``PM2`` run on startup.
 **Example**
 
 ```bash
-$ cd Raspy
 $ make start
 
 $ pm2 save
@@ -120,14 +120,14 @@ For more information on how to use PM2, check out **[the official documentation]
 
 ## Usage
 
-By default, Raspy runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+By default, RaspBot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
 
 ## Configuration
 
 Current configuration options:
 
 ```js
-// server/config/index.js
+// raspbot/config/index.js
 dev: {
   port: 5000,
   databasePath: 'db.json'
@@ -140,4 +140,4 @@ prod: {
 
 ## Author
 
-Raspy was created by **Ardalan Samimi**.
+RaspBot was created by **Ardalan Samimi**.
