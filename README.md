@@ -11,7 +11,7 @@
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
 
-Raspy is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+Raspbot is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
@@ -43,11 +43,13 @@ Clone this repository on your Raspberry Pi:
 $ git clone https://github.com/pkrll/Raspy
 ```
 
-And run ``make install`` in the project root folder:
+And run ``make install`` followed by ``make build`` in the project root folder:
 
 ```bash
 $ cd Raspy
 $ make install
+...
+$ make build
 ```
 
 This might take a while, so grab a snack and wait for the installation, build and setup processes to finish.
