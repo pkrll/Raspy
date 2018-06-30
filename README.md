@@ -169,9 +169,37 @@ module.exports = {
 }
 ```
 
-### Enabling HTTPS
+## Enabling HTTPS
 
-To enable HTTPS with ``RaspBot``, you need an SSL certificate. After obtaining it, put the certificate (``fullchain.pem``) and the key (``privkey.pem``) files (or symbolic links to them) in the folder ``config/.sslcert`` and restart the server. (Don't forget to forward port ``443`` to ``5443``.)
+To serve Raspbot over ``HTTPs``, you need to put your SSL certificate files (``fullchain.pem`` and ``privkey.pem``) in the folder ``config/.sslcert``.
+
+### Example
+
+Below follows a guide on how to generate certificates using Certbot and Let's encrypt. For more information [see this article](https://medium.com/@yash.kulshrestha/using-lets-encrypt-with-express-e069c7abe625).
+
+#### Generate certificates
+
+First make sure you have [Certbot](https://certbot.eff.org) and *Let's encrypt* installed, and the ports ``80`` and ``443`` forwarded to ``5000`` and ``5443`` (or, if overridden, the custom ports you've used).
+
+Navigate to the folder ``raspbot`` in the project directory and run the following command (**NOTE:** Remember to change *example.com* to your URL):
+
+```bash
+$ certbot certonly --webroot -w ./dist -d example.com --config-dir ~/.certbot/config --logs-dir ~/.certbot/logs --work-dir ~/.certbot/work
+```
+
+Follow the instructions, and wait for it finish.
+
+#### Add the certificate
+
+If you're using the default [configurations](https://github.com/pkrll/Raspy/wiki/Configurations), you can now symlink the certificate to the folder ``config/.sslcert`` in the folder ``raspbot/raspbot`` (**NOTE:** Remember to change *example.com* to your URL):
+
+```bash
+$ cd /path/to/raspbot
+$ ln -s ~/.certbot/config/live/example.com/fullchain.pem raspbot/config/.sslcert/fullchain.pem
+$ ln -s ~/.certbot/config/live/example.com/privkey.pem raspbot/config/.sslcert/privkey.pem
+```
+
+Restart the server.
 
 ## Author
 
