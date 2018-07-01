@@ -135,7 +135,7 @@ For more information on how to use PM2, check out **[the official documentation]
 
 ## Usage
 
-By default, Raspbot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+By default, Raspbot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``. The default username is ``admin`` with the password ``secret``. Be sure to change this.
 
 ## Configurations
 
