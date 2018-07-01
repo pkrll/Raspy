@@ -10,22 +10,22 @@
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
 
-``Raspbot`` is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+Raspbot is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
-**``Raspbot`` is still a work in progress**.
+**Raspbot is still a work in progress**.
 
 **Features:**
 
-- [ ] Reboot and shutdown
-- [x] Browse file system
-- [x] Download files
-- [ ] Upload files
-- [x] Delete files
-- [x] Create folders
-- [x] Check temperature, CPU, memory and disk usage.
-- [x] Interface to update Raspbot remotely
+- [x] 📂 Browse file system
+- [x] ⬇️ Download files
+- [ ] ⬆️ <s>Upload files</s>
+- [x] 🗑️ Delete files
+- [x] 📁 Create folders
+- [x] 🔌 Reboot & shutdown system
+- [x] 🌡️ Check temperature, CPU, memory and disk usage.
+- [x] 🎛️ Interface to update Raspbot remotely
 
 ## Table of Contents
 
@@ -135,7 +135,7 @@ For more information on how to use PM2, check out **[the official documentation]
 
 ## Usage
 
-By default, ``Raspbot`` runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+By default, Raspbot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
 
 ## Configurations
 
@@ -187,4 +187,4 @@ Restart the server.
 
 ## Author
 
-Raspbot was created by **Ardalan Samimi**.
+Raspbot was created by [**Ardalan Samimi**](https://github.com/pkrll). The robot icon was created by [FontAwesome](https://fontawesome.com/license) and is licensed under the [CC by 4.0 license](https://creativecommons.org/licenses/by/4.0/).
