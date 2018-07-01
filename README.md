@@ -10,7 +10,7 @@
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
 
-Raspbot is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+Raspbot is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
