@@ -43,6 +43,28 @@ exports.methods = {
       }
     });
   },
+
+  shutdown: function() {
+    this.$APIManager.shutdown(response => {
+      console.log(response);
+      if (response.success) {
+
+      } else {
+        alert(response.error.message);
+      }
+    });
+  },
+
+  reboot: function() {
+    this.$APIManager.reboot(response => {
+      console.log(response);
+      if (response.success) {
+
+      } else {
+        alert(response.error.message);
+      }
+    });
+  },
   /**
    * Converts temperature from Celsius to Fahrenheit.
    *

@@ -31,6 +31,14 @@ exports.launchBootstrapper = () => {
 	return executeCommand('cd ../ && make start_bootstrapper');
 };
 
+exports.reboot = () => {
+	return executeCommand('reboot');
+};
+
+exports.shutdown = () => {
+	return executeCommand('shutdown');
+};
+
 function getLatestRelease(callback, reject) {
 	let url = 'https://api.github.com/repos/pkrll/Raspy/releases';
 	if (oauth.id && oauth.secret) {

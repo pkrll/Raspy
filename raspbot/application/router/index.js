@@ -84,6 +84,14 @@ module.exports = app => {
   // ------------------------------
 	router.route('/bootstrapper').get(systemController.launchBootstrapper);
 	// ------------------------------
+  //          /checkForUpdate
+  // ------------------------------
+	router.route('/system/reboot').get(systemController.reboot);
+	// ------------------------------
+  //          /checkForUpdate
+  // ------------------------------
+	router.route('/system/shutdown').get(systemController.shutdown);
+	// ------------------------------
   //          /account/password
   // ------------------------------
 	router.route('/account/password').post(auther.updatePassword);
