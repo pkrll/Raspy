@@ -6,7 +6,6 @@ const auth = require('../../helpers/auth/');
 const browserController 	= require('../controllers/BrowserController');
 const dashboardController = require('../controllers/DashboardController');
 const systemController = require('../controllers/SystemController');
-const accountController = require('../controllers/AccountController');
 
 module.exports = app => {
 
@@ -87,7 +86,7 @@ module.exports = app => {
 	// ------------------------------
   //          /account/password
   // ------------------------------
-	router.route('/account/password').post(accountController.updatePassword);
+	router.route('/account/password').post(auther.updatePassword);
 
   app.use(express.static(app.get('dist')));
   app.use('/api', router);

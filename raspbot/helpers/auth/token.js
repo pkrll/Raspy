@@ -12,12 +12,11 @@ exports.generate = callback => {
 			callback(null, buffer.toString('hex'));
 		}
 	});
-}
+};
 
-exports.save = (token, clientIP) => {
-	lowdb.get('tokens').push({ token: token, clientIP: clientIP }).write();
-	console.log(lowdb.get('tokens').size().value());
-}
+exports.save = (token, clientIP, username) => {
+	lowdb.get('tokens').push({ token: token, clientIP: clientIP, username: username }).write();
+};
 
 exports.check = (token, clientIP) => {
 	const credentials = lowdb.get('tokens').find({ token: token }).value();
@@ -26,4 +25,13 @@ exports.check = (token, clientIP) => {
 	}
 
 	return false;
-}
+};
+
+exports.getUsernameFromToken = token => {
+	const credentials = lowdb.get('tokens').find({ token: token }).value();
+	if (credentials && credentials.username) {
+		return credentials.username;
+	}
+
+	return null;
+};
