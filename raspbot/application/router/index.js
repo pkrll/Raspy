@@ -6,6 +6,7 @@ const auth = require('../../helpers/auth/');
 const browserController 	= require('../controllers/BrowserController');
 const dashboardController = require('../controllers/DashboardController');
 const systemController = require('../controllers/SystemController');
+const raspbotController = require('../controllers/RaspbotController');
 
 module.exports = app => {
 
@@ -78,19 +79,23 @@ module.exports = app => {
 	// ------------------------------
   //          /checkForUpdate
   // ------------------------------
-	router.route('/checkForUpdate').get(systemController.checkForUpdate);
-	// ------------------------------
-  //          /bootstrapper
-  // ------------------------------
-	router.route('/bootstrapper').get(systemController.launchBootstrapper);
-	// ------------------------------
-  //          /checkForUpdate
-  // ------------------------------
 	router.route('/system/reboot').get(systemController.reboot);
 	// ------------------------------
   //          /checkForUpdate
   // ------------------------------
 	router.route('/system/shutdown').get(systemController.shutdown);
+	// ------------------------------
+  //          /raspbot/update/check
+  // ------------------------------
+	router.route('/raspbot/update/check').get(raspbotController.checkForUpdate);
+	// ------------------------------
+  //          /raspbot/reboot
+  // ------------------------------
+	router.route('/raspbot/reboot').get(raspbotController.reboot);
+	// ------------------------------
+  //          /raspbot/reboot
+  // ------------------------------
+	router.route('/raspbot/shutdown').get(raspbotController.reboot);
 	// ------------------------------
   //          /account/password
   // ------------------------------

@@ -10,8 +10,8 @@
 <script>
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
-import Changelog from '@/components/Settings/General/Update/Changelog.vue';
-import { data, created, methods } from '@/components/Settings/General/Update/main.js';
+import Changelog from '@/components/Settings/Control/Update/Changelog.vue';
+import { data, created, methods } from '@/components/Settings/Control/Update/update.js';
 
 export default {
   name: 'Update',
@@ -22,5 +22,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

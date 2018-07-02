@@ -153,27 +153,39 @@ export default {
       /**
 			 * Checks for system update.
 			 *
-			 * Calls the /system/checkForUpdate endpoint
+			 * Calls the /raspbot/update/check endpoint
 			 *
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
 			checkForUpdate: function (callback) {
-				this.HTTP.get('checkForUpdate').then(response => {
+				this.HTTP.get('raspbot/update/check').then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
 					if (typeof callback === 'function') callback(handleError(error));
 				});
 			},
 
-      launchBootstrapper: function(callback) {
-        this.HTTP.get('bootstrapper').then(response => {
+      rebootRaspbot: function(callback) {
+        this.HTTP.get('raspbot/reboot').then(response => {
           if (typeof callback === 'function') callback(response.data);
-				}).catch(error => {
-					if (typeof callback === 'function') callback(handleError(error));
-				});
+        }).catch(error => {
+          if (error.message && error.message == 'Network Error') {
+            callback({success: true});
+          }
+        });
       },
 
-      reboot: function(callback) {
+      shutdownRaspbot: function(callback) {
+        this.HTTP.get('raspbot/shutdown').then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          if (error.message && error.message == 'Network Error') {
+            callback({success: true});
+          }
+        });
+      },
+
+      rebootSystem: function(callback) {
         this.HTTP.get('system/reboot').then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
@@ -181,7 +193,7 @@ export default {
         });
       },
 
-      shutdown: function(callback) {
+      shutdownSystem: function(callback) {
         this.HTTP.get('system/shutdown').then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {

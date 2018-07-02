@@ -45,7 +45,7 @@ exports.methods = {
   },
 
   shutdown: function() {
-    this.$APIManager.shutdown(response => {
+    this.$APIManager.shutdownSystem(response => {
       console.log(response);
       if (response.success) {
 
@@ -56,7 +56,7 @@ exports.methods = {
   },
 
   reboot: function() {
-    this.$APIManager.reboot(response => {
+    this.$APIManager.rebootSystem(response => {
       console.log(response);
       if (response.success) {
 

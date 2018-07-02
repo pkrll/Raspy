@@ -3,12 +3,8 @@
     <div class="heading">{{heading}}</div>
     <vue-markdown class="changelog">
       {{textElement}}
-
-*Launch the bootstrapper to update to the latest version.*
     </vue-markdown>
-    <router-link to="/bootstrapper">
-      <div class="button">Launch bootstrapper</div>
-    </router-link>
+    <div class="button">Update</div>
   </div>
 </template>
 
@@ -27,4 +23,4 @@ export default {
 }
 </script>
 
-<style scoped src="@/components/Settings/General/Update/changelog.css"></style>
+<style scoped src="@/components/Settings/Control/Update/changelog.css"></style>

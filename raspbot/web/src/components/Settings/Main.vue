@@ -21,6 +21,11 @@
 			<div class="title">General</div>
 			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
 		</router-link>
+    <router-link to="/settings/control" class="row">
+			<div class="icon"><font-awesome-icon icon="wrench"/></div>
+			<div class="title">Control</div>
+			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
+		</router-link>
 	</section>
 </template>
 

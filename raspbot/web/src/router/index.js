@@ -9,9 +9,11 @@ import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsGeneral from '@/components/Settings/General/General.vue';
-import SettingsUpdate from '@/components/Settings/General/Update/Main.vue';
 import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
 import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
+import Control from '@/components/Settings/Control/Control.vue';
+import Update from '@/components/Settings/Control/Update/Update.vue';
+import Reboot from '@/components/Settings/Control/Reboot/Reboot.vue';
 
 Vue.use(Router);
 
@@ -116,18 +118,27 @@ export default new Router({
       }
     },
     {
-      path: '/settings/general/Update',
-      name: 'SettingsUpdate',
-      component: SettingsUpdate,
+      path: '/settings/control',
+      name: 'Control',
+      component: Control,
       meta: {
         tab: 3,
         requiresAuth: true
       }
     },
     {
-      path: '/bootstrapper',
-      name: 'Bootstrapper',
-      component: Bootstrapper,
+      path: '/settings/control/update',
+      name: 'Update',
+      component: Update,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/control/reboot',
+      name: 'Reboot',
+      component: Reboot,
       meta: {
         tab: 3,
         requiresAuth: true
