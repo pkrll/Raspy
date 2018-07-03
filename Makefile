@@ -23,7 +23,7 @@ install_server:
 	cd raspbot && npm run setup
 
 build:
-	npm run build
+	cd raspbot && npm run build
 
 start:
 	pm2 start process.json --only Raspbot --watch
