@@ -57,6 +57,12 @@ devclient:
 update:
 	git pull
 
+system_reboot:
+	sudo /sbin/shutdown
+
+system_restart:
+	sudo /sbin/reboot
+
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
 	node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch --file=$(SERVICE)/package.json
