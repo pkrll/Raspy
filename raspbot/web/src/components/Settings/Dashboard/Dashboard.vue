@@ -3,7 +3,7 @@
     <div class="heading">Dashboard settings</div>
 		<div class="row">
 			<div class="title">Dashboard refresh rate</div>
-			<div class="button">
+			<div class="discreet-button">
 				<select class="select" v-model="refreshRate">
 					<option value="0">Never</option>
 					<option value="3">3 seconds</option>
@@ -14,7 +14,7 @@
 		</div>
 		<div class="row">
 			<div class="title">Show temperatures in</div>
-			<div class="button" v-on:click="switchTemperatureScale">{{this.temperatureScale | temperatureLabel}}</div>
+			<div class="discreet-button" v-on:click="switchTemperatureScale">{{this.temperatureScale | temperatureLabel}}</div>
 		</div>
   </section>
 </template>

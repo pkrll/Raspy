@@ -16,13 +16,8 @@
 			<div class="title">Account</div>
 			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
 		</router-link>
-		<router-link to="/settings/general" class="row">
-			<div class="icon"><font-awesome-icon icon="wrench"/></div>
-			<div class="title">General</div>
-			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
-		</router-link>
     <router-link to="/settings/control" class="row">
-			<div class="icon"><font-awesome-icon icon="wrench"/></div>
+			<div class="icon"><font-awesome-icon icon="keyboard"/></div>
 			<div class="title">Control</div>
 			<div class="arrow"><font-awesome-icon icon="angle-right"/></div>
 		</router-link>
@@ -31,9 +26,9 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHdd, faAngleRight, faTachometerAlt, faUserCircle, faWrench } from '@fortawesome/free-solid-svg-icons';
+import { faHdd, faAngleRight, faTachometerAlt, faUserCircle, faKeyboard } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHdd, faAngleRight, faTachometerAlt, faUserCircle, faWrench);
+library.add(faHdd, faAngleRight, faTachometerAlt, faUserCircle, faKeyboard);
 
 export default {
   name: 'Settings'

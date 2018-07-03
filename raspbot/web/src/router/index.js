@@ -8,7 +8,6 @@ import Settings from '@/components/Settings/Main.vue';
 import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
-import SettingsGeneral from '@/components/Settings/General/General.vue';
 import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
 import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
 import Control from '@/components/Settings/Control/Control.vue';
@@ -104,15 +103,6 @@ export default new Router({
       path: '/settings/account/password',
       name: 'AccountPassword',
       component: SettingsAccountPassword,
-      meta: {
-        tab: 3,
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/settings/general',
-      name: 'SettingsGeneral',
-      component: SettingsGeneral,
       meta: {
         tab: 3,
         requiresAuth: true

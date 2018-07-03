@@ -49,6 +49,12 @@
 
 }
 
+.row .discreet-button {
+	cursor:			pointer;
+	width: 			20vw;
+	text-align: center;
+}
+
 .greyed {
 	color: grey;
 }

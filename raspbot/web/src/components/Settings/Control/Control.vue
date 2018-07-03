@@ -2,7 +2,7 @@
   <section id="content">
     <div class="heading">Control</div>
     <router-link to="/settings/control/update" class="row">
-      <div class="icon"><font-awesome-icon icon="cloud-download-alt"/></div>
+      <div class="icon"><font-awesome-icon icon="download"/></div>
       <div class="title">Check for update</div>
       <div class="arrow"><font-awesome-icon icon="angle-right"/></div>
     </router-link>
@@ -21,9 +21,9 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCloudDownloadAlt, faPowerOff, faRedoAlt, faPlug, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPowerOff, faRedoAlt, faPlug, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faCloudDownloadAlt, faPowerOff, faRedoAlt, faPlug, faAngleRight);
+library.add(faDownload, faPowerOff, faRedoAlt, faPlug, faAngleRight);
 
 export default {
   name: 'Control'
