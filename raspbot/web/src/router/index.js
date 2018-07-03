@@ -4,15 +4,17 @@ import Main from '@/components/Main/Main.vue';
 import Browser from '@/components/Browser/Main/Main.vue';
 import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
+import RebootSystem from '@/components/Dashboard/Reboot/Reboot.vue';
+import ShutdownSystem from '@/components/Dashboard/Shutdown/Shutdown.vue';
 import Settings from '@/components/Settings/Main.vue';
 import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
 import Control from '@/components/Settings/Control/Control.vue';
-import Update from '@/components/Settings/Control/Update/Update.vue';
-import Reboot from '@/components/Settings/Control/Reboot/Reboot.vue';
-import Shutdown from '@/components/Settings/Control/Shutdown/Shutdown.vue';
+import UpdateRaspbot from '@/components/Settings/Control/Update/Update.vue';
+import RebootRaspbot from '@/components/Settings/Control/Reboot/Reboot.vue';
+import ShutdownRaspbot from '@/components/Settings/Control/Shutdown/Shutdown.vue';
 
 Vue.use(Router);
 
@@ -57,6 +59,24 @@ export default new Router({
 			path: '/dashboard',
 			name: 'Dashboard',
 			component: Dashboard,
+			meta: {
+				tab: 2,
+				requiresAuth: true
+			}
+		},
+    {
+			path: '/dashboard/reboot',
+			name: 'RebootSystem',
+			component: RebootSystem,
+			meta: {
+				tab: 2,
+				requiresAuth: true
+			}
+		},
+    {
+			path: '/dashboard/Shutdown',
+			name: 'ShutdownSystem',
+			component: ShutdownSystem,
 			meta: {
 				tab: 2,
 				requiresAuth: true
@@ -119,7 +139,7 @@ export default new Router({
     {
       path: '/settings/control/update',
       name: 'Update',
-      component: Update,
+      component: UpdateRaspbot,
       meta: {
         tab: 3,
         requiresAuth: true
@@ -128,7 +148,7 @@ export default new Router({
     {
       path: '/settings/control/reboot',
       name: 'Reboot',
-      component: Reboot,
+      component: RebootRaspbot,
       meta: {
         tab: 3,
         requiresAuth: true
@@ -137,7 +157,7 @@ export default new Router({
     {
       path: '/settings/control/shutdown',
       name: 'Shutdown',
-      component: Shutdown,
+      component: ShutdownRaspbot,
       meta: {
         tab: 3,
         requiresAuth: true

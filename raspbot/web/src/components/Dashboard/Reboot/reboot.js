@@ -3,23 +3,22 @@
 exports.data = function() {
   return {
     component: 'ConfirmPage',
-    textElement: 'Are you sure you want to quit Raspbot?',
-    confirmButtonTitle: 'Shutdown',
+    textElement: 'Are you sure you want to reboot the system?',
+    confirmButtonTitle: 'Reboot',
     cancelButtonTitle: 'Cancel'
   }
 };
 
 exports.methods = {
-  shutdown: function() {
+  reboot: function() {
     this.component = 'Spinner';
-    this.textElement = 'Shutting down...';
+    this.textElement = 'Rebooting...';
 
-    this.$APIManager.shutdownRaspbot(response => {
+    this.$APIManager.rebootRaspbot(response => {
       this.component = 'Content';
       if (response.success) {
-        this.textElement = 'Raspbot has shutdown.';
       } else {
-        this.textElement = 'Could not shutdown';
+        this.textElement = 'Could not reboot.';
       }
     });
   },

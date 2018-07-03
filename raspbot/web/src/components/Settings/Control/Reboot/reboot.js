@@ -2,14 +2,15 @@
 
 exports.data = function() {
   return {
-    didConfirm: false,
-    textElement: ''
+    component: 'ConfirmPage',
+    textElement: 'Are you sure you want to reboot Raspbot?',
+    confirmButtonTitle: 'Reboot',
+    cancelButtonTitle: 'Cancel'
   }
 };
 
 exports.methods = {
   reboot: function() {
-    this.didConfirm = true;
     this.component = 'Spinner';
     this.textElement = 'Rebooting...';
 

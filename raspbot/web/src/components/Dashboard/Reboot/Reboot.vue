@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import { data, methods } from '@/components/Settings/Control/Reboot/reboot.js';
+import { data, methods } from '@/components/Dashboard/Reboot/reboot.js';
 import ConfirmPage from '@/components/Common/ConfirmPage/ConfirmPage.vue';
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
 
 export default {
-  name: 'Reboot',
+  name: 'RebootSystem',
   components: { ConfirmPage, Spinner, Content },
   data: data,
   methods: methods

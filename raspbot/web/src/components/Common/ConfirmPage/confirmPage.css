@@ -1,0 +1,23 @@
+
+#confirmation {
+  font-size: 6vw;
+  padding: 10px 0;
+}
+
+#buttons > div:last-child {
+  margin-top: 20px;
+}
+
+.button {
+	background: 		rgb(82, 172, 120);
+	border-radius: 	5px;
+	cursor:					pointer;
+	font-size: 			5vw;
+	margin-top: 		40px;
+	padding: 				10px;
+
+}
+
+.red {
+	background: rgb(172, 82, 82);
+}
