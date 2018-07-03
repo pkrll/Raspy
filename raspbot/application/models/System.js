@@ -1,11 +1,11 @@
 const oauth = require('../../config/index.js').oauth;
 
 exports.reboot = () => {
-	return executeCommand('reboot');
+	return executeCommand('cd ../ && make system_reboot');
 };
 
 exports.shutdown = () => {
-	return executeCommand('shutdown');
+	return executeCommand('cd ../ && make system_shutdown');
 };
 
 function executeCommand(command, arguments = '') {
