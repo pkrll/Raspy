@@ -1,0 +1,17 @@
+#content {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+	align-items: 			center;
+	display: 					flex;
+	flex-direction: 	column;
+	justify-content: 	flex-start;
+}
+
+.heading {
+	font-size: 	8vw;
+	margin-top: 40px;
+	text-align: center;
+}

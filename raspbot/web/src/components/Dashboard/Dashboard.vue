@@ -1,11 +1,11 @@
 <template>
   <section id="content">
 		<nav class="options">
-		 <div class="noselect">
+		 <div class="noselect" v-on:click="shutdown">
 			 <font-awesome-icon icon="power-off"/>
 			 <div class="title">Power off</div>
 		 </div>
-		 <div class="noselect">
+		 <div class="noselect" v-on:click="reboot">
 			 <font-awesome-icon icon="redo"/>
 			 <div class="title">Reboot</div>
 		 </div>

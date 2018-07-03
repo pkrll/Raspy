@@ -39,6 +39,8 @@ module.exports = databasePath => {
 
 	const auth = {
 
+		verify: verify,
+
 		authenticate: req => {
 			return new Promise((resolve, reject) => {
 				let credentials = decodeBasicAuth(req);
@@ -67,7 +69,7 @@ module.exports = databasePath => {
 						token.generate((error, userToken) => {
 							if (error) { throw error; }
 							const clientIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-							token.save(userToken, clientIP);
+							token.save(userToken, clientIP, user.username);
 							resolve(userToken);
 						});
 					});
@@ -76,8 +78,6 @@ module.exports = databasePath => {
 				}
 			});
 		},
-
-		verify: verify,
 
 		isAuthorized: (req, res, next) => {
 			if (verify(req)) { return next(); }
@@ -88,6 +88,26 @@ module.exports = databasePath => {
 					message: 'Unauthorized access.'
 				}
 			});
+		},
+
+		updatePassword: (req, res) => {
+			const credential = decodeTokenAuth(req);
+			if (credential) {
+				const username = token.getUsernameFromToken(credential);
+				const password = req.body.password;
+				const database = require('lowdb')(new FileSync(databasePath));
+				const userInfo = database.get('users').find({ username: username }).value();
+
+				if (userInfo) {
+					bcrypt.hash(password, 10, function(err, hash) {
+						userInfo.password = hash;
+						database.write();
+						res.json({ success: true });
+					});
+				} else {
+					res.json({ success: false, error: { message: 'User not found.'}});
+				}
+			}
 		}
 	}
 

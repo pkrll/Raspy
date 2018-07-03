@@ -6,7 +6,7 @@ const auth = require('../../helpers/auth/');
 const browserController 	= require('../controllers/BrowserController');
 const dashboardController = require('../controllers/DashboardController');
 const systemController = require('../controllers/SystemController');
-const accountController = require('../controllers/AccountController');
+const raspbotController = require('../controllers/RaspbotController');
 
 module.exports = app => {
 
@@ -79,15 +79,35 @@ module.exports = app => {
 	// ------------------------------
   //          /checkForUpdate
   // ------------------------------
-	router.route('/checkForUpdate').get(systemController.checkForUpdate);
+	router.route('/system/reboot').get(systemController.reboot);
 	// ------------------------------
-  //          /bootstrapper
+  //          /checkForUpdate
   // ------------------------------
-	router.route('/bootstrapper').get(systemController.launchBootstrapper);
+	router.route('/system/shutdown').get(systemController.shutdown);
+	// ------------------------------
+  //          /raspbot/update/check
+  // ------------------------------
+	router.route('/raspbot/update/check').get(raspbotController.checkForUpdate);
+	// ------------------------------
+  //          /raspbot/update
+  // ------------------------------
+	router.route('/raspbot/update').get(raspbotController.update);
+	// ------------------------------
+	//          /raspbot/install
+	// ------------------------------
+	router.route('/raspbot/install').get(raspbotController.install);
+	// ------------------------------
+  //          /raspbot/reboot
+  // ------------------------------
+	router.route('/raspbot/reboot').get(raspbotController.reboot);
+	// ------------------------------
+  //          /raspbot/reboot
+  // ------------------------------
+	router.route('/raspbot/shutdown').get(raspbotController.shutdown);
 	// ------------------------------
   //          /account/password
   // ------------------------------
-	router.route('/account/password').post(accountController.updatePassword);
+	router.route('/account/password').post(auther.updatePassword);
 
   app.use(express.static(app.get('dist')));
   app.use('/api', router);

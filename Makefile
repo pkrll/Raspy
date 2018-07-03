@@ -1,4 +1,4 @@
-.PHONY: all install build start stop server devserver client devclient updater major minor patch clean
+.PHONY: all install install_client install_server build start stop server devserver client devclient updater major minor patch clean
 
 ENV = production
 SERVICE = null
@@ -6,18 +6,24 @@ SERVICE = null
 all: install build start
 
 install:
-ifeq ($(SERVICE), bootstrapper)
-	npm run install:bootstrapper
+ifeq ($(SERVICE), client)
+	make install_client
+else ifeq ($(SERVICE), server)
+	make install_server
 else
-	npm run install:server
+	make install_client
+	make install_server
 endif
 
+install_client:
+	cd raspbot/web && npm install
+
+install_server:
+	cd raspbot && npm install
+	cd raspbot && npm run setup
+
 build:
-ifeq ($(SERVICE), bootstrapper)
-	npm run build:bootstrapper
-else
-	npm run build
-endif
+	cd raspbot && npm run build
 
 start:
 	pm2 start process.json --only Raspbot --watch
@@ -28,17 +34,11 @@ restart:
 stop:
 	pm2 stop process.json --only Raspbot --watch 0
 
-start_bootstrapper:
-	pm2 start process.json --only Bootstrapper --watch
-
-stop_bootstrapper:
-	pm2 stop process.json --only Bootstrapper --watch 0
-
 server:
 ifeq ($(ENV), dev)
-	NODE_ENV=development npm run server
+	cd raspbot && NODE_ENV=development npm run dev
 else
-	NODE_ENV=production npm run server
+	cd raspbot && NODE_ENV=production npm run dev
 endif
 
 devserver:
@@ -46,9 +46,9 @@ devserver:
 
 client:
 ifeq ($(ENV), dev)
-	npm run client
+	cd raspbot && npm run dev:client
 else
-	npm run build
+	cd raspbot && npm run build
 endif
 
 devclient:
@@ -58,27 +58,27 @@ update:
 	git pull
 
 major:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run major -- --file=$(SERVICE)/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
+	node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment major version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] major"
+	@echo "USAGE:\tmake SERVICE=[raspbot] major"
 endif
 
 minor:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run minor -- --file=$(SERVICE)/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
+	node .scripts/increment-version.js --version=minor --skip-build --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment minor version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] minor"
+	@echo "USAGE:\tmake SERVICE=[raspbot] minor"
 endif
 
 patch:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
-	npm run patch -- --file=$(SERVICE)/package.json
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
+	node .scripts/increment-version.js --version=patch --skip-build --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment patch version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] patch"
+	@echo "USAGE:\tmake SERVICE=[raspbot] patch"
 endif
 
 clean:

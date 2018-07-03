@@ -6,11 +6,11 @@
 				Favorite folder
 				<div class="subscript">{{this.favoritFolder}}</div>
 			</div>
-			<div class="button noselect" v-on:click="clearBookmark" v-bind:class="{greyed : this.favoritFolder == 'None'}">Clear</div>
+			<div class="discreet-button noselect" v-on:click="clearBookmark" v-bind:class="{greyed : this.favoritFolder == 'None'}">Clear</div>
 		</div>
 		<div class="row">
 			<div class="title">Show hidden files</div>
-			<div class="button" v-on:click="toggleHiddenFiles">{{this.showHidden | showHiddenLabel}}</div>
+			<div class="discreet-button" v-on:click="toggleHiddenFiles">{{this.showHidden | showHiddenLabel}}</div>
 		</div>
   </section>
 </template>

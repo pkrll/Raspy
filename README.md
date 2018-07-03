@@ -10,22 +10,22 @@
 
 <img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
 
-``Raspbot`` is a lightweight REST API server,esigned for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
+Raspbot is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
 Built with NodeJS & Express 4 and Vue 2 & Webpack.
 
-**``Raspbot`` is still a work in progress**.
+**Raspbot is still a work in progress**.
 
 **Features:**
 
-- [ ] Reboot and shutdown
-- [x] Browse file system
-- [x] Download files
-- [ ] Upload files
-- [x] Delete files
-- [x] Create folders
-- [x] Check temperature, CPU, memory and disk usage.
-- [x] Interface to update Raspbot remotely
+- [x] 📂 Browse file system
+- [x] ⬇️ Download files
+- [ ] ⬆️ <s>Upload files</s>
+- [x] 🗑️ Delete files
+- [x] 📁 Create folders
+- [x] 🔌 Reboot & shutdown system
+- [x] 🌡️ Check temperature, CPU, memory and disk usage.
+- [x] 🎛️ Update, restart & stop Raspbot remotely
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 * NodeJS (__recommended version 10.4.1+__)
 * Python (__developed for version 2.7.10__)
   * psutil library (__developed using version 5.4.3__)
-* PM2 (__required to use the Bootstrapper app__)
+* PM2 (__required to update, restart or stop Raspbot remotely__)
 
 ## Installation
 
@@ -135,7 +135,7 @@ For more information on how to use PM2, check out **[the official documentation]
 
 ## Usage
 
-By default, ``Raspbot`` runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``.
+By default, Raspbot runs on port 5000 and can be accessed by ``http://ip-to-your-pi:5000``. The default username is ``admin`` with the password ``secret``. Be sure to change this.
 
 ## Configurations
 
@@ -187,4 +187,4 @@ Restart the server.
 
 ## Author
 
-Raspbot was created by **Ardalan Samimi**.
+Raspbot was created by [**Ardalan Samimi**](https://github.com/pkrll). The robot icon was created by [FontAwesome](https://fontawesome.com/license) and is licensed under the [CC by 4.0 license](https://creativecommons.org/licenses/by/4.0/).
