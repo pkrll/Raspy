@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/logo.png" data-canonical-src="docs/logo.png" width="65%"/>
+  <img src=".assets/logo.png" data-canonical-src=".assets/logo.png" width="65%"/>
 </p>
 <p align="center">
   <a href="https://github.com/pkrll/Raspy/releases"><img src="https://img.shields.io/github/release/pkrll/raspy/all.svg?style=for-the-badge"></a>
@@ -8,7 +8,7 @@
 <a href="https://github.com/pkrll/Raspy/search?l=javascript"><img src="https://img.shields.io/github/languages/top/pkrll/Raspy.svg?style=for-the-badge"></a>
 </p>
 
-<img src="docs/screenshot.png" data-canonical-src="docs/screenshot.png" align="right" width="350px"/>
+<img src=".assets/screenshot.png" data-canonical-src=".assets/screenshot.png" align="right" width="350px"/>
 
 Raspbot is a lightweight REST API server, designed for the **Raspberry Pi**, as well as a client web application that let's you control your device with ease.
 
@@ -133,7 +133,7 @@ sudo env PATH=$PATH:[...] startup systemd -u USER --hp /home/USER
 $ sudo env PATH=$PATH:[...] startup systemd -u USER --hp /home/USER
 ```
 
-For more information on how to use PM2, check out **[the official documentation](http://pm2.keymetrics.io/docs/usage/cluster-mode/)** or **[this quickstart guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#manage-application-with-pm2)**.
+For more information on how to use PM2, check out **[the official documentation](http://pm2.keymetrics.io/.assets/usage/cluster-mode/)** or **[this quickstart guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#manage-application-with-pm2)**.
 
 ## Usage
 
