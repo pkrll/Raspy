@@ -57,7 +57,7 @@ devclient:
 update:
 	git pull
 
-system_reboot:
+system_shutdown:
 	sudo /sbin/shutdown
 
 system_restart:
