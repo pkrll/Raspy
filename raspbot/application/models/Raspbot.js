@@ -13,7 +13,7 @@ exports.checkForUpdate = () => {
 					const compare = require('compare-versions');
 					let response = { heading: '', version: version, isNewer: false, changes: '' }
 
-					if (compare(json.version, version) < 1) {
+					if (compare(json.version, version) > 0) {
 						response.version = json.version;
 						response.isNewer = true;
 						response.changes = json.changes;
