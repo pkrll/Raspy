@@ -18,9 +18,13 @@ exports.methods = {
       this.component = 'Content';
       if (response.success) {
         let timer = setInterval(() => {
-          this.$root.endSession();
-          clearInterval(timer);
-        }, 1500);
+          this.$APIManager.testConnection(response => {
+            if (response.success) {
+              clearInterval(timer);
+              this.$root.endSession()
+            }
+          });
+        }, 2000);
       } else {
         this.textElement = 'Could not reboot';
       }

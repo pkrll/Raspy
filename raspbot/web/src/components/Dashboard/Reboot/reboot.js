@@ -17,6 +17,14 @@ exports.methods = {
     this.$APIManager.rebootRaspbot(response => {
       this.component = 'Content';
       if (response.success) {
+        let timer = setInterval(() => {
+          this.$APIManager.testConnection(response => {
+            if (response.success) {
+              clearInterval(timer);
+              this.$root.endSession()
+            }
+          });
+        }, 10000);
       } else {
         this.textElement = 'Could not reboot.';
       }

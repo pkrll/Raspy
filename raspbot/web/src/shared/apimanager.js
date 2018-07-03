@@ -16,6 +16,18 @@ export default {
         this.HTTP.defaults.headers.common['Authorization'] = "bearer " + token;
       },
 
+      testConnection: function(callback) {
+        this.HTTP.get('health').then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          if (error.message && error.message == 'Network Error') {
+            if (typeof callback === 'function') callback({success: false});
+          } else {
+            if (typeof callback === 'function') callback(handleError(error));
+          }
+        });
+      },
+
       verifyToken: function(token, callback) {
         this.HTTP.post('verify', {}, {
           headers: {
