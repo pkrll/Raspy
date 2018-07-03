@@ -25,7 +25,7 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 - [x] 📁 Create folders
 - [x] 🔌 Reboot & shutdown system
 - [x] 🌡️ Check temperature, CPU, memory and disk usage.
-- [x] 🎛️ Interface to update Raspbot remotely
+- [x] 🎛️ Update, restart & stop Raspbot remotely
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 * NodeJS (__recommended version 10.4.1+__)
 * Python (__developed for version 2.7.10__)
   * psutil library (__developed using version 5.4.3__)
-* PM2 (__required to use the Bootstrapper app__)
+* PM2 (__required to update, restart or stop Raspbot remotely__)
 
 ## Installation
 
