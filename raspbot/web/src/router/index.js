@@ -9,7 +9,6 @@ import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
-import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
 import Control from '@/components/Settings/Control/Control.vue';
 import Update from '@/components/Settings/Control/Update/Update.vue';
 import Reboot from '@/components/Settings/Control/Reboot/Reboot.vue';
