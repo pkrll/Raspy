@@ -1,4 +1,4 @@
-.PHONY: all install build start stop server devserver client devclient updater major minor patch clean
+.PHONY: all install install_client install_server build start stop server devserver client devclient updater major minor patch clean
 
 ENV = production
 SERVICE = null
@@ -6,7 +6,21 @@ SERVICE = null
 all: install build start
 
 install:
-	npm run install:server
+ifeq ($(SERVICE), client)
+	make install_client
+else ifeq ($(SERVICE), server)
+	make install_server
+else
+	make install_client
+	make install_server
+endif
+
+install_client:
+	cd raspbot/web && npm install
+
+install_server:
+	cd raspbot && npm install
+	cd raspbot && npm run setup
 
 build:
 	npm run build
@@ -22,9 +36,9 @@ stop:
 
 server:
 ifeq ($(ENV), dev)
-	NODE_ENV=development npm run server
+	cd raspbot && NODE_ENV=development npm run dev
 else
-	NODE_ENV=production npm run server
+	cd raspbot && NODE_ENV=production npm run dev
 endif
 
 devserver:
@@ -32,9 +46,9 @@ devserver:
 
 client:
 ifeq ($(ENV), dev)
-	npm run client
+	cd raspbot && npm run dev:client
 else
-	npm run build
+	cd raspbot && npm run build
 endif
 
 devclient:
@@ -45,15 +59,15 @@ update:
 
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	npm run major -- --file=$(SERVICE)/package.json
+	node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment major version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] major"
+	@echo "USAGE:\tmake SERVICE=[raspbot] major"
 endif
 
 minor:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	npm run minor -- --file=$(SERVICE)/package.json
+	node .scripts/increment-version.js --version=minor --skip-build --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment minor version."
 	@echo "USAGE:\tmake SERVICE=[raspbot] minor"
@@ -61,7 +75,7 @@ endif
 
 patch:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	npm run patch -- --file=$(SERVICE)/package.json
+	node .scripts/increment-version.js --version=patch --skip-build --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment patch version."
 	@echo "USAGE:\tmake SERVICE=[raspbot] patch"
