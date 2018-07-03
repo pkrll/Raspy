@@ -60,7 +60,7 @@ update:
 system_shutdown:
 	sudo /sbin/shutdown
 
-system_restart:
+system_reboot:
 	sudo /sbin/reboot
 
 major:
