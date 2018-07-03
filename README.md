@@ -48,6 +48,8 @@ Built with NodeJS & Express 4 and Vue 2 & Webpack.
 * NodeJS (__recommended version 10.4.1+__)
 * Python (__developed for version 2.7.10__)
   * psutil library (__developed using version 5.4.3__)
+
+**Optional(-ish):**
 * PM2 (__required to update, restart or stop Raspbot remotely__)
 
 ## Installation
