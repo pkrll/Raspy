@@ -17,7 +17,10 @@ exports.methods = {
     this.$APIManager.shutdownRaspbot(response => {
       this.component = 'Content';
       if (response.success) {
-        this.textElement = 'Raspbot has shutdown.';
+        let timer = setInterval(() => {
+          clearInterval(timer);
+          this.$root.endSession()
+        }, 1500);
       } else {
         this.textElement = 'Could not shutdown';
       }
