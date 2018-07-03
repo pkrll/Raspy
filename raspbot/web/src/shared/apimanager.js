@@ -62,7 +62,7 @@ export default {
 			 * @param  {String} 	path 			The path to the directory list.
 			 * @param  {Function} callback 	The callback to invoke on response.
 			 */
-			browseDirectory: function (path, callback) {
+			browseDirectory: function(path, callback) {
 				this.HTTP.get('browse' + path).then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
@@ -77,7 +77,7 @@ export default {
 			 * @param  {String}   path     The path to the file.
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			viewFile: function (path, callback) {
+			viewFile: function(path, callback) {
 				this.HTTP.get('file' + path).then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
@@ -92,7 +92,7 @@ export default {
        * @param  {String}   path     The path to the directory or file file.
        * @param  {Function} callback The callback to invoke on response.
        */
-      deleteFile: function (path, callback) {
+      deleteFile: function(path, callback) {
         this.HTTP.delete('file' + path).then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
@@ -107,7 +107,7 @@ export default {
 			 * @param  {String}   path     The path of the new folder.
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			createFolder: function (path, callback) {
+			createFolder: function(path, callback) {
 				this.HTTP.post('folder/new', { fullPath: path }).then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
@@ -123,7 +123,7 @@ export default {
 			 * @param  {String} saveAsName 	The name to save the file as.
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			downloadFile: function (path, saveAsName, callback) {
+			downloadFile: function(path, saveAsName, callback) {
 				let	fileName 	= (saveAsName != undefined) ? saveAsName : 'untitled';
 				let baseURL 	= this.HTTP.defaults.baseURL;
 				let tokenAuth	= this.HTTP.defaults.headers.common['Authorization'];
@@ -149,7 +149,7 @@ export default {
 			 *
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			getSystemInformation: function (callback) {
+			getSystemInformation: function(callback) {
 				this.HTTP.get('dashboard').then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
@@ -157,13 +157,28 @@ export default {
 				});
 			},
       /**
+       * Changes the current users password.
+       *
+       * Calls the /account/password endpoint.
+       *
+       * @param  {String}   password The new password.
+       * @param  {Function} callback The callback to invoke on response.
+       */
+      updatePassword: function(password, callback) {
+        this.HTTP.post('account/password', { password: password }).then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          if (typeof callback === 'function') callback(handleError(error));
+        });
+      },
+      /**
 			 * Checks for system update.
 			 *
 			 * Calls the /raspbot/update/check endpoint
 			 *
 			 * @param  {Function} callback The callback to invoke on response.
 			 */
-			checkForUpdate: function (callback) {
+			checkForUpdate: function(callback) {
 				this.HTTP.get('raspbot/update/check').then(response => {
 					if (typeof callback === 'function') callback(response.data);
 				}).catch(error => {
@@ -171,6 +186,29 @@ export default {
 				});
 			},
 
+      updateRaspbot: function(callback) {
+        this.HTTP.get('raspbot/update').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+          console.log(error);
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+      },
+
+      installRaspbot: function(callback) {
+        this.HTTP.get('raspbot/install').then(response => {
+					if (typeof callback === 'function') callback(response.data);
+				}).catch(error => {
+					if (typeof callback === 'function') callback(handleError(error));
+				});
+      },
+      /**
+       * Reboots the application.
+       *
+       * Calls the raspbot/reboot endpoint.
+       *
+       * @param  {Function} callback The callback to invoke on response.
+       */
       rebootRaspbot: function(callback) {
         this.HTTP.get('raspbot/reboot').then(response => {
           if (typeof callback === 'function') callback(response.data);
@@ -180,7 +218,13 @@ export default {
           }
         });
       },
-
+      /**
+       * shuts down the application.
+       *
+       * Calls the raspbot/shutdown endpoint.
+       *
+       * @param  {Function} callback The callback to invoke on response.
+       */
       shutdownRaspbot: function(callback) {
         this.HTTP.get('raspbot/shutdown').then(response => {
           if (typeof callback === 'function') callback(response.data);
@@ -190,7 +234,13 @@ export default {
           }
         });
       },
-
+      /**
+       * Reboots the system.
+       *
+       * Calls the system/reboot endpoint.
+       *
+       * @param  {Function} callback The callback to invoke on response.
+       */
       rebootSystem: function(callback) {
         this.HTTP.get('system/reboot').then(response => {
           if (typeof callback === 'function') callback(response.data);
@@ -198,17 +248,15 @@ export default {
           if (typeof callback === 'function') callback(handleError(error));
         });
       },
-
+      /**
+       * Shuts down the system.
+       *
+       * Calls the system/shutdown endpoint.
+       *
+       * @param  {Function} callback The callback to invoke on response.
+       */
       shutdownSystem: function(callback) {
         this.HTTP.get('system/shutdown').then(response => {
-          if (typeof callback === 'function') callback(response.data);
-        }).catch(error => {
-          if (typeof callback === 'function') callback(handleError(error));
-        });
-      },
-
-      updatePassword: function(password, callback) {
-        this.HTTP.post('account/password', { password: password }).then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
           if (typeof callback === 'function') callback(handleError(error));

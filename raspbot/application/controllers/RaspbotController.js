@@ -8,6 +8,24 @@ exports.checkForUpdate = (req, res) => {
 	});
 };
 
+exports.update = (req, res) => {
+	console.log("Update requested");
+	raspbot.update().then(response => {
+		res.json({success: true, result: response});
+	}).catch(error => {
+		res.status(500).json({success: false, error: error.message});
+	});
+};
+
+exports.install = (req, res) => {
+	console.log("Install requested");
+	raspbot.install().then(response => {
+		res.json({success: true, result: response});
+	}).catch(error => {
+		res.status(500).json({success: false, error: error.message});
+	});
+}
+
 exports.reboot = (req, res) => {
 	console.log("Reboot requested.");
 	raspbot.reboot().then(response => {

@@ -13,7 +13,7 @@ exports.checkForUpdate = () => {
 					const compare = require('compare-versions');
 					let response = { heading: '', version: version, isNewer: false, changes: '' }
 
-					if (compare(json.version, version) > 0) {
+					if (compare(json.version, version) < 1) {
 						response.version = json.version;
 						response.isNewer = true;
 						response.changes = json.changes;
@@ -26,6 +26,14 @@ exports.checkForUpdate = () => {
 		}, reject);
 	});
 };
+
+exports.update = () => {
+	return executeCommand('cd ../ && make update');
+};
+
+exports.install = () => {
+	return executeCommand('cd ../ && make install');
+}
 
 exports.reboot = () => {
 	return executeCommand('cd ../ && make restart');

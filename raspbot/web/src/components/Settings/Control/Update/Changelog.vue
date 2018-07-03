@@ -4,7 +4,7 @@
     <vue-markdown class="changelog">
       {{textElement}}
     </vue-markdown>
-    <div class="button">Update</div>
+    <div v-on:click="$emit('update')" class="button">Update</div>
   </div>
 </template>
 
@@ -15,12 +15,9 @@ export default {
 	name: "Changelog",
 	props: ["heading", "textElement"],
 	components: { 'vue-markdown' : VueMarkdown },
-	methods: {
-		launchBootstrapper: function () {
-      this.$root._router.push('bootstrapper');
-		}
-	}
 }
 </script>
 
+<style scoped src="@/components/Settings/main.css"></style>
+<style scoped src="@/components/Settings/Control/Update/update.css"></style>
 <style scoped src="@/components/Settings/Control/Update/changelog.css"></style>

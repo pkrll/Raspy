@@ -89,6 +89,14 @@ module.exports = app => {
   // ------------------------------
 	router.route('/raspbot/update/check').get(raspbotController.checkForUpdate);
 	// ------------------------------
+  //          /raspbot/update
+  // ------------------------------
+	router.route('/raspbot/update').get(raspbotController.update);
+	// ------------------------------
+	//          /raspbot/install
+	// ------------------------------
+	router.route('/raspbot/install').get(raspbotController.install);
+	// ------------------------------
   //          /raspbot/reboot
   // ------------------------------
 	router.route('/raspbot/reboot').get(raspbotController.reboot);
