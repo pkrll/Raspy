@@ -96,6 +96,13 @@ new Vue({
      */
     clearBookmark: function() {
       this.$cookie.delete('bookmark');
+    },
+
+    endSession: function() {
+      this.$cookie.delete('_token');
+      this.$APIManager.endSession();
+      this.loggedIn = false;
+      this._router.push('/');
     }
 
   },

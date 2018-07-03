@@ -14,6 +14,7 @@ import Bootstrapper from '@/components/Bootstrapper/Bootstrapper.vue';
 import Control from '@/components/Settings/Control/Control.vue';
 import Update from '@/components/Settings/Control/Update/Update.vue';
 import Reboot from '@/components/Settings/Control/Reboot/Reboot.vue';
+import Shutdown from '@/components/Settings/Control/Shutdown/Shutdown.vue';
 
 Vue.use(Router);
 
@@ -139,6 +140,15 @@ export default new Router({
       path: '/settings/control/reboot',
       name: 'Reboot',
       component: Reboot,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/control/shutdown',
+      name: 'Shutdown',
+      component: Shutdown,
       meta: {
         tab: 3,
         requiresAuth: true

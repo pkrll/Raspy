@@ -95,7 +95,7 @@ module.exports = app => {
 	// ------------------------------
   //          /raspbot/reboot
   // ------------------------------
-	router.route('/raspbot/shutdown').get(raspbotController.reboot);
+	router.route('/raspbot/shutdown').get(raspbotController.shutdown);
 	// ------------------------------
   //          /account/password
   // ------------------------------

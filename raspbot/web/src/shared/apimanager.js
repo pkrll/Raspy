@@ -49,6 +49,12 @@ export default {
         });
       },
       /**
+       * Ends a session. Removes the auth header.
+       */
+      endSession: function() {
+        this.HTTP = axios.create({ baseURL: apiURL, timeout: timeout });
+      },
+      /**
 			 * Browse the specified path.
 			 *
 			 * Calls the /browser endpoint.
