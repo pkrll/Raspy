@@ -15,22 +15,6 @@
       "env" : {
         "NODE_ENV": "production"
       }
-    },
-    {
-      "name": "Bootstrapper",
-      "cwd": "bootstrapper",
-      "script": "app.js",
-      "env_development": {
-        "NODE_ENV": "development"
-      },
-      "watch": ["bootstrapper"],
-      "ignore_watch" : ["node_modules", "web/node_modules"],
-      "watch_options": {
-        "followSymlinks": false
-      },
-      "env" : {
-        "NODE_ENV": "production"
-      }
     }
   ]
 }

@@ -1,9 +1,0 @@
-{
-  "ignore": [
-    ".git", "node_modules/**/node_modules", "*.json", "config/*", "web/*", "nodemon.json", "Makefile", "tmp"
-  ],
-  "events": {
-    "restart": "",
-    "start": ""
-  }
-}

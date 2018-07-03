@@ -9,7 +9,6 @@
     "url": "https://github.com/pkrll/raspy"
   },
   "scripts": {
-    "install:bootstrapper": "cd bootstrapper && make install",
     "install:server": "cd raspbot && npm run setup",
     "install:client": "cd raspbot/web && npm install",
     "server": "cd raspbot && npm run dev",

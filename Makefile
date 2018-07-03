@@ -6,18 +6,10 @@ SERVICE = null
 all: install build start
 
 install:
-ifeq ($(SERVICE), bootstrapper)
-	npm run install:bootstrapper
-else
 	npm run install:server
-endif
 
 build:
-ifeq ($(SERVICE), bootstrapper)
-	npm run build:bootstrapper
-else
 	npm run build
-endif
 
 start:
 	pm2 start process.json --only Raspbot --watch
@@ -27,12 +19,6 @@ restart:
 
 stop:
 	pm2 stop process.json --only Raspbot --watch 0
-
-start_bootstrapper:
-	pm2 start process.json --only Bootstrapper --watch
-
-stop_bootstrapper:
-	pm2 stop process.json --only Bootstrapper --watch 0
 
 server:
 ifeq ($(ENV), dev)
@@ -58,7 +44,7 @@ update:
 	git pull
 
 major:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
 	npm run major -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment major version."
@@ -66,19 +52,19 @@ else
 endif
 
 minor:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
 	npm run minor -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment minor version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] minor"
+	@echo "USAGE:\tmake SERVICE=[raspbot] minor"
 endif
 
 patch:
-ifeq ($(SERVICE), $(filter $(SERVICE),raspbot bootstrapper))
+ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
 	npm run patch -- --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment patch version."
-	@echo "USAGE:\tmake SERVICE=[raspbot|bootstrapper] patch"
+	@echo "USAGE:\tmake SERVICE=[raspbot] patch"
 endif
 
 clean:
