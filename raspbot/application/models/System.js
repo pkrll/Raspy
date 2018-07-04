@@ -11,7 +11,7 @@ exports.shutdown = () => {
 function executeCommand(command, options = []) {
   return new Promise((resolve, reject) => {
 		const { exec } = require('child_process');
-		exec('top', options, (error, stdout, stderr) => {
+		exec(command, options, (error, stdout, stderr) => {
 			if (error) {
 				reject(stderr);
 			} else {
