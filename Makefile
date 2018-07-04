@@ -65,7 +65,7 @@ system_reboot:
 
 major:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	node .scripts/increment-version.js --version=major --skip-build --reset-minor --reset-patch --file=$(SERVICE)/package.json
+	node .assets/increment-version.js --version=major --skip-build --reset-minor --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment major version."
 	@echo "USAGE:\tmake SERVICE=[raspbot] major"
@@ -73,7 +73,7 @@ endif
 
 minor:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	node .scripts/increment-version.js --version=minor --skip-build --reset-patch --file=$(SERVICE)/package.json
+	node .assets/increment-version.js --version=minor --skip-build --reset-patch --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment minor version."
 	@echo "USAGE:\tmake SERVICE=[raspbot] minor"
@@ -81,7 +81,7 @@ endif
 
 patch:
 ifeq ($(SERVICE), $(filter $(SERVICE),raspbot))
-	node .scripts/increment-version.js --version=patch --skip-build --file=$(SERVICE)/package.json
+	node .assets/increment-version.js --version=patch --skip-build --file=$(SERVICE)/package.json
 else
 	@echo "ERROR:\tCould not increment patch version."
 	@echo "USAGE:\tmake SERVICE=[raspbot] patch"

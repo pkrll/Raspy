@@ -8,19 +8,6 @@ exports.checkForUpdate = (req, res) => {
 	});
 };
 
-exports.launchBootstrapper = (req, res) => {
-	system.launchBootstrapper().then(response => {
-		const waitForLocalhost = require('wait-for-localhost');
-		(async () => {
-			await waitForLocalhost(5001);
-			res.json({success: true, result: response});
-		})();
-	}).catch(error => {
-		console.error(error);
-		res.status(500).json({success: false, error: {message: "Could not launch bootstrapper."}});
-	});
-};
-
 exports.reboot = (req, res) => {
 	console.log("Reboot requested.");
 	system.reboot().then(response => {

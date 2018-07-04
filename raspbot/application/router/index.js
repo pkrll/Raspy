@@ -21,6 +21,10 @@ module.exports = app => {
 		res.status(404).send({ success: false, error: { message: "Not found." } });
 	});
 
+	router.get('/health', function(req, res) {
+		res.json({ success: true });
+	});
+
 	router.post('/login', (req, res) => {
 		auther.authenticate(req).then(token => {
 			res.json({ success: true, result: { token: token } });

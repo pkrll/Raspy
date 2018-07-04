@@ -4,20 +4,20 @@
                 v-bind:textElement="textElement"
                 v-bind:confirmButtonTitle="confirmButtonTitle"
                 v-bind:cancelButtonTitle="cancelButtonTitle"
-                v-on:confirm="reboot"
+                v-on:confirm="shutdown"
                 v-on:cancel="cancel">
    </component>
  </div>
 </template>
 
 <script>
-import { data, methods } from '@/components/Settings/Control/Reboot/reboot.js';
+import { data, methods } from '@/components/Dashboard/Shutdown/shutdown.js';
 import ConfirmPage from '@/components/Common/ConfirmPage/ConfirmPage.vue';
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
 
 export default {
-  name: 'Reboot',
+  name: 'ShutdownSystem',
   components: { ConfirmPage, Spinner, Content },
   data: data,
   methods: methods

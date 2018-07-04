@@ -3,7 +3,7 @@
 exports.data = function() {
   return {
     component: 'ConfirmPage',
-    textElement: 'Are you sure you want to reboot Raspbot?',
+    textElement: 'Are you sure you want to reboot the system?',
     confirmButtonTitle: 'Reboot',
     cancelButtonTitle: 'Cancel'
   }
@@ -24,9 +24,9 @@ exports.methods = {
               this.$root.endSession()
             }
           });
-        }, 2000);
+        }, 10000);
       } else {
-        this.textElement = 'Could not reboot';
+        this.textElement = 'Could not reboot.';
       }
     });
   },

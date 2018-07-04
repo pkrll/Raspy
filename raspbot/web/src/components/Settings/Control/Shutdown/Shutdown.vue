@@ -1,30 +1,27 @@
 <template>
   <div id="content">
-    <div id="confirmation" v-if="!didConfirm">
-      <div>Are you sure you want to shutdown?</div>
-      <div id="buttons">
-        <div v-on:click="shutdown" class="button">Shutdown</div>
-        <div v-on:click="cancel" class="button red">Cancel</div>
-      </div>
-    </div>
     <component  v-bind:is="component"
-                v-bind:textElement="textElement" v-else>
+                v-bind:textElement="textElement"
+                v-bind:confirmButtonTitle="confirmButtonTitle"
+                v-bind:cancelButtonTitle="cancelButtonTitle"
+                v-on:confirm="shutdown"
+                v-on:cancel="cancel">
    </component>
  </div>
 </template>
 
 <script>
 import { data, methods } from '@/components/Settings/Control/Shutdown/shutdown.js';
+import ConfirmPage from '@/components/Common/ConfirmPage/ConfirmPage.vue';
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
 
 export default {
   name: 'Shutdown',
-  components: { Spinner, Content },
+  components: { ConfirmPage, Spinner, Content },
   data: data,
   methods: methods
 }
 </script>
 
 <style scoped src="@/components/Settings/main.css"></style>
-<style scoped src="@/components/Settings/Control/Shutdown/shutdown.css"></style>
