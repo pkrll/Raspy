@@ -1,18 +1,18 @@
 <template>
   <section id="content">
     <nav class="options">
-      <div class="noselect">
-        <router-link to="/dashboard/shutdown">
+      <router-link to="/dashboard/shutdown">
+        <div class="noselect">
           <font-awesome-icon icon="power-off"/>
           <div class="title">Power off</div>
-        </router-link>
-      </div>
-      <div class="noselect">
-        <router-link to="/dashboard/reboot">
-          <font-awesome-icon icon="redo"/>
-          <div class="title">Reboot</div>
-        </router-link>
-      </div>
+        </div>
+      </router-link>
+      <router-link to="/dashboard/reboot">
+        <div class="noselect">
+            <font-awesome-icon icon="redo"/>
+            <div class="title">Reboot</div>
+        </div>
+      </router-link>
     </nav>
 
     <div class="column-view">
@@ -86,7 +86,8 @@ export default {
   text-align: center;
 }
 
-.noselect a {
+.options a {
+  width: 100%;
   color: #fff;
   text-decoration: none;
 }
