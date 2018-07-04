@@ -14,7 +14,7 @@ exports.methods = {
     this.component = 'Spinner';
     this.textElement = 'Rebooting...';
 
-    this.$APIManager.rebootRaspbot(response => {
+    this.$APIManager.rebootSystem(response => {
       this.component = 'Content';
       if (response.success) {
         let timer = setInterval(() => {
