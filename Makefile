@@ -20,7 +20,6 @@ install_client:
 
 install_server:
 	cd raspbot && npm install
-	cd raspbot && npm run setup
 
 build:
 	cd raspbot && npm run build

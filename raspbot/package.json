@@ -16,7 +16,6 @@
     "dev:server": "nodemon",
     "dev:client": "cd web && npm run dev",
     "postinstall": "node .build/setup.js",
-    "setup": "npm install",
     "build": "node ../.assets/increment-version.js --file=package.json && cd web && npm install && npm run build",
     "patch": "node ../.assets/increment-version.js --file=package.json --version=patch --skip-build",
     "minor": "node ../.assets/increment-version.js --file=package.json --version=minor --skip-build --reset-patch",
