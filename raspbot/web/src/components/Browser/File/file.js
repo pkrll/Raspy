@@ -65,7 +65,7 @@ exports.methods = {
   deleteFile: function (confirmation) {
     if (confirmation) {
       this.middleComponent = 'Content';
-      this.errorMessage = 'Delete has been disabled for demo';
+      this.textElement = 'Delete has been disabled for demo';
     } else {
       this.showConfirmation(false);
     }
