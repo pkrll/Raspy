@@ -8,17 +8,15 @@ exports.shutdown = () => {
 	return executeCommand('cd ../ && make system_shutdown');
 };
 
-function executeCommand(command, arguments = '') {
-  return new Promise(
-    (resolve, reject) => {
-      const { exec } = require('child_process');
-      exec(command, arguments, (error, stdout, stderr) => {
-        if (error) {
-          reject(stderr);
-        } else {
-          resolve(stdout);
-        }
-      });
-    }
-  );
+function executeCommand(command, options = []) {
+  return new Promise((resolve, reject) => {
+		const { exec } = require('child_process');
+		exec(command, options, (error, stdout, stderr) => {
+			if (error) {
+				reject(stderr);
+			} else {
+				resolve(stdout);
+			}
+		});
+  });
 }

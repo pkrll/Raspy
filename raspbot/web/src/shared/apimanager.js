@@ -257,7 +257,11 @@ export default {
         this.HTTP.get('system/reboot').then(response => {
           if (typeof callback === 'function') callback(response.data);
         }).catch(error => {
-          if (typeof callback === 'function') callback(handleError(error));
+          if (error.message && error.message == 'Network Error') {
+            if (typeof callback === 'function') callback({success: true});
+          } else {
+            if (typeof callback === 'function') callback(handleError(error));
+          }
         });
       },
       /**
@@ -288,23 +292,30 @@ function handleError(error) {
 		result: (error.result) ? error.result : {}
 	};
 
-  if (error.response.data) {
-		let status = error.response.status;
-
-		switch (status) {
-			case 500:
-				response.error.message = handleInternalError(error.response.data.error);
-        break;
-			default:
-        response.error.message = error.response.statusText;
-        response.error.statusCode = error.response.status;
-        break;
-		}
-	} else if (error.message) {
+  if (error.response && error.response.data) {
+    response.error = handleRequestError(error.response);
+	} else if (error.code) {
+    response.error = { code: error.code, message: error.message };
+  } else if (error.message) {
 		response.error = error.message;
 	}
 
 	return response;
+}
+
+function handleRequestError(error) {
+  let response = { statusCode: error.status };
+
+  switch (error.status) {
+    case 500:
+      response.message = handleInternalError(error.data.error);
+      break;
+    default:
+      response.message = error.statusText;
+      break;
+  }
+
+  return response;
 }
 
 function handleInternalError(error) {

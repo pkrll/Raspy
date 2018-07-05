@@ -50,6 +50,11 @@
           <div class="table-cell-view right">{{this.convertSize(this.disk.free)}}</div>
         </div>
       </div>
+
+      <div class="box">
+        <div class="title"><font-awesome-icon icon="clock"/> Uptime:</div>
+        <div class="description">{{this.convertTime(this.uptime.total_seconds)}}</div>
+      </div>
     </div>
 
   </section>
@@ -58,9 +63,9 @@
 <script>
 import { data, created, methods, beforeDestroy } from '@/components/Dashboard/dashboard.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPowerOff, faRedo, faThermometerThreeQuarters } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff, faRedo, faThermometerThreeQuarters, faClock } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPowerOff, faRedo, faThermometerThreeQuarters);
+library.add(faPowerOff, faRedo, faThermometerThreeQuarters, faClock);
 
 export default {
   name: 'Dashboard',
@@ -90,6 +95,24 @@ export default {
   width: 100%;
   color: #fff;
   text-decoration: none;
+}
+
+.box {
+  font-size: 5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 8vw;
+  align-items: center;
+  width: 100%;
+}
+
+.box > .title {
+  font-size: 7vw;
+}
+
+.box > .description {
+  text-align: center;
 }
 
 </style>

@@ -1,4 +1,8 @@
 'use strict'
+import NoSleep from 'nosleep.js';
+
+const noSleep = new NoSleep();
+
 const Status = {
   WAITING: 0,
   RUNNING: 1,
@@ -6,7 +10,7 @@ const Status = {
   ERRORED: 3
 };
 
-exports.data = function() {
+export const data = function() {
   return {
     component: 'Spinner',
     heading: '',
@@ -17,16 +21,19 @@ exports.data = function() {
   }
 };
 
-exports.created = function() {
+export const created = function() {
   this.$APIManager.checkForUpdate(this.didCheckForUpdate);
 };
 
-exports.methods = {
+export const methods = {
   update: function() {
     this.component = 'Progress';
     this.content = 'Updating';
 
     this.downloadStatus = Status.RUNNING;
+
+    noSleep.enable();
+
     this.$APIManager.updateRaspbot(response => {
       if (response.success) {
         this.logs.push(response.result);
@@ -37,6 +44,7 @@ exports.methods = {
         if (response.result) this.logs.push(response.result);
         this.content = "Update could not finish"
         this.downloadStatus = Status.ERRORED;
+        noSleep.disable();
       }
     });
   },
@@ -48,10 +56,12 @@ exports.methods = {
         this.logs.push(response.result);
         this.installationStatus = Status.SUCCESS;
         this.content = "Update complete!"
+        noSleep.disable();
       } else {
         if (response.result) this.logs.push(response.result);
         this.content = "Update could not finish"
         this.installationStatus = Status.ERRORED;
+        noSleep.disable();
       }
     });
   },

@@ -1,4 +1,4 @@
-import sys, psutil, os, json
+import sys, psutil, os, json, datetime
 
 def getTemperature():
     result = 0
@@ -39,11 +39,20 @@ def getDiskUsage():
 
     return stat
 
+def getUptime():
+		uptime = datetime.datetime.now() - datetime.datetime.fromtimestamp(psutil.boot_time())
+		stat = {
+			'total_seconds': str(uptime.total_seconds())
+		}
+
+		return stat
+
 stat = {
     'temperature': getTemperature(),
     'cpu': getCPUUsage(),
     'ram': getRAMUsage(),
-    'disk': getDiskUsage()
+    'disk': getDiskUsage(),
+		'uptime': getUptime()
 }
 
 print json.dumps(stat)

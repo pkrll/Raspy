@@ -40,6 +40,7 @@ Built with [NodeJS](https://github.com/nodejs/node) & [Express 4](https://github
 * [Usage](#usage)
 * [Configurations](#configurations)
   * [Enabling HTTPS](#enabling-https)
+  * [Reboot and shutdown](#reboot-and-shutdown)
 
 
 ## Prerequisites
@@ -155,15 +156,15 @@ The configuration options can be found in the file ``index.js`` inside the ``./r
 
 **Note:** The ``httpsOpts`` options are used when enabling HTTPs (See [Enabling HTTPs](#enabling-https) below).
 
-## Enabling HTTPS
+### Enabling HTTPS
 
 To serve Raspbot over ``HTTPs``, you need to put your SSL certificate files (``fullchain.pem`` and ``privkey.pem``) in the folder ``config/.sslcert``.
 
-### Example
+#### Example
 
 Below follows a guide on how to generate certificates using Certbot and Let's encrypt. For more information [see this article](https://medium.com/@yash.kulshrestha/using-lets-encrypt-with-express-e069c7abe625).
 
-#### Generate certificates
+##### Generate certificates
 
 First make sure you have [Certbot](https://certbot.eff.org) and *Let's encrypt* installed, and the ports ``80`` and ``443`` forwarded to ``5000`` and ``5443`` (or, if overridden, the custom ports you've used).
 
@@ -175,7 +176,7 @@ $ certbot certonly --webroot -w ./dist -d example.com --config-dir ~/.certbot/c
 
 Follow the instructions, and wait for it finish.
 
-#### Add the certificate
+##### Add the certificate
 
 If you're using the default [configurations](https://github.com/pkrll/Raspy/wiki/Configurations), you can now symlink the certificate to the folder ``config/.sslcert`` in the folder ``raspbot/raspbot`` (**NOTE:** Remember to change *example.com* to your URL):
 
@@ -186,6 +187,18 @@ $ ln -s ~/.certbot/config/live/example.com/privkey.pem raspbot/config/.sslcert/p
 ```
 
 Restart the server.
+
+### Reboot and shutdown
+
+Raspbot enables you to remotely shutdown or reboot your device, but for these commands to work the user running the server must have permission to execute ``sudo /sbin/reboot`` and ``sudo /sbin/shutdown`` (defined in the ``Makefile``).
+
+This can be done by adding the line
+
+```bash
+USERNAME ALL=NOPASSWD: /sbin/reboot,/sbin/shutdown
+```
+
+to ``/etc/sudoers``, where ``USERNAME`` should be replaced with the username of the user running the server. Make sure to add it after any previous configurations for that user.
 
 ## Author
 
