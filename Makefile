@@ -86,6 +86,9 @@ else
 	@echo "USAGE:\tmake SERVICE=[raspbot] patch"
 endif
 
+heroku:
+	git subtree push --prefix raspbot heroku master
+
 clean:
 	find . -name \*.pyc -delete
 	rm -rf raspbot/node_modules/ raspbot/web/node_modules
