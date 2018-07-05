@@ -14,6 +14,8 @@ Raspbot is a lightweight REST API server, designed for the **Raspberry Pi**, as 
 
 Built with [NodeJS](https://github.com/nodejs/node) & [Express 4](https://github.com/expressjs/express/) and [Vue 2](https://github.com/vuejs/vue) & [Webpack](https://github.com/webpack/webpack).
 
+Check out a [**demo here**](https://raspbot-app.herokuapp.com).
+
 **Raspbot is still a work in progress**.
 
 **Features:**
