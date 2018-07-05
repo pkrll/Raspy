@@ -14,8 +14,6 @@ Raspbot is a lightweight REST API server, designed for the **Raspberry Pi**, as 
 
 Built with [NodeJS](https://github.com/nodejs/node) & [Express 4](https://github.com/expressjs/express/) and [Vue 2](https://github.com/vuejs/vue) & [Webpack](https://github.com/webpack/webpack).
 
-Check out a [**demo here**](https://raspbot-app.herokuapp.com).
-
 **Raspbot is still a work in progress**.
 
 **Features:**
@@ -28,6 +26,8 @@ Check out a [**demo here**](https://raspbot-app.herokuapp.com).
 - [x] 🔌 Reboot & shutdown system
 - [x] 🌡️ Check temperature, CPU, memory and disk usage.
 - [x] 🎛️ Update, restart & stop Raspbot remotely
+
+Check out a [**demo here**](https://raspbot-app.herokuapp.com) (sign in with username ``admin`` and password ``secret``).
 
 ## Table of Contents
 
