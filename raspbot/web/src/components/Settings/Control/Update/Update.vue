@@ -16,13 +16,12 @@ import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
 import Progress from '@/components/Settings/Control/Update/Progress.vue';
 import Changelog from '@/components/Settings/Control/Update/Changelog.vue';
-import { data, mounted, created, methods } from '@/components/Settings/Control/Update/update.js';
+import { data, created, methods } from '@/components/Settings/Control/Update/update.js';
 
 export default {
   name: 'Update',
   components: { Progress, Changelog, Spinner, Content },
   data: data,
-  mounted: mounted,
   created: created,
   methods: methods
 }

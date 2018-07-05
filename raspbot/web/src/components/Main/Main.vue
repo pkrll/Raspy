@@ -15,13 +15,12 @@
 import Splash from '@/components/Common/Splash/Splash.vue';
 import Logo from '@/components/Common/Logo/Logo.vue';
 import Login from '@/components/Login/Login.vue';
-import { data, computed, created, mounted, methods, watch } from '@/components/Main/main.js';
+import { data, computed, mounted, methods, watch } from '@/components/Main/main.js';
 
 export default {
   name: 'Main',
   data: data,
   watch: watch,
-  created: created,
   mounted: mounted,
   methods: methods,
   computed: computed,
