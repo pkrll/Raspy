@@ -80,19 +80,11 @@ exports.methods = {
 
   deleteDirectory: function (confirmation) {
     if (confirmation) {
-      this.middleComponent = 'Spinner';
-
-      this.$APIManager.deleteFile(this.prettyPath, response => {
-        if (response.success) {
-          this.$shared.goBack(this);
-        } else {
-          this.textElement = response.error;
-          this.middleComponent = 'Content';
-        }
-      });
-    } else {
-      this.showConfirmation(false);
+      this.middleComponent = 'Content';
+      this.errorMessage = 'Delete has been disabled for demo';
     }
+
+    this.showConfirmation(false);
   },
   /**
    * Toggles the current path as the bookmarked path.

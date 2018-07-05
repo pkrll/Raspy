@@ -58,30 +58,14 @@ exports.methods = {
   },
 
   downloadFile: function () {
-    this.middleComponent = 'Spinner';
-
-    this.$APIManager.downloadFile(this.prettyPath, this.file.filename, response => {
-      if (response.success) {
-        this.middleComponent = 'Details';
-      } else {
-        this.textElement = "Could not download file."
-        this.middleComponent = 'Content';
-      }
-    });
+    this.textElement = "Download disabled for demo";
+    this.middleComponent = 'Content';
   },
 
   deleteFile: function (confirmation) {
     if (confirmation) {
-      this.middleComponent = 'Spinner';
-
-      this.$APIManager.deleteFile(this.prettyPath, response => {
-        if (response.success) {
-          this.$shared.goBack(this);
-        } else {
-          this.textElement = response.error.message;
-          this.middleComponent = 'Content';
-        }
-      });
+      this.middleComponent = 'Content';
+      this.errorMessage = 'Delete has been disabled for demo';
     } else {
       this.showConfirmation(false);
     }
