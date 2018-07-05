@@ -5,6 +5,7 @@ exports.data = function() {
     ram: {},
     cpu: {},
     disk: 0,
+    uptime: {},
     temperature: 0,
     intervalID: null,
     temperatureScale: undefined
@@ -35,6 +36,7 @@ exports.methods = {
         this.ram = response.result.ram;
         this.cpu = response.result.cpu;
         this.disk = response.result.disk;
+        this.uptime = response.result.uptime;
         this.temperature = this.convertTemperature(response.result.temperature);
       } else {
         if (response.error.statusCode == 401) {
@@ -68,5 +70,9 @@ exports.methods = {
    */
   convertSize: function (bytes) {
     return this.$shared.bytesToHumanReadable(bytes);
+  },
+
+  convertTime: function (seconds) {
+    return this.$shared.timeSince(seconds);
   }
 };

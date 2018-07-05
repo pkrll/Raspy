@@ -100,6 +100,38 @@ export default {
         }
 
         return bytes;
+      },
+      /**
+       * Calculates the number of years, days, hours, minutes and seconds
+       * passed since a specific date, specified in seconds.
+       *
+       * @param  {Int}    seconds   The total number of seconds since a date.
+       * @return {Object}           The time passed in a human readable format.
+       */
+      timeSince: seconds => {
+      	const units = {
+      		years: 60 * 60 * 24 * 365,
+      		days: 24 * 60 * 60,
+      		hours: 60 * 60,
+      		minutes: 60,
+      		seconds: 1
+      	};
+
+      	let result = [];
+
+      	for (let unit in units) {
+      		if (seconds > units[unit]) {
+            if (unit == 'seconds' && result.length > 1) {
+              continue;
+            }
+
+            const str = Math.floor(seconds / units[unit]) + " " + unit;
+            result.push(str);
+            seconds = seconds % units[unit];
+      		}
+      	}
+
+      	return result.join(", ");
       }
 
     }
