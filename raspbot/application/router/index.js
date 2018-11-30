@@ -81,6 +81,10 @@ module.exports = app => {
   // ------------------------------
 	router.route('/dashboard').get(dashboardController.systemInformation);
 	// ------------------------------
+  //          /disks
+  // ------------------------------
+	router.route('/disks').get(systemController.getDisks);
+	// ------------------------------
   //          /checkForUpdate
   // ------------------------------
 	router.route('/system/reboot').get(systemController.reboot);

@@ -27,3 +27,11 @@ exports.shutdown = (req, res) => {
 		res.json({status: false, error: {message: error}});
 	})
 };
+
+exports.getDisks = (req, res) => {
+	system.getDisks().then(response => {
+		res.json({success: true, result: response});
+	}).catch(error => {
+		res.status(500).json({success: false, error: error.message});
+	});
+}
