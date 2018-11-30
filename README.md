@@ -42,7 +42,7 @@ Check out a [**demo here**](https://raspbot-app.herokuapp.com) (sign in with use
 * [Usage](#usage)
 * [Configurations](#configurations)
   * [Enabling HTTPS](#enabling-https)
-  * [Reboot and shutdown](#reboot-and-shutdown)
+  * [Reboot, shutdown and mount/umount](#system-commands)
 
 
 ## Prerequisites
@@ -190,7 +190,7 @@ $ ln -s ~/.certbot/config/live/example.com/privkey.pem raspbot/config/.sslcert/p
 
 Restart the server.
 
-### Reboot and shutdown
+### System commands
 
 Raspbot enables you to remotely shutdown or reboot your device and mount/unmount devices connected to the Raspberry Pi, but for these commands to work the user running the server must have permission to execute ``sudo /sbin/reboot`` and ``sudo /sbin/shutdown``, (defined in the ``Makefile``), as well as ``sudo mount`` and ``sudo umount``.
 
