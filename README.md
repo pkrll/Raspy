@@ -192,15 +192,15 @@ Restart the server.
 
 ### Reboot and shutdown
 
-Raspbot enables you to remotely shutdown or reboot your device, but for these commands to work the user running the server must have permission to execute ``sudo /sbin/reboot`` and ``sudo /sbin/shutdown`` (defined in the ``Makefile``).
+Raspbot enables you to remotely shutdown or reboot your device and mount/unmount devices connected to the Raspberry Pi, but for these commands to work the user running the server must have permission to execute ``sudo /sbin/reboot`` and ``sudo /sbin/shutdown``, (defined in the ``Makefile``), as well as ``sudo mount`` and ``sudo umount``.
 
 This can be done by adding the line
 
 ```bash
-USERNAME ALL=NOPASSWD: /sbin/reboot,/sbin/shutdown
+USERNAME ALL=NOPASSWD: /sbin/reboot,/sbin/shutdown,/bin/mount,/bin/umount
 ```
 
-to ``/etc/sudoers``, where ``USERNAME`` should be replaced with the username of the user running the server. Make sure to add it after any previous configurations for that user.
+to ``/etc/sudoers`` using ``sudo visudo``, where ``USERNAME`` should be replaced with the username of the user running the server. Make sure to add it after any previous configurations for that user.
 
 ## Author
 
