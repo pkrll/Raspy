@@ -14,8 +14,8 @@ module.exports = app => {
 	const router = express.Router();
 
 	// ------------------------------
-  //      Unauthorized calls
-  // ------------------------------
+	//      Unauthorized calls
+	// ------------------------------
 
 	router.get('/', function(req, res) {
 		res.status(404).send({ success: false, error: { message: "Not found." } });
@@ -40,89 +40,89 @@ module.exports = app => {
 	});
 
 	// ------------------------------
-  //      Authorized calls
-  // ------------------------------
+	//      Authorized calls
+	// ------------------------------
 
 	// Checks if call is authorized
-  router.use(auther.isAuthorized);
+	router.use(auther.isAuthorized);
 
 	// ------------------------------
-  //          /browse
-  // ------------------------------
+	//          /browse
+	// ------------------------------
 	router.route('/browse').get(browserController.browse);
 
 	router.route('/browse/:path*')
-    // Get directory listing
-    .get(browserController.browse)
-    // Delete folder
-    .delete(browserController.remove);
+	// Get directory listing
+	.get(browserController.browse)
+	// Delete folder
+	.delete(browserController.remove);
 	// ------------------------------
-  //          /file
-  // ------------------------------
-  router.route('/file/:path*')
-    // Get the requested file
-    .get(browserController.viewFile)
-    // Delete the requested file
-    .delete(browserController.remove);
-  // ------------------------------
-  //          /folder
-  // ------------------------------
-  router.route('/folder/new')
-    // Create a new folder
-    .post(browserController.makeDirectory);
-  // ------------------------------
-  //          /download
-  // ------------------------------
-  router.route('/download/:path*')
-    // Get the requested file
-    .get(browserController.download);
+	//          /file
 	// ------------------------------
-  //          /dashboard
-  // ------------------------------
+	router.route('/file/:path*')
+	// Get the requested file
+	.get(browserController.viewFile)
+	// Delete the requested file
+	.delete(browserController.remove);
+	// ------------------------------
+	//          /folder
+	// ------------------------------
+	router.route('/folder/new')
+	// Create a new folder
+	.post(browserController.makeDirectory);
+	// ------------------------------
+	//          /download
+	// ------------------------------
+	router.route('/download/:path*')
+	// Get the requested file
+	.get(browserController.download);
+	// ------------------------------
+	//          /dashboard
+	// ------------------------------
 	router.route('/dashboard').get(dashboardController.systemInformation);
 	// ------------------------------
-  //          /disks
-  // ------------------------------
+	//          /disks
+	// ------------------------------
 	router.route('/disks').get(systemController.getDisks);
 	// ------------------------------
-  //          /checkForUpdate
-  // ------------------------------
+	//          /checkForUpdate
+	// ------------------------------
 	router.route('/system/reboot').get(systemController.reboot);
 	// ------------------------------
-  //          /checkForUpdate
-  // ------------------------------
+	//          /checkForUpdate
+	// ------------------------------
 	router.route('/system/shutdown').get(systemController.shutdown);
 	// ------------------------------
-  //          /raspbot/update/check
-  // ------------------------------
+	//          /raspbot/update/check
+	// ------------------------------
 	router.route('/raspbot/update/check').get(raspbotController.checkForUpdate);
 	// ------------------------------
-  //          /raspbot/update
-  // ------------------------------
+	//          /raspbot/update
+	// ------------------------------
 	router.route('/raspbot/update').get(raspbotController.update);
 	// ------------------------------
 	//          /raspbot/install
 	// ------------------------------
 	router.route('/raspbot/install').get(raspbotController.install);
 	// ------------------------------
-  //          /raspbot/reboot
-  // ------------------------------
+	//          /raspbot/reboot
+	// ------------------------------
 	router.route('/raspbot/reboot').get(raspbotController.reboot);
 	// ------------------------------
-  //          /raspbot/reboot
-  // ------------------------------
+	//          /raspbot/reboot
+	// ------------------------------
 	router.route('/raspbot/shutdown').get(raspbotController.shutdown);
 	// ------------------------------
-  //          /account/password
-  // ------------------------------
+	//          /account/password
+	// ------------------------------
 	router.route('/account/password').post(auther.updatePassword);
 
-  app.use(express.static(app.get('dist')));
-  app.use('/api', router);
-  // Catch all to handle direct routes
-  app.get('*', function(req, res) {
-    let file = path.join(app.get('dist'), '/index.html');
-    res.sendFile(file);
-  });
+	app.use(express.static(app.get('dist')));
+	app.use('/api', router);
+	// Catch all to handle direct routes
+	app.get('*', function(req, res) {
+		let file = path.join(app.get('dist'), '/index.html');
+		res.sendFile(file);
+	});
 
 }
