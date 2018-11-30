@@ -21,9 +21,11 @@ Built with [NodeJS](https://github.com/nodejs/node) & [Express 4](https://github
 - [x] 📂 Browse file system
 - [x] ⬇️ Download files
 - [ ] ⬆️ <s>Upload files</s>
+- [ ] ↘️ Move files
 - [x] 🗑️ Delete files
 - [x] 📁 Create folders
 - [x] 🔌 Reboot & shutdown system
+- [ ] 💾 Mount & unmount USB devices
 - [x] 🌡️ Check temperature, CPU, memory and disk usage.
 - [x] 🎛️ Update, restart & stop Raspbot remotely
 
@@ -42,7 +44,7 @@ Check out a [**demo here**](https://raspbot-app.herokuapp.com) (sign in with use
 * [Usage](#usage)
 * [Configurations](#configurations)
   * [Enabling HTTPS](#enabling-https)
-  * [Reboot, shutdown and mount/umount](#system-commands)
+  * [Reboot, shutdown and mount/unmount](#system-commands)
 
 
 ## Prerequisites
