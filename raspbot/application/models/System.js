@@ -12,7 +12,7 @@ exports.getDisks = () => {
 	return new Promise((resolve, reject) => {
 		let disks = [];
 		executeCommand('lsblk -o name,type,size -l -n').then(response => {
-			let lines = stdout.split(/(\r?\n)/g);
+			let lines = response.split(/(\r?\n)/g);
 			for (let index in lines) {
 				if (lines[index] == '\n') continue;
 				let line = lines[index].split(/[ \t]/g).filter((v) => v != '' && v != '\t');
