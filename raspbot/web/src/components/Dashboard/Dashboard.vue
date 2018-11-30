@@ -9,8 +9,8 @@
       </router-link>
       <router-link to="/dashboard/reboot">
         <div class="noselect">
-            <font-awesome-icon icon="redo"/>
-            <div class="title">Reboot</div>
+          <font-awesome-icon icon="redo"/>
+          <div class="title">Reboot</div>
         </div>
       </router-link>
     </nav>

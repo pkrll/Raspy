@@ -58,3 +58,9 @@
 .greyed {
 	color: grey;
 }
+
+.options a {
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+}
