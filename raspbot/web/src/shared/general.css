@@ -1,0 +1,38 @@
+#content {
+	margin: 10px 2vw;
+}
+
+.heading {
+	color: 			#ddd;
+	font-size: 	5vw;
+}
+
+.button {
+	background: 		rgb(82, 172, 120);
+	border-radius: 	5px;
+	cursor:					pointer;
+	font-size: 			5vw;
+	margin-top: 		40px;
+	padding: 				10px;
+}
+
+.row {
+	color: 						inherit;
+	display: 					flex;
+	border-bottom: 		1px solid #fff;
+	font-size: 				6vw;
+	justify-content: 	space-between;
+  text-align:       left;
+}
+
+.row div {
+	padding: 10px;
+}
+
+.row .title {
+	flex: 1;
+}
+
+.greyed {
+	color: grey;
+}

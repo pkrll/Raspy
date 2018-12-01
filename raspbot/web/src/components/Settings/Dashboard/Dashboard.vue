@@ -31,5 +31,6 @@ export default {
 }
 </script>
 
+<style scoped src="@/shared/general.css"></style>
 <style scoped src="@/components/Settings/main.css"></style>
 <style scoped src="@/components/Settings/Dashboard/dashboard.css"></style>
