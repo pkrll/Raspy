@@ -16,6 +16,7 @@ import Control from '@/components/Control/Control.vue';
 import UpdateRaspbot from '@/components/Control/Update/Update.vue';
 import RebootRaspbot from '@/components/Control/Reboot/Reboot.vue';
 import ShutdownRaspbot from '@/components/Control/Shutdown/Shutdown.vue';
+import Devices from '@/components/Advanced/Devices/Devices.vue';
 
 Vue.use(Router);
 
@@ -168,6 +169,15 @@ export default new Router({
       path: '/control/shutdown',
       name: 'Shutdown',
       component: ShutdownRaspbot,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/advanced/devices',
+      name: 'Devices',
+      component: Devices,
       meta: {
         tab: 3,
         requiresAuth: true
