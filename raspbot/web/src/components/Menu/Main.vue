@@ -38,5 +38,5 @@ export default {
 }
 </script>
 
-<style scoped src="@/components/Menu/main.css">
-</style>
+<style scoped src="@/shared/general.css"></style>
+<style scoped src="@/components/Menu/main.css"></style>

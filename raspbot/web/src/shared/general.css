@@ -17,6 +17,7 @@
 }
 
 .row {
+  align-items:      center;
 	color: 						inherit;
 	display: 					flex;
 	border-bottom: 		1px solid #fff;
@@ -31,8 +32,14 @@
 
 .row .title {
 	flex: 1;
+  font-size: 7vw;
 }
 
 .greyed {
 	color: grey;
+}
+
+.row .icon {
+  width: 10vw;
+  font-size: 10vw;
 }
