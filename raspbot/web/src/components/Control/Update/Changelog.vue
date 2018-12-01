@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style scoped src="@/components/Settings/main.css"></style>
-<style scoped src="@/components/Settings/Control/Update/update.css"></style>
-<style scoped src="@/components/Settings/Control/Update/changelog.css"></style>
+<style scoped src="@/components/Control/Update/update.css"></style>
+<style scoped src="@/components/Control/Update/changelog.css"></style>

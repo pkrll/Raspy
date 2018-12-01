@@ -6,15 +6,16 @@ import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
 import RebootSystem from '@/components/Dashboard/Reboot/Reboot.vue';
 import ShutdownSystem from '@/components/Dashboard/Shutdown/Shutdown.vue';
+import Menu from '@/components/Menu/Main.vue';
 import Settings from '@/components/Settings/Main.vue';
 import SettingsBrowser from '@/components/Settings/Browser/Browser.vue';
 import SettingsDashboard from '@/components/Settings/Dashboard/Dashboard.vue';
 import SettingsAccount from '@/components/Settings/Account/Account.vue';
 import SettingsAccountPassword from '@/components/Settings/Account/Password/Password.vue';
-import Control from '@/components/Settings/Control/Control.vue';
-import UpdateRaspbot from '@/components/Settings/Control/Update/Update.vue';
-import RebootRaspbot from '@/components/Settings/Control/Reboot/Reboot.vue';
-import ShutdownRaspbot from '@/components/Settings/Control/Shutdown/Shutdown.vue';
+import Control from '@/components/Control/Control.vue';
+import UpdateRaspbot from '@/components/Control/Update/Update.vue';
+import RebootRaspbot from '@/components/Control/Reboot/Reboot.vue';
+import ShutdownRaspbot from '@/components/Control/Shutdown/Shutdown.vue';
 
 Vue.use(Router);
 
@@ -83,6 +84,15 @@ export default new Router({
 			}
 		},
     {
+      path: '/menu',
+      name: 'Menu',
+      component: Menu,
+      meta: {
+        tab: 3,
+        requiresAuth: true
+      }
+    },
+    {
 			path: '/settings',
 			name: 'Settings',
 			component: Settings,
@@ -128,7 +138,7 @@ export default new Router({
       }
     },
     {
-      path: '/settings/control',
+      path: '/control',
       name: 'Control',
       component: Control,
       meta: {
@@ -137,7 +147,7 @@ export default new Router({
       }
     },
     {
-      path: '/settings/control/update',
+      path: '/control/update',
       name: 'Update',
       component: UpdateRaspbot,
       meta: {
@@ -146,7 +156,7 @@ export default new Router({
       }
     },
     {
-      path: '/settings/control/reboot',
+      path: '/control/reboot',
       name: 'Reboot',
       component: RebootRaspbot,
       meta: {
@@ -155,7 +165,7 @@ export default new Router({
       }
     },
     {
-      path: '/settings/control/shutdown',
+      path: '/control/shutdown',
       name: 'Shutdown',
       component: ShutdownRaspbot,
       meta: {

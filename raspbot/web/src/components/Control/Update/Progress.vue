@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style scoped src="@/components/Settings/Control/Update/update.css"></style>
+<style scoped src="@/components/Control/Update/update.css"></style>
 <style scoped>
 #container {
   flex-grow: 1;

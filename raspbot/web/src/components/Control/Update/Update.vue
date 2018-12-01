@@ -14,9 +14,9 @@
 <script>
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
-import Progress from '@/components/Settings/Control/Update/Progress.vue';
-import Changelog from '@/components/Settings/Control/Update/Changelog.vue';
-import { data, created, methods } from '@/components/Settings/Control/Update/update.js';
+import Progress from '@/components/Control/Update/Progress.vue';
+import Changelog from '@/components/Control/Update/Changelog.vue';
+import { data, created, methods } from '@/components/Control/Update/update.js';
 
 export default {
   name: 'Update',
@@ -27,4 +27,4 @@ export default {
 }
 </script>
 
-<style scoped src="@/components/Settings/Control/Update/update.css"></style>
+<style scoped src="@/components/Control/Update/update.css"></style>

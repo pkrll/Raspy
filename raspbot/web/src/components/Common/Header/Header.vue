@@ -11,9 +11,9 @@
 					<div>Dashboard</div>
 				</router-link>
 
-				<router-link to="/settings" v-bind:class="{ active: this.$route.meta.tab == 3 }">
-					<font-awesome-icon icon="sliders-h"/>
-					<div>Settings</div>
+				<router-link to="/menu" v-bind:class="{ active: this.$route.meta.tab == 3 }">
+					<font-awesome-icon icon="align-justify"/>
+					<div>Menu</div>
 				</router-link>
 		</nav>
 	</header>
@@ -21,9 +21,9 @@
 
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHdd, faTachometerAlt, faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { faHdd, faTachometerAlt, faSlidersH, faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHdd, faTachometerAlt, faSlidersH);
+library.add(faHdd, faTachometerAlt, faSlidersH, faAlignJustify);
 
 export default {
 	name: 'Header',

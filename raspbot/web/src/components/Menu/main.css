@@ -58,3 +58,33 @@
 .greyed {
 	color: grey;
 }
+
+.options {
+  flex-direction: column;
+  border-bottom: none;
+}
+
+.options a {
+  width: 100%;
+  color: #fff;
+}
+
+.noselect {
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  font-size: 7vw;
+
+}
+
+.icon {
+  width: 10vw;
+  text-align: right;
+  font-size: 10vw;
+}
+
+.title {
+  width: 60vw;
+  text-align: left;
+  padding-left: 10vw;
+}
