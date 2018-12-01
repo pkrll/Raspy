@@ -11,7 +11,7 @@ exports.shutdown = () => {
 exports.getDisks = () => {
 	return new Promise((resolve, reject) => {
 		let disks = [];
-		executeCommand('lsblk -o name,type,size -l -n').then(response => {
+		executeCommand('lsblk -o name,type,size,mountpoint -l -n').then(response => {
 			let lines = response.split(/(\r?\n)/g);
 			for (let index in lines) {
 				if (lines[index] == '\n') continue;
