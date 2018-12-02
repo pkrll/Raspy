@@ -44,7 +44,7 @@ export default {
   props: { path: { default: '/' } },
   name: 'Select',
   data: data,
-  components: { Directory, Spinner, Content, ConfirmButton },
+  components: { Directory, Spinner, Content },
   computed: computed,
   methods: methods,
   created: created,
