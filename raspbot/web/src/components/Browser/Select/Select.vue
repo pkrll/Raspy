@@ -33,7 +33,6 @@
 import Spinner from '@/components/Common/Spinner/Spinner.vue';
 import Content from '@/components/Common/Content/Content.vue';
 import Directory from '@/components/Browser/Directory/Directory.vue';
-import ConfirmButton from '@/components/Common/ConfirmButton/ConfirmButton.vue';
 import { data, computed, methods, created } from '@/components/Browser/Select/select.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBan, faCheck, faFolder, faTrash } from '@fortawesome/free-solid-svg-icons';
