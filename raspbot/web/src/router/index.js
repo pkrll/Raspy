@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main/Main.vue';
 import Browser from '@/components/Browser/Main/Main.vue';
+import Select from '@/components/Browser/Select/Select.vue';
 import File from '@/components/Browser/File/File.vue';
 import Dashboard from '@/components/Dashboard/Dashboard.vue';
 import RebootSystem from '@/components/Dashboard/Reboot/Reboot.vue';
@@ -36,6 +37,23 @@ export default new Router({
 				tab: 1,
 				requiresAuth: true
 			}
+    },
+    {
+      path: '/select',
+      name: 'Select',
+      component: Select,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/select/:path',
+      name: 'Select: Directory',
+      component: Select,
+      props: true,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
 			path: '/browse/:path',
