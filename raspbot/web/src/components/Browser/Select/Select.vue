@@ -53,7 +53,6 @@ export default {
     if (to.name == 'Select' || to.name == 'Select: Directory') {
       next();
     } else {
-      const path = to.params.path || '';
       next({ name: 'Select: Directory', params: to.params });
     }
   }
