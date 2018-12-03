@@ -3,21 +3,25 @@
     <component  v-bind:is="component"
                 v-bind:devices="devices"
                 v-bind:device="device"
-                v-bind:showDetails="showDetails">
+                v-bind:showDetails="showDetails"
+                v-bind:textElement="errorMessage">
     </component>
   </section>
 </template>
 
 <script>
-import Details from '@/Components/Advanced/Devices/Details/Details.vue';
-import List from '@/Components/Advanced/Devices/List/List.vue';
-import { data, methods } from '@/components/Advanced/Devices/devices.js';
+import Content from '@/components/Common/Content/Content.vue';
+import Spinner from '@/components/Common/Spinner/Spinner.vue';
+import Details from '@/components/Advanced/Devices/Details/Details.vue';
+import List from '@/components/Advanced/Devices/List/List.vue';
+import { data, methods, created } from '@/components/Advanced/Devices/devices.js';
 
 export default {
   name: 'Devices',
-  components: { List, Details },
+  components: { Content, Spinner, List, Details },
   data: data,
-  methods: methods
+  methods: methods,
+  created: created
 }
 </script>
 

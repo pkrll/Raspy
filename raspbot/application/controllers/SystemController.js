@@ -32,6 +32,6 @@ exports.getDisks = (req, res) => {
 	system.getDisks().then(response => {
 		res.json({success: true, result: response});
 	}).catch(error => {
-		res.status(500).json({success: false, error: error.message});
+		res.status(500).json({success: false, error: error});
 	});
 }

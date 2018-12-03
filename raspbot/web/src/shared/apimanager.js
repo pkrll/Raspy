@@ -277,6 +277,18 @@ export default {
         }).catch(error => {
           if (typeof callback === 'function') callback(handleError(error));
         });
+      },
+      /**
+       * Retrives a list of block devices, mounted or unmounted.
+       *
+       * @param  {Function} callback The callback to invoke on response.
+       */
+      getDevices: function(callback) {
+        this.HTTP.get('disks').then(response => {
+          if (typeof callback === 'function') callback(response.data);
+        }).catch(error => {
+          if (typeof callback === 'function') callback(handleError(error));
+        });
       }
 
     }
