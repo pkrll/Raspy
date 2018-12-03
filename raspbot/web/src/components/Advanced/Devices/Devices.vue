@@ -1,13 +1,52 @@
 <template>
   <section id="content">
-    Devices
+    <nav class="file-list-view" v-if="devices.length > 0">
+      <nav class="row">
+        <div class="icon"><font-awesome-icon icon="list-alt"/></div>
+        <div class="title">Name</div>
+        <div class="title">Size</div>
+        <div class="title">Type</div>
+        <div class="title">Mount</div>
+      </nav>
+      <nav v-for="device in devices">
+				<router-link :to="{ name: '', params: {}}" class="row">
+					<div class="icon"><font-awesome-icon :icon="icon(device.mountpoint)"/></div>
+					<div class="title">{{device.name}}</div>
+					<div class="title">{{device.size}}</div>
+					<div class="title">{{device.type}}</div>
+					<div class="title">{{device.mountpoint}}</div>
+				</router-link>
+			</nav>
+    </nav>
   </section>
 </template>
 
 <script>
+import { data } from '@/components/Advanced/Devices/devices.js';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faListAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHdd } from '@fortawesome/free-regular-svg-icons';
+
+library.add(faHdd, faListAlt);
+
 export default {
-  name: 'Devices'
+  name: 'Devices',
+  data: data,
+  methods: {
+    icon: function (isMounted) {
+      return (isMounted) ? ['fa', 'hdd'] : ['far', 'hdd'];
+    }
+  }
 }
 </script>
 
 <style scoped src="@/shared/general.css"></style>
+<style scoped>
+.row .icon {
+  font-size: 5vw;
+  width: auto;
+}
+.row .title {
+  font-size: 5vw;
+}
+</style>

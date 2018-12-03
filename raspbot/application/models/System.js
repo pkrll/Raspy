@@ -11,16 +11,9 @@ exports.shutdown = () => {
 exports.getDisks = () => {
 	return new Promise((resolve, reject) => {
 		let disks = [];
-		executeCommand('lsblk -o name,type,size,mountpoint -l -n').then(response => {
-			let lines = response.split(/(\r?\n)/g);
-			for (let index in lines) {
-				if (lines[index] == '\n') continue;
-				let line = lines[index].split(/[ \t]/g).filter((v) => v != '' && v != '\t');
-				disks.push(line);
-			}
-
-			resolve(disks);
-
+		executeCommand('lsblk -lnJ -o name,type,size,mountpoint').then(response => {
+			const json = JSON.parse(response);
+			resolve(json['blockdevices']);
 		}).catch(error => {
 			reject(error);
 		});
