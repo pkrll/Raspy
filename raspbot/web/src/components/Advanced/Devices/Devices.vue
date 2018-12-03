@@ -1,52 +1,24 @@
 <template>
   <section id="content">
-    <nav class="file-list-view" v-if="devices.length > 0">
-      <nav class="row">
-        <div class="icon"><font-awesome-icon icon="list-alt"/></div>
-        <div class="title">Name</div>
-        <div class="title">Size</div>
-        <div class="title">Type</div>
-        <div class="title">Mount</div>
-      </nav>
-      <nav v-for="device in devices">
-				<router-link :to="{ name: '', params: {}}" class="row">
-					<div class="icon"><font-awesome-icon :icon="icon(device.mountpoint)"/></div>
-					<div class="title">{{device.name}}</div>
-					<div class="title">{{device.size}}</div>
-					<div class="title">{{device.type}}</div>
-					<div class="title">{{device.mountpoint}}</div>
-				</router-link>
-			</nav>
-    </nav>
+    <component  v-bind:is="component"
+                v-bind:devices="devices"
+                v-bind:device="device"
+                v-bind:showDetails="showDetails">
+    </component>
   </section>
 </template>
 
 <script>
-import { data } from '@/components/Advanced/Devices/devices.js';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faListAlt } from '@fortawesome/free-solid-svg-icons';
-import { faHdd } from '@fortawesome/free-regular-svg-icons';
-
-library.add(faHdd, faListAlt);
+import Details from '@/Components/Advanced/Devices/Details/Details.vue';
+import List from '@/Components/Advanced/Devices/List/List.vue';
+import { data, methods } from '@/components/Advanced/Devices/devices.js';
 
 export default {
   name: 'Devices',
+  components: { List, Details },
   data: data,
-  methods: {
-    icon: function (isMounted) {
-      return (isMounted) ? ['fa', 'hdd'] : ['far', 'hdd'];
-    }
-  }
+  methods: methods
 }
 </script>
 
 <style scoped src="@/shared/general.css"></style>
-<style scoped>
-.row .icon {
-  font-size: 5vw;
-  width: auto;
-}
-.row .title {
-  font-size: 5vw;
-}
-</style>
