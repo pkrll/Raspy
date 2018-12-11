@@ -18,7 +18,14 @@ exports.getDisks = () => {
 			reject(error);
 		});
 	});
+}
 
+exports.mount = (device, mountpoint) => {
+	return executeCommand('sudo mount ' + device + ' ' + mountpoint);
+}
+
+exports.umount = mountpoint => {
+	return executeCommand('sudo umount ' + mountpoint);
 }
 
 function executeCommand(command, options = []) {

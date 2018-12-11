@@ -85,6 +85,14 @@ module.exports = app => {
 	// ------------------------------
 	router.route('/disks').get(systemController.getDisks);
 	// ------------------------------
+	//          /mount
+	// ------------------------------
+	router.route('/mount').get(systemController.mount);
+	// ------------------------------
+	//          /umount
+	// ------------------------------
+	router.route('/umount').get(systemController.umount);
+	// ------------------------------
 	//          /checkForUpdate
 	// ------------------------------
 	router.route('/system/reboot').get(systemController.reboot);

@@ -35,3 +35,24 @@ exports.getDisks = (req, res) => {
 		res.status(500).json({success: false, error: error});
 	});
 }
+
+exports.mount = (req, res) => {
+	const device = req.body.device;
+	const mpoint = req.body.mountpoint;
+	system.mount(device, mpoint).then(response => {
+		res.json({success: true});
+	}).catch(error => {
+		console.log(error);
+		res.json({status: false, error: {message: error}});
+	});
+}
+
+exports.umount = (req, res) => {
+	const mountpoint = req.body.mountpoint;
+	system.umount(mpoint).then(response => {
+		res.json({success: true});
+	}).catch(error => {
+		console.log(error);
+		res.json({status: false, error: {message: error}});
+	});
+}
