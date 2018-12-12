@@ -11,7 +11,7 @@ exports.shutdown = () => {
 exports.getDisks = () => {
 	return new Promise((resolve, reject) => {
 		let disks = [];
-		executeCommand('lsblk -lnJ -o name,type,size,mountpoint').then(response => {
+		executeCommand('lsblk -lnpJ -o name,type,size,mountpoint,fstype').then(response => {
 			const json = JSON.parse(response);
 			resolve(json['blockdevices']);
 		}).catch(error => {
