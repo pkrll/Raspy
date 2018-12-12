@@ -2,8 +2,8 @@
   <div id="confirmation">
     <div>{{textElement}}</div>
     <div id="buttons">
-      <div v-on:click="$emit('confirm')" class="button">{{confirmButtonTitle}}</div>
-      <div v-on:click="$emit('cancel')" class="button red">{{cancelButtonTitle}}</div>
+      <div v-on:click="$emit('confirm')" class="button" v-show="confirmButtonTitle != undefined">{{confirmButtonTitle}}</div>
+      <div v-on:click="$emit('cancel')" class="button red" v-show="cancelButtonTitle != undefined">{{cancelButtonTitle}}</div>
     </div>
   </div>
 </template>

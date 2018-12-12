@@ -23,6 +23,22 @@ exports.methods = {
       this.errorMessage = response.error.message;
       this.component = 'Content';
     }
+  },
+
+  unmount: function() {
+    console.log("H");
+  },
+
+  mount: function() {
+    this.component = 'Select';
+  },
+
+  didClickSelect: function(a) {
+    console.log(a);
+  },
+
+  didClickCancel: function(a) {
+    console.log(a);
   }
 }
 

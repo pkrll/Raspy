@@ -10,7 +10,7 @@
       </nav>
       <nav v-for="device in devices" class="row" v-on:click="showDetails(device)">
 					<div class="icon"><font-awesome-icon :icon="icon(device.mountpoint)"/></div>
-					<div class="title">{{device.name}}</div>
+					<div class="title">{{deviceName(device)}}</div>
 					<div class="title">{{device.size}}</div>
 					<div class="title">{{device.type}}</div>
 					<div class="title">{{device.mountpoint}}</div>
@@ -30,8 +30,14 @@ export default {
   name: 'List',
   props: ['devices', 'showDetails'],
   methods: {
-    icon: function (isMounted) {
-      return (isMounted) ? ['fa', 'hdd'] : ['far', 'hdd'];
+    icon: function (mountpoint) {
+      return (mountpoint != null) ? ['fa', 'hdd'] : ['far', 'hdd'];
+    },
+    deviceName: function(device) {
+      const name = device.name.match(/(?!\/)\w+$/g);
+      if (name.length > 0) return name[0];
+
+      return device.name;
     }
   }
 }
@@ -46,4 +52,5 @@ export default {
 .row .title {
   font-size: 5vw;
 }
+
 </style>

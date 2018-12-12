@@ -193,7 +193,7 @@ export default new Router({
       }
     },
     {
-      path: '/advanced/devices',
+      path: '/advanced/devices/',
       name: 'Devices',
       component: Devices,
       meta: {
