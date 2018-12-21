@@ -49,7 +49,7 @@ exports.mount = (req, res) => {
 
 exports.umount = (req, res) => {
 	const mountpoint = req.body.mountpoint;
-	system.umount(mpoint).then(response => {
+	system.umount(mountpoint).then(response => {
 		res.json({success: true});
 	}).catch(error => {
 		console.log(error);
