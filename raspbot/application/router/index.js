@@ -87,11 +87,11 @@ module.exports = app => {
 	// ------------------------------
 	//          /mount
 	// ------------------------------
-	router.route('/mount').get(systemController.mount);
+	router.route('/mount').post(systemController.mount);
 	// ------------------------------
 	//          /umount
 	// ------------------------------
-	router.route('/umount').get(systemController.umount);
+	router.route('/umount').post(systemController.umount);
 	// ------------------------------
 	//          /checkForUpdate
 	// ------------------------------
