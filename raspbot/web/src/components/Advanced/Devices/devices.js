@@ -27,7 +27,13 @@ exports.methods = {
 
   unmount: function() {
     this.$APIManager.umount(this.device.mountpoint, (response) => {
-      console.log(response);
+      if (response.success) {
+        this.device.mountpoint = undefined;
+        this.component = 'Details';
+      } else {
+        this.errorMessage = response.error.message;
+        this.component = 'Content';
+      }
     });
   },
 
@@ -37,7 +43,13 @@ exports.methods = {
 
   didClickSelect: function(mountpoint) {
     this.$APIManager.mount(this.device.name, mountpoint, (response) => {
-      console.log(response);
+      if (response.success) {
+        this.device.mountpoint = mountpoint;
+        this.component = 'Details';
+      } else {
+        this.errorMessage = response.error.message;
+        this.component = 'Content';
+      }
     });
   },
 
