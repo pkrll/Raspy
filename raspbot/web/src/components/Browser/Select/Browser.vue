@@ -7,7 +7,7 @@
 				<div class="title">..</div>
 			</router-link>
 
-			<nav v-for="directory in directories" v-if="showHidden || !directory.name.startsWith('.')">
+			<nav v-for="directory in directories" v-if=" !directory.name.startsWith('.')">
 				<div v-on:click="browse(directory.path)" class="row">
 					<div class="icon"><font-awesome-icon icon="folder-open"/></div>
 					<div class="title">{{directory.name}}</div>
@@ -33,17 +33,10 @@ library.add(faFolderOpen, faFile, faFolderOpen, faAngleRight);
 
 export default {
 	name: "Directory",
+  props: ['browse', 'directories', 'prettyPath', 'currentPath'],
 	computed: computed,
 	methods: {
-    browse: function(path) {
-      this.$APIManager.browseDirectory(decodeURIComponent(path), this.browseDirectory);
-    },
 
-    browseDirectory: function(response) {
-      if (response.success) {
-        this.directories = response.result.directories;
-      }
-    }
   },
   created: created
 }

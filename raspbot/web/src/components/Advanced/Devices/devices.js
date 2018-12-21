@@ -26,19 +26,23 @@ exports.methods = {
   },
 
   unmount: function() {
-    console.log("H");
+    this.$APIManager.umount(this.device.mountpoint, (response) => {
+      console.log(response);
+    });
   },
 
   mount: function() {
     this.component = 'Select';
   },
 
-  didClickSelect: function(a) {
-    console.log(a);
+  didClickSelect: function(mountpoint) {
+    this.$APIManager.mount(this.device.name, mountpoint, (response) => {
+      console.log(response);
+    });
   },
 
   didClickCancel: function(a) {
-    console.log(a);
+    this.component = 'Details';
   }
 }
 
