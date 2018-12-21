@@ -48,6 +48,16 @@ exports.remove = (req, res) => {
 	});
 };
 
+exports.move = (req, res) => {
+	let oldPath = req.body.oldPath;
+	let newPath = req.body.newPath;
+	browser.move(oldPath, newPath).then(response => {
+		res.json({ success: true, result: response });
+	}).catch(error => {
+		res.status(500).json({ success: false, error: error.message });
+	});
+};
+
 exports.download = (req, res) => {
 	let request = buildPath(req.params);
 	res.download(request, path.basename(request), error => {
