@@ -2,7 +2,7 @@
   "name": "raspbot",
   "main": "server.js",
   "version": "0.4.0",
-  "build": "1b",
+  "build": "1c",
   "description": "Raspbot lets you control your Raspberry Pi.",
   "author": "Ardalan Samimi <ardalan@saturnfive.se>",
   "license": "AGPL-3.0",
