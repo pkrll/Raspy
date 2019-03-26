@@ -25,7 +25,7 @@ Built with [NodeJS](https://github.com/nodejs/node) & [Express 4](https://github
 - [x] 🗑️ Delete files
 - [x] 📁 Create folders
 - [x] 🔌 Reboot & shutdown system
-- [ ] 💾 Mount & unmount USB devices
+- [x] 💾 Mount & unmount USB devices
 - [x] 🌡️ Check temperature, CPU, memory and disk usage.
 - [x] 🎛️ Update, restart & stop Raspbot remotely
 
