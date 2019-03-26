@@ -19,7 +19,8 @@
     "build": "node .build/increment-version.js --file=package.json && cd web && npm install && npm run build",
     "patch": "node .build/increment-version.js --file=package.json --version=patch --skip-build",
     "minor": "node .build/increment-version.js --file=package.json --version=minor --skip-build --reset-patch",
-    "major": "node .build/increment-version.js --file=package.json --version=major --skip-build --reset-minor --reset-patch"
+    "major": "node .build/increment-version.js --file=package.json --version=major --skip-build --reset-minor --reset-patch",
+		"heroku-postbuild": ""
   },
   "dependencies": {
     "bcrypt": "^2.0.1",
