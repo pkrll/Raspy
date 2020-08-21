@@ -23,7 +23,7 @@
 		"heroku-postbuild": ""
   },
   "dependencies": {
-    "bcrypt": "^2.0.1",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.0.2",
     "compare-versions": "^3.3.0",
     "cors": "^2.8.4",
